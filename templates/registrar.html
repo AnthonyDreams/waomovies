@@ -1,0 +1,257 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Registrarse</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->  
+  <link rel="stylesheet" href="{% static 'frameworks/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'frameworks/css/util.css' %}">
+  <link rel="stylesheet" href="{% static 'frameworks/css/main.css' %}">
+<!--===============================================================================================-->
+
+<!--===============================================================================================-->
+</head>
+<body>
+  
+  <div class="limiter" style="" >
+    <div class="container-login100" style="background-image: url({% static 'img/textura.jpg' %});
+
+">
+      <div class="wrap-login100">
+        <form style="position: relative; margin-top: -200px;" class="login100-form" method="post" action="/waomovies/register/" id="formulario" name="formulario" onsubmit="return validarFormulario()" autocomplete="off">{% csrf_token %}
+          <span class="login100-form-title p-b-34" style="font-size: 36px; font-weight: bold; font-family: sans-serif;">
+            Bienvenido
+          </span>
+          
+          <div id="full_name_div" class="wrap-input100 rs1-wrap-input100  m-b-20" >
+            <input class="input100"  type="text" name="full_name"  pattern="[A-Za-z ]{4,30}" title="Tu nombre no puede contener caracteres especiales: más de 4 y menos de 30 caracteres" id="nombre" autocomplete="off" placeholder="Nombre completo">
+            <span class="focus-input100"></span>
+            <div id="full_name_error"></div>
+          </div>
+          <div id="usuario_div" class="wrap-input100 rs2-wrap-input100  m-b-20" >
+            <input class="input100" type="text" name="username"  pattern="[A-Za-z0-9]{4,18}" title="El nombre de usuario no puede contener caracteres especiales, ni más de 4 y menos de 18 caracteres" id="usuario" autocomplete="off" placeholder="Nombre de usuario">
+            <span class="focus-input100"></span>
+              <div id="usuario_error">
+                  {% if dato2  %}
+                  <p style="color: red;">{{ dato2 }}</p>
+                  {% endif %}
+                </div>
+          </div>
+          <div  id="email_div" class="wrap-input100  m-b-20" >
+            <input class="input100" id="correo" type="email" name="email"  pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Por favor introduce una dirección de email valida e.g. XXX.XXX@gmail.com" placeholder="Email">
+            <span class="focus-input100"></span>
+            <div id="email_error">
+                  {% if dato  %}
+                  <p style="color: red;">{{ dato }}</p>
+                  {% endif %}
+                </div>
+          </div>
+
+
+          <div id="clave_div" class="wrap-input100 rs2-wrap-input100  m-b-20" >
+            <input class="input100" id="clave" type="password" name="password1"  pattern=".{6,}" title="Seís o más caracteres" placeholder="Contraseña">
+            <span class="focus-input100"></span>
+            <div id="clave_error"></div>
+          </div>
+          <div id="clave2_div" class="wrap-input100 rs1-wrap-input100  m-b-20" >
+            <input id="clave2" type="password" name="password2" class="input100"placeholder="Confirmar">
+            <span class="focus-input100"></span>
+                    <div id="clave2_error"></div>
+
+          </div>
+          
+          <div class="container-login100-form-btn">
+            <button class="login100-form-btn" style="background-color: #C70039;">
+              Registrarse
+            </button>
+          </div>
+
+          
+
+          <div class="w-full text-center m-t-18">
+            
+            <a href="/waomovies/auth/" class="txt3" style="color: #000; font-family: Courier New;">
+              Iniciar Sesión
+            </a>
+          </div>
+        </form>
+        <h3 style="position: absolute; z-index: 5; font-weight: bold; top: 58%; right: 57%; color: white; text-align: center;" > “Estar en casa sin<strong> películas</strong>, <br>es ser un alma en pena.” </h3>
+        <a href="/waomovies/inicio/"><img src="{%static ''%}img/wamovieslogo.png" style="cursor: pointer; position: absolute; z-index: 5; right: 70%; top: 40%;"></a>
+        <div class="login100-more" style="filter: blur(1px); background-image: url('{% static 'img/tt.png' %}');"></div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  
+<!--===============================================================================================-->
+         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'frameworks/js/popper.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'frameworks/js/bootstrap.min.js' %}"></script>
+  
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+ 
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+
+</body>
+</html>
+
+<script type="text/javascript">
+  var username = document.forms['formulario']['usuario'];
+  var full_name = document.forms['formulario']['nombre'];
+  var email = document.forms['formulario']['correo'];
+  var pass = document.forms['formulario']['clave'];
+  var pass2 = document.forms['formulario']['clave2'];
+
+  var username_error = document.getElementById('usuario_error');
+var full_name_error = document.getElementById('full_name_error');
+var email_error = document.getElementById('email_error');
+var clave_error = document.getElementById('clave_error');
+
+var clave2_error = document.getElementById('clave2_error');
+
+
+username.addEventListener('blur', nameVerify, true);
+full_name.addEventListener('blur', full_nameVerify, true);
+email.addEventListener('blur', emailVerify, true);
+pass.addEventListener('blur', passwordVerify, true);
+
+function validarFormulario() {
+  // validate username
+  if (username.value == "") {
+    username.style.border = "1px solid red";
+    document.getElementById('usuario_div').style.color = "red";
+    username_error.textContent = "Nombre de usuario obligatorio";
+    username.focus();
+    return false;
+  }
+  // validate username
+  if (username.value.length < 4) {
+    username.style.border = "1px solid red";
+    document.getElementById('usuario_error').style.color = "red";
+    username_error.textContent = "El nombre de usuario debe tener más de cuatro caracteres";
+    username.focus();
+    return false;
+  }
+
+
+ // validate username
+  if (username.value.length > 18) {
+    username.style.border = "1px solid red";
+    document.getElementById('usuario_error').style.color = "red";
+    username_error.textContent = "El nombre de usuario debe tener menos de 18 caracteres";
+    username.focus();
+    return false;
+  }
+
+  // validate full_name
+  if (full_name.value.length == "") {
+    full_name.style.border = "1px solid red";
+    document.getElementById('full_name_div').style.color = "red";
+    full_name_error.textContent = "Nombre  obligatorio";
+    full_name.focus();
+    return false;
+  }
+  // validate full_name
+  if (full_name.value.length < 4) {
+    full_name.style.border = "1px solid red";
+    document.getElementById('full_name_div').style.color = "red";
+    full_name_error.textContent = "El nombre debe tener más de cuatro caracteres";
+    full_name.focus();
+    return false;
+  }
+
+
+ // validate full_name
+  if (full_name.value.length > 30) {
+    full_name.style.border = "1px solid red";
+    document.getElementById('full_name_div').style.color = "red";
+    full_name_error.textContent = "El nombre debe tener menos de 30 caracteres";
+    full_name.focus();
+    return false;
+  }
+
+
+
+  // validate email
+  if (email.value == "") {
+    email.style.border = "1px solid red";
+    document.getElementById('email_div').style.color = "red";
+    email_error.textContent = "Email obligatorio";
+    email.focus();
+    return false;
+  }
+  // validate password
+  if (pass.value == "") {
+    pass.style.border = "1px solid red";
+    document.getElementById('clave_div').style.color = "red";
+    pass2.style.border = "1px solid red";
+    clave_error.textContent = "Contraseña obligatoria";
+    pass.focus();
+    return false;
+  }
+  // check if the two passwords match
+  if (pass.value != pass2.value) {
+    pass.style.border = "1px solid red";
+    document.getElementById('clave2_div').style.color = "red";
+    pass2.style.border = "1px solid red";
+    clave_error.innerHTML = "Las contraseñas no coinciden";
+    return false;
+  }
+}
+// event handler functions
+function nameVerify() {
+  if (username.value != "") {
+   username.style.border = "1px solid #5e6e66";
+   document.getElementById('usuario_div').style.color = "#5e6e66";
+   username_error.innerHTML = "";
+   return true;
+  }
+}
+
+function full_nameVerify() {
+  if (full_name.value != "") {
+   full_name.style.border = "1px solid #5e6e66";
+   document.getElementById('full_name_div').style.color = "#5e6e66";
+   username_error.innerHTML = "";
+   return true;
+  }
+}
+function emailVerify() {
+  if (email.value != "") {
+    email.style.border = "1px solid #5e6e66";
+    document.getElementById('email_div').style.color = "#5e6e66";
+    email_error.innerHTML = "";
+    return true;
+  }
+}
+function passwordVerify() {
+  if (pass.value != "") {
+    pass.style.border = "1px solid #5e6e66";
+    document.getElementById('clave2_div').style.color = "#5e6e66";
+    document.getElementById('clave_div').style.color = "#5e6e66";
+    clave_error.innerHTML = "";
+    return true;
+  }
+  if (pass.value === pass2.value) {
+    pass.style.border = "1px solid #5e6e66";
+    document.getElementById('clave_div').style.color = "#5e6e66";
+    clave_error.innerHTML = "";
+    return true;
+  }
+}
+
+
+
+
+
+
+</script>

@@ -1,0 +1,409 @@
+    			<div class="hvr-inner" id="puto{{ o.id }}" style="float:left;  width: 70px; position: absolute; margin-top: -19%; padding: -4px; margin-left: 7px; background-color: rgba(0,0,0,0.7); border-radius: 3px; padding-top: 3px;">
+					            				
+					            				
+
+{% if request.user.is_authenticated %}
+{% if not request.user in o.favoritos.all %}					            				<!-- añadir a favoritos -->
+
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formfav{{o.id}}" method='POST'data-url="/waomovies/favorito/{{o.id}}/">{% csrf_token %}
+					            				<button  onclick="myFunctionfav(this)" id="fav{{o.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer;" type="submit"><i class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 1); font-size: 20px;"></i></button>
+					            				</form>
+					            				<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formafav{{o.id}}" method='POST'data-url="/waomovies/eliminar_favorito/{{o.id}}/">{% csrf_token %}
+					            				<button  onclick="myFunctionfa2(this)" id="afav{{o.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; display: none;" type="submit"><i class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 1); font-size: 20px;"></i></button>
+					            				</form>
+					            				<script>
+													function myFunctionfav(b) {
+														var juan = b.id
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+													 document.getElementById(juan).style.display = "none";
+													    document.getElementById("a" + juan).style.display = "initial";
+													}
+													
+													function myFunctionfa2(c) {
+														var juana = c.id
+														var juan2 = juana.substr(1)
+														console.log(juan2)
+
+														
+
+													var $myForm = $('.my-ajax-form' + juana)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													 document.getElementById(juana).style.display = "none";
+													 document.getElementById(juan2).style.display = "initial";
+
+													    
+													}
+													
+													</script>
+
+
+		{% else %}			            				<!-- Eliminar añadir a favoritos -->
+
+
+
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formsfav{{o.id}}" method='POST'data-url="/waomovies/eliminar_favorito/{{o.id}}/">{% csrf_token %}
+					            				<button  onclick="myFunctionfavs(this)" id="sfav{{o.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; " type="submit"><i class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 1); font-size: 20px;"></i></button>
+					            				</form>
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formfav{{o.id}}" method='POST'data-url="/waomovies/favorito/{{o.id}}/">{% csrf_token %}
+					            				<button  onclick="myFunctionfavs2(this)" id="fav{{o.id}}"title="Favoritos" class="" style="display: none; background: none; border: none; cursor: pointer;" type="submit"><i class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 1); font-size: 20px;"></i></button>
+					            				</form>
+					            				<script>
+													function myFunctionfavs(b) {
+														var juan = b.id
+														var juan2 = juan.substr(1)
+														console.log(juan2)
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													 document.getElementById(juan).style.display = "none";
+													 document.getElementById(juan2).style.display = "initial";
+
+													}
+													   
+													
+													function myFunctionfavs2(c) {
+														var juana = c.id
+														var p = "s" + juana
+
+														var $myForm = $('.my-ajax-form' + juana)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+														
+													    document.getElementById(juana).style.display = "none";
+
+													    document.getElementById(p).style.display = "initial";
+													    
+													}
+													
+													</script>
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if not o in peliculase %}	
+					            				<!-- ver más tarde -->
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-form{{o.id}}" method='POST'data-url="/waomovies/vermastarde/{{ o.id }}/">{% csrf_token %}
+					            				<button onclick="myFunction(this)" id="{{o.id}}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i   style="color: rgba(255, 255, 255, 0.9);  position: relative; right: 7px;  font-size: 20px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
+					            				
+					            				</form>
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-forms{{ o.id }}" method='POST'data-url="/waomovies/eliminar_vermastarde/{{ o.id }}/">{% csrf_token %}
+					            				<button name="eye" style="background: none; border: none; cursor: pointer; display: none;"id="s{{ o.id }}"onclick="myFunction2(this)" title="Ver más tarde" class="example" type="submit"><i  style="color: rgba(255, 255, 255, 0.9); position: relative; right: 7px;   font-size: 20px;" class="fa fa-eye" aria-hidden="true"></i></button>
+					            			</form>
+					            				<!-- termina ver más tarde -->
+
+					            				
+
+					            				<script>
+													function myFunction(b) {
+														var juan = b.id
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+													 document.getElementById(juan).style.display = "none";
+													    document.getElementById("s" + juan).style.display = "initial";
+													}
+													
+													function myFunction2(c) {
+														var juana = c.id
+														var p = juana.substr(1)
+
+
+													var $myForm = $('.my-ajax-form' + juana)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+														
+													    document.getElementById(juana).style.display = "none";
+
+													    document.getElementById(p).style.display = "initial";
+													    
+													}
+													
+													</script>
+													
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+
+		<!-- ver más tarde -->
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-forms{{o.id}}" method='POST'data-url="/waomovies/eliminar_vermastarde/{{ o.id }}/">{% csrf_token %}
+					            				<button onclick="myFunction2(this)" id="s{{ o.id }}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i   style="color: rgba(255, 255, 255, 0.9); position: relative; right: 7px;  font-size: 20px; " class="fa fa-eye" aria-hidden="true"></i></button>
+					            				
+					            				</form>
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-form{{ o.id }}" method='POST'data-url="/waomovies/vermastarde/{{ o.id }}/">{% csrf_token %}
+					            				<button name="eye" style="background: none; border: none; cursor: pointer; display: none;"id="{{ o.id }}"onclick="myFunction(this)" title="Ver más tarde" class="example" type="submit"><i  style="color: rgba(255, 255, 255, 0.9); position: relative; right: 7px;  font-size: 20px; " class="fa fa-eye-slash" aria-hidden="true"></i></button>
+					            			</form>
+					            				<!-- termina ver más tarde -->
+
+<script type="text/javascript">
+	
+	function myFunction(b) {
+														var juan = b.id
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+													 document.getElementById(juan).style.display = "none";
+													    document.getElementById("s" + juan).style.display = "initial";
+													}
+													
+													function myFunction2(c) {
+														var juana = c.id
+														var p = juana.substr(1)
+
+
+													var $myForm = $('.my-ajax-form' + juana)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+														
+													    document.getElementById(juana).style.display = "none";
+
+													    document.getElementById(p).style.display = "initial";
+													    
+													}
+													
+</script>
+
+{% endif %}
+
+					            				{% else %}
+					            				
+{%endif%}													
+
+
+
+					            			</div>

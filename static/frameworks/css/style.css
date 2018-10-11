@@ -1,0 +1,257 @@
+.peliculasrecomendadas {
+	position: relative;
+	top: 30px;
+}
+
+.primt {
+	right: -340px;
+	padding-bottom: 5px;
+	font-weight:bold;
+	border-bottom-width: 4px;
+	border-bottom-color: #3396FF;
+	border-bottom-style: solid;
+
+}
+
+.no-gutters {
+  margin-right: 0px;
+  margin-left: 0px;
+
+  > .col,
+  > [class*="col-"] {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}
+
+.padding {
+	padding-top: 15px;
+}
+
+.push-1 {
+	position: relative;
+	left: 40px;
+}
+
+.top-peliculas {
+	border-top-width: 4px;
+	border-top-style: solid;
+	border-top-color: #3396FF;
+	text-align: center;
+	padding: 6px;
+
+
+}
+
+.top-peliculasc {
+	position: relative;
+	top: 15px;
+}
+
+.container-1{
+  width: 300px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+}
+
+.container-1 input#search{
+  width: 300px;
+  height: 50px;
+  background: #C4C4C4;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: #63717f;
+  padding-left: 45px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.container-1 input#search::-webkit-input-placeholder {
+   color: #65737e;
+}
+ 
+.container-1 input#search:-moz-placeholder { /* Firefox 18- */
+   color: #65737e;  
+}
+ 
+.container-1 input#search::-moz-placeholder {  /* Firefox 19+ */
+   color: #65737e;  
+}
+ 
+.container-1 input#search:-ms-input-placeholder {  
+   color: #65737e;  
+}
+
+.container-1 .icon{
+  position: absolute;
+  top: -3px;
+  margin-left: 17px;
+  margin-top: 17px;
+  z-index: 4;
+  color: #4f5b66;
+}
+
+.box{
+  margin: 100px auto;
+  width: 300px;
+  height: 50px;
+}
+
+.point {
+	color: #FFE506;
+	position: relative;
+	left: 76%;
+}
+
+.containerpoint {
+	background: rgba(0, 0, 0, 70%);
+	position: relative;
+	top: -24px;
+	margin-bottom:  -70px;
+
+
+}
+
+.hdlogo {
+	top: 50px;
+	position: absolute;
+	z-index: 1;
+	color: red;
+	left: 75%;
+}
+
+.img-container {
+	position: relative;
+	top: -50px;
+}
+
+.img-container2 {
+	position: relative;
+	top: -50px;
+}
+
+.peliname {
+	
+
+}
+
+.playhover {
+	font-weight: bold;
+	font-size: 40px;
+	text-align: center;
+	position: ;
+	color: white;
+}
+
+.background {
+	position: absolute;
+	z-index: -1;
+	
+}
+
+.pelimg {
+	z-index: 1;
+	position: absolute;
+}
+
+.contenedor2 {
+	background: rgba(0, 0, 0, 85%);
+	width: 101.2%;
+	height: 100%;
+	position: absolute;
+
+}
+
+.contenedor {
+	width: 100%;
+}
+
+.titulo  {
+	color: white;
+	font-weight: bold;
+	font-style: arial black;
+	top: 30px;
+	position: relative;
+}
+
+.sinopsis {
+	color: white;
+	width: 90%;
+
+}
+
+.datos {
+	z-index: 50000;
+	font-size: 10px;
+	background: black;
+	position: relative;
+	top: 630px;
+	float: none;
+
+}
+
+.contenedorpelicula {
+	background: blue;
+	width: 75%;
+	height: 400px;
+	position: relative;
+	top: 630px;
+
+
+}
+
+.contene {
+
+}
+
+div.contene {
+	width: 166.5px;
+	height: 50px;
+	float: left;
+	z-index: 10;
+	position: relative;
+	top: 600px;
+	left: 350px;
+}
+
+div#uno {
+	background: rgb(208, 101, 3);
+}
+
+div#dos {
+	background: rgb(233, 146, 26);
+}
+
+div#tres {
+	background: rgb(22, 145, 190);
+}
+
+div#cuatro{
+	background: rgb(22, 107, 162);
+}
+
+div#cinco {
+	background: rgb(27, 54, 71);
+}
+
+.texto {
+	padding-top: 8%;
+	text-align: center;
+	color: white;
+}
+
+div.contene:hover {
+	height: 70px;
+}
+
+.carousel2 {
+	width: 500px;
+	height: 500px;
+}
+
+.contenidopelicula {
+}
+

@@ -1,0 +1,428 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+<head>
+	<title>{% block title %}WaoMovies/lista de peliculas por genero{% endblock %}</title>
+	
+
+</head>
+<body>
+
+{% block content %}
+
+
+<div class="hero common-hero"{% if not genero3 == "ROM" %} style="background: url({% static '' %}img/{{genero3}}.jpg) no-repeat;
+  height: 598px;  "{% else %} style="background: url({% static '' %}img/{{genero3}}.jpg) no-repeat;
+  height: 598px; background-position: center;" {% endif %}>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					{% if genero3 == "DRA" %}
+					<h1 id="h1">Drama </h1>
+					<div id="generosdiv">
+{% if request.user in drama.drama.all %}
+
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/drama/" method="post">
+		{% csrf_token %}
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		
+	</form>
+	{% else %}
+	
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/drama/" method="post"> {% csrf_token%}
+
+	
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+		
+	</form>
+	
+	{% endif %}
+</div>
+					{% endif %}
+					{% if genero3 == "ACC" %}
+					<h1 id="h1">Acción </h1>
+					<div id="generosdiv">
+{% if request.user in accion.accion.all %}
+
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/accion/" method="post">
+		{% csrf_token %}
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		
+	</form>
+	{% else %}
+	
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/accion/" method="post"> {% csrf_token%}
+
+	
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+		
+	</form>
+	
+	{% endif %}
+</div>
+					{% endif %}
+					{% if genero3 == "SC" %}
+					<h1 id="h1">Ciencia Ficción </h1>
+					<div id="generosdiv">
+{% if request.user in ciencia_ficcion.ciencia_ficcion.all %}
+
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/ciencia_ficcion/" method="post">
+		{% csrf_token %}
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		
+	</form>
+	{% else %}
+	
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/ciencia_ficcion/" method="post"> {% csrf_token%}
+
+	
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+		
+	</form>
+	
+	{% endif %}
+</div>
+					{% endif %}
+					{% if genero3 == "ROM" %}
+					<h1 id="h1">Romance </h1>
+					<div id="generosdiv">
+{% if request.user in romance.romance.all %}
+
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/romance/" method="post">
+		{% csrf_token %}
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		
+	</form>
+	{% else %}
+	
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/romance/" method="post"> {% csrf_token%}
+
+	
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+		
+	</form>
+	
+	{% endif %}
+</div>
+					{% endif %}
+					{% if genero3 == "CRI" %}
+					<h1 id="h1">Crimen </h1>
+					<div id="generosdiv">
+{% if request.user in crimen.crimen.all %}
+
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/crimen/" method="post">
+		{% csrf_token %}
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		
+	</form>
+	{% else %}
+	
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/crimen/" method="post"> {% csrf_token%}
+
+	
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+		
+	</form>
+	
+	{% endif %}
+</div>
+					{% endif %}
+					{% if genero3 == "COME" %}
+					<h1 id="h1">Comedia </h1>
+					<div id="generosdiv">
+{% if request.user in comedia.comedia.all %}
+
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/comedia/" method="post">
+		{% csrf_token %}
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		
+	</form>
+	{% else %}
+	
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/comedia/" method="post"> {% csrf_token%}
+
+	
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+		
+	</form>
+	
+	{% endif %}
+</div>
+					{% endif %}
+					{% if genero3 == "TER" %}
+					<h1 id="h1">Terror </h1>
+					<div id="generosdiv">
+{% if request.user in terror.terror.all %}
+
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/terror/" method="post">
+		{% csrf_token %}
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		
+	</form>
+	{% else %}
+	
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/terror/" method="post"> {% csrf_token%}
+
+	
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+		
+	</form>
+	
+	{% endif %}
+</div>
+					{% endif %}
+					{% if genero3 == "AVEN" %}
+					<h1 id="h1">Aventura </h1>
+					<div id="generosdiv">
+{% if request.user in aventura.aventura.all %}
+
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/aventura/" method="post">
+		{% csrf_token %}
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		
+	</form>
+	{% else %}
+	
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/aventura/" method="post"> {% csrf_token%}
+
+	
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+		
+	</form>
+	
+	{% endif %}
+</div>
+					{% endif %}
+					{% if genero3 == "SUS" %}
+					<h1 id="h1">Suspenso </h1>
+					<div id="generosdiv">
+{% if request.user in suspenso.suspenso.all %}
+
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/suspenso/" method="post">
+		{% csrf_token %}
+		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		
+	</form>
+	{% else %}
+	
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/suspenso/" method="post"> {% csrf_token%}
+
+	
+						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+		
+	</form>
+	
+	{% endif %}
+</div>
+					{% endif %}
+					{% if genero3 == "ANI" %}
+					<h1 id="h1">Animación</h1>
+					<div id="generosdiv">
+{% if request.user in animacion.animacion.all %}
+
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/animacion/" method="post">
+		{% csrf_token %}
+		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		
+	</form>
+	{% else %}
+	
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/animacion/" method="post"> {% csrf_token%}
+
+	
+						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+		
+	</form>
+	
+	{% endif %}
+</div>
+					{% endif %}
+					{% if genero3 == "FANT" %}
+					<h1 id="h1">Fantasía</h1>
+					<div id="generosdiv">
+{% if request.user in fantasia.fantasia.all %}
+
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/fantasia/" method="post">
+		{% csrf_token %}
+		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		
+	</form>
+	{% else %}
+	
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/fantasia/" method="post"> {% csrf_token%}
+
+	
+						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;"  onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+		
+	</form>
+	
+	{% endif %}
+</div>
+					{% endif %}
+					{% if genero3 == "DOCU" %}
+					<h1 id="h1">Documental</h1>
+					<div id="generosdiv">
+{% if request.user in documental.documental.all %}
+
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/documental/" method="post">
+		{% csrf_token %}
+		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		
+	</form>
+	{% else %}
+	
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/documental/" method="post"> {% csrf_token%}
+
+	
+						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+		
+	</form>
+	
+	{% endif %}
+</div>
+					{% endif %}
+
+
+
+
+	<script type="text/javascript">
+	function generosele(b) {
+		var juan = b.id
+														var c = juan.substr(3)
+														var z = juan.substr(5)
+
+
+														
+
+													var $myForm = $('.' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+                										 event.stopImmediatePropagation();
+
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													        beforeSend: function () {
+           //   document.getElementById("sendingfav" + z).style.display = "initial";
+
+                  //  $("#" +z ).src="none";
+                    
+
+                     //Agregamos la clase loading al body
+                },
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+    $("#generosdiv").load(window.location + " #generosdiv");
+   
+
+     
+
+
+          //    document.getElementById("sendingfav" + z).style.display = "none";
+
+              
+
+     
+
+
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+	}
+</script>
+
+</div>
+
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page-single">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="topbar-filter fw">
+					<p> <span>{{generocount}}{% if generocount > 1 or generocount == 0  %} películas</span> encontradas en total {% else %} película</span> encontrada en total {% endif %}</p>
+					<label>Ordenar por:</label>
+					<select>
+						<option value="popularity">Mejor puntuada</option>
+					</select>
+					
+				</div>
+				<div class="flex-wrap-movielist mv-grid-fw">
+					{% for o in genero %}
+						<div class="movie-item-style-2 movie-item-style-1">
+							<img src="{{ o.Cover.url }}" alt="">
+							{% include 'ajax.html' %}
+							<div class="mv-item-infor">
+								<h6><a href="#">{{ o.titulo }}</a></h6>
+								<p class="rate"><i class="fa fa-star point" aria-hidden="true"></i><span>{{ o.puntuacion }}</span> /10</p>
+							</div>
+
+							
+						</div>					
+						{% endfor %}
+						</div>
+						
+				</div>		
+			</div>
+				<div class="topbar-filter">
+					<label>Películas por paginas:</label>
+					<select>
+						<option value="range">20</option>
+					</select>
+					
+					<div class="pagination2" style="position: relative; top: 10px;">
+						{% if peliculas.has_previous %}
+            			<a href="?page=1">&laquo; 1</a>
+            			<a href="?page={{ peliculas.previous_page_number }}"><i class="fa fa-long-arrow-left point"></i></a>
+        				{% endif %}
+						<span>Página {{ peliculas.number }} de {{ peliculas.paginator.num_pages }}:</span>
+						{% for i in peliculas.paginator.page_range %}
+						{% if peliculas.number == i %}
+							<a class="active" href="?page={{ i }}">{{ i }}</a>
+
+						{% elif i > peliculas.number|add:'-3' and i < peliculas.number|add:'3' %}
+							<a class="" href="?page={{ i }}">{{ i }}</a>
+											
+						{% endif %}
+						{% endfor %}
+						 {% if peliculas.has_next %}
+						
+					
+            <a href="?page={{ peliculas.next_page_number }}"><i class="fa fa-long-arrow-right point"></i></a>
+            <a href="?page={{ peliculas.paginator.num_pages }}">{{ series.paginator.num_pages }}&raquo;</a>
+        {% endif %}
+						<a href="#"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+.dasheder {
+	width: 100%;
+	height: 60px;
+	background: black;
+	 
+}
+
+.main-nav {
+	list-style: none;
+	float: right;
+	margin-top: -60px;
+	position: relative;
+	right: 70%;
+
+
+}
+
+.main-nav li {
+	display: inline-block;
+}
+
+.main-nav li a{
+	color: white;
+	text-decoration: none;
+	padding:5px 15px;
+	font-family: roboto;
+	position: relative;
+
+
+
+}
+
+.admin-img  {
+	display: inline-block;
+	position: relative;
+	left: 85%;
+	top: -70px;
+
+
+}
+
+.admin-img img {
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	position: relative;
+}
+
+.name-admin {
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: arial;
+	position:relative;
+	top: -15px;
+
+}

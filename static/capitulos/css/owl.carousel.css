@@ -1,0 +1,61 @@
+
+
+/*2nd*/
+#owl1 {
+	/*overflow: hidden;*/
+	z-index: 1;
+	position: relative;
+	margin-top: 0px;
+}
+
+
+#owl1 .owl-item {
+	float: left;
+	width: 100%;
+}
+
+#owl1 .item {
+	/*padding: 0 10px;*/
+	padding: 0;
+	position: relative;
+	text-align: left;
+	padding-left: 2px;
+}
+#owl1 .owl-wrapper-outer {
+	overflow: hidden;
+	padding-bottom: 50px;
+}
+
+#owl1 .owl-wrapper {
+	overflow: visible;
+}
+
+
+#owl1 .owl-prev, #owl1 .owl-next {
+	cursor: pointer;
+	position: absolute;
+	background: url(../images/carousel_btn_prev.png) 0 0 no-repeat;
+	display: block;
+	height: 35px;
+	left: 0;
+	bottom: -21px;
+	width: 34px;
+	overflow: hidden;
+	text-indent: -999px;
+
+}
+
+#owl1 .owl-next {
+	left: 34px;
+	background: url(../images/carousel_btn_next.png) 0 0 no-repeat;
+
+}
+#owl1 .owl-next:hover {
+	background-position: 0 bottom;
+}
+
+
+
+#owl1 .owl-prev:hover {
+	background-position: 0 bottom;
+}

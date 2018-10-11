@@ -1,0 +1,10 @@
+#generosdiv {
+	 width: 800px;
+}
+
+
+@media (max-width: 1200px) {
+  #generosdiv {
+    display: initial;
+  }
+}

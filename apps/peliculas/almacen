@@ -1,0 +1,20 @@
+
+'''
+	votacion = Hitcount.objects.all()
+	lista = []
+	lista2 = []
+
+	if votacion:
+		topsemanal = Hitcount.objects.filter(publish__day__range=(datetime.now().day - 7,datetime.now().day + 7)).order_by('-hitcount')
+		for i in topsemanal:
+			lista.append(i.pelicula)
+			for a in lista:
+				if not a in lista2:
+					lista2.append(a)
+
+	else:
+		topsemanal = False
+		topsemanall = False
+'''
+
+de view inicio en peliculas

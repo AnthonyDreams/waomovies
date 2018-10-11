@@ -1,0 +1,2411 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+ <title>{% block title %}{{peliculaa.titulo}}{% endblock %}</title>
+
+
+{% block scriptt %}
+
+<script type="text/javascript">
+ 
+var start = 0;
+var limit = 5;
+
+$(document).ready(function(){
+ getData();
+})
+
+function getData() {
+ if (reachedMax)
+  return;
+ $.ajax{{
+  url = window.location.href 
+  method = post;
+  dataType: {
+   start: start,
+   limit: limit,
+  }
+
+  function succes(response) {
+
+  }
+ }}
+}
+</script>
+
+
+<script type=”text/javascript”>
+      
+      window.CSRF_TOKEN = “{{ csrf_token }}”;
+    </script>
+    <script type="text/javascript">
+     $(function(){
+ $(document).one('click', '.like-review', function(e) {
+  $(this).html('<i class="fa fa-heart" aria-hidden="true"></i>');
+  $(this).children('.fa-heart').addClass('animate-like');
+ });
+});
+
+$(function(){
+ $(document).one('click', '.dislike-review', function(e) {
+  $(this).html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+  $(this).children('.fa-heart').addClass('animate-like');
+ });
+});
+    </script>
+<script type="text/javascript">
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+</script>
+
+
+<script type="text/javascript">
+ 
+ function myFunction(b) {
+              var juan = b.id
+
+              
+
+             var $myForm = $('.my-ajax-form' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                 })
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+              document.getElementById(juan).style.display = "none";
+                 document.getElementById("s" + juan).style.display = "initial";
+             }
+             
+             function myFunction2(c) {
+              var juana = c.id
+              var p = juana.substr(1)
+
+
+             var $myForm = $('.my-ajax-form' + juana)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                 })
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+              
+                 document.getElementById(juana).style.display = "none";
+
+                 document.getElementById(p).style.display = "initial";
+                 
+             }
+             
+</script>
+
+
+<script type="text/javascript">
+ 
+ function myFunctiona(b) {
+              var juan = b.id
+
+              
+
+             var $myForm = $('.my-ajax-form' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                 })
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+              document.getElementById(juan).style.display = "none";
+                 document.getElementById("z" + juan).style.display = "initial";
+             }
+             
+             function myFunctiona2(c) {
+              var juana = c.id
+              var p = juana.substr(1)
+
+
+             var $myForm = $('.my-ajax-form' + juana)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                 })
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+              
+                 document.getElementById(juana).style.display = "none";
+
+                 document.getElementById(p).style.display = "initial";
+                 
+             }
+             
+</script>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function formOnClickEvent(e,formObj) {
+      var childs;
+      if(window.event) // IE
+      {
+        keynum = e.keyCode;
+        ctrlKey  = e.ctrlKey;
+        EventObj = e.srcElement;
+      }
+      else if(e.which) // Netscape/Firefox/Opera
+      {
+        keynum = e.which;
+        ctrlKey = e.ctrlKey;
+        EventObj = e.target;
+      }
+      
+      childs = formObj.elements;
+      
+      for (i=0;i<childs.length;i++){
+        if (childs[i].type == 'checkbox'){
+          childs[i].checked=false;
+        }
+      }
+    }
+</script>
+
+
+
+
+
+<!--jax para comentarios-->
+
+
+
+
+<script>
+             function send(b) {
+              var juan = b.id
+
+              
+
+             var $myForm = $('.coment')
+             $myForm.submit(function(event){
+                 event.preventDefault();
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+              document.getElementById("sendingcoment").style.display = "initial";
+                    
+                },
+                 })
+             })
+
+          function handleFormSuccess(data, textStatus, jqXHR){
+              console.log(data)
+              console.log(textStatus)
+              console.log(jqXHR)
+     $("#rv").load(window.location + " #rv");
+     $("#rva").load(window.location + " #rva");
+     $("#ven").load(window.location + " #ven");
+     document.getElementById("sendingcoment").style.display = "none";
+
+     $(this).remove();
+            
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+             
+             function update(b) {
+              var juan = b.id
+
+              
+
+             var $myForm = $('.updatec' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                 })
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 document.getElementById("updateajax" + juan).innerHTML = data.content;
+                 document.getElementById("texto" + juan).innerHTML = data.content;
+                 $myForm[0].reset();
+                  
+             }
+
+ 
+             
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function update_ans(b) {
+              var juan = b.id
+              var tt = juan.substr(6)
+
+              
+
+             var $myForm = $('.update' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                 })
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 document.getElementById("cm" + tt).innerHTML = data.content;
+                 document.getElementById("textoans" + tt).innerHTML = data.content;
+                 $myForm[0].reset();
+                  
+             }
+
+ 
+             
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+
+
+
+             </script>
+
+
+
+
+
+
+
+
+
+<!--votacion ajax-->
+
+<script>
+             function votar(b) {
+              var juan = b.id
+
+              
+
+             var $myForm = $('.my-ajax-form')
+             $myForm.submit(function(event){
+                 event.preventDefault();
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                 })
+             })
+
+          function handleFormSuccess(data, textStatus, jqXHR){
+              console.log(data)
+              console.log(textStatus)
+              console.log(jqXHR)
+     $("#vot").load(window.location + " #vot");
+     $("#updatevot").load(window.location + " #updatevot");
+     $(this).remove();
+            
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+             
+             
+             </script>
+
+<script>
+             function reportee(b) {
+              var juan = b.id
+              var m = juan.substr(6)
+
+              
+
+             var $myForm = $('.' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault();
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+                    $("#pop" + m).removeClass('fa-ellipsis-v');
+                    $("#pop" + m).addClass('fa-circle-o-notch'); //Agregamos la clase loading al body
+                },
+                 })
+             })
+
+          function handleFormSuccess(data, textStatus, jqXHR){
+              console.log(data)
+              console.log(textStatus)
+              console.log(jqXHR)
+        $("#modalbody" + m).load(window.location + " #modalbody" + m);
+        $("#pop" + m).removeClass('fa-circle-o-notch');
+                    $("#pop" + m).addClass('fa-ellipsis-v');
+
+     
+     $(this).remove();
+            
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+             
+
+             function reportee_res(b) {
+              var juan = b.id
+              var m = juan.substr(10)
+
+              
+
+             var $myForm = $('.' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault();
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+                    $("#pop_res" + m).removeClass('fa-ellipsis-v');
+                    $("#pop_res" + m).addClass('fa-circle-o-notch'); //Agregamos la clase loading al body
+                },
+                 })
+             })
+
+          function handleFormSuccess(data, textStatus, jqXHR){
+              console.log(data)
+              console.log(textStatus)
+              console.log(jqXHR)
+        $("#modalbody_res" + m).load(window.location + " #modalbody_res" + m);
+        $("#pop_res" + m).removeClass('fa-circle-o-notch');
+                    $("#pop_res" + m).addClass('fa-ellipsis-v');
+
+     
+     $(this).remove();
+            
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+             
+             </script>
+
+
+<script>
+             function deletee(b) {
+              var juan = b.id
+              var c = juan.substr(4)
+
+              
+
+             var $myForm = $('.' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault();
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+                    $("#cog_co" + c).removeClass('fa-cog');
+                    $("#cog_co" + c).addClass('fa-circle-o-notch'); //Agregamos la clase loading al body
+                },
+                 })
+             })
+
+          function handleFormSuccess(data, textStatus, jqXHR){
+              console.log(data)
+              console.log(textStatus)
+              console.log(jqXHR)
+     $("#rv").load(window.location + " #rv");
+     $("#rva").load(window.location + " #rva");
+     $("#ven").load(window.location + " #ven");
+     $(this).remove();
+            
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+             
+
+
+
+
+
+
+             function deletee_res(b) {
+              var juan = b.id
+              var namen = b.name
+              var c = juan.substr(8)
+
+              
+
+             var $myForm = $('.' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault();
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+                    $("#cog" + c).removeClass('fa-cog');
+                    $("#cog" + c).addClass('fa-circle-o-notch'); //Agregamos la clase loading al body
+                },
+
+                 })
+             })
+
+          function handleFormSuccess(data, textStatus, jqXHR){
+              console.log(data)
+              console.log(textStatus)
+              console.log(jqXHR)
+     $("#rv").load(window.location + " #rv");
+     $("#rs" + c).load(window.location + " #rs" + c);
+     $("#j" + namen).load(window.location + " #j" + namen);
+
+     $(this).remove();
+            
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+             
+             </script>
+
+
+
+<script type="text/javascript">
+              function reportar(b) {
+              var juan = b.id
+
+              
+
+             var $myForm = $('.reportar')
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+                    $("#load").removeClass('fa-bug');
+                    $("#load").addClass('fa-circle-o-notch'); //Agregamos la clase loading al body
+                },
+
+
+                 })
+
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 
+                 $myForm[0].reset(); 
+                 $("#act").load(window.location + " #act");
+                 $("#load").removeClass('fa-circle-o-notch')
+                  $("#load").addClass('fa-check')
+                 document.getElementById("none").style.cursor= "default"
+                 document.getElementById("none").disabled= "true"
+$(this).remove();
+         }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+
+
+
+             </script>
+
+<script type="text/javascript">
+              function vermas(b) {
+              var juan = b.id
+
+              
+
+             var $myForm = $('.cabron')
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+              document.getElementById("displayload").style.display = "initial";
+                    
+                },
+                     
+
+
+                 })
+
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 
+                 $myForm[0].reset(); 
+     $("#ven").load(window.location + " #ven");
+              document.getElementById("displayload").style.display = "none";
+              document.getElementById("noneaaa").style.display = "none";
+
+$(this).remove();
+         }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+
+
+
+             </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+             <script type="text/javascript">
+              function res(b) {
+              var juan = b.id
+              var c = juan.substr(1)
+
+              
+
+             var $myForm = $('.resp' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+                    $("#load" + c).removeClass('fa-chevron-down');
+                    $("#load" + c).addClass('fa-circle-o-notch');
+       
+                     //Agregamos la clase loading al body
+
+                },
+
+
+                 })
+
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+              var token = "{% csrf_token %}"
+
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+       $("#j" + c).load(window.location + " #j" + c);
+       $("#like_div" + c).load(window.location + " #like_div" + c);
+       $("#ccn" + c).append(' <div id="rs'+data.idp+'"><div class="mv-user-review-item" style="margin-bottom: -6px; width: 70%; position: relative; left: 40px;"><div class="user-infor" style="margin-bottom: -0px;"><img src="'+data.perfil+'" alt=""><div><h3 style="font-size: 16px; display:initial;">'+data.name+'</h3><i id="cog'+data.idp+'" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i><div class="btn-group"><div class="dropdown-menu"><a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample">Editar comentario<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a><form style="display: inline;" class="dele_ans'+data.idp+'" data-url="/waomovies/delete_res/'+data.idp+'/" method="post">'+token+'<button onclick="deletee_res(this)" name="'+data.id+'"id="dele_ans'+data.idp+'" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form><!--a class="dropdown-item" href="#">Something else here</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a--></div></div><p class="time" style="margin-top: -0x;">'+data.fecha+'</p></div></div><p id="cm'+data.idp+'" style="margin-bottom: -15px;">'+data.content+'</p></div></div><div class="collapse container" id="col'+data.idp+'"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans'+data.idp+'" data-url="/waomovies/responder_update/'+data.idp+'/">'+token+'<textarea id="textoans'+data.idp+'" onkeypress="return limita(400);" style=" height: 6em; width: 400px;" name="respuesta">'+data.content+'</textarea><br><input onclick="update_ans(this)" id="up_ans'+data.idp+'" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form></div></div></div>');
+
+      
+
+                 
+$(this).remove();
+         }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+
+
+
+             </script>
+
+
+
+
+<script type="text/javascript">
+              function like(b) {
+              var juan = b.id
+              var c = juan.substr(2)
+
+              
+
+             var $myForm = $('.like' + c)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                    
+
+
+                 })
+
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+       $("#like_div" + c).load(window.location + " #like_div" + c);
+      // $("#rs" + c).load(window.location + " #rs" + c);
+       
+
+         }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+
+function unlike(b) {
+              var juan = b.id
+              var c = juan.substr(3)
+
+              
+
+             var $myForm = $('.unlike' + c)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                    
+
+
+                 })
+
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+       $("#like_div" + c).load(window.location + " #like_div" + c);
+      // $("#rs" + c).load(window.location + " #rs" + c);
+       
+
+                 
+$(this).remove();
+         }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+
+
+             </script>
+
+
+
+
+
+
+
+{% endblock %}
+{% block content %}
+
+
+
+{% if peliculaa.portada %}
+<div class="hero mv-single-hero" style="background: url({{ peliculaa.portada.url  }}) no-repeat;
+  height: 598px; background-size: 1400px;">
+
+  {% else %}
+  <div class="hero mv-single-hero" style="background: url({% static 'img/fondo.jpg' %}) no-repeat;
+  background-size: 1400px;">
+  {% endif %}
+
+ <div class="container">
+  <div class="row">
+   <div class="col-md-12">
+    <!-- <h1> movie listing - list</h1>
+    <ul class="breadcumb">
+     <li class="active"><a href="#">Home</a></li>
+     <li> <span class="ion-ios-arrow-right"></span> movie listing</li>
+    </ul> -->
+   </div>
+  </div>
+ </div>
+</div>
+<div class="page-single movie-single movie_single">
+ <div class="container">
+  <div class="row ipad-width2">
+   <div class="col-md-4 col-sm-12 col-xs-12">
+    <div class="movie-img sticky-sb" >
+     <img src="{{ peliculaa.Cover.url }}" alt="" style="height: 440px; width: auto;">
+     <div class="movie-btn" style="width: 296px;"> 
+      <div class="btn-transform transform-vertical red">
+       <div><a href="#" class="item item-1 redbtn">  Ver Trailer</a></div>
+       <div><a href="{{peliculaa.links}}" class="item item-2 redbtn fancybox-media hvr-grow"><i class="fa fa-play point"></i></a></div>
+      </div>
+      <div class="btn-transform transform-vertical">
+       <div><a href="#" class="item item-1 yellowbtn"> <i class="fa-share-alt fa point"></i> Compartir</a></div>
+       <div><a data-toggle="modal" data-target="#modalSocial" class="item item-2 yellowbtn"><i class="fa-share-alt fa point"></i></a></div>
+      </div>
+      
+     </div>
+    </div>
+   </div>
+   <!-- Button trigger modal-->
+
+
+<!--Modal: modalSocial-->
+<div class="modal fade" id="modalSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="title"><i class="fa fa-users"></i> ¡Comparte!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body mb-0 text-center">
+
+ <!--Facebook-->
+                <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/waomovies/peliculas/{{peliculaa.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook"></i></a>
+                <!--Twitter-->
+                <a type="button" style="background-color: #00acee" class="btn-floating btn-tw"><i class="fa fa-twitter"></i></a>
+                <!--Google +-->
+                <a type="button" style="background-color: #d34836;" class="btn-floating btn-gplus"><i class="fa fa-google-plus"></i></a>
+
+                <!--Instagram-->
+                <a type="button"  style="background-color: #3f729b;"class="btn-floating btn-ins"><i class="fa fa-instagram"></i></a>
+                <!--Pinterest-->
+                <a type="button"  style="background-color: #c8232c ;"class="btn-floating btn-pin"><i class="fa fa-pinterest"></i></a>
+    
+                <!--Comments-->
+                <!--a type="button" class="btn-floating btn-comm"><i class="fa fa-comments"></i></a>
+                <Email>
+                <a type="button" class="btn-floating btn-email"><i class="fa fa-envelope"></i></a-->
+
+            </div>
+
+        </div>
+        <!--/.Content-->
+
+    </div>
+</div>
+<!--Modal: modalSocial-->
+   <div class="col-md-8 col-sm-12 col-xs-12">
+    <div class="movie-single-ct main-content">
+     <h1 class="bd-hd">{{ peliculaa.titulo }} /<span>  {{ peliculaa.fecha_de_lanzamiento }}</span></h1>
+     
+     <div class="social-btn">
+      
+      
+      
+               {% if request.user.is_authenticated %}
+      {% if not peliculasf %}
+      
+      <form class="my-ajax-formz{{ peliculaa.id }}"method='POST' data-url='/waomovies/favorito/{{ peliculaa.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+      <input type="numero" name="ver_mas_tarde" style="display:none"  value="1">
+      <button onclick="myFunctiona(this)" id="z{{ peliculaa.id }}" class="btn-secondary">
+          <i class="fa fa-heart-o" aria-hidden="true" style="position: relative; left: 2px;"></i>
+        </button>
+      </form> 
+      <form class="my-ajax-formzz{{ peliculaa.id }}" method='POST' data-url='/waomovies/eliminar_favorito/{{ peliculaa.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+      <input type="numero" name="ver_mas_tarde" style="display:none"  value="1">
+        <button style="cursor: pointer; display: none;"id="zz{{ peliculaa.id }}"onclick="myFunctiona2(this)" class="btn-secondary">
+          <i class="fa fa-heart" aria-hidden="true" style="position: relative; left: 2px;"></i> 
+        </button>
+        
+      </form>
+      {% else %}
+      <form class="my-ajax-formzz{{ peliculaa.id }}"method='POST' data-url='/waomovies/eliminar_favorito/{{ peliculaa.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+      <input type="numero" name="ver_mas_tarde" style="display:none"  value="1">
+      <button onclick="myFunctiona2(this)" id="zz{{ peliculaa.id }}" class="btn-secondary">
+          <i class="fa fa-heart" aria-hidden="true" style="position: relative; left: 2px;"></i>
+        </button>
+      </form> 
+      <form class="my-ajax-formz{{ peliculaa.id }}" method='POST' data-url='/waomovies/favorito/{{ peliculaa.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+      <input type="numero" name="ver_mas_tarde" style="display:none"  value="1">
+        <button style="cursor: pointer; display: none;"id="z{{ peliculaa.id }}"onclick="myFunctiona(this)" class="btn-secondary">
+          <i class="fa fa-heart-o" aria-hidden="true" style="position: relative; left: 2px;"></i> 
+        </button>
+        
+      </form>
+      {% endif %}
+      {% if not peliculase %}
+<form  class="my-ajax-form{{ peliculaa.id }}" method='POST'data-url="/waomovies/vermastarde/{{ peliculaa.id }}/">{% csrf_token %}
+      <input type="numero" name="id" style="display:none; "  value="1">
+      <button onclick="myFunction(this)" id="{{ peliculaa.id }}" title="Ver más tarde" class="btn-ver" type="submit" style="position: relative; left: 10%;"><i style="color: #17202A; font-size: 20px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
+     </form> 
+
+<form class="my-ajax-forms{{ peliculaa.id }}" method='POST'data-url="/waomovies/eliminar_vermastarde/{{ peliculaa.id }}/">{% csrf_token %}
+                     <button name="eye" style="position: relative; left: 10%; cursor: pointer; display: none;"id="s{{ peliculaa.id }}"onclick="myFunction2(this)" title="Ver más tarde" class="btn-ver" type="submit" style="position: relative; left: 10%;" ><i  style="color: #17202A; font-size: 20px;" class="fa fa-eye" aria-hidden="true"></i></button>
+                    </form>
+     
+     {% else %}
+     <form class="my-ajax-forms{{ peliculaa.id }}" method='POST'data-url="/waomovies/eliminar_vermastarde/{{ peliculaa.id }}/">{% csrf_token %}
+     <button onclick="myFunction2(this)" id="s{{ peliculaa.id }}" title="Ver más tarde" class="btn-ver" type="submit" style="position: relative; left: 10%;"><i style="color: #17202A; font-size: 20px;" class="fa fa-eye" aria-hidden="true"></i></button>
+     </form> 
+
+<form class="my-ajax-form{{ peliculaa.id }}" method='POST'data-url="/waomovies/vermastarde/{{ peliculaa.id }}/">{% csrf_token %}
+                     <button name="eye" style="cursor: pointer; display: none;position: relative; left: 10%;"id="{{ peliculaa.id }}"onclick="myFunction(this)" title="Ver más tarde" class="btn-ver" type="submit"><i  style="color: #17202A; font-size: 20px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                    </form>
+     {% endif %}
+               {% else %}
+     
+               <button title="Ver más tarde" class="loginLink btn-ver" type="submit" style="position: relative; left: 50%;"><i style="color: black; font-size: 24px;" class="fa  fa-eye" aria-hidden="true"></i></button>
+     {% endif %}
+     <form class="reportar" method='POST' data-url='/waomovies/reportar/{{ peliculaa.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+      <input type="numero" name="reportes" style="visibility:hidden;" value="1">
+      <button onclick="reportar(this)"  id="none" title="Reportar" class="" type="submit" style="position: relative; left: 200%; background: none; border: none; cursor: pointer;"><i id="load" style="text-shadow: 2px 2px black; color: white; font-size: 24px;" class="fa fa-bug" aria-hidden="true"></i></button>
+      <h6 id="gone"></h6>
+     </form>
+     </div>
+     <div class="movie-rate" style=" width: 100%; margin-left: -45px; height: 60px;">
+      <div class="rate" style="  width: 160px; height: 60px; position: relative; z-index: 5;">
+       <i class="fa fa-star point" aria-hidden="true">
+</i>
+       <p><span>{{ peliculaa.puntuacion }}</span> /10  IMB<br>
+        <span id="rv" class="rv">{{ comentariosc }} {% if comentariosc > 1 %}comentarios{%  else %}comentario{% endif %}</span>
+       </p>
+      </div>
+      <div class="rate-star" style="width: auto; ">
+       <div class="rate" style="position: relative; left:-22px; width: 200px; height: 60px; " >
+        <a href=""type="button" data-toggle="collapse" data-target="{%  if request.user.is_authenticated %}#collapseExampl{% else %}#collapseExamplee{% endif %}" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;"><img width="58" height="58" src="{% static 'img/wamovieslogo.png' %}" ></a>
+       <p><span id="the-div-that-should-be-refreshe">{{promedio}}</span><small class="" style="font-size: 14px; font-family: sans-serif;"> /5 WAO</small> <br>
+        <span id="vot" class="rv">{{ votacion2c }} {% if votacion2c > 1 %}votos{%  else %}voto{% endif %}</span>
+       </p>
+       </div>
+       
+
+
+       
+
+
+        {%  if request.user.is_authenticated %}
+        <div id="updatevot">
+        {% if votacion4  %}
+        {% for i in votacion4 %}
+        
+
+       <div  style="width: 170px; height: 60px;" class="collapse container" id="collapseExampl">
+                <div class="mt-3">
+                 <div  class="md-form form-lg">
+    
+                <form  class="my-ajax-form" method='POST'data-url="/waomovies/cambiar_votaciono/{{i.id}}/as/" >{% csrf_token %}
+                   
+      <button onclick="votar(this)" style="background:none; border: none; cursor: pointer;" type="submit"><i style="font-size: 18px;" class="fa fa-refresh point"></i></button>
+      </form>
+           </div>
+                               
+                </div>
+            </div>
+            <!-- / Collapsible element -->
+
+
+ 
+       {% endfor %}
+
+       {% else %}
+       <!-- Collapsible element -->
+            <div style=" margin-left:-50px;  width: 195px; height: 60px;"  class="collapse container" id="collapseExampl">
+                <div class="mt-3">
+                 <div class="md-form form-lg">
+    
+               <form  class="my-ajax-form" method='POST'data-url="/waomovies/votaciono/{{peliculaa.id}}/" >{% csrf_token %}
+                   <ul class="rate-area">
+                <input  type="radio" id="5-star" name="votacion" value="5" /><label   style="font-size: 180%;"  for="5-star" title="Amazing">5 stars</label>
+                <input type="radio" id="4-star" name="votacion" value="4" /><label   style="font-size: 180%;" for="4-star" title="Good">4 stars</label>
+                <input type="radio" id="3-star" name="votacion" value="3" /><label  style="font-size: 180%;"  for="3-star" title="Average">3 stars</label>
+                <input type="radio" id="2-star" name="votacion" value="2" /><label   style="font-size: 180%;" for="2-star" title="Not Good">2 stars</label>
+                <input type="radio" id="1-star" name="votacion" value="1" /><label   style="font-size: 180%;" for="1-star" title="Bad">1 star</label>
+                <input type="number" value="{{peliculaa.id}}" name="pelicula">
+
+            </ul>
+      <button onclick="votar(this)" style="background:none; border: none; cursor: pointer;" type="submit"><i style="font-size: 14px;" class="fa fa-send point"></i></button>
+      </form>
+           </div>
+                               
+                </div>
+            </div>
+            <!-- / Collapsible element -->
+    
+       {% endif %}
+      </div>
+
+       {%  else %}
+       
+        <!-- Collapsible element -->
+            <div class="collapse container" id="collapseExamplee">
+                <div class="mt-3">
+                 <div class="md-form form-lg">
+    
+               <small><img src="http://127.0.0.1:8000/static/img/star/{{promedio}}.png" style="width: 140px; height: 30px;" title="Inicia Sesión para poder votar"></small>
+           </div>
+                               
+                </div>
+            </div>
+            <!-- / Collapsible element -->
+       {% endif %}
+       
+        
+      
+             
+       </div>
+     </div>
+     <div class="movie-tabs">
+      <div class="tabs">
+       <ul class="tab-links tabs-mv">
+        <li class="active"><a href="#overview">Overview</a></li>
+        <li class=""><a href="#reproducir">Reproducir</a></li>
+        <li><a href="#reviews"> Comentarios </a></li>
+        <!--li><a href="#cast">  Cast & Crew </a></li-->
+        <li><a href="#moviesrelated"> Películas relacionadas</a></li>                        
+       </ul>
+          <div class="tab-content">
+              <div id="overview" class="tab active">
+                  <div class="row">
+                   <div class="col-md-8 col-sm-12 col-xs-12">
+                    <p>{{ peliculaa.sinopsis }}.</p>
+                    
+           
+           <div class="title-hd-sm">
+            <h4>Cast</h4>
+            
+           </div>
+           <!-- movie cast -->
+           <div class="mvcast-item">
+            {% for i in peliculaa.reparto.all %}  
+            {% for a in i.actor.all %}
+            <div class="cast-it">
+             <div class="cast-left">
+              {% if a.picture %}<img src="{{ a.picture.url }}" alt="" width="40" height="40"> {% endif %}
+              <a href="#">{{ a }}</a>
+             </div>
+             <p>... {{ i }}.</p>
+            </div>
+
+            {% endfor %}
+            {% endfor %}
+            
+           </div>
+          
+                   </div>
+                   <div class="col-md-4 col-xs-12 col-sm-12">
+                    <div class="sb-it">
+                     <h6>Director: </h6>
+                     <p><a href="#">{{ peliculaa.director }}</a></p>
+                    </div>
+                    
+                    
+                    <div class="sb-it">
+                     <h6>Generos:</h6>
+                     <p><a href="#">{{ peliculaa.genero }} </a>,<a href="#">{{ peliculaa.genero2 }} </a>  </p>
+                    </div>
+                    <div class="sb-it">
+                     <h6>Fecha de extreno:</h6>
+                     <p>{{ peliculaa.fecha_de_lanzamiento }}</p>
+                    </div>
+                    
+                    <div class="sb-it">
+                     <h6>Palabras claves:</h6>
+                     <p class="tags">
+                      
+
+                      <span class="time"><a href="#">{{ peliculaa.tag_principal }}, {{ peliculaa.tema }}, {{ peliculaa.tag1 }}, {{ peliculaa.tag2 }}, {{ peliculaa.tag3 }}</a></span>
+             
+                     </p>
+                    </div>
+                    <div class="ads">
+            <img src="images/uploads/ads1.png" alt="">
+           </div>
+                   </div>
+                  </div>
+              </div>
+              <div id="reviews" class="tab review">
+                 <div class="row">
+                   <div class="rv-hd">
+                    <div class="div">
+                   <h2>{{ peliculaa.titulo }}</h2>
+                   
+                    </div>
+                    <div style="position: inline">
+                
+                <a class="redbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer; position: relative; top: 0px;">
+                    Dejar un comentario
+                </a>
+            </div>
+
+            
+
+                   </div>
+                   <div class="topbar-filter">
+           <p><span id="rva">{{comentariosc}} comentarios </span>encontrados </p>
+           <label>Ordenado por:</label>
+           <select>
+            <option value="popularity">Fecha de publicación</option>
+            
+           </select>
+
+          </div>
+            <!-- Collapsible element -->
+            <div class="collapse container" id="collapseExample">
+                <div class="mt-3">
+                 <div class="md-form form-lg">
+                 <!-- img width="30" height="30" src="{{ request.user.profile.perfil_img.url }}"-->
+                 <form class="coment" method='POST' data-url='/waomovies/comentar/{{ peliculaa.id }}/' enctype='multipart/form-data'>
+                  {% csrf_token %}
+
+              <input autocomplete="off" type="text" id="inputLGEx" class="form-control form-control-lg" name="content" style="width: 700px; color: #abb7c4;" size="25">
+                  <label for="inputLGEx" style="font-size: 16px; color: silver;">Dejar un comentario</label>
+                  <a data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"style="color: hsl(0, 0%, 53.3%); font-size: 16px; position: relative; left: 44.5%;">Cerrar</a>
+              <button onclick="send(this)" class="btn btn-primary" type="submit" style="background-color: hsl(206.1, 79.3%, 52.7%); font-size: 16px; position: relative; left: 46%;">Comentar<i class="fa fa-paper-plane-o ml-2"></i></button>
+              
+              </form>
+</div>
+                    
+                </div>
+            </div>
+            <!-- / Collapsible element -->
+
+          <script type="text/javascript">
+           function mouse(b) {
+                   var juan = b.id
+                   var on = juan.substr(5)
+
+                   document.getElementById("pop" + on).style.display = "initial"
+           }
+           function mouseout(b) {
+                   var juan = b.id
+                   var on = juan.substr(5)
+
+                   document.getElementById("pop" + on).style.display = "none"
+           }
+          </script>
+          <div id="sendingcoment" style="display: none;">
+           <img style="position: relative; left: 45%;" height="50" width="50"  src="{% static 'img/throbber_12.gif' %}">
+          </div>
+<div id="ven" class="the-div-that-should-be-refreshed">         
+{% for i in comentarios %}
+
+<div  {% if not request.user == i.user %}  onmouseover="mouse(this)" onmouseout="mouseout(this)" {% endif %} id="mouse{{i.id}}" class="mv-user-review-item">
+           <div class="user-infor" style="">
+            <img src="{{ i.user.profile.perfil_img.url }}" alt="">
+            <div style="position: relative; left: -25px;">
+             <div class="no-star" style="  /* fallback for old browsers */
+              color: -webkit-linear-gradient(to right, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+              color: linear-gradient(to right, #ffffff, #fffc00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+              ">
+
+             </div>
+              <a href="#" style="color: white; font-weight: bold; padding-left: 0px; "> <h3 style="display: inline;">{{ i.user.username }}</h3></a> 
+              {% if request.user.is_authenticated %}
+              {% if request.user == i.user %}
+
+
+
+              <i id="cog_co{{i.id}}" style="cursor: pointer; color: grey; position: relative; left: 10px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i>
+              <!-- Split button -->
+              {% else %}
+
+              <i  id="pop{{i.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer; color: grey; position: relative; left: 500px; display: none;" class="fa fa-ellipsis-v" aria-hidden="true"></i>
+              <div class="btn-group" style="position: relative; right: 40px;">
+    
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#reportModal{{ i.id }}">Reportar por spam/spoiler o comentario inadecuado<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a>
+
+        
+        <!--a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a-->
+    </div>
+    <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div style="z-index: 99999;  top: 200px;" class="modal fade" id="reportModal{{ i.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="modalbody{{i.id}}">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color: grey; position: relative; left: 12px; top: 7px; font-family: monospace;" id="exampleModalLabel">{% if not i in report_user%}Denunciar comentario{% else %}Ya haz reportado a este comentario{% endif %}</h5>
+
+                
+            </div>
+            <div style="margin-top: -40px;" class="modal-body" >
+             {% if not i in report_user%}
+                <form  method="post" class="report{{i.id}}" data-url="/waomovies/reportando/{{i.id}}/" style="" > {% csrf_token %}
+    <br />
+    <br />
+    <label class="containersss">Spoiler<input type="radio" name="reportar" value="Spoiler" /><span class="checkmark"></span></label>
+   
+    <label class="containersss">Muestra odio o violencia<input type="radio" name="reportar" value="Muestra odio o violencia" /><span class="checkmark"></span></label>
+    
+    <label class="containersss">Spam o Contenido comercial<input type="radio" name="reportar" value="Spam o Contenido comercial" /><span class="checkmark"></span></label>
+    
+    
+    
+
+ <div class="modal-footer">
+  <button style="font-size: 16px;" type="submit" class="btn btn-primary" id="report{{i.id}}" onclick="reportee(this)">Reportar</button>
+                <button style="font-size: 16px;" type="button" class="btn redbtn" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+    </form>
+    {%else%}
+    <div class="modal-footer">
+                <button style="font-size: 16px;" type="button" class="btn redbtn" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+    {%endif%}
+            </div>
+           
+        </div>
+    </div>
+</div>
+</div>
+              {% endif %}
+              {% endif %}
+<div class="btn-group">
+    
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" data-toggle="collapse" data-target="#{{i.id}}" aria-expanded="false" aria-controls="collapseExample">Editar comentario<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a>
+
+        <form style="display: inline;" class="dele{{ i.id }}" data-url="/waomovies/{{ i.slug }}/delete/" method="post">{% csrf_token %}<button onclick="deletee(this)" id="dele{{ i.id }}" style="background: none; border: none;"><a class="dropdown-item">Eliminar comentario<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form>
+        <!--a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a-->
+    </div>
+</div>
+
+<br>
+            
+            <p class="time">
+              {% for aa in votacion3 %}
+{% if i.user_id == aa.user_id %}
+             <img src="http://127.0.0.1:8000/static/img/star/{{aa}}.png" style="top: -24px; position: relative; width: 82px; height: 16px;"> 
+              {% else %}
+              {% endif %}
+              {% endfor %}
+              <span style="position: relative; left: -0px; font-size: 14px; top: -20px;">{{ i.timestamp|timesince }}</span>
+             </p>
+            </div>
+           </div>
+           <p id="updateajaxp{{ i.slug }}" style=" {% if i.respuestas.all %} margin-top: -20px; {% else %} margin-top: -10px; {% endif %}margin-bottom: -2px; word-break: break-all;
+ word-wrap: break-word;">{{ i.content }} </p>
+<div id="like_div{{i.id}}" style="">
+ {% if not request.user in i.vote.all %}
+ <form style="display: inline;" method="post" class="like{{i.id}}" data-url="/waomovies/like/{{i.id}}/">{% csrf_token %}
+ 
+<button  class="buttonn" onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a  style=" color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
+</form>
+{% else %}
+<form style="display: inline;" method="post" class="like{{i.id}}" data-url="/waomovies/outlike/{{i.id}}/">{% csrf_token %}
+ 
+<button class="buttonn"  onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
+</form>
+{% endif %}
+{% if not request.user in i.unvote.all %}
+<form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/waomovies/dislike/{{i.id}}/">{% csrf_token %}
+ <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  > <span id="count">{{i.unvote.all|length}}</span> </i></a></button>
+</form>
+{% else %}
+<form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/waomovies/outdislike/{{i.id}}/">
+ <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  > <span id="count">{{i.unvote.all|length}}</span> </i></a></button>
+</form>
+{% endif %}
+  <a   data-toggle="collapse" data-target="#collapseExample{{i.id}}z" aria-expanded="false
+  " aria-controls="collapseExample{{i.id}}z" style="color: grey; font-family: sans-serif; padding-left: 5px; padding-right: 15px; position: relative; top: 10px;">Responder</a>
+  <div  class="collapse container" id="collapseExample{{i.id}}z">
+  <form class="respv{{i.id}}" method="post" data-url="/waomovies/responder/{{i.slug}}/">
+  {% csrf_token %}<div class="md-form">
+   <img width="40"  height="40" style="border: 50%;" src="{{request.user.profile.perfil_img.url}}">
+    <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4;" id="input-char-counter" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
+</div>
+  </form>
+</div>
+ </div>
+<div id="j{{i.id}}">
+{% if i.respuestas.all %}
+<div style="margin-left:auto; margin-right:auto; background-color: none; cursor: pointer; width: 200px;  margin-top: 0px; margin-bottom: 3px;"><a data-toggle="collapse" data-target="#collapseExample{{i.id}}x" aria-expanded="false" aria-controls="collapseExample{{i.id}}x" style="color: #566CA6; font-family: arial;"> <span id="">{% if i.respuestas.all|length == 1 %}Ver {{i.respuestas.all|length}} respuesta {%else%} Ver las {{i.respuestas.all|length}} respuestas {%endif%}</span> <i id="load{{i.id}}" class="fa fa-chevron-down" aria-hidden="true"></i></a></div>
+{% endif %}
+</div>
+  <div  class="collapse container" id="collapseExample{{i.id}}x">
+   <script type="text/javascript">
+           function mouse_res(b) {
+                   var juan = b.id
+                   var on = juan.substr(2)
+
+                   document.getElementById("pop_res" + on).style.display = "initial"
+           }
+           function mouseout_res(b) {
+                   var juan = b.id
+                   var on = juan.substr(2)
+
+                   document.getElementById("pop_res" + on).style.display = "none"
+           }
+          </script>
+   {% for cm in i.respuestas.all|order_by:"timestamp" %}
+   <div {% if not request.user == cm.user %} onmouseover="mouse_res(this)" onmouseout="mouseout_res(this)" {% endif %} id="rs{{cm.id}}">
+    <div class="mv-user-review-item" style="margin-bottom: -6px; width: 70%; position: relative; left: 40px;">
+           <div class="user-infor" style="margin-bottom: -0px;">
+            <img src="{{cm.who.profile.perfil_img.url}}" alt="">
+            <div style="position: relative; right: 20px;">
+             <h3 style=" display: inline; font-size: 16px;">{{cm.who.username}}</h3>
+             {% if request.user == cm.who %}
+             <i id="cog{{cm.id}}" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i>
+
+             <div class="btn-group">
+    
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col{{cm.id}}" aria-expanded="false" aria-controls="collapseExample">Editar respuesta<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a>
+
+        <form style="display: inline;" class="dele_ans{{ cm.id }}" data-url="/waomovies/delete_res/{{ cm.id }}/" method="post">{% csrf_token %}<button onclick="deletee_res(this)" name="{{i.id}}" id="dele_ans{{ cm.id }}" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i  style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form>
+        <!--a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a-->
+    </div>
+</div>
+{% else %}
+<style type="text/css">
+ .vuelve {
+  cursor: pointer; color: grey; position: relative; left: 500px;
+}
+
+
+</style>
+
+
+              <i id="pop_res{{ cm.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  class="fa fa-ellipsis-v vuelve" aria-hidden="true"></i>
+              <div class="btn-group" style="position: relative; right: 40px;">
+    
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#report_resModal{{ cm.id }}">Reportar por spam/spoiler o respuesta inadecuada<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a>
+
+        
+        <!--a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a-->
+    </div>
+     
+
+<!-- Modal -->
+<div style="z-index: 99999;  top: 200px;" class="modal fade" id="report_resModal{{ cm.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="modalbody_res{{cm.id}}">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color: grey; position: relative; left: 12px; top: 7px; font-family: monospace;" id="exampleModalLabel">{% if not cm in report_user_res %}Denunciar respuesta{% else %}Ya haz reportado esta respuesta{% endif %}</h5>
+
+                
+            </div>
+            <div style="margin-top: -40px;" class="modal-body" >
+             {% if not cm in report_user_res%}
+                <form  method="post" class="report_res{{cm.id}}" data-url="/waomovies/reportando_res/{{cm.id}}/" style="" > {% csrf_token %}
+    <br />
+    <br />
+    <label class="containersss">Spoiler<input type="radio" name="reportar" value="Spoiler" /><span class="checkmark"></span></label>
+   
+    <label class="containersss">Muestra odio o violencia<input type="radio" name="reportar" value="Muestra odio o violencia" /><span class="checkmark"></span></label>
+    
+    <label class="containersss">Spam o Contenido comercial<input type="radio" name="reportar" value="Spam o Contenido comercial" /><span class="checkmark"></span></label>
+    
+    
+    
+
+ <div class="modal-footer">
+  <button style="font-size: 16px;" type="submit" class="btn btn-primary" id="report_res{{cm.id}}" onclick="reportee_res(this)">Reportar</button>
+                <button style="font-size: 16px;" type="button" class="btn redbtn" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+    </form>
+    {%else%}
+    <div class="modal-footer">
+                <button style="font-size: 16px;" type="button" class="btn redbtn" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+    {%endif%}
+            </div>
+           
+        </div>
+    </div>
+</div>
+</div>
+ 
+             {% endif %}
+             
+             <p class="time" style="margin-top: -4px;">
+              {{cm.timestamp|timesince}}
+              
+             </p>
+            </div>
+
+           </div>
+           <!-- Collapsible element -->
+
+            <div class="collapse container" id="col{{cm.id}}">
+                <div class="mt-3">
+                 <div class="md-form form-lg">
+                  <form method="post" class="updateup_ans{{ cm.id }}" data-url="/waomovies/responder_update/{{ cm.id }}/">
+                   {% csrf_token %}
+                 <textarea id="textoans{{cm.id}}" onkeypress="return limita(400);" style=" height: 6em;
+   width: 400px;" name="respuesta">{{cm.respuesta}}</textarea> 
+   <br>
+   <input  onclick="update_ans(this)" id="up_ans{{ cm.id }}" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar">
+   <a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col{{cm.id}}" aria-expanded="false" aria-controls="collapseExample">
+<i class="fa fa-close"  aria-hidden="true"></i>
+</a>
+                 </form>
+</div>
+                    
+                </div>
+            </div>
+            <!-- / Collapsible element -->
+           <p id="cm{{ cm.id }}" tyle="margin-bottom: -15px;">{{cm.respuesta}}</p>
+          </div>
+
+    </div>
+
+   {% endfor %}
+</div>
+<div id="ccn{{i.id}}">
+ 
+</div>
+ <!-- Collapsible element -->
+
+            <div class="collapse container" id="{{i.id}}">
+                <div class="mt-3">
+                 <div class="md-form form-lg">
+                  <form method="post" class="updatecp{{ i.slug }}" data-url="/waomovies/{{ i.slug }}/edit/">
+                   {% csrf_token %}
+                 <textarea id="textop{{i.slug}}" onkeypress="return limita(400);" style=" height: 6em;
+   width: 400px;" name="content">{{i.content}}</textarea> 
+   <br>
+   <input  onclick="update(this)" id="p{{ i.slug }}" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar">
+   <a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#{{i.id}}" aria-expanded="false" aria-controls="collapseExample">
+<i class="fa fa-close"  aria-hidden="true"></i>
+</a>
+                 </form>
+</div>
+                    
+                </div>
+            </div>
+            <!-- / Collapsible element -->
+          </div>
+
+
+
+
+
+{% endfor %}
+<br>
+
+<div id="displayload" style="display: none; ">
+ <img style="position: relative; left: 45%;" height="50" width="50" src="{% static 'img/fancybox_loading@2x.gif' %}">
+</div>
+
+
+
+</div> 
+
+<style type="text/css">
+
+/* Customize the label (the container) */
+.containersss {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: grey;
+}
+
+/* Hide the browser's default radio button */
+.containersss input {
+  position: absolute;
+  opacity: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.containersss:hover input ~ .checkmark {
+  background-color: silver;
+}
+
+/* When the radio button is checked, add a blue background */
+.containersss input:checked ~ .checkmark {
+  background-color: #2874A6;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.containersss input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.containersss .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+ .btn.btn-lg {
+    padding: 1rem 2.4rem;
+    font-size: 0.94rem; }
+    .btn.btn-lg .fa {
+      font-size: 1rem; }
+  .btn.btn-md {
+    padding: 0.7rem 1.6rem;
+    font-size: 0.7rem; }
+    .btn.btn-md .fa {
+      font-size: 0.8rem; }
+  .btn.btn-sm {
+    padding: 0.5rem 1.6rem;
+    font-size: 0.64rem; }
+    .btn.btn-sm .fa {
+      font-size: 0.7rem; }
+  .btn.btn-tb {
+    padding: 0.3rem 1rem; }
+  .btn.disabled:active, .btn.disabled:focus, .btn.disabled:hover, .btn:disabled:active, .btn:disabled:focus, .btn:disabled:hover {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+  .btn.btn-block {
+    margin: inherit; }
+  .btn.btn-link {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: transparent; }
+    .btn.btn-link:active, .btn.btn-link:focus, .btn.btn-link:hover {
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+      background-color: transparent; }
+  .btn[class*="btn-outline-"] {
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem; }
+    .btn[class*="btn-outline-"].btn-lg {
+      padding-top: 0.88rem;
+      padding-bottom: 0.88rem; }
+    .btn[class*="btn-outline-"].btn-md {
+      padding-top: 0.58rem;
+      padding-bottom: 0.58rem; }
+    .btn[class*="btn-outline-"].btn-sm {
+      padding-top: 0.38rem;
+      padding-bottom: 0.38rem; }
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-lg, .btn-group-lg > .btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+.btn-block + .btn-block {
+  margin-top: 0.5rem;
+}
+
+input[type="submit"].btn-block,
+input[type="reset"].btn-block,
+input[type="button"].btn-block {
+  width: 100%;
+}
+
+.btn-default {
+  background-color: #2bbbad !important;
+  color: #fff !important; }
+  .btn-default:hover {
+    background-color: #30cfc0; }
+  .btn-default:focus, .btn-default.focus {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
+  .btn-default:focus, .btn-default:active, .btn-default.active {
+    background-color: #186860; }
+  .btn-default.dropdown-toggle {
+    background-color: #2bbbad !important; }
+    .btn-default.dropdown-toggle:hover, .btn-default.dropdown-toggle:focus {
+      background-color: #30cfc0 !important; }
+  .btn-default:not([disabled]):not(.disabled):active, .btn-default:not([disabled]):not(.disabled).active,
+  .show > .btn-default.dropdown-toggle {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    background-color: #186860 !important; }
+  .btn-default:not([disabled]):not(.disabled):active:focus, .btn-default:not([disabled]):not(.disabled).active:focus,
+  .show > .btn-default.dropdown-toggle:focus {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
+
+
+</style>
+
+{% if comentariosc > 5 %}
+<form method="post" id="noneaaa" class="cabron" data-url="/waomovies/peliculas/{{peliculaa.slug}}/">
+                    {% csrf_token %}
+                    <input type="radio" name="vmore" value="True" checked="True" style="display: none;">
+                    <button id="noneaaa" style=" background: silver; font-size: 14px; position: relative; top: 6px;" type="submit"  onclick="vermas(this)" class="btn  btn-lg btn-block"><i class="fa fa-sort-down" aria-hidden="true"></i> Ver los {{ comentariosc }} comentarios</button>
+                    
+                   </form>
+
+          <br>
+          {% endif %}
+          
+          <!-- Collapse buttons -->
+            
+            <!-- / Collapse buttons -->
+<br>
+          
+            <br>
+          
+          <!--div class="topbar-filter">
+           <label>Comentarios por paginas:</label>
+           <select>
+            <option value="range">5 comentarios</option>
+           </select>
+           <div class="pagination2" style="position: relative; top: 10px;">
+      {% if comentarios.has_previous %}
+               <a href="?page=1">&laquo; 1</a>
+               <a href="?page={{ comentarios.previous_page_number }}"><i class="fa fa-long-arrow-left point"></i></a>
+            {% endif %}
+      <span>Página {{ comentarios.number }} de {{ comentarios.paginator.num_pages }}:</span>
+      {% for i in comentarios.paginator.page_range %}
+       <a style="padding-left: 5px;" class="{% if comentarios.number == i %}active{% endif %}" href="?page={{ i }}">{{ i }}</a>
+      {% endfor %}
+       {% if comentarios.has_next %}
+      
+     
+            <a href="?page={{ comentarios.next_page_number }}"><i class="fa fa-long-arrow-right point"></i></a>
+            <a href="?page={{ comentarios.paginator.num_pages }}">{{ comentarios.paginator.num_pages }}&raquo;</a>
+        {% endif %}
+      <a href="#"></a>
+     </div>
+          </div-->
+                  </div>
+              </div>
+              <!-- -->
+              
+
+<style type="text/css">
+    .btn-tw.active {
+    background-color: #FFC300;
+    
+}
+</style>
+              <div id="reproducir" class="tab review">
+                <!--Facebook-->
+<button type="button" class="btn btn-tw active" onclick="clicker()" style="font-size: 16px;" data-toggle="tab" id="rapidvideo" href="#panelrapidvideo" role="tab">Rapidvideo</button>
+<button type="button" class="btn btn-tw" style="font-size: 16px;" data-toggle="tab"  href="#panelvidlox" role="tab" id="vidlox" onclick="click2()">Vidlox</button>
+<button type="button" class="btn btn-tw"   onclick="click3()" style="font-size: 16px;" data-toggle="tab" id="vidoza" href="#panelvidoza" role="tab">Vidoza</button>
+<button type="button" class="btn btn-tw"  onclick="click4()" style="font-size: 16px;" data-toggle="tab" id="openload" href="#panelopenload" role="tab">Openload</button>
+<button type="button" class="btn btn-tw"  onclick="click5()" style="font-size: 16px;" data-toggle="tab" id="streamago" href="#panelstreamago" role="tab">Streamago</button>
+
+
+<button type="button" class="btn btn-tw" onclick="click6()" style="font-size: 16px;" onclick="click6()"  data-toggle="tab" id="streamcloud" href="#panelstreamcloud" role="tab">StreamCloud</button>
+<br>
+<br>
+<br>
+
+<div class="tab-content" style="">
+
+    <!--Panel 1-->
+    <div class="tab-pane fade in show active " id="panelrapidvideo" role="tabpanel" style="">
+<div class="row">
+                   <iframe src="{{peliculaa.rapidvideo}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
+       
+    </div>
+    <!--/.Panel 1-->
+
+    <!--Panel 2-->
+    <div class="tab-pane fade " id="panelvidlox" role="tabpanel" >
+        
+
+        <div class="row">
+                   <iframe src="{{peliculaa.vidlox}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
+
+    </div>
+    <!--/.Panel 2-->
+
+    <!--Panel 3-->
+    <div class="tab-pane fade " id="panelvidoza" role="tabpanel" >
+        
+
+        <div class="row">
+                   <iframe src="{{peliculaa.vidoza}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
+
+    </div>
+    <!--/.Panel 3-->
+
+    <div class="tab-pane fade " id="panelopenload" role="tabpanel" >
+        
+
+        <div class="row">
+                   <iframe src="{{peliculaa.openload}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
+
+    </div>
+
+    <div class="tab-pane fade " id="panelstreamago" role="tabpanel" >
+        
+
+        <div class="row">
+                   <iframe src="{{peliculaa.streamago}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
+
+    </div>
+
+<div class="tab-pane fade " id="panelstreamcloud" role="tabpanel" >
+        
+
+        <div class="row">
+                   <iframe src="{{peliculaa.streamcloud}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
+
+    </div>
+</div>
+         
+         <script type="text/javascript">
+            function clicker () {
+  $('#panelrapidvideo').addClass("active");
+  $('#panelrapidvideo').addClass("show");
+  $('#panelrapidvideo').addClass("in");
+
+  
+
+  $('#panelvidoza').removeClass("active");
+  $('#panelvidoza').removeClass("show");
+  $('#panelvidoza').removeClass("in");
+
+  $('#panelvidlox').removeClass("active");
+  $('#panelvidlox').removeClass("show");
+  $('#panelvidlox').removeClass("in");
+
+
+
+  $('#panelopenload').removeClass("active");
+  $('#panelopenload').removeClass("show");
+  $('#panelopenload').removeClass("in");
+
+  $('#panelstreamago').removeClass("active");
+  $('#panelstreamago').removeClass("show");
+  $('#panelstreamago').removeClass("in");
+
+    $('#panelstreamcloud').removeClass("active");
+  $('#panelstreamcloud').removeClass("show");
+  $('#panelstreamcloud').removeClass("in");
+
+  $('#rapidvideo').addClass("active")
+  $('#vidlox').removeClass("active")
+document.getElementById('panelvidlox').style.display="none"
+document.getElementById('panelrapidvideo').style.display="initial"
+
+  $('#vidoza').removeClass("active")
+  $('#openload').removeClass("active")
+document.getElementById('panelvidoza').style.display="none"
+document.getElementById('panelopenload').style.display="none"
+  $('#streamago').removeClass("active")
+
+  $('#streamcloud').removeClass("active")
+document.getElementById('panelstreamago').style.display="none"
+document.getElementById('panelstreamcloud').style.display="none"
+
+ 
+
+
+}
+  
+</script>
+<script type="text/javascript">
+    function click2 () {
+  
+
+  $('#panelvidlox').addClass("active");
+  $('#panelvidlox').addClass("show");
+  $('#panelvidlox').addClass("in");
+
+  $('#panelrapidvideo').removeClass("active");
+  $('#panelrapidvideo').removeClass("show");
+  $('#panelrapidvideo').removeClass("in");
+
+  $('#rapidvideo').removeClass("active")
+  $('#vidlox').addClass("active")
+
+document.getElementById('panelrapidvideo').style.display="none"
+document.getElementById('panelvidlox').style.display="initial"
+
+
+  $('#vidoza').removeClass("active")
+  $('#openload').removeClass("active")
+document.getElementById('panelvidoza').style.display="none"
+document.getElementById('panelopenload').style.display="none"
+  $('#streamago').removeClass("active")
+
+  $('#streamcloud').removeClass("active")
+document.getElementById('panelstreamago').style.display="none"
+document.getElementById('panelstreamcloud').style.display="none"
+
+ 
+
+
+  }
+
+  function click3 () {
+   $('#panelvidoza').addClass("active");
+  $('#panelvidoza').addClass("show");
+  $('#panelvidoza').addClass("in");
+
+  $('#panelvidlox').removeClass("active");
+  $('#panelvidlox').removeClass("show");
+  $('#panelvidlox').removeClass("in");
+
+  $('#panelrapidvideo').removeClass("active");
+  $('#panelrapidvideo').removeClass("show");
+  $('#panelrapidvideo').removeClass("in");
+
+  $('#panelopenload').removeClass("active");
+  $('#panelopenload').removeClass("show");
+  $('#panelopenload').removeClass("in");
+
+  $('#panelstreamago').removeClass("active");
+  $('#panelstreamago').removeClass("show");
+  $('#panelstreamago').removeClass("in");
+
+    $('#panelstreamcloud').removeClass("active");
+  $('#panelstreamcloud').removeClass("show");
+  $('#panelstreamcloud').removeClass("in");
+
+  $('#rapidvideo').removeClass("active")
+  $('#vidoza').addClass("active")
+
+document.getElementById('panelrapidvideo').style.display="none"
+document.getElementById('panelvidoza').style.display="initial"
+
+
+  $('#vidlox').removeClass("active")
+  $('#openload').removeClass("active")
+document.getElementById('panelvidlox').style.display="none"
+document.getElementById('panelopenload').style.display="none"
+  $('#streamago').removeClass("active")
+
+  $('#streamcloud').removeClass("active")
+document.getElementById('panelstreamago').style.display="none"
+document.getElementById('panelstreamcloud').style.display="none"
+
+ 
+
+
+  }
+
+  function click4 () {
+   $('#panelopenload').addClass("active");
+  $('#panelopenload').addClass("show");
+  $('#panelopenload').addClass("in");
+
+  $('#panelvidlox').removeClass("active");
+  $('#panelvidlox').removeClass("show");
+  $('#panelvidlox').removeClass("in");
+
+  $('#panelrapidvideo').removeClass("active");
+  $('#panelrapidvideo').removeClass("show");
+  $('#panelrapidvideo').removeClass("in");
+
+  $('#panelvidoza').removeClass("active");
+  $('#panelvidoza').removeClass("show");
+  $('#panelvidoza').removeClass("in");
+
+  $('#panelstreamago').removeClass("active");
+  $('#panelstreamago').removeClass("show");
+  $('#panelstreamago').removeClass("in");
+
+    $('#panelstreamcloud').removeClass("active");
+  $('#panelstreamcloud').removeClass("show");
+  $('#panelstreamcloud').removeClass("in");
+
+  $('#rapidvideo').removeClass("active")
+  $('#openload').addClass("active")
+
+document.getElementById('panelrapidvideo').style.display="none"
+document.getElementById('panelopenload').style.display="initial"
+
+
+  $('#vidlox').removeClass("active")
+  $('#vidoza').removeClass("active")
+document.getElementById('panelvidlox').style.display="none"
+document.getElementById('panelvidoza').style.display="none"
+  $('#streamago').removeClass("active")
+
+  $('#streamcloud').removeClass("active")
+document.getElementById('panelstreamago').style.display="none"
+document.getElementById('panelstreamcloud').style.display="none"
+
+ 
+
+
+  }
+
+  function click5 () {
+   $('#panelstreamago').addClass("active");
+  $('#panelstreamago').addClass("show");
+  $('#panelstreamago').addClass("in");
+
+  $('#panelvidlox').removeClass("active");
+  $('#panelvidlox').removeClass("show");
+  $('#panelvidlox').removeClass("in");
+
+  $('#panelrapidvideo').removeClass("active");
+  $('#panelrapidvideo').removeClass("show");
+  $('#panelrapidvideo').removeClass("in");
+
+  $('#panelopenload').removeClass("active");
+  $('#panelopenload').removeClass("show");
+  $('#panelopenload').removeClass("in");
+
+  $('#panelvidoza').removeClass("active");
+  $('#panelvidoza').removeClass("show");
+  $('#panelvidoza').removeClass("in");
+
+    $('#panelstreamcloud').removeClass("active");
+  $('#panelstreamcloud').removeClass("show");
+  $('#panelstreamcloud').removeClass("in");
+
+  $('#rapidvideo').removeClass("active")
+  $('#streamago').addClass("active")
+
+document.getElementById('panelrapidvideo').style.display="none"
+document.getElementById('panelstreamago').style.display="initial"
+
+
+  $('#vidlox').removeClass("active")
+  $('#openload').removeClass("active")
+document.getElementById('panelvidlox').style.display="none"
+document.getElementById('panelopenload').style.display="none"
+  $('#vidoza').removeClass("active")
+
+  $('#streamcloud').removeClass("active")
+document.getElementById('panelvidoza').style.display="none"
+document.getElementById('panelstreamcloud').style.display="none"
+
+ 
+
+
+  }
+
+  function click6 () {
+   $('#panelstreamcloud').addClass("active");
+  $('#panelstreamcloud').addClass("show");
+  $('#panelstreamcloud').addClass("in");
+
+  $('#panelvidlox').removeClass("active");
+  $('#panelvidlox').removeClass("show");
+  $('#panelvidlox').removeClass("in");
+
+  $('#panelrapidvideo').removeClass("active");
+  $('#panelrapidvideo').removeClass("show");
+  $('#panelrapidvideo').removeClass("in");
+
+  $('#panelopenload').removeClass("active");
+  $('#panelopenload').removeClass("show");
+  $('#panelopenload').removeClass("in");
+
+  $('#panelstreamago').removeClass("active");
+  $('#panelstreamago').removeClass("show");
+  $('#panelstreamago').removeClass("in");
+
+    $('#panelvidoza').removeClass("active");
+  $('#panelvidoza').removeClass("show");
+  $('#panelvidoza').removeClass("in");
+
+  $('#rapidvideo').removeClass("active")
+  $('#streamcloud').addClass("active")
+
+document.getElementById('panelrapidvideo').style.display="none"
+document.getElementById('panelstreamcloud').style.display="initial"
+
+
+  $('#vidlox').removeClass("active")
+  $('#openload').removeClass("active")
+document.getElementById('panelvidlox').style.display="none"
+document.getElementById('panelopenload').style.display="none"
+  $('#streamago').removeClass("active")
+
+  $('#vidozad').removeClass("active")
+document.getElementById('panelstreamago').style.display="none"
+document.getElementById('panelstreamcloud').style.display="none"
+
+ 
+
+
+  }
+</script>        
+              </div>
+              
+               
+               <div id="moviesrelated" class="tab">
+                <h3>Películas relacionadas a:</h3>
+                   <h2>{{peliculaa.titulo}}</h2>
+            <div class="topbar-filter">
+             {% if relacionarc == 1 %}
+           <p><span>{{relacionarc}}</span> Película encontrada en total</p>
+           {% else %}
+           <p><span>{{relacionarc}}</span> Películas encontradas en total</p>
+
+           {%  endif%}
+           <label>Ordenada por</label>
+           <select>
+            <option value="popularity">Popularidad</option>
+            <!--option value="popularity">Popularity Ascending</option>
+            <option value="rating">Rating Descending</option>
+            <option value="rating">Rating Ascending</option>
+            <option value="date">Release date Descending</option>
+            <option value="date">Release date Ascending</option-->
+           </select>
+            </div>
+                <div class="tabs container">
+                 <ul class="tab-links">
+          <li class=""><a href="#tab1">#Palabra Clave</a></li>
+          <li class="active"><a href="#tab4"> #Por Tema y tags</a></li>                        
+
+          <li><a href="#tab2"> #Por Titulo</a></li>
+          <li><a href="#tab3"> #Por Director   </a></li>
+           </ul>
+         <br>
+          <div class="tab-content" >
+           <div class="row">
+                   
+
+           <div id="tab1" class="tab ">
+                {% for i in relacionarr %}
+            {% if i != peliculaa %}
+
+          <div class="movie-item-style-2">
+            <img style="height: 255px; width: auto;" src="{{ i.Cover.url }}" alt="">
+{% include 'ajaxlistre.html' %}
+           <div class="mv-item-infor">
+
+             
+            <h6><a href="/waomovies/peliculas/{{ i.slug }}/">{{ i.titulo }}  </a> <span class="blank">   ({{ i.fecha_de_lanzamiento|date:"Y" }})</span> </h6>
+            <p class="rate"><i class="fa-star fa point"></i><span>{{ i.puntuacion }}</span> /10</p>
+            <p class="describe">{{ i.sinopsis }}</p>
+            <p class="run-time"> País:<span>{{i.pais }}</span>    .     <span>Fecha de estreno: {{i.fecha_de_lanzamiento }}</span></p>
+            <p>Director: <a href="#">{{ i.director }}</a></p>
+            <p>Estrellas:{% for a in i.reparto.all %} <a href="#">  {{ a }},</a> {% endfor %}</p>
+           </div>
+
+          </div>
+            {% endif %}
+           {% endfor%}
+                  </div>
+
+                  <div id="tab2" class="tab">
+                  {% for i in relacionarportitulo %}
+            {% if i != peliculaa %}
+
+          <div class="movie-item-style-2">
+            <img style="height: 255px; width: auto;" src="{{ i.Cover.url }}" alt="">
+{% include 'ajaxlistre.html' %}
+           <div class="mv-item-infor">
+
+             
+            <h6><a href="/waomovies/peliculas/{{ i.slug }}/">{{ i.titulo }}  </a> <span class="blank">   ({{ i.fecha_de_lanzamiento|date:"Y" }})</span> </h6>
+            <p class="rate"><i class="fa-star fa point"></i><span>{{ i.puntuacion }}</span> /10</p>
+            <p class="describe">{{ i.sinopsis }}</p>
+            <p class="run-time"> País:<span>{{i.pais }}</span>    .     <span>Fecha de estreno: {{i.fecha_de_lanzamiento }}</span></p>
+            <p>Director: <a href="#">{{ i.director }}</a></p>
+            <p>Estrellas: <a href="#">{{ i.reparto }},</a></p>
+           </div>
+
+          </div>
+            {% endif %}
+           {% endfor%}
+           </div>
+           <div id="tab3" class="tab">
+                  {% for i in relacionarpordirect %}
+            {% if i != peliculaa %}
+
+          <div class="movie-item-style-2">
+            <img style="height: 255px; width: auto;"  src="{{ i.Cover.url }}" alt="">
+{% include 'ajaxlistre.html' %}
+           <div class="mv-item-infor">
+
+             
+            <h6><a href="/waomovies/peliculas/{{ i.slug }}/">{{ i.titulo }}  </a> <span class="blank">   ({{ i.fecha_de_lanzamiento|date:"Y" }})</span> </h6>
+            <p class="rate"><i class="fa-star fa point"></i><span>{{ i.puntuacion }}</span> /10</p>
+            <p class="describe">{{ i.sinopsis }}</p>
+            <p class="run-time"> País:<span>{{i.pais }}</span>    .     <span>Fecha de estreno: {{i.fecha_de_lanzamiento }}</span></p>
+            <p>Director: <a href="#">{{ i.director }}</a></p>
+            <p>Estrellas: <a href="#">{{ i.reparto }},</a></p>
+           </div>
+
+          </div>
+            {% endif %}
+           {% endfor%}
+           </div>
+           <div id="tab4" class="tab active">
+                  {% for i in relacionarportema %}
+            {% if i != peliculaa %}
+
+          <div class="movie-item-style-2">
+            <img style="height: 255px; width: auto;" src="{{ i.Cover.url }}" alt="">
+{% include 'ajaxlistre.html' %}
+           <div class="mv-item-infor">
+
+             
+            <h6><a href="/waomovies/peliculas/{{ i.slug}}/">{{ i.titulo }}  </a> <span class="blank">   ({{ i.fecha_de_lanzamiento|date:"Y" }})</span> </h6>
+            <p class="rate"><i class="fa-star fa point"></i><span>{{ i.puntuacion }}</span> /10</p>
+            <p class="describe">{{ i.sinopsis }}</p>
+            <p class="run-time"> País:<span>{{i.pais }}</span>    .     <span>Fecha de estreno: {{i.fecha_de_lanzamiento }}</span></p>
+            <p>Director: <a href="#">{{ i.director }}</a></p>
+            <p>Estrellas: <a href="#">{{ i.reparto }},</a></p>
+           </div>
+
+          </div>
+            {% endif %}
+           {% endfor%}
+           </div>
+                  </div>
+          </div>
+
+                </div>
+                
+          
+                </div>
+               </div>
+          </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+{% endblock %}

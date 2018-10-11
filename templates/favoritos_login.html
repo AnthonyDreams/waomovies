@@ -1,0 +1,747 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset="UTF-8">
+
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+				
+
+	<title>Selección</title>
+
+	<!-- no pregunte :)-->
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/jevelin.shufflehound.com\/coming-soon\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.6"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56692,8205,9792,65039],[55357,56692,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+
+		* {
+			font-size: 16px;
+			color: white;
+			text-decoration: none;
+		}
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='bootstrap-css' href='{% static "" %}wp-content/themes/jevelin/css/bootstrap.min.css?ver=3.3.4' type='text/css' media='all'>
+<link rel='stylesheet' id='animate-css' href='{% static "" %}wp-content/themes/jevelin/css/animate.min.css?ver=3.4.0' type='text/css' media='all'>
+<link rel='stylesheet' id='slick-css' href='{% static "" %}wp-content/themes/jevelin/css/slick.css?ver=1.5.9' type='text/css' media='all'>
+<link rel='stylesheet' id='sumoselect-css' href='{% static "" %}wp-content/themes/jevelin/css/sumoselect.min.css?ver=1.0' type='text/css' media='all'>
+<link rel='stylesheet' id='jevelin-shortcodes-css' href='{% static "" %}wp-content/themes/jevelin/css/shortcodes.css?ver=1.0' type='text/css' media='all'>
+<link rel='stylesheet' id='jevelin-styles-css' href='{% static "" %}wp-content/themes/jevelin/style.css?ver=1.0' type='text/css' media='all'>
+<link rel='stylesheet' id='jevelin-responsive-css' href='{% static "" %}wp-content/themes/jevelin/css/responsive.css?ver=1.0' type='text/css' media='all'>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>  
+<link rel='stylesheet' id='pixeden-icons-css' href='{% static "" %}wp-content/themes/jevelin/css/pe-icon-7-stroke.css?ver=1.0.0' type='text/css' media='all'>
+<link rel='stylesheet' id='jevelin-fonts-css' href='https://fonts.googleapis.com/css?family=Montserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic|Raleway:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&#038;subset=latin' type='text/css' media='all'>
+
+
+	<style type="text/css">
+		body {
+			overflow: hidden;
+		}
+
+		.sh-page-loader {
+			background-color: #ffffff;
+		}
+
+		.sk-cube-grid .sk-cube,
+		.sk-folding-cube .sk-cube:before,
+		.sk-spinner > div,
+		.sh-page-loader-style-spinner .object {
+			background-color: #47c9e5!important;
+		}
+	</style>
+
+<script type="text/javascript">function setREVStartSize(e){
+				try{ var i=jQuery(window).width(),t=9999,r=0,n=0,l=0,f=0,s=0,h=0;					
+					if(e.responsiveLevels&&(jQuery.each(e.responsiveLevels,function(e,f){f>i&&(t=r=f,l=e),i>f&&f>r&&(r=f,n=e)}),t>r&&(l=n)),f=e.gridheight[l]||e.gridheight[0]||e.gridheight,s=e.gridwidth[l]||e.gridwidth[0]||e.gridwidth,h=i/s,h=h>1?1:h,f=Math.round(h*f),"fullscreen"==e.sliderLayout){var u=(e.c.width(),jQuery(window).height());if(void 0!=e.fullScreenOffsetContainer){var c=e.fullScreenOffsetContainer.split(",");if (c) jQuery.each(c,function(e,i){u=jQuery(i).length>0?u-jQuery(i).outerHeight(!0):u}),e.fullScreenOffset.split("%").length>1&&void 0!=e.fullScreenOffset&&e.fullScreenOffset.length>0?u-=jQuery(window).height()*parseInt(e.fullScreenOffset,0)/100:void 0!=e.fullScreenOffset&&e.fullScreenOffset.length>0&&(u-=parseInt(e.fullScreenOffset,0))}f=u}else void 0!=e.minHeight&&f<e.minHeight&&(f=e.minHeight);e.c.closest(".rev_slider_wrapper").css({height:f})					
+				}catch(d){console.log("Failure at Presize of Slider:"+d)}
+			};</script>
+</head>
+<body class="home page-template-default page page-id-5 ">
+
+
+	
+	<div id="page-container" class="">
+		
+
+					<header class="primary-mobile primary-mobile-light">
+				
+<div id="header-mobile" class="sh-header-mobile">
+	<div class="sh-header-mobile-navigation">
+		<div class="container">
+			<div class="sh-table">
+				<div class="sh-table-cell sh-group">
+
+
+    
+				</div>
+				<div class="sh-table-cell">
+
+										<nav id="header-navigation-mobile" class="header-standard-position">
+						<div class="sh-nav-container">
+							<ul class="sh-nav">
+
+															    
+        <li class="menu-item sh-nav-dropdown">
+            <a>
+                <div class="sh-table-full">
+                    <div class="sh-table-cell">
+                        <span class="c-hamburger c-hamburger--htx">
+                            <span>Toggle menu</span>
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </li>
+							</ul>
+						</div>
+					</nav>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<nav class="sh-header-mobile-dropdown">
+		<div class="container sh-nav-container">
+			<ul class="sh-nav-mobile"></ul>
+		</div>
+
+		<div class="container sh-nav-container">
+					</div>
+
+			</nav>
+</div>
+			</header>
+			<header class="primary-desktop primary-desktop-light">
+				
+<div class="sh-header-height">
+	<div class="sh-header sh-header-1">
+		<div class="container">
+			<div class="sh-table">
+				<div class="sh-table-cell sh-group">
+
+										            <div class="header-logo sh-group-equal">
+                <a href="index.htm" class="header-logo-container sh-table-small">
+                   
+                </a>
+                            </div>
+
+    
+				</div>
+				<div class="sh-table-cell">
+
+										<nav id="header-navigation" class="header-standard-position">
+													<div class="sh-nav-container"><ul id="menu-header-navigation" class="sh-nav"><li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12"><a href="#">Facebook</a></li>
+<li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13"><a href="#">Instagram</a></li>
+<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="/waomovies/inicio/">Waomovies</a></li>
+</ul></div>											</nav>
+
+				</div>
+			</div>
+		</div>
+
+		<div id="header-search" class="sh-header-search">
+	<div class="sh-table-full">
+		<div class="sh-table-cell">
+
+			<div class="line-test">
+				<div class="container">
+
+					<form method="get" class="sh-header-search-form" action="/waomovies/auth/">
+						<input type="search" class="sh-header-search-input" placeholder="Search Here.." value="" name="s" required="">
+						<button type="submit" class="sh-header-search-submit">
+							<i class="icon-magnifier"></i>
+						</button>
+						<div class="sh-header-search-close close-header-search">
+							<i class="ti-close"></i>
+						</div>
+						
+											</form>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+	</div>
+</div>
+			</header>
+		
+
+		
+
+        
+
+			<div id="wrapper">
+				
+
+				<div class="content-container sh-page-layout-full">
+				
+
+				
+
+	<div id="content" class="page-content " >
+
+		<div class="fw-page-builder-content" style="overflow: hidden;">
+<section class="sh-section sh-section-fd30b882a68f5ed8a204ffae26772b93 fw-main-row sh-section-visibility-everywhere">
+	
+
+	<div class="">
+	
+	</div>
+</section>
+
+</div>
+<div class="sh-section-container container " style=" z-index:500000px;position: relative; top: -550px; overflow: hidden;">
+	<!--div style="margin-bottom: none; z-index: -1; background-color: rgba(0,0,0,0.7);filter: blur(10px); width:900px; height: 500px; margin-right: auto; margin-left: auto;"></div-->
+		<div class="fw-row no-gutters" style="" >
+	
+<div class="sh-column sh-column-e8dd896dd11e33f20a5f74d8d5704bf1 fw-col-xs-12">
+
+	
+<style type="text/css">
+	.scrollbar {
+    width: 65px;
+    overflow-y: scroll;
+    margin-bottom: 25px;
+}
+.force-overflow {
+    min-height: 450px;
+}
+
+.scrollbar-primary::-webkit-scrollbar {
+  width: 12px;
+  background-color: gray; }
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #4285F4; }
+
+.scrollbar-danger::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+
+.scrollbar-danger::-webkit-scrollbar {
+  width: 12px;
+  background-color: gray; }
+
+.scrollbar-danger::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background: #ED213A;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ }
+
+.scrollbar-warning::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+
+.scrollbar-warning::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5; }
+
+.scrollbar-warning::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #FF8800; }
+
+.scrollbar-success::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+
+.scrollbar-success::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5; }
+
+.scrollbar-success::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #00C851; }
+
+.scrollbar-info::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+
+.scrollbar-info::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5; }
+
+.scrollbar-info::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #33b5e5; }
+
+.scrollbar-default::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+
+.scrollbar-default::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5; }
+
+.scrollbar-default::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #2BBBAD; }
+
+.scrollbar-secondary::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+
+.scrollbar-secondary::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5; }
+
+.scrollbar-secondary::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #aa66cc; }
+
+  .border {
+  	border: inset 4px ;
+  	border-radius: 6px;
+  	border-color: #FFC300;
+  }
+
+  .as .hvr-inner {
+  position: absolute;
+  top: 0;
+  background-color: rgb(0, 0, 0, 0.2);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  -webkit-opacity: 0;
+  opacity: 0;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+  filter: alpha(opacity=0);
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+  width: 100%;
+  height: 260px;
+}
+@media (max-width: 991px) {
+  .as .hvr-inner {
+    margin-left: 0;
+  }
+}
+.as .hvr-inner a {
+  font-family: 'Dosis', sans-serif;
+  font-size: 14px;
+  color: #abb7c4;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.as .hvr-inner a i {
+  margin-right: 5px;
+}
+.as:hover img {
+	border: outset 4px ;
+  	border-radius: 6px;
+  	border-color: #FFC300;
+}
+.as:hover .hvr-inner {
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  -webkit-opacity: 1;
+  opacity: 1;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+  filter: alpha(opacity=100);
+}
+.as:hover h6 a {
+  color: #dcf836;
+}
+
+.sh-cf7-style2 div p input:not(.wpcf7-submit),
+.sh-cf7-style2 div p textarea {
+	border-radius: 100px;
+	border: 2px solid #ededed!important;
+	line-height: 64px!important;
+	padding: 0 45px;
+	transition: 0.7s all ease-in-out;
+}
+
+.sh-cf7-style2 div .wpcf7-submit {
+	border-radius: 100px;
+	line-height: 64px!important;
+	padding: 0 45px!important;
+}
+
+.sh-cf7-style2 div .ajax-loader,
+.sh-cf7-style3 div .ajax-loader {
+	display: table;
+	margin: 0 auto;
+	position: relative;
+	top: 10px;
+}
+
+.sh-cf7 div .wpcf7-submit:hover,
+.sh-cf7 div .wpcf7-submit:focus {
+	background-position: center center;
+}
+
+.sh-cf7-style2 div p input::-webkit-input-placeholder,
+.sh-cf7-style3 div p input::-webkit-input-placeholder {
+	color: #a8a8a8;
+	font-style: normal;
+}
+.sh-cf7-style2 div p input:-moz-placeholder,
+.sh-cf7-style3 div p input:-moz-placeholder {
+	color: #a8a8a8;
+	font-style: normal;
+}
+.sh-cf7-style2 div p input::-moz-placeholder,
+.sh-cf7-style3 div p input::-moz-placeholder {
+	color: #a8a8a8;
+	font-style: normal;
+}
+.sh-cf7-style2 div p input:-ms-input-placeholder,
+.sh-cf7-style3 div p input:-ms-input-placeholder {
+	color: #a8a8a8;
+	font-style: normal;
+}
+
+
+/* CF7 Style - 3 */
+.sh-cf7-style3 div p input:not(.wpcf7-submit),
+.sh-cf7-style3 div p textarea {
+	border-radius: 5px;
+	line-height: 55px!important;
+	padding: 0 45px;
+	transition: 0.7s all ease-in-out;
+}
+
+.sh-cf7-style3 div .wpcf7-submit {
+	border-radius: 5px!important;
+	line-height: 64px!important;
+	padding: 0 45px!important;
+}
+
+.sh-cf7-style3 div p input,
+.sh-cf7-style3 div p textarea {
+	width: 100%!important;
+	text-align: center;
+}
+
+.sh-cf7-style3 div p input:not(.wpcf7-submit):focus,
+.sh-cf7-style3 div p textarea:focus {
+	box-shadow: 0px 8px 30px 0px rgba(0,0,0,0.2);
+}
+
+
+/* CF7 Style - 4 */
+.sh-cf7-style4 div input:not(.wpcf7-submit),
+.sh-cf7-style4 div select,
+.sh-cf7-style4 .SumoSelect .SelectBox,
+.sh-cf7-style4 div textarea {
+	border-width: 0px!important;
+	border-bottom-width: 1px!important;
+	border-radius: 0px;
+	line-height: 62px!important;
+	padding: 0 26px;
+	font-size: 13px;
+}
+
+.sh-cf7-style4 div input:not(.wpcf7-submit) {
+	transition: 0.3s all ease-in-out;
+}
+
+.sh-cf7-style4 div input:not(.wpcf7-submit):focus {
+	border-bottom-color: red;
+}
+
+.sh-cf7-style4 div .wpcf7-submit {
+	background: none!important;
+	color: #646464;
+	margin-top: 20px;
+}
+
+.sh-cf7-style4 div .wpcf7-submit:hover,
+.sh-cf7-style4 div .wpcf7-submit:focus {
+	background: none!important;
+	opacity: 0.7;
+}
+
+
+/* CF7 Style - 5 */
+.sh-cf7-style5 div input:not(.wpcf7-submit),
+.sh-cf7-style5 div select,
+.sh-cf7-style5 .SumoSelect .SelectBox,
+.sh-cf7-style5 div textarea {
+	border-color: #363636!important;
+	border-radius: 0px;
+	line-height: 60px!important;
+	padding: 0 26px;
+	font-size: 14px;
+	margin-bottom: 0px;
+	letter-spacing: 2px;
+}
+
+/* Elements CSS */.sh-tabs-filter li a,.woocommerce .woocommerce-tabs li:not(.active) a,.woocommerce .product .posted_in a,.woocommerce .product .tagged_as a,.woocommerce .product .woocommerce-review-link,.woocommerce-checkout #payment div.payment_box,.sh-default-color a,.sh-default-color,.post-meta-two a,#sidebar a,.logged-in-as a ,.post-meta-author a,.sh-social-share-networks .jssocials-share i,.sh-header-left-side .sh-header-copyrights-text a,.wpcf7-form-control-wrap .simpleselect {color: #8d8d8d!important;}.woocommerce nav.woocommerce-pagination ul.page-numbers a {color: #8d8d8d;}html body,html .menu-item a {font-family: "Montserrat"; color: #8d8d8d; font-weight: 400; font-size: 14px; }.woocommerce ul.products li.product a h3:hover,.woocommerce ul.products li.product ins,.post-title h2:hover,.sh-team:hover .sh-team-role,.sh-team-style4 .sh-team-role,.sh-team-style4 .sh-team-icon:hover i,.sh-header-search-submit,.woocommerce .woocommerce-tabs li.active a,.woocommerce .required,.sh-recent-products .woocommerce .star-rating span::before,.woocommerce .woocomerce-styling .star-rating span::before,.woocommerce div.product p.price,.woocomerce-styling li.product .amount,.post-format-icon,.sh-accent-color,.sh-blog-tag-item:hover h6,ul.page-numbers a:hover,.sh-portfolio-single-info-item i,.sh-filter-item.active,.sh-filter-item:hover,.sh-nav .sh-nav-cart li.menu-item-cart .mini_cart_item .amount,.sh-pricing-button-style3,#sidebar a:not(.sh-social-widgets-item):hover,.logged-in-as a:hover,.woocommerce table.shop_table.cart a:hover,.wrap-forms sup:before,.sh-comment-date a:hover,.reply a.comment-edit-link,.comment-respond #cancel-comment-reply-link,.sh-portfolio-title:hover,.sh-portfolio-single-related-mini h5:hover,.sh-header-top-10 .header-contacts-details-large-icon i,.sh-unyson-frontend-test.active {color: #47c9e5!important;}.woocommerce p.stars.selected a:not(.active),.woocommerce p.stars.selected a.active,.sh-dropcaps-full-square,.sh-dropcaps-full-square-border,.masonry2 .post-content-container a.post-meta-comments:hover {background-color: #47c9e5;}.contact-form input[type="submit"],.sh-back-to-top:hover,.sh-dropcaps-full-square-tale,.sh-404-button,.woocommerce .wc-forward,.woocommerce .checkout-button,.woocommerce div.product form.cart button,.woocommerce .button:not(.add_to_cart_button),.sh-blog-tag-item,.sh-comments .submit,.sh-sidebar-search-active .search-field,.sh-nav .sh-nav-cart .buttons a.checkout,ul.page-numbers .current,ul.page-numbers .current:hover,.post-background,.post-item .post-category .post-category-list,.cart-icon span,.comment-input-required,.widget_tag_cloud a:hover,.widget_product_tag_cloud a:hover,.woocommerce #respond input#submit,.sh-portfolio-overlay1-bar,.sh-pricing-button-style4,.sh-pricing-button-style11,.sh-revslider-button2,.sh-portfolio-default2 .sh-portfolio-title,.sh-recent-posts-widgets-count,.sh-filter-item.active:after,.blog-style-largedate .post-comments,.sh-video-player-image-play,.woocommerce .woocommerce-tabs li a:after,.sh-image-gallery .slick-dots li.slick-active button,.sh-recent-posts-carousel .slick-dots li.slick-active button,.sh-recent-products-carousel .slick-dots li.slick-active button,.sh-settings-container-bar .sh-progress-status-value,.post-password-form input[type="submit"],.wpcf7-form .wpcf7-submit,.sh-portfolio-filter-style3 .sh-filter-item.active .sh-filter-item-content,.sh-portfolio-filter-style4 .sh-filter-item:hover .sh-filter-item-content,.sh-woocommerce-categories-count,.sh-woocommerce-products-style2 .woocommerce ul.products li.product .add_to_cart_button:hover,.woocomerce-styling.sh-woocommerce-products-style2 ul.products li.product .add_to_cart_button:hover,.sh-icon-group-style2 .sh-icon-group-item:hover,.sh-text-background {background-color: #47c9e5!important;}.sh-cf7-style4 form input:not(.wpcf7-submit):focus {border-bottom-color: #47c9e5;}::selection {background-color: #47c9e5!important;color: #fff;}::-moz-selection {background-color: #47c9e5!important;color: #fff;}.woocommerce .woocommerce-tabs li.active a,/*.sh-header-8 .sh-nav > .current-menu-item a*/ {border-bottom-color: #47c9e5!important;}#header-quote,.sh-dropcaps-full-square-tale:after,.sh-blog-tag-item:after,.widget_tag_cloud a:hover:after,.widget_product_tag_cloud a:hover:after {border-left-color: #47c9e5!important;}.cart-icon .cart-icon-triangle-color {border-right-color: #47c9e5!important;}.sh-back-to-top:hover,.widget_price_filter .ui-slider .ui-slider-handle,.sh-sidebar-search-active .search-field:hover,.sh-sidebar-search-active .search-field:focus,.sh-cf7-style2 form p input:not(.wpcf7-submit):focus,.sh-cf7-style2 form p textarea:focus {border-color: #47c9e5!important;}.post-item .post-category .arrow-right {border-left-color: #47c9e5;}.woocommerce .wc-forward:hover,.woocommerce .button:not(.add_to_cart_button):hover,.woocommerce .checkout-button:hover,.woocommerce #respond input#submit:hover,.contact-form input[type="submit"]:hover,.wpcf7-form .wpcf7-submit:hover,.sh-video-player-image-play:hover,.sh-404-button:hover,.post-password-form input[type="submit"],.sh-pricing-button-style11:hover,.sh-revslider-button2.spacing-animation:not(.inverted):hover {background-color: #EC2A61 !important;}.sh-cf7 div .wpcf7-submit {background-size: 200% auto;background-image: linear-gradient(to right, #C2032F , #900C3F, #FFC300);}.sh-mini-overlay-container,.sh-portfolio-overlay-info-box,.sh-portfolio-overlay-bottom .sh-portfolio-icon,.sh-portfolio-overlay-bottom .sh-portfolio-text,.sh-portfolio-overlay2-bar,.sh-portfolio-overlay2-data,.sh-portfolio-overlay3-data {background-color: rgba(71,201,229,0.75)!important;}.widget_price_filter .ui-slider .ui-slider-range {background-color: rgba(71,201,229,0.5)!important;}.sh-team-social-overlay2 .sh-team-image:hover .sh-team-overlay2,.sh-overlay-style1,.sh-portfolio-overlay4 {background-color: rgba(71,201,229,0.8)!important;}a {color: #16acce;}a:hover,a:focus,.post-meta-two a:hover {color: #10a0c0;}body h1,body h2,body h3,body h4,body h5,body h6 {font-family: "Montserrat"; color: #5c5c5c; font-weight: 700; }.sh-heading-font,.masonry2 .post-meta-one,.masonry2 .post-meta-two,.sh-countdown > div > span,.sh-woocommerce-products-style2 ul.products li.product .price,.sh-blog-style2 .widget_product_tag_cloud a,.sh-blog-style2 .widget_tag_cloud a,.sh-blog-style2 .sh-recent-posts-widgets-item-content .post-meta-categories,.sh-blog-style2 .post-meta-categories,.sh-blog-style2 .post-item-single .post-meta-data,.rev_slider .sh-rev-blog .sh-revslider-button2,.sh-portfolio-filter-style4 .sh-filter span,.sh-accordion-style6 .panel-title a {font-family: Montserrat;}h1 {font-size: 30px;}h2 {font-size: 24px;}h3 {font-size: 21px;}h4 {font-size: 18px;}h5 {font-size: 16px;}h6 {font-size: 14px;}.sh-progress-style1 .sh-progress-title,.sh-progress-style1 .sh-progress-value2,.sh-progress-style4 .sh-progress-title,.sh-progress-style4 .sh-progress-value2,.sh-progress-style5 .sh-progress-title,.widget_price_filter .price_slider_wrapper .price_label span,.product_list_widget a span,.woocommerce .product .woo-meta-title,.woocommerce .product .price ins,.woocommerce .product .price .amount,.woocommerce-checkout #payment ul.payment_methods li,table th,.woocommerce-checkout-review-order-table .order-total span,.sh-comment-form label,.sh-piechart-percentage,.woocommerce table.shop_table a.remove:hover:before,.woocommerce .woocommerce-tabs .commentlist .comment-text .meta strong,.sh-pricing-amount,.sh-pricing-icon,.sh-countdown > div > span,.blog-single .post-title h1:hover,.blog-single .post-title h2:hover,.post-meta-author a:hover,.post-meta-categories a:hover,.post-meta-categories span:hover,.woocommerce table.shop_table.cart a,.wrap-forms label,.wpcf7-form p,.post-password-form label,.product_list_widget ins,.product_list_widget .amount,.sh-social-share-networks .jssocials-share:hover i,.sh-page-links p,.woocommerce ul.products li.product .add_to_cart_button:hover {color: #5c5c5c!important;}.sh-header,.sh-header-top,.sh-header-mobile,.sh-header-left-side {background-color: #fff;}.primary-desktop .sh-header-top:not(.sh-header-top-10) {background-color: #47c9e5!important;}.primary-desktop .header-contacts-details,.primary-desktop .header-social-media a {color: #fff;}.sh-header .sh-nav > li.menu-item > a,.sh-header-left-side .sh-nav > li.menu-item > a,.sh-nav-mobile li a {text-transform: uppercase;}.sh-header-left-1 .header-bottom,.sh-header-left-1 .header-social-media i,.sh-header-left-1 .sh-side-button-search i,.sh-header-left-1 .sh-side-button-cart .sh-nav-cart i,.sh-header-left-side .header-bottom,.sh-header-left-2 .header-social-media i {color: #8d8d8d;}.sh-header-search-close i,.sh-header .sh-nav > li.menu-item > a,.sh-header #header-logo-title,.sh-header .sh-nav > li.menu-item > a > i,.sh-header-mobile-navigation li.menu-item > a > i,.sh-header-left-side li.menu-item > a,.sh-header-left-2 .sh-side-button-search, .sh-header-left-2 .sh-side-button-cart,.sh-header-left-2 .sh-side-button-cart .sh-nav-cart i,.sh-header-left-2 .sh-nav li.menu-item > a.fa:before {color: rgba(61,61,61,0.69);}.sh-header .c-hamburger span,.sh-header .c-hamburger span:before,.sh-header .c-hamburger span:after,.sh-header-mobile-navigation .c-hamburger span,.sh-header-mobile-navigation .c-hamburger span:before,.sh-header-mobile-navigation .c-hamburger span:after {background-color: rgba(61,61,61,0.69);}.sh-header .sh-nav-login #header-login > span {border-color: rgba(61,61,61,0.69);}.sh-nav > li.menu-item > a,.sh-nav-mobile li a {font-size: 12px;}.sh-header .sh-nav > li.menu-item:hover:not(.sh-nav-social) > a,.sh-header .sh-nav > li.menu-item:hover:not(.sh-nav-social) > a > i,.sh-header .sh-nav > li.sh-nav-social > a:hover > i,.sh-header-mobile-navigation li > a:hover > i,.sh-header-left-side li.menu-item > a:hover {color: rgba(61,61,61,0.80);}.sh-header .sh-nav > .current_page_item > a,.sh-header .sh-nav > .current-menu-ancestor > a,.sh-header-left-side .sh-nav > .current_page_item > a {color: #47c9e5!important;}.header-logo img {height: auto;max-height: 250px;}.sh-header-mobile-navigation .header-logo img {height: auto;max-height: 250px;}.sh-sticky-header-active .header-logo img {height: auto;}.sh-header-6 .sh-nav > .menu-item:not(.sh-nav-social),.sh-header-6 .sh-nav > .sh-nav-social a {height: 70px;width: 70px;}.sh-header-5 .sh-nav > .menu-item {height: 70px!important;max-height: 70px!important;}.sh-header-5 .sh-nav > .menu-item > a,.sh-header-6 .sh-nav > .menu-item > a {line-height: 70px!important;max-height: 70px!important;height: 70px!important;}.sh-header-5 .sh-nav > .current_page_item {margin-top: 15px!important;margin-bottom: 15px!important;}.sh-header,.sh-header-top-3,.sh-header-top-4,.sh-header-left-side .sh-header-search .line-test,.sh-header-left-2 .sh-nav > li > a,.sh-header-mobile-navigation {border-bottom: 1px solid rgba( 0,0,0,0.08 );}.sh-header-top-3 .header-contacts-item span,.sh-header-top-3 .header-social-media a,.sh-header-5 .sh-nav-login,.sh-header-5 .sh-nav-cart,.sh-header-5 .sh-nav-search,.sh-header-5 .sh-nav-social,.sh-header-5 .sh-nav-social a:not(:first-child),.sh-header-6 .sh-nav > .menu-item:not(.sh-nav-social),.sh-header-6 .sh-nav > .sh-nav-social a,.sh-header-6 .header-logo,.sh-header-left-1 .header-social-media a {border-left: 1px solid rgba( 0,0,0,0.08 );}.sh-header-top-3 .container,.sh-header-5 .sh-nav > .menu-item:last-child,.sh-header-6 .sh-nav > .menu-item:last-child,.sh-header-6 .header-logo,.sh-header-left-side,.sh-header-left-1 .sh-side-button-search,.sh-header-left-2 .sh-side-button-search {border-right: 1px solid rgba( 0,0,0,0.08 );}.sh-header-left-1 .header-social-media,.sh-header-left-1 .sh-side-buttons .sh-table-cell,.sh-header-left-2 .sh-side-buttons .sh-table-cell {border-top: 1px solid rgba( 0,0,0,0.08 );}.sh-header-left-2 .sh-side-buttons .sh-table-cell {border-bottom: 1px solid rgba( 0,0,0,0.08 );}.sh-header:not(.sh-header-6) .container,.sh-header-top:not(.sh-header-top-6) .container {width: 90%!important;max-width: 90%!important;}.sh-header-6 .container,.sh-header-top-6 .container {width: 100%!important;max-width: 100%!important;} .sh-header-right-side,.sh-header-mobile-dropdown,.header-mobile-social-media a,.sh-header .sh-nav > li.menu-item ul,.sh-header-left-side .sh-nav > li.menu-item ul,.sh-header-mobile-dropdown {background-color: #232323!important;} .sh-nav-mobile li:after,.sh-nav-mobile ul:before {background-color: #303030!important;} .header-mobile-social-media a i,.sh-nav-mobile li a,.sh-header .sh-nav > li.menu-item ul a,.sh-header-left-side .sh-nav > li.menu-item ul a,.header-mobile-search .header-mobile-form .header-mobile-form-input,.header-mobile-search .header-mobile-form-submit {color: #aaaaaa!important;}.sh-nav-mobile .current_page_item > a,.sh-nav-mobile > li a:hover,.sh-header .sh-nav ul,.sh-header:not(.sh-header-megamenu-style2) .sh-nav > li.menu-item:not(.menu-item-cart) ul a:hover,.sh-header .sh-nav ul.mega-menu-row li.mega-menu-col > a,.sh-header-left-side .sh-nav ul,.sh-header-left-side .sh-nav > li.menu-item:not(.menu-item-cart) ul a:hover,.sh-header-left-side .sh-nav ul.mega-menu-row li.mega-menu-col > a,.sh-header .woocommerce a.remove:hover:before,.sh-header-left-side .woocommerce a.remove:hover:before {color: #ffffff!important;}.header-mobile-social-media,.header-mobile-social-media a,.sh-nav > li.menu-item:not(.menu-item-cart) ul a:hover {border-color: #303030!important;}.sh-nav > li.menu-item:not(.menu-item-cart) ul a:hover,.sh-nav-cart .menu-item-cart .total {border-bottom: 1px solid #303030!important;}.sh-nav-cart .menu-item-cart .total {border-top: 1px solid #303030!important;}.sh-nav .mega-menu-row > li.menu-item,.sh-nav-cart .menu-item-cart .widget_shopping_cart_content p.buttons a:first-child {border-right: 1px solid #303030!important;}#sidebar .widget-item .widget-title {color: #505050; font-size: 14px; }#sidebar .widget-item li,#sidebar .widget-item .sh-recent-posts-widgets-item {border-color: #e3e3e3!important;}.sh-footer {background-size: cover;background-position: 50% 50%;}.sh-footer .sh-footer-widgets {background-color: #262626;color: #e3e3e3;}.sh-footer .sh-footer-widgets .sh-recent-posts-widgets-item-meta a {color: #e3e3e3;}.sh-footer .sh-footer-widgets i:not(.icon-link),.sh-footer .sh-footer-widgets .widget_recent_entries li:before {color: #f7f7f7!important;}.sh-footer .sh-footer-widgets h3 {color: #ffffff; font-size: 20px; }.sh-footer .sh-footer-widgets ul li,.sh-footer .sh-footer-widgets ul li,.sh-footer .sh-recent-posts-widgets .sh-recent-posts-widgets-item {border-color: rgba(255,255,255,0.10);}.sh-footer .sh-footer-widgets a,.sh-footer .sh-footer-widgets li a,.sh-footer .sh-footer-widgets h6 {color: #ffffff;}.sh-footer .sh-footer-widgets .product-title,.sh-footer .sh-footer-widgets .woocommerce-Price-amount {color: #ffffff!important;}.sh-footer .sh-footer-widgets a:hover,.sh-footer .sh-footer-widgets li a:hover,.sh-footer .sh-footer-widgets h6:hover {color: #47c9e5;}.sh-footer-columns > .widget-item {width: 25%!important;}.sh-footer .sh-copyrights {background-color: #222222;color: #ffffff;}.sh-footer .sh-copyrights a {color: #ffffff;}.sh-footer .sh-copyrights a:hover {color: #c0e3eb!important;}.sh-footer .sh-copyrights-social a {border-left: 1px solid rgba(255,255,255,0.15);}.sh-footer .sh-copyrights-social a:last-child {border-right: 1px solid rgba(255,255,255,0.15);}@media (max-width: 850px) {.sh-footer .sh-copyrights-social a {border: 1px solid rgba(255,255,255,0.15);}}.woocommerce .woocomerce-styling ul.products li {;width: 25%;}.sh-popover-mini {font-family: 'Raleway'!important;}.sh-popover-mini:not(.sh-popover-mini-dark) {background-color: #47c9e5;}.sh-popover-mini:not(.sh-popover-mini-dark):before {border-color: transparent transparent #47c9e5 #47c9e5!important;}.sh-titlebar {background-color: #fbfbfb;}.sh-back-to-top {border-radius: 100px;}.sh-404 {background-image: url();background-color: #3f3f3f;}
+
+</style>
+
+<div class="sh-column-wrapper">
+		
+<!--div id="text-block-98b838cb14828f1bb30771b38ffc6b10" class="sh-text-block">
+	<p style="text-align: center;"><span style="color: #ffffff;"><img src="{%static ''%}img/wamovieslogo.png"></span></p></div-->
+	{% if not request.user.profile.fav_peliculas %}
+	<div  id="text-block-6e824969aefe6553ab3d4cad0bd64a61" class="sh-text-block" style="width: 500px;">
+	<p style="text-align: center;"><span style="color: #ffffff;"><strong>{% if count != 0 %}Selecciona {{count}} películas para continuar{%else%} Ahora presione continuar para seleccionar las series {% endif %}</strong></span></p></div>
+	{% else %}
+	<div  id="text-block-6e824969aefe6553ab3d4cad0bd64a61" class="sh-text-block">
+	<p style="text-align: center;"><span style="color: #ffffff;"><strong>{% if count_series != 0 %}Selecciona {{count_series}} series para continuar{%else%} Presione continuar para ir a inicio {% endif %}</strong></span></p></div>
+	{% endif %}
+
+<div class="sh-heading" id="heading-867d718c1e538b5f2995dad162328747">
+	<h1 class="sh-heading-content size-default text-center">
+			</h1>
+</div>
+<div class="row col-lg-12 no-gutters container-fluid scrollbar scrollbar-danger" style="border: solid 3px rgba(0,0,0,0.7); border-radius: 7px; width: 980px; position: relative; right: 250px; overflow-y: scroll; height: 500px;">
+	{% if not request.user.profile.fav_peliculas %}
+{% for peli in peliculas_fav%}
+<div id="{{peli.id}}" class=" as no-gutters" style=" margin-bottom:45px;padding:0px 19px; padding-left:  0px; padding-right: 0px; width: 160px; height: 200px; position: relative; float: left;">
+<img  class="{% if peli in request.user.favoritos.all %}border{% endif %}" src="{{ peli.Cover.url }}"  ><div id="sendingfav{{peli.id}}" style="display: none; ">
+           <img style=" z-index:999;position: relative; left: 35%; margin-top: -280px;" height="50" width="50"  src="{% static 'img/asa.gif' %}">
+          </div> <div class="hvr-inner" id="hvr-inner{{peli.id}}">
+          	{% if not peli in request.user.favoritos.all %}
+	<form {% if not continuar %} method="post" class="my-ajax-formfavas{{peli.id}}" data-url="/waomovies/favorito/{{peli.id}}/" {% else %} method="post" class="" action="/waomovies/inicio/" {% endif %} style="display: inline;">{% csrf_token %}
+					            				<button id="favas{{peli.id}}" type="submit" {% if not continuar %} onclick="myFunctionfavajax(this)" {% endif %} style="background: none; cursor: pointer; border: none; cursor: pointer; width: 100%; height: 100%;  position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 400px; text-align: center; font-weight: bold;" class="fa fa-heart-o point" id="affavas{{peli.id}}" aria-hidden="true" ></i> </button>
+					            				
+					            			</form>
+					            			{% else %}
+					            			<form method="post" class="my-ajax-formfavas{{peli.id}}" data-url="/waomovies/eliminar_favorito/{{peli.id}}/" style="display: inline;">{% csrf_token %}
+					            				<button id="favas{{peli.id}}" type="submit" onclick="myFunctionfavajax(this)" style="background: none; cursor: pointer; border: none; cursor: pointer; width: 100%; height: 100%;  position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 400px; text-align: center; font-weight: bold;" class="fa fa-heart-o point" id="affavas{{peli.id}}" aria-hidden="true" ></i> </button>
+					            				
+					            			</form>
+
+					            			{% endif %}
+					            			</div>
+
+</div>
+{% endfor %}
+{%else%}
+{% for serie in series_fav%}
+<div id="{{serie.id}}" class=" as no-gutters" style=" margin-bottom:45px;padding:0px 19px; padding-left:  0px; padding-right: 0px; width: 160px; height: 120px; position: relative; float: left;">
+<img  class="{% if serie in request.user.favoritos_series.all %}border{% endif %}" src="{{ serie.serie_cover.url }}"  ><div id="sendingfav{{serie.id}}" style="display: none; ">
+           <img style=" z-index:999;position: relative; left: 35%; margin-top: -280px;" height="50" width="50"  src="{% static 'img/asa.gif' %}">
+          </div> <div class="hvr-inner" id="hvr-inner{{serie.id}}" style="height: 160px;">
+          	{% if not serie in request.user.favoritos_series.all %}
+	<form {% if not end %} method="post" class="my-ajax-formfavas{{serie.id}}" data-url="/waomovies/añadirfavorito_series/{{serie.id}}/" {% else %} method="post" class="" action="/waomovies/inicio/" {% endif %} style="display: inline;">{% csrf_token %}
+					            				<button id="favas{{serie.id}}" type="submit" {% if not end %} onclick="myFunctionfavajax(this)" {% endif %} style="background: none; cursor: pointer; border: none; cursor: pointer; width: 100%; height: 100%;  position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 400px; text-align: center; font-weight: bold;" class="fa fa-heart-o point" id="affavas{{serie.id}}" aria-hidden="true" ></i> </button>
+					            				
+					            			</form>
+					            			{% else %}
+					            			<form method="post" class="my-ajax-formfavas{{serie.id}}" data-url="/waomovies/eliminar_añadirfavorito_series/{{serie.id}}/" style="display: inline;">{% csrf_token %}
+					            				<button id="favas{{serie.id}}" type="submit" onclick="myFunctionfavajax(this)" style="background: none; cursor: pointer; border: none; cursor: pointer; width: 100%; height: 100%;  position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 400px; text-align: center; font-weight: bold;" class="fa fa-heart-o point" id="affavas{{serie.id}}" aria-hidden="true" ></i> </button>
+					            				
+					            			</form>
+
+					            			{% endif %}
+					            			</div>
+
+</div>
+{% endfor %}
+	{% endif %}
+
+<script type="text/javascript">
+	function myFunctionfavajax(b) {
+														var juan = b.id
+														var c = juan.substr(3)
+														var z = juan.substr(5)
+
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+                										 event.stopImmediatePropagation();
+
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													        beforeSend: function () {
+              document.getElementById("sendingfav" + z).style.display = "initial";
+
+                  //  $("#" +z ).src="none";
+                    
+
+                     //Agregamos la clase loading al body
+                },
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+     $("#" + z).load(window.location + " #" + z);
+     $("#continuar").load(window.location + " #continuar");
+     $("#text-block-6e824969aefe6553ab3d4cad0bd64a61").load(window.location + " #text-block-6e824969aefe6553ab3d4cad0bd64a61");
+     $("#hvr-inner" + z).load(window.location + " #hvr-inner" + z);
+
+     
+
+
+              document.getElementById("sendingfav" + z).style.display = "none";
+
+              
+
+     
+
+
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+													 
+													}
+													
+</script>
+
+<div id="countdown-d762f6f9282c32e27346262f9be1b73a" class="sh-countdown sh-countdown-style1 sh-countdown-small sh-countdown-alignment-center"></div>
+
+<div class="sh-empty-space" id="empty-space-2b6c74bdf7de152d97b3036896dc2894"></div>
+	</div>
+</div>
+</div>
+{% if not request.user.profile.fav_peliculas  %}
+
+<div id="continuar">
+{% if continuar %}
+<div id="cf7-c15514f11947e5e5a2b480a09848a46a" class="sh-cf7 sh-cf7-style3">
+    <div role="form" class="wpcf7" id="wpcf7-f114-p5-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"></div>
+<form  method="Post" action="/waomovies/favoritos/" class="wpcf7-form" novalidate="novalidate" style="position: relative; left: 80%; padding:0px; width: 200px;">{% csrf_token %}
+
+
+<p><a href="#"><input onclick="series(this)" type="submit" value="Continuar" style="font-size:14px; height: 50px;  border-radius: 50%; padding: 0px; line-height: 5px!important; margin-top: 4px;" class="wpcf7-form-control wpcf7-submit"></a></p>
+</form></div></div>
+{% endif %}
+	</div>
+{% else %}
+<div id="continuar">
+{% if end %}
+<div id="cf7-c15514f11947e5e5a2b480a09848a46a" class="sh-cf7 sh-cf7-style3">
+    <div role="form" class="wpcf7" id="wpcf7-f114-p5-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"></div>
+<form  method="Post" action="/waomovies/favoritos/" class="wpcf7-form" novalidate="novalidate" style="position: relative; left: 80%; padding:0px; width: 200px;">{% csrf_token %}
+
+
+<p><a href="#"><input onclick="series(this)" type="submit" value="Continuar" style="font-size:14px; height: 50px;  border-radius: 50%; padding: 0px; line-height: 5px!important; margin-top: 4px;" class="wpcf7-form-control wpcf7-submit"></a></p>
+</form></div></div>
+{% endif %}
+	</div>
+{% endif %}
+
+	<script type="text/javascript">
+		function series(b) {
+     												$("#wrapper").load(window.location + " #wrapper");
+
+													}
+	</script>			
+</div>
+</div>
+</div>
+</div>
+
+
+<!--div class="sh-empty-space" id="empty-space-00111dccdf3b1bbe8d713e818fcc5a96"></div>
+	</div>
+</div>
+</div>
+
+
+	</div>
+				<div class="sh-clear"></div>
+
+		
+	</div>
+	
+
+		</div>
+
+		<footer class="sh-footer">
+								</footer>
+	</div>
+
+/waomovies/inicio/
+	
+	
+		<div class="sh-back-to-top sh-back-to-top3">
+			<i class="icon-arrow-up"></i>
+		</div>
+
+	</div-->
+
+
+
+
+		
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type='text/javascript' src='{% static "" %}wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=5.0.1'></script>
+<script type='text/javascript' src='{% static "" %}wp-content/themes/jevelin/js/bootstrap.min.js?ver=3.3.4'></script>
+
+</body>
+
+</html>
+
+
+

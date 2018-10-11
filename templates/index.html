@@ -1,0 +1,1598 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+<body >
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+{% block scriptt%}
+<script type="text/javascript">
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+</script>
+<script type="text/javascript">
+	
+													   
+													
+</script>
+
+{% endblock %}
+{% block content %}
+
+
+
+<div class="slider movie-items" style="
+                      background: url('{% static 'img/fondo.jpg' %}') no-repeat;
+                      background-position: center;
+                      text-align: center;
+                      background-size: cover;
+                      position: relative;
+                      padding-top: 200px;
+                      padding-bottom: 50px;
+                      display: -webkit-flex;
+                      display: -moz-box;
+                      display: -ms-flexbox;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;    
+  " >
+	<div class="container">
+		<div class="row" id="slider" style="display: none;">
+			<div class="social-link">
+				<p>Siguenos: </p>
+				<a href="https://www.facebook.com/WaoMovies-312032219581979/"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+				<a href="https://www.instagram.com/waomovies/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+				
+			</div>
+			
+	    	<div class="slick-multiItemSlider" >
+          {% for pelicula in movies %}
+	    		<div class="movie-item">
+
+	    			<div class="mv-img">
+	    				<a href="{% url 'peliculasO' slug=pelicula.slug %}"><img class="imgtop" src="{{ pelicula.Cover.url }}" alt="" width="285" height="437"></a>
+	    			</div>
+	    			<div class="title-in">
+	    				<div class="cate">
+	    					<span class="yell"><a href="#">{{ pelicula.genero }}</a></span>
+	    					{% if pelicula.genero2 %}
+	    					<span class="blue"><a href="#">{{ pelicula.genero2 }}</a></span>
+	    					{% endif %}
+
+	    				</div>
+	    				<h6 style="background: rgba(254,140,0,0.7);  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ padding: 8px; width: 285px; margin-left: -30px;"><a href="{% url 'peliculasO' slug=pelicula.slug %}">{{ pelicula.titulo }}</a></h6>
+	    				<p><i class="fa fa-star point" aria-hidden="true">
+</i><span> {{ pelicula.puntuacion }}</span> /10</p>
+	    			</div>
+	    		</div>
+          {% endfor %}
+				
+	    	</div>
+	    </div>
+	</div>
+</div>
+<script type="text/javascript">
+  function miFuncionloaded() {
+  var sliderhome = document.getElementById('slider')
+  var formuser = document.getElementsByClassName('login-wrapper')[0]
+  var formuser2 = document.getElementsByClassName('login-wrapper')[1]
+
+  formuser.style.display = "initial"
+  formuser2.style.display = "initial"
+
+  sliderhome.style.display = "initial"
+
+      
+    }
+    window.onload=miFuncionloaded;
+</script>
+
+<div class="movie-items">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-8">
+				<div class="title-hd">
+					<h2>Películas</h2>
+					<a href="/waomovies/ver%todo/" class="viewall">Ver todo<i class="fa fa-long-arrow-right point"></i></a>
+				</div>
+				<div class="tabs">
+					<ul class="tab-links">
+						<li class="active"><a href="#tab1">#Popular</a></li>
+						{% if request.user.favoritos %}
+						<li><a href="#tab2"> #Seleccionada para ti</a></li>
+						{% else %}
+						{% endif %}
+						<!-- lo que tengo que hacer aquí, es decirle a la base de datos
+						que me mande las mejores películas en un lapso de una semana -->
+						<li><a href="#tab3">  #Top Semanal  </a></li>
+						<!--li><a href="#tab4"> #Mejor critica</a></li-->                        
+					</ul>
+					<br>
+					<br>
+				    <div class="tab-content">
+				        <div id="tab1" class="tab active">
+				            <div class="row">
+				            	<div class=" flex-wrap-movielist" id="nojoda">
+                        {% for pelicula in peliculas %}
+
+				            		<div id="zzzz{{pelicula.id}}" class="">
+				            			<div class="movie-item-style-2 movie-item-style-1" style="padding-bottom: 0px; margin-bottom: 0px;">
+					            			<div class="mv-img">
+					            				<img src="{{ pelicula.Cover.url }}" alt="" width="185" height="284">
+					            			</div> 
+					            			<div class="hvr-inner" id="puto{{ pelicula.id }}">
+					            				
+					            				<a href="{% url 'peliculasO' slug=pelicula.slug %}" style="color: white; width: 100%; top: 37% ; position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 50px; text-align: center; font-weight: bold;" class="fa fa-play point" aria-hidden="true"></i> </a>
+
+{% if request.user.is_authenticated %}
+{% if not request.user in pelicula.favoritos.all %}					            				<!-- añadir a favoritos -->
+
+<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formfav{{pelicula.id}}" method='POST'data-url="/waomovies/favorito/{{pelicula.id}}/">{% csrf_token %}
+					            				<button  onclick="myFunctionfav(this)" id="fav{{pelicula.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer;" type="submit"><i class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
+					            				</form>
+					            				<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formafav{{pelicula.id}}" method='POST'data-url="/waomovies/eliminar_favorito/{{pelicula.id}}/">{% csrf_token %}
+					            				<button  onclick="myFunctionfa2(this)" id="afav{{pelicula.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; display: none;" type="submit"><i class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
+					            				</form>
+					            				<script>
+													function myFunctionfav(b) {
+														var juan = b.id
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+													 document.getElementById(juan).style.display = "none";
+													    document.getElementById("a" + juan).style.display = "initial";
+													}
+													
+													function myFunctionfa2(c) {
+														var juana = c.id
+														var juan2 = juana.substr(1)
+														console.log(juan2)
+
+														
+
+													var $myForm = $('.my-ajax-form' + juana)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													 document.getElementById(juana).style.display = "none";
+													 document.getElementById(juan2).style.display = "initial";
+
+													    
+													}
+													
+													</script>
+
+
+		{% else %}			            				<!-- Eliminar añadir a favoritos -->
+
+
+
+<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formsfav{{pelicula.id}}" method='POST'data-url="/waomovies/eliminar_favorito/{{pelicula.id}}/">{% csrf_token %}
+					            				<button  onclick="myFunctionfavs(this)" id="sfav{{pelicula.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; " type="submit"><i class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
+					            				</form>
+<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formfav{{pelicula.id}}" method='POST'data-url="/waomovies/favorito/{{pelicula.id}}/">{% csrf_token %}
+					            				<button  onclick="myFunctionfavs2(this)" id="fav{{pelicula.id}}"title="Favoritos" class="" style="display: none; background: none; border: none; cursor: pointer;" type="submit"><i class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
+					            				</form>
+					            				<script>
+													function myFunctionfavs(b) {
+														var juan = b.id
+														var juan2 = juan.substr(1)
+														console.log(juan2)
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													 document.getElementById(juan).style.display = "none";
+													 document.getElementById(juan2).style.display = "initial";
+
+													}
+													   
+													
+													function myFunctionfavs2(c) {
+														var juana = c.id
+														var p = "s" + juana
+
+														var $myForm = $('.my-ajax-form' + juana)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+														
+													    document.getElementById(juana).style.display = "none";
+
+													    document.getElementById(p).style.display = "initial";
+													    
+													}
+													
+													</script>
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if not pelicula in peliculase %}	
+					            				<!-- ver más tarde -->
+<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-form{{pelicula.id}}" method='POST'data-url="/waomovies/vermastarde/{{ pelicula.id }}/">{% csrf_token %}
+					            				<button onclick="myFunction(this)" id="{{pelicula.id}}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i   style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
+					            				
+					            				</form>
+<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-forms{{ pelicula.id }}" method='POST'data-url="/waomovies/eliminar_vermastarde/{{ pelicula.id }}/">{% csrf_token %}
+					            				<button name="eye" style="background: none; border: none; cursor: pointer; display: none;"id="s{{ pelicula.id }}"onclick="myFunction2(this)" title="Ver más tarde" class="example" type="submit"><i  style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye" aria-hidden="true"></i></button>
+					            			</form>
+					            				<!-- termina ver más tarde -->
+
+					            				
+
+					            				<script>
+													function myFunction(b) {
+														var juan = b.id
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+													 document.getElementById(juan).style.display = "none";
+													    document.getElementById("s" + juan).style.display = "initial";
+													}
+													
+													function myFunction2(c) {
+														var juana = c.id
+														var p = juana.substr(1)
+
+
+													var $myForm = $('.my-ajax-form' + juana)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+														
+													    document.getElementById(juana).style.display = "none";
+
+													    document.getElementById(p).style.display = "initial";
+													    
+													}
+													
+													</script>
+													
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+
+		<!-- ver más tarde -->
+<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-forms{{pelicula.id}}" method='POST'data-url="/waomovies/eliminar_vermastarde/{{ pelicula.id }}/">{% csrf_token %}
+					            				<button onclick="myFunction2(this)" id="s{{ pelicula.id }}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i   style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye" aria-hidden="true"></i></button>
+					            				
+					            				</form>
+<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-form{{ pelicula.id }}" method='POST'data-url="/waomovies/vermastarde/{{ pelicula.id }}/">{% csrf_token %}
+					            				<button name="eye" style="background: none; border: none; cursor: pointer; display: none;"id="{{ pelicula.id }}"onclick="myFunction(this)" title="Ver más tarde" class="example" type="submit"><i  style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
+					            			</form>
+					            				<!-- termina ver más tarde -->
+
+<script type="text/javascript">
+	
+	function myFunction(b) {
+														var juan = b.id
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+													 document.getElementById(juan).style.display = "none";
+													    document.getElementById("s" + juan).style.display = "initial";
+													}
+													
+													function myFunction2(c) {
+														var juana = c.id
+														var p = juana.substr(1)
+
+
+													var $myForm = $('.my-ajax-form' + juana)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+														
+													    document.getElementById(juana).style.display = "none";
+
+													    document.getElementById(p).style.display = "initial";
+													    
+													}
+													
+</script>
+
+{% endif %}
+<a title="Ver más" class="" type="
+					            				submit" style="position: relative; top: -30%; left: 50%;"><i  id="done" style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-plus" aria-hidden="true"></i></a>
+
+					            				{% else %}
+					            				<a title="Ver más" class="" type="
+					            				submit" style="position: relative; top: -30%; left: 87%;"><i  id="done" style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-plus" aria-hidden="true"></i></a>
+{%endif%}													
+
+
+
+					            			</div>
+					            			<div class="title-in">
+					            				<h6 class="" style="font-size: 14px;"><a style="font-weight:bold;" style="" href="{% url 'peliculasO' slug=pelicula.slug %}">{{ pelicula.titulo|upper }}</a></h6>
+					            				<p><i style="color: #F1D104;" class="fa fa-star point" aria-hidden="true">
+</i><span> {{ pelicula.puntuacion }}</span> /10</p>
+					            			</div>
+					            		</div>
+				            		</div>
+                        {% endfor %}
+							
+				            	</div>
+				            </div>
+				        </div>
+				        <div id="tab2" class="tab">
+				           <div id="" class="row">
+				            	<div  class="slick-multiItem">
+				            	{% if request.user.favoritos %}
+				            		{% for a in peliculasfav %}
+				            			{% if not a.id in favaid %}
+				            		<div id="zzz{{a.id}}"  class="slide-it">
+				            			<div id="" class="movie-item">
+					            			<div class="mv-img">
+					            				<img src="{{ a.Cover.url }}" alt="" width="185" height="284">
+					            			</div>
+					            			<div class="hvr-inner" id="hvras{{a.id}}">
+					            				<a href="{% url 'peliculasO' slug=a.slug %}" style="color: white; width: 100%; top: 28% ; position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 50px; text-align: center; font-weight: bold;" class="fa fa-play point" aria-hidden="true"></i> </a>
+	
+
+					            				{% if request.user.is_authenticated %}
+
+
+					            				<script type="text/javascript">
+	function myFunctionfavajax(b) {
+														var juan = b.id
+														var c = juan.substr(3)
+														var z = juan.substr(5)
+
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+                										 event.stopImmediatePropagation();
+
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													        beforeSend: function () {
+                    $("#af" + juan).removeClass('fa-heart-o');
+                    $("#af" + juan).addClass('fa-circle-o-notch');
+                    
+
+                     //Agregamos la clase loading al body
+                },
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+     $("#zzz" + z).load(window.location + " #zzz" + z);
+     $("#zzzz" + z).load(window.location + " #zzzz" + z);
+
+
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+													 
+													}
+
+													function myFunctionfavajaxd(b) {
+														var juan = b.id
+														var c = juan.substr(4)
+
+														
+
+													var $myForm = $('.my-ax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+                 										event.stopImmediatePropagation();
+
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													        beforeSend: function () {
+                    
+                    $("#af" + juan).removeClass('fa-heart');
+                    $("#af" + juan).addClass('fa-circle-o-notch');
+
+                     //Agregamos la clase loading al body
+                },
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+     $("#hvr" + c).load(window.location + " #hvr" + c);
+
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+     $("#hvr" + c).load(window.location + " #hvr" + c);
+													    
+													}
+													
+													
+													 
+													}
+</script>
+{% if not request.user in a.favoritos.all %}					            				<!-- añadir a favoritos -->
+
+<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formfavas{{a.id}}" method='POST'data-url="/waomovies/favorito/{{a.id}}/">{% csrf_token %}
+					            				<button  onclick="myFunctionfavajax(this)" id="favas{{a.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer;" type="submit"><i id="affavas{{a.id}}" class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
+					            				</form>
+					            				
+
+
+		{% else %}			            				<!-- Eliminar añadir a favoritos -->
+
+
+
+<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ax-formsfavas{{a.id}}" method='POST'data-url="/waomovies/eliminar_favorito/{{a.id}}/">{% csrf_token %}
+					            				<button  onclick="myFunctionfavajaxd(this)" id="sfavas{{a.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; " type="submit"><i id="afsfavas{{a.id}}" class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
+					            				</form>
+
+					            		
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	function myFunctionajax(b) {
+														var juan = b.id
+														var z = juan.substr(2)
+
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+                										 event.stopImmediatePropagation();
+
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													        beforeSend: function () {
+                    $("#a" + juan).removeClass('fa-eye-slash');
+                    $("#a" + juan).addClass('fa-circle-o-notch');
+                    
+
+                     //Agregamos la clase loading al body
+                },
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+     $("#hvr" + juan).load(window.location + " #hvr" + juan);
+     $("#zzzz" + z).load(window.location + " #zzzz" + z);
+
+
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+													 
+													}
+
+													function myFunctionajaxd(b) {
+														var juan = b.id
+														var c = juan.substr(2)
+														var z = juan.substr(4)
+
+
+														
+
+													var $myForm = $('.my-ax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+                 										event.stopImmediatePropagation();
+
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													        beforeSend: function () {
+                    
+                    $("#a" + juan).removeClass('fa-eye');
+                    $("#a" + juan).addClass('fa-circle-o-notch');
+
+                     //Agregamos la clase loading al body
+                },
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+     $("#hvr" + c).load(window.location + " #hvr" + c);
+     $("#zzzz" + z).load(window.location + " #zzzz" + z);
+
+
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+     $("#hvr" + c).load(window.location + " #hvr" + c);
+
+													}
+													
+													
+													 
+													}
+</script>
+
+
+
+
+
+
+{% if not a in peliculase %}	
+					            				<!-- ver más tarde -->
+<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-formas{{a.id}}" method='POST'data-url="/waomovies/vermastarde/{{ a.id }}/">{% csrf_token %}
+					            				<button onclick="myFunctionajax(this)" id="as{{a.id}}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i id="aas{{a.id}}"  style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
+					            				
+					            				</form>
+
+					            				<!-- termina ver más tarde -->					            	
+{% else %}
+
+
+
+		<!-- ver más tarde -->
+<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ax-formaaas{{a.id}}" method='POST'data-url="/waomovies/eliminar_vermastarde/{{ a.id }}/">{% csrf_token %}
+					            				<button onclick="myFunctionajaxd(this)" id="aaas{{ a.id }}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i  id="aaaas{{a.id}}"  style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye" aria-hidden="true"></i></button>
+					            				
+					            				</form>
+
+					            				<!-- termina ver más tarde -->
+
+{% endif %}
+<a title="Ver más" class="" type="
+					            				submit" style="position: relative; top: -30%; left: 50%;"><i  id="done" style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-plus" aria-hidden="true"></i></a>
+
+					            				{% else %}
+					            				<a title="Ver más" class="" type="
+					            				submit" style="position: relative; top: -30%; left: 87%;"><i  id="done" style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-plus" aria-hidden="true"></i></a>
+{%endif%}													
+
+
+
+					            			</div>
+					            			<div class="title-in">
+					            				<h6><a href="#">{{ a.titulo }}</a></h6>
+					            				<p><i class="fa fa-star point" aria-hidden="True"></i><span>{{ a.puntuacion }}</span> /10</p>
+					            			</div>
+					            		</div>
+				            		</div>
+				            		{% endif %}
+				            		{% endfor %}
+				            		{% endif %}
+									
+				            	</div>
+				            </div>
+				        </div>
+				        <div id="tab3" class="tab">
+				        	<div class="row">
+				            	<div class="slick-multiItem">
+				            		{% if topsemanal %}
+				            		{% for kk in topsemanal %}
+
+				            		<div class="slide-it">
+				            			<div class="movie-item">
+					            			<div class="mv-img">
+					            				<img src="{{ kk.pelicula.Cover.url }}" alt="" width="185" height="284">
+					            			</div>
+					            			<div class="hvr-inner">
+					            				<a href="{% url 'peliculasO' slug=kk.pelicula.slug %}" style="color: white; width: 100%; top: 28% ; position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 50px; text-align: center; font-weight: bold;" class="fa fa-play point" aria-hidden="true"></i> </a>
+					            			</div>
+					            			<div class="title-in">
+					            				<h6><a href="#">{{ kk.pelicula.titulo }}</a></h6>
+					            				<p><i class="fa fa-star point" aria-hidden="True"></i><span>{{ kk.pelicula.puntuacion }}</span> /10</p>
+					            			</div>
+					            		</div>
+				            		</div>
+				            		{% endfor %}
+
+				            		{% endif %}
+									
+				            	</div>
+				            </div>
+			       	 	</div>
+			       	 	<!--div id="tab4" class="tab">
+				        	<div class="row">
+				            	<div class="slick-multiItem">
+				            		<div class="slide-it">
+				            			<div class="movie-item">
+					            			<div class="mv-img">
+					            				<img src="images/uploads/mv-item5.jpg" alt="" width="185" height="284">
+					            			</div>
+					            			<div class="hvr-inner">
+					            				<a href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+					            			</div>
+					            			<div class="title-in">
+					            				<h6><a href="#">Interstellar</a></h6>
+					            				<p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+					            			</div>
+					            		</div>
+				            		</div>
+							
+				            	</div>
+				            </div>
+			       	 	</div-->
+				    </div>
+				</div>
+				<div class="title-hd">
+					<h2>Series</h2>
+					<a href="/waomovies/series_list/orden_de_subida/" class="viewall">Ver todo<i class="fa fa-long-arrow-right point"></i></a>
+				</div>
+				<div class="tabs">
+					<ul class="tab-links-2">
+						<li class="active"><a href="#tab21">#Series</a></li>
+						<li class=""><a href="#tab22"> #últimos capitulos subidos en</a></li>
+						<li><a href="#tab23">  #Top semanal  </a></li>
+						{% if request.user.favoritos_series %}
+						<li><a href="#tab24">  #Seleccionada para ti  </a></li>
+						{% endif %}
+
+					</ul>
+					<br>
+				    <div class="tab-content">
+				        <div id="tab21" class="tab active">
+				            <div class="row">
+				            	<div class=" flex-wrap-movielist ">
+                        {% for o in series %}
+
+				            		<div id="zzzzx{{o.id}}" class="">
+
+				            			<div class="movie-item-style-2 movie-item-style-1" style="padding-bottom: 0px; margin-bottom: 0px;">
+					            			<div class="mv-img">
+					            				<img style=" height: 190px;" src="{{ o.serie_cover.url }}" alt="" width="170" height="250">
+					            			</div> 
+					            				{% include 'ajaxserie.html' %}
+					            			<div class="title-in">
+					            				<h6 class="" style="font-size: 14px;"><a style="font-weight:bold;" href="{% url 'series_detail' slug=o.slug %}">{{ o.titulo|upper }}</a></h6>
+					            				<p><i style="color: #F1D104;" class="fa fa-star point" aria-hidden="true">
+</i><span> {{ o.puntuacion }}</span> /10</p>
+					            			</div>
+					            		</div>
+				            		</div>
+                        {% endfor %}
+							
+				            	</div>
+				            </div>
+				        </div>
+				        <div id="tab22" class="tab">
+				           <div class="row">
+				            	<div class="slick-multiItem">
+				            		
+								{% for o in capi %}
+
+				            		<div class="slide-it">
+				            			<div class="movie-item">
+					            			<div class="mv-img">
+					            				<img src="{{ o.serie_cover.url }}" alt="" width="200" height="300" style="height:  210px; width: auto;">
+					            			</div>
+					            			<div class="hvr-inner">
+					            				<a href="{% url 'series_detail' slug=o.slug %}" style="color: white; width: 100%; top: 20% ; position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 50px; text-align: center; font-weight: bold;" class="fa fa-play point" aria-hidden="true"></i> </a>
+					            			</div>
+					            			<div class="title-in">
+					            				<h6><a href="#">{{ o.titulo }}</a></h6>
+					            				<p><i class="fa fa-star point" aria-hidden="True"></i><span>{{ o.puntuacion }}</span> /10</p>
+					            			</div>
+					            		</div>
+				            		</div>
+                        {% endfor %}
+				            	</div>
+				            </div>
+				        </div>
+
+				        <div id="tab23" class="tab">
+				        	<div class="row">
+				            	<div class="slick-multiItem">
+				            		{% if topsemanal_serie %}
+				            		{% for kk in topsemanal_serie %}
+
+				            		<div class="slide-it">
+				            			<div class="movie-item">
+					            			<div class="mv-img">
+					            				<img src="{{ kk.serie.serie_cover.url }}" alt="" width="200" height="300" style="height:  210px; width: auto;">
+					            			</div>
+					            			<div class="hvr-inner">
+					            				<a href="{% url 'series_detail' slug=kk.serie.slug %}" style="color: white; width: 100%; top: 20% ; position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 50px; text-align: center; font-weight: bold;" class="fa fa-play point" aria-hidden="true"></i> </a>
+					            			</div>
+					            			<div class="title-in">
+					            				<h6><a href="#">{{ kk.serie.titulo }}</a></h6>
+					            				<p><i class="fa fa-star point" aria-hidden="True"></i><span>{{ kk.serie.puntuacion }}</span> /10</p>
+					            			</div>
+					            		</div>
+				            		</div>
+				            		{% endfor %}
+
+				            		{% endif %}
+									
+				            	</div>
+				            </div>
+			       	 	</div>
+			       	 	 <div id="tab24" class="tab">
+				        	<div class="row">
+				            	<div class="slick-multiItem">
+				            		{% if request.user.favoritos_series %}
+				            		{% for a in seriesfav %}
+				            			{% if not a.id in favaid_serie %}
+				            		<div id="zzzx{{a.id}}"  class="slide-it">
+				            			<div id="" class="movie-item">
+					            			<div class="mv-img">
+					            				<img src="{{ a.serie_cover.url }}"style="height:  210px; width: auto;" alt="" width="185" height="284">
+					            			</div>
+					            			<div class="hvr-inner" id="hvrasx{{a.id}}">
+					            				<a href="{% url 'series_detail' slug=a.slug %}" style="color: white; width: 100%; top: 20% ; position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 50px; text-align: center; font-weight: bold;" class="fa fa-play point" aria-hidden="true"></i> </a>
+	
+
+					            				{% if request.user.is_authenticated %}
+
+
+					            				<script type="text/javascript">
+	function myFunctionfavajaxs(b) {
+														var juan = b.id
+														var c = juan.substr(3)
+														var z = juan.substr(6)
+
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+                										 event.stopImmediatePropagation();
+
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													        beforeSend: function () {
+                    $("#af" + juan).removeClass('fa-heart-o');
+                    $("#af" + juan).addClass('fa-circle-o-notch');
+                    
+
+                     //Agregamos la clase loading al body
+                },
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+     $("#zzzx" + z).load(window.location + " #zzzx" + z);
+     $("#zzzzx" + z).load(window.location + " #zzzzx" + z);
+
+
+
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+													 
+													}
+
+													function myFunctionfavajaxdx(b) {
+														var juan = b.id
+														var c = juan.substr(4)
+
+														
+
+													var $myForm = $('.my-ax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+                 										event.stopImmediatePropagation();
+
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													        beforeSend: function () {
+                    
+                    $("#af" + juan).removeClass('fa-heart');
+                    $("#af" + juan).addClass('fa-circle-o-notch');
+
+                     //Agregamos la clase loading al body
+                },
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+     $("#hvr" + c).load(window.location + " #hvr" + c);
+
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+     $("#hvr" + c).load(window.location + " #hvr" + c);
+													    
+													}
+													
+													
+													 
+													}
+</script>
+{% if not a in request.user.favoritos_series.all %}					            				<!-- añadir a favoritos -->
+
+<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formfavasx{{a.id}}" method='POST'data-url="/waomovies/añadirfavorito_series/{{a.id}}/">{% csrf_token %}
+					            				<button  onclick="myFunctionfavajaxs(this)" id="favasx{{a.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer;" type="submit"><i id="affavasx{{a.id}}" class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
+					            				</form>
+					            				
+
+
+		{% else %}			            				<!-- Eliminar añadir a favoritos -->
+
+
+
+<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ax-formsfavasx{{a.id}}" method='POST'data-url="/waomovies/eliminar_añadirfavorito_series/{{a.id}}/">{% csrf_token %}
+					            				<button  onclick="myFunctionfavajaxdx(this)" id="sfavasx{{a.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; " type="submit"><i id="afsfavasx{{a.id}}" class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
+					            				</form>
+
+					            		
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	function myFunctionajax(b) {
+														var juan = b.id
+														var z = juan.substr(2)
+
+
+														
+
+													var $myForm = $('.my-ajax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+                										 event.stopImmediatePropagation();
+
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													        beforeSend: function () {
+                    $("#a" + juan).removeClass('fa-eye-slash');
+                    $("#a" + juan).addClass('fa-circle-o-notch');
+                    
+
+                     //Agregamos la clase loading al body
+                },
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+     $("#hvr" + juan).load(window.location + " #hvr" + juan);
+
+
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+													 
+													}
+
+													function myFunctionajaxd(b) {
+														var juan = b.id
+														var c = juan.substr(2)
+														var z = juan.substr(4)
+
+
+														
+
+													var $myForm = $('.my-ax-form' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+                 										event.stopImmediatePropagation();
+
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													        beforeSend: function () {
+                    
+                    $("#a" + juan).removeClass('fa-eye');
+                    $("#a" + juan).addClass('fa-circle-o-notch');
+
+                     //Agregamos la clase loading al body
+                },
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+     $("#hvr" + c).load(window.location + " #hvr" + c);
+     $("#zzzz" + z).load(window.location + " #zzzz" + z);
+
+
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+     $("#hvr" + c).load(window.location + " #hvr" + c);
+
+													}
+													
+													
+													 
+													}
+</script>
+
+
+
+
+
+
+{% if not a in peliculase_serie %}	
+					            				<!-- ver más tarde -->
+<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-formasx{{a.id}}" method='POST'data-url="/waomovies/vermastarde_series/{{ a.id }}/">{% csrf_token %}
+					            				<button onclick="myFunctionajax(this)" id="asx{{a.id}}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i id="aasx{{a.id}}"  style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
+					            				
+					            				</form>
+
+					            				<!-- termina ver más tarde -->					            	
+{% else %}
+
+
+
+		<!-- ver más tarde -->
+<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ax-formaaasx{{a.id}}" method='POST'data-url="/waomovies/eliminar_vermastarde_series/{{ a.id }}/">{% csrf_token %}
+					            				<button onclick="myFunctionajaxdx(this)" id="aaasx{{ a.id }}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i  id="aaaasx{{a.id}}"  style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye" aria-hidden="true"></i></button>
+					            				
+					            				</form>
+
+					            				<!-- termina ver más tarde -->
+
+{% endif %}
+<a title="Ver más" class="" type="
+					            				submit" style="position: relative; top: -30%; left: 50%;"><i  id="done" style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-plus" aria-hidden="true"></i></a>
+
+					            				{% else %}
+					            				<a title="Ver más" class="" type="
+					            				submit" style="position: relative; top: -30%; left: 87%;"><i  id="done" style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-plus" aria-hidden="true"></i></a>
+{%endif%}													
+
+
+
+					            			</div>
+					            			<div class="title-in">
+					            				<h6><a href="#">{{ a.titulo }}</a></h6>
+					            				<p><i class="fa fa-star point" aria-hidden="True"></i><span>{{ a.puntuacion }}</span> /10</p>
+					            			</div>
+					            		</div>
+				            		</div>
+				            		{% endif %}
+				            		{% endfor %}
+				            		{% endif %}
+									
+				            	</div>
+				            </div>
+			       	 	</div>
+				    </div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="sidebar">
+					<div class="ads">
+						<img src="{{anuncios}}" alt="" width="336" height="296">
+					</div>
+					<div class="celebrities"  >
+						<h4 class="sb-title">Generos</h4>
+						<div style="">
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<h6><a href="/waomovies/peliculas_por_genero/ACC/">Acción<span class="textaling" style="border-bottom-color: yellow; border-bottom-style: solid; border-bottom-width: 3px; position:absolute; left: 80%; border-radius: 5px; ">{{ accion }} </span></a></h6>
+								
+							</div>
+						</div>
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<h6><a href="/waomovies/peliculas_por_genero/SC/">Ciencia Ficción<span class="textaling" style="border-bottom-color: yellow; border-bottom-style: solid; border-bottom-width: 3px; position:absolute; left: 80%; border-radius: 5px; ">{{ ciencia_ficcion }}</span></a></h6>
+								
+							</div>
+						</div>
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<h6><a href="/waomovies/peliculas_por_genero/DRA/">Drama<span class="textaling" style="border-bottom-color: yellow; border-bottom-style: solid; border-bottom-width: 3px; position:absolute; left: 80%; border-radius: 5px; ">{{ drama }}</span></a></h6>
+								
+							</div>
+						</div>
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<h6><a href="/waomovies/peliculas_por_genero/ROM/">Romance<span class="textaling" style="border-bottom-color: yellow; border-bottom-style: solid; border-bottom-width: 3px;  border-radius: 5px ;position:absolute; left: 80%; ">{{ romance }}</span></a></h6>
+								
+							</div>
+						</div>
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<h6><a href="/waomovies/peliculas_por_genero/CRI/">Crimen</a><span class="textaling" style="border-bottom-color: yellow; border-bottom-style: solid; border-bottom-width: 3px;  border-radius: 5px; position:absolute; left: 80%;">{{ crimen }}</span></h6>
+								
+							</div>
+						</div>
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<h6><a href="/waomovies/peliculas_por_genero/TER/">Terror</a><span class="textaling" style="border-bottom-color: yellow; border-bottom-style: solid; border-bottom-width: 3px;  border-radius: 5px; position:absolute; left: 80%;">{{ terror }}</span></h6>
+								
+							</div>
+						</div>
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<h6><a href="/waomovies/peliculas_por_genero/SUS/">Suspenso</a><span class="textaling" style="border-bottom-color: yellow; border-bottom-style: solid; border-bottom-width: 3px;  border-radius: 5px; position:absolute; left: 80%;">{{ suspenso }}</span></h6>
+								
+							</div>
+						</div>
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<h6><a href="/waomovies/peliculas_por_genero/AVEN/">Aventura</a><span class="textaling" style="border-bottom-color: yellow; border-bottom-style: solid; border-bottom-width: 3px;  border-radius: 5px; position:absolute; left: 80%;">{{ aventura }}</span></h6>
+								
+							</div>
+						</div>
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<h6><a href="/waomovies/peliculas_por_genero/ANI/">Animación</a><span class="textaling" style="border-bottom-color: yellow; border-bottom-style: solid; border-bottom-width: 3px;  border-radius: 5px; position:absolute; left: 80%;">{{ animacion }}</span></h6>
+								
+							</div>
+						</div>
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<h6><a href="/waomovies/peliculas_por_genero/COME/">Comedia</a><span class="textaling" style="border-bottom-color: yellow; border-bottom-style: solid; border-bottom-width: 3px;  border-radius: 5px; position:absolute; left: 80%;">{{ comedia }}</span></h6>
+								
+							</div>
+						</div>
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<h6><a href="/waomovies/peliculas_por_genero/FANT/">Fantasía</a><span class="textaling" style="border-bottom-color: yellow; border-bottom-style: solid; border-bottom-width: 3px;  border-radius: 5px; position:absolute; left: 80%;">{{ fantasia }}</span></h6>
+								
+							</div>
+						</div>
+						<div class="celeb-item">
+							<div class="celeb-author">
+								<h6><a href="/waomovies/peliculas_por_genero/DOCU/">Documental</a><span class="textaling" style="border-bottom-color: yellow; border-bottom-style: solid; border-bottom-width: 3px;  border-radius: 5px; position:absolute; left: 80%;">{{ documental }}</span></h6>
+								
+							</div>
+						</div>
+						</div>
+						<a href="/waomovies/ver%todo/" class="btn">Ver todas las películas<i class="fa fa-long-arrow-right point"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="trailers">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-12">
+				<div class="title-hd">
+					<h2>En cartelera</h2>
+					
+				</div>
+				<div class="videos">
+				 	<div class="slider-for-2 video-ft">
+				 		{% for trailer in trailers %}
+
+            <div>
+					    	<iframe class="item-video" src="" data-src="{{ trailer.links }}"></iframe>
+					    </div>
+					    
+						{% endfor %}
+						
+					</div>
+					<div class="slider-nav-2 thumb-ft">
+						{% for trailer in trailers %}
+            <div class="item">
+							<div class="trailer-img">
+								<img src="{{ trailer.trailer_cover }}" alt="" width="4096" height="2737">
+							</div>
+							<div class="trailer-infor">
+	                        	<h4 class="desc">{{ trailer.titulo }}</h4>
+	                        	<p>2:30</p>
+	                        </div>
+						</div>
+					           {% endfor %}
+
+					
+					</div>
+				</div>   
+			</div>
+		</div>
+	</div>
+</div>
+<!-- latest new v1 section-->
+<div class="latestnew">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-8">
+				<div class="ads">
+					<img src="images/uploads/ads2.png" alt="" width="728" height="106">
+				</div>
+				<div class="title-hd">
+					<h2>¡Avisos!:</h2>
+				</div>
+				<div class="tabs">
+					
+				    <div class="tab-content">
+				        <div id="tab31" class="tab active">
+				            <div class="row">
+				            	<div class="blog-item-style-1">
+				            		<img src="images/uploads/blog-it1.jpg" alt="" width="170" height="250">
+				            		<div class="blog-it-infor">
+				            			<h3><a href="#">Estamos en remodelaciones</a></h3>
+				            			<span class="time"></span>
+				            			<p></p>
+				            		</div>
+				            	</div>
+				            </div>
+				        </div>
+				      
+				        
+				    </div>
+				</div>
+				<div class="morenew">
+					<!--div class="title-hd">
+						<h3>More news on Blockbuster</h3>
+						<a href="#" class="viewall">See all Movies news<i class="ion-ios-arrow-right"></i></a>
+					</div>
+					<div class="more-items">
+						<div class="left">
+							<div class="more-it">
+								<h6><a href="#">Michael Shannon Frontrunner to play Cable in “Deadpool 2”</a></h6>
+								<span class="time">13 hours ago</span>
+							</div>
+							<div class="more-it">
+								<h6><a href="#">French cannibal horror “Raw” inspires L.A. theater to hand out “Barf Bags”</a></h6>
+								
+								<span class="time">13 hours ago</span>
+							</div>
+						</div>
+						<div class="right">
+							<div class="more-it">
+								<h6><a href="#">Laura Dern in talks to join Justin Kelly’s biopic “JT Leroy”</a></h6>
+								<span class="time">13 hours ago</span>
+							</div>
+							<div class="more-it">
+								<h6><a href="#">China punishes more than 300 cinemas for box office cheating</a></h6>
+								<span class="time">13 hours ago</span>
+							</div>
+						</div>
+					</div-->
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="sidebar">
+					<div class="sb-facebook sb-it">
+						<h4 class="sb-title">Encuentranos en Facebook</h4>
+						<div class="fb-page" data-href="https://www.facebook.com/WaoMovies-312032219581979/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/WaoMovies-312032219581979/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/WaoMovies-312032219581979/">WaoMovies</a></blockquote></div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<style type="text/css">
+.alert {
+    padding: 5px;
+    background-color: #f44336; 
+    color: white;
+    margin-bottom: 0px;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.success {
+	background-color: #2ECC71;
+}
+
+.closebtn:hover {
+    color: black;
+}
+</style>
+
+
+
+
+
+<script type="text/javascript">
+	
+</script>
+
+
+{% endblock %}
+
+
+
+
+</body>
+
+</html>
