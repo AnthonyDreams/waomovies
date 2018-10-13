@@ -148,13 +148,14 @@ STATICFILES_DIRS = [
 
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smt.EmailBackend'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'theanthony2d@gmail.com'
 EMAIL_HOST_PASSWORD = 'a253035253035'
+DEFAULT_FROM_EMAIL = 'testing@testing.com'
 #EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 
