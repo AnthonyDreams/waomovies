@@ -22,7 +22,7 @@ from django.views.generic.edit import UpdateView
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_protect
 from django.template.context_processors import csrf
-
+from django.template.response import TemplateResponse
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
