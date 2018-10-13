@@ -1,0 +1,6 @@
+[1012/082105.090:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name plat, discarding value Win64
+[1012/082105.729:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name prod, discarding value OperaDesktop
+[1012/082105.729:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name ver, discarding value 56.0.3051.36
+[1012/082105.729:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name channel, discarding value Stable
+[1012/082105.729:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name ptype, discarding value gpu-process
+[1012/172307.367:ERROR:autoupdatechecker.cc(143)] Unable to prepare update checker runtime.
