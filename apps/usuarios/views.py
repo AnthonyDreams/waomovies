@@ -13,6 +13,10 @@ from django.contrib.auth import (
 	REDIRECT_FIELD_NAME, get_user_model, login as auth_login,
 	logout as auth_logout, update_session_auth_hash,
 )
+from django.contrib.auth.forms import (
+    AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm,
+)
+from django.contrib.auth.tokens import default_token_generator
 from django.views.generic.edit import UpdateView
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_protect
