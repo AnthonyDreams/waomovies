@@ -109,27 +109,27 @@ class Profile(models.Model):
 		return reverse("user_detail", kwargs={"id": self.user.username})
 	
 	def send_activation_email(self):
-			if not self.user.active:
-				self.activation_key = code_generator()# 'somekey' #gen key
-				self.save()
-				#path_ = reverse()
+		if not self.user.active:
+			self.activation_key = code_generator()# 'somekey' #gen key
+			self.save()
+			#path_ = reverse()
 
-				path_ = reverse('activate', kwargs={"code": self.activation_key})
-				subject = 'Activate Account'
-				from_email = settings.EMAIL_HOST_USER
-				message = f('Activate your account here: {path_}')
-				recipient_list = [self.user.email]
-				html_message = f('<p>Activate your account here: {path_}</p>')
-				print(html_message)
-				sent_mail = send_mail(
-								subject, 
-								message, 
-								from_email, 
-								recipient_list, 
-								fail_silently=False, 
-								html_message=html_message)
-				sent_mail = False
-				return sent_mail
+			path_ = reverse('activate', kwargs={"code": self.activation_key})
+			subject = 'Activate Account'
+			from_email = settings.EMAIL_HOST_USER
+			message = f('Activate your account here: {path_}')
+			recipient_list = [self.user.email]
+			html_message = f('<p>Activate your account here: {path_}</p>')
+			print(html_message)
+			sent_mail = send_mail(
+							subject, 
+							message, 
+							from_email, 
+							recipient_list, 
+							fail_silently=False, 
+							html_message=html_message)
+			sent_mail = False
+			return sent_mail
 @receiver(post_save, sender=Usuario)
 def create_user_profile(sender, instance, created, **kwargs):
 	if created:
