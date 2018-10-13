@@ -14,8 +14,9 @@ from django.contrib.auth import (
 	logout as auth_logout, update_session_auth_hash,
 )
 from django.contrib.auth.forms import (
-    AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm,
+    AuthenticationForm, PasswordChangeForm, SetPasswordForm,
 )
+from .forms import PasswordResetForm
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.tokens import default_token_generator
 from django.views.generic.edit import UpdateView
