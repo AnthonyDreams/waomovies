@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib.auth.views import login, logout_then_login, password_reset_done, password_reset_confirm, password_reset_complete
-from apps.usuarios.views import password_reset,
+from apps.usuarios.views import password_reset
 from django.conf.urls import handler404, handler500
 from apps.footer.views import mi_error_404 
  
