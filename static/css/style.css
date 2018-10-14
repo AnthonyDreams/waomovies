@@ -4279,12 +4279,7 @@ ul {
   overflow: hidden;
   margin-bottom: 30px;
 }
-@media (max-width: 400px) {
-  .movie-item-style-2 {
-    display: flex;
-    flex-direction: column;
-  }
-}
+
 .movie-item-style-2 img {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -4422,8 +4417,8 @@ ul {
 }
 @media (max-width: 667px) {
   .movie-item-style-1 {
-    margin-left: 15px;
-    max-width: 170px;
+    margin-left: 0px;
+    max-width: 160px;
   }
 }
 .style-3 {
@@ -4447,25 +4442,16 @@ ul {
 }
 @media (max-width: 991px) {
   .flex-wrap-movielist .movie-item-style-2 {
-    margin-right: 10px;
+    margin-right: 20px;
   }
 }
-@media (max-width: 400px) {
-  .flex-wrap-movielist {
-    max-width: 200px;
-    margin: 0 auto;
-  }
-}
+
 @media (max-width: 991px) {
   .mv-grid-fw {
     max-width: 100%;
   }
 }
-@media (max-width: 400px) {
-  .mv-grid-fw {
-    max-width: 200px;
-  }
-}
+
 .grid-fav .movie-item-style-2 {
   margin-right: 15px;
 }
@@ -4775,21 +4761,7 @@ ul {
   }
 }
 
-@media (max-width: 546px) {
-  .tabs ul.tab-links,
-  .tabs ul.tab-links-2,
-  .tabs ul.tab-links-3 {
-    display: inherit;
-  }
-  .tabs ul.tab-links li a,
-.tabs ul.tab-links-2 li a,
-.tabs ul.tab-links-3 li a {
-  font-family: 'Dosis', sans-serif;
-  font-size: 10px;
-  color: #abb7c4;
-  font-weight: bold;
-}
-}
+
 
 .tabs ul.tab-links li,
 .tabs ul.tab-links-2 li,
@@ -7144,12 +7116,43 @@ p.ceb-single {
   color: #dcf836;
 }
 @media (max-width: 767px) {
+
+
   .slider {
-    padding-bottom: 0;
+    padding-bottom: 0px;
   }
   .slider .slick-multiItemSlider {
+    max-width: 500px;
+    padding-top: 0px;
+  }
+  .slider .slick-multiItemSlider .movie-item {
+    margin-left: 5px;
+  }
+}
+
+@media (max-width: 568px) {
+  
+  .slider .slick-multiItemSlider {
+    max-width: 400px;
+    padding-top: 0;
+  }
+  .slider .slick-multiItemSlider .movie-item {
+    margin-left: 5px;
+  }
+}
+
+@media (max-width: 400px) {
+  
+  .logo {
+    height: 35px;
+  }
+}
+
+@media (max-width: 400px) {
+  
+  .slider .slick-multiItemSlider {
     max-width: 300px;
-    padding-top: 60;
+    padding-top: 0;
   }
   .slider .slick-multiItemSlider .movie-item {
     margin-left: 5px;
@@ -7159,7 +7162,7 @@ p.ceb-single {
   padding-bottom: 30px;
 }
 .slider .slick-multiItemSlider .slick-list {
-  margin-top: 30px;
+  margin-top: 60px;
 }
 .slider .slick-multiItemSlider .slick-dots {
   text-align: right;
@@ -7992,8 +7995,8 @@ header .top-search input {
   background-size:20px;
 }
 header #nav-icon1 {
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
   position: relative;
   margin: 0px auto;
   -webkit-transform: rotate(0deg);
@@ -8117,7 +8120,6 @@ header#headerv3-light {
     display: block;
   }
   header .navbar-default .navbar-toggle {
-    border: 1px solid #ffffff;
   }
   header .navbar-default .navbar-toggle:hover,
   header .navbar-default .navbar-toggle:focus {
