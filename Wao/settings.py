@@ -160,7 +160,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'theanthony2d@gmail.com'
 DEFAULT_FROM_EMAIL = 'testing@testing.com'
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 
 ADMINS = (
 ('Anthony2D', 'theanthony2d@gmail.com')
