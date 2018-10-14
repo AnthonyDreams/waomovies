@@ -79,7 +79,7 @@ TEMPLATES = [
             ],
 
             'libraries':{
-            'my_templatetag': 'apps.peliculas.templatetags.tags',
+            	'my_templatetag': 'apps.peliculas.templatetags.tags',
 
             }
         },
@@ -159,7 +159,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'theanthony2d@gmail.com'
-#EMAIL_HOST_PASSWORD = 'a253035253035'
+DEFAULT_FROM_EMAIL = 'testing@testing.com'
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 
