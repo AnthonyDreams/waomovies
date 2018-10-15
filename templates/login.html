@@ -91,14 +91,8 @@ img.emoji {
 
 															    
         <li class="menu-item sh-nav-dropdown">
-            <a>
-                <div class="sh-table-full">
-                    <div class="sh-table-cell">
-                        <span class="c-hamburger c-hamburger--htx">
-                            <span>Toggle menu</span>
-                        </span>
-                    </div>
-                </div>
+            <a href="/waomovies/inicio/" style="font-size: 14px;">
+                INICIO
             </a>
         </li>
 							</ul>
@@ -212,10 +206,25 @@ img.emoji {
 {% if not min %}
 {% if not request.user.is_authenticated %}
 
+
+<style type="text/css">
+	@media (max-width: 360px) {
+.issue{
+	display: none!important;
+}
+.sh-heading {
+	padding-top: 40px;
+}
+
+	}
+</style>
+
 <div class="sh-column-wrapper">
 		
+
+
 <div id="text-block-98b838cb14828f1bb30771b38ffc6b10" class="sh-text-block">
-	<p style="text-align: center;"><span style="color: #ffffff;"><img src="{%static ''%}img/wamovieslogo.png"></span></p></div>
+	<p class="" style="text-align: center;"><span class="issue" ><img class="" src="{%static ''%}img/wamovieslogo.png"></span></p></div>
 <div class="sh-heading" id="heading-867d718c1e538b5f2995dad162328747">
 	<h1 class="sh-heading-content size-default text-center">
 			</h1>

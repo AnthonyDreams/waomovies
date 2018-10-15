@@ -86,16 +86,17 @@ $.ajaxSetup({
 	    			</div>
 	    			<div class="title-in">
 	    				<div class="cate">
-	    					<span class="yell"><a href="#">{{ pelicula.genero }}</a></span>
+
+	    					<span style="margin-right: 4px;" class=" {% if pelicula.genero == "AVEN" %} green {% endif %}{% if pelicula.genero == "COME" %} orange {% endif %} {% if pelicula.genero == "DRA" %} yell{% endif %}{% if pelicula.genero == "ANI" %} blue {% endif %}{% if pelicula.genero == "ROM" %} red {% endif %}{% if pelicula.genero == "SC" %} greendark {% endif %}{% if pelicula.genero == "CRI" %} reddark {% endif %}{% if pelicula.genero == "TER" %} black {% endif %}{% if pelicula.genero == "FANT" %} sowhitegreen {% endif %}{% if pelicula.genero == "ACC" %} darkgray {% endif %}{% if pelicula.genero == "SUS" %} gray {% endif %}{% if pelicula.genero == "DOCU" %} DOCU {% endif %}"><a href="#">{% if pelicula.genero == "DOCU" %} DOCUMENTAL {% else %}{{ pelicula.genero }} {% endif %}</a></span>
 	    					{% if pelicula.genero2 %}
-	    					<span class="blue"><a href="#">{{ pelicula.genero2 }}</a></span>
+	    					<span class=" {% if pelicula.genero2 == "AVEN" %} green {% endif %}{% if pelicula.genero2 == "COME" %} orange {% endif %} {% if pelicula.genero2 == "DRA" %} yell{% endif %}{% if pelicula.genero2 == "ANI" %} blue {% endif %}{% if pelicula.genero2 == "ROM" %} red {% endif %}{% if pelicula.genero2 == "SC" %} greendark {% endif %}{% if pelicula.genero2 == "CRI" %} reddark {% endif %}{% if pelicula.genero2 == "TER" %} black {% endif %}{% if pelicula.genero2 == "FANT" %} sowhitegreen {% endif %}{% if pelicula.genero2 == "ACC" %} darkgray {% endif %}{% if pelicula.genero2 == "SUS" %} gray {% endif %}{% if pelicula.genero2 == "DOCU" %} DOCU {% endif %}"><a href="#">{{ pelicula.genero2 }}</a></span>
 	    					{% endif %}
 
 	    				</div>
 	    				<h6 style="background: rgba(254,140,0,0.7);  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
- padding: 8px; width: 285px; margin-left: -30px;"><a href="{% url 'peliculasO' slug=pelicula.slug %}">{{ pelicula.titulo }}</a></h6>
+ padding: 8px; width: 100%; "><a href="{% url 'peliculasO' slug=pelicula.slug %}">{{ pelicula.titulo }}</a></h6>
 	    				<p><i class="fa fa-star point" aria-hidden="true">
 </i><span> {{ pelicula.puntuacion }}</span> /10</p>
 	    			</div>
