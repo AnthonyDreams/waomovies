@@ -7314,8 +7314,26 @@ p.ceb-single {
 
 @media (max-width: 400px) {
   
-  .logo {
+  .logoz {
+    height: 30px;
+    width: auto;
+  }
+}
+
+.logito {
+  display: none;
+}
+
+@media (max-width: 350px) {
+  
+  .logoz {
+    display: none;  }
+
+  .logito {
+    display: initial;
     height: 35px;
+    width: 10px;
+    margin-bottom: -20px;
   }
 }
 

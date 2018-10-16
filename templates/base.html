@@ -17,7 +17,9 @@
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600'>
          <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
            <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+
 
 <style type="text/css">
  
@@ -910,6 +912,7 @@ var resultac = document.getElementById('result').style.display= "none";
             }
            
           </script>
+         
           <div class="col-md-6" style="position: relative; left: 40px;">
           <div class="toggle-search col-md-6" >
               <i class="fa fa-search" id="searchshower"onclick="mac()" ></i>
@@ -924,13 +927,17 @@ var resultac = document.getElementById('result').style.display= "none";
             </div>
             </div>
             </div>
-            <a href="/waomovies/inicio/"><img style="margin-left: 15px;" class="logo" src="{% static 'img/waologo.png' %}" alt="" width="180" height="90"></a>
+            <a href="/waomovies/inicio/"><img style="margin-left: 15px;" class="logoz logo" src="{% static 'img/waologo.png' %}" alt="" width="180" height="90"></a>
+
+            <a href="/waomovies/inicio/"><img style="width: auto;" class="logo logito" src="{% static 'img/wamovieslogo.png' %}" alt="" ></a>
+             
           </div>
         <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav flex-child-menu menu-left">
             <li class="hidden">
               <a href="#page-top"></a>
             </li>
+            
             <li class="dropdown first">
               <a  href="/waomovies/inicio/" >
               Inicio  
@@ -982,17 +989,24 @@ var resultac = document.getElementById('result').style.display= "none";
             <li><a href="#">Ayuda  <i style="padding-left: 5px; padding-right: 5px;" class="fa fa-question-circle" aria-hidden="true"></i>|   </a></li>
             {% if request.user.is_authenticated %}
               <li class="dropdown first">
-             <a href="#" class=" dropdown-toggle lv1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+<a href="/waomovies/usuario/{{user.username}}/"  >
               {%if user.profile.perfil_img %} 
-               <img src="{{ user.profile.perfil_img.url }}" style="border-radius:  50%; left: -6px; top: -3px; position: relative; width: 37px; height: 37px;"> {{ user.username }}<i style="padding-left: 8px;" class="fa fa-sort-down" aria-hidden="true"></i>{% else %}{{ user.full_name }}<i style="padding-left: 8px;" class="fa fa-sort-down" aria-hidden="true"></i>{% endif%}          
+               <img src="{{ user.profile.perfil_img.url }}" style="border-radius:  50%; left: -6px; top: -3px; position: relative; width: 37px; height: 37px;"> {{ user.username }}{% else %}{{ user.full_name }}{% endif%}          
               
               </a>
-<div class="btn-group">
+            </li>
+
+
+            {% endif %}
+            {% if request.user.is_authenticated %}
+              <li class="dropdown first">
+             
+
               <ul class="dropdown-menu level1" style="background-color: rgba(255, 255, 255, 0.8);">
                 <li><a href="/waomovies/usuario/{{user.username}}/">Cuenta</a></li>
                 <li><a href="/waomovies/ver_más_tarde/{{request.user.username}}/">Ver más tarde</a></li>
               </ul>
-            </div>
+           
             </li>      
               <li class=""><a href="/waomovies/logout/"><i style="padding-left: 8px;" class="fa fa-sign-in" aria-hidden="true"></i>Cerrar Sesión </a></li>
               
