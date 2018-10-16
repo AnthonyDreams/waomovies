@@ -892,12 +892,36 @@ var load = false
   <div class="container-fluid">
     <nav class="navbar navbar-default navbar-custom" >
         <div class="navbar-header logo">
-            <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <script type="text/javascript">
+
+            function mac() {
+
+              if (document.getElementById("searchshow").style.display === "none") {
+              var verga = document.getElementById("searchshow").style.display = "initial";
+
+                
+              } else {
+var verga = document.getElementById("searchshow").style.display = "none";
+var resultac = document.getElementById('result').style.display= "none";
+
+              }
+
+
+            }
+           
+          </script>
+          <div class="col-md-6">
+          <div class="toggle-search col-md-6" >
+              <i class="fa fa-search" id="searchshower"onclick="mac()" ></i>
+            </div>
+            <div class="navbar-toggle col-md-6" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+
               <span class="sr-only">Toggle navigation</span>
               <div id="nav-icon1">
               <span></span>
               <span></span>
               <span></span>
+            </div>
             </div>
             </div>
             <a href="/waomovies/inicio/"><img style="margin-left: 15px;" class="logo" src="{% static 'img/waologo.png' %}" alt="" width="180" height="90"></a>
@@ -1003,7 +1027,7 @@ var load = false
   </style>
       <form method="post" action="{% if not series_filt %}/waomovies/search/{% else %}/waomovies/buscar_series/{% endif %}" name="formaa">
 
-      <div class="top-search" style="width: 90%; margin-left: 20px;">
+      <div id="searchshow" class="top-search" style="width: 90%; margin-left: 20px; display: none;">
         <select{% if not series_filt %} onchange='myfunctionss()'{% else %} onchange='myfunctionssa()'{% endif %}>
         <option value="united"{% if not series_filt %}selected{% endif %}>Películas</option>
         <option value="saab"{% if series_filt %}selected{% endif %}>Series</option>
@@ -1039,9 +1063,11 @@ $(document).ready(function(){
   var expression = new RegExp(searchField, "i");
   var resulta = document.getElementById('search');
   var resultac = document.getElementById('result')
+  var widthscreen = $( window ).width()
+  if (widthscreen >= 767) {
   $.getJSON('/waomovies/pelis/', function(data) {
    $.each(data, function(key, value){
-    if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1 && result.value.length > 1)
+    if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1 && result.value.length > 1 && widthscreen > 767)
     {
      $('#result').append('<li class="list-group-item link-class"><a style="color: black;" href="/waomovies/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
     }
@@ -1055,12 +1081,13 @@ $(document).ready(function(){
               result.style.display = "none";
           }
       }
-    if (resulta.value.length > 0)
+    if (resulta.value.length > 0 && widthscreen > 767)
     {
       resultac.style.display = "initial"
     }
    });   
   });
+  }
  });
  
  $('#result').on('click', 'li', function() {
