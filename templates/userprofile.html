@@ -55,7 +55,7 @@
 						<a href="#"><img id="blah" alt="your image" src="{{ usuario.profile.perfil_img.url }}" alt=""><br></a>
 						<form method='POST' action='/waomovies/edit/{{ request.user.id }}/' enctype='multipart/form-data'>{% csrf_token %}
 						<button  type="submit" class="ip-upload btn redbtn"><input class="ip-file" type="file" name="perfil_img" accept="image/*" id="imgInp"><span style="font-size: 14px;">Cambiar foto de perfil</span></input></button>
-						<button class="btn redbtn" style="background:#F4BB00;"><i class="fa fa-send" style="position: relative; padding-left: 5px;"></i></button></form>
+						<button class="btn redbtn sendbutton" style="background:#F4BB00;"><i class="fa fa-send" style="position: relative; padding-left: 5px;"></i></button></form>
 					</div>
 					<div class="user-fav">
 						<p>Detalles</p>
@@ -167,14 +167,14 @@
 			{% if user_favoritos and not n %}
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="topbar-filter user">
-					<p>{{ peliculas_list.count }}<span>{% if peliculas_list.count == 1 %} Película encontrada{% else %} Películas encontradas {% endif%}</span></p>
+					<p style="width: 100%;">{{ peliculas_list.count }}<span>{% if peliculas_list.count == 1 %} Película encontrada{% else %} Películas encontradas {% endif%}</span></p>
 					<label>Ordenada por:</label>
 					<select>
 						<option value="range">Fecha de selección</option>
 					</select>
 					
 				</div>
-				<div class="flex-wrap-movielist grid-fav">
+				<div class="flex-wrap-movielist " >
 {% for o in peliculas %}
 						<div class="movie-item-style-2 movie-item-style-1 style-3">
 							<img src="{{o.Cover.url}}" alt="">
