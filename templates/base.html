@@ -1078,7 +1078,9 @@ $(document).ready(function(){
   var resulta = document.getElementById('search');
   var resultac = document.getElementById('result')
   var widthscreen = $( window ).width()
+
   if (widthscreen >= 767) {
+    var search = document.getElementsById('searchshow').style.display = 'initial'
   $.getJSON('/waomovies/pelis/', function(data) {
    $.each(data, function(key, value){
     if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1 && result.value.length > 1 && widthscreen > 767)
@@ -1312,7 +1314,7 @@ function passwordVerify() {
 <script src="{% static 'frameworks/js/jquery.Jcrop.min.js' %}"></script>
 <script src="{% static 'frameworks/js/jquery.imgpicker.js' %}"></script>
 
-
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-expander/1.7.0/jquery.expander.js"></script>
 <script src="{% static 'js/plugins.js' %}"></script>
 
 <script src="{% static 'js/plugins2.js' %}"></script>

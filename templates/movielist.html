@@ -38,16 +38,37 @@
 				</div>
 									{% if peliculas %}
 
+<script type="text/javascript">
+
+	var widthscreen = $( window ).width()
+
+	
+
+  $(document).ready(function() {
+  	if (widthscreen <= 767 ) {
+      // use esta configuracion simple para valores por defecto
+      //$('div.expandable p').expander();
+      // *** O ***
+      // configure de la siguiente manera
+      $('div.mv-item-infor p').expander({
+      slicePoint: 50, // si eliminamos por defecto es 100 caracteres
+      expandText: '[...]', // por defecto es 'read more...'
+      collapseTimer: 0, // tiempo de para cerrar la expanción si desea poner 0 para no cerrar
+      userCollapseText: '(Ocultar)' // por defecto es 'read less...'
+    });}
+  });
+</script>
+
 									{% for o in peliculas %}
 
-				<div class="movie-item-style-2">
-					<img src="{{ o.Cover.url }}{{ o.serie_cover.url }}" alt="">
+				<div class="movie-item-style-2" id="imglist" style="border-bottom: solid 1px; padding-bottom: 8px;">
+					<img src="{{ o.Cover.url }}{{ o.serie_cover.url }}" alt="" class="">
 						{% if  series_filt %}	{% include 'ajaxserielist.html' %}{% else %}{% include 'ajaxlist.html' %}{% endif %}
 
 					<div class="mv-item-infor">
 						<h6><a href="/waomovies/{% if not series_filt %}peliculas{%else%}series{% endif %}/{{ o.slug }}">{{ o.titulo }} <span>  &nbsp; ({{ o.fecha_de_lanzamiento|date:"Y" }})</span></a></h6>
 						<i class="fa fa-star point" aria-hidden="true"></i><span> {{ o.puntuacion }}</span> /10</p>
-						<p class="describe">{{ o.sinopsis }}</p>
+						<p class="describe" id="describe">{{ o.sinopsis }}</p>
 						<p class="">Duración: <a href="">{{ o.run_time }}</a></p>
 
 						
