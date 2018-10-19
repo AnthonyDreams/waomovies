@@ -1011,7 +1011,19 @@ $(this).remove();
 {% block content %}
 
 
+<style type="text/css">
+    @media (max-width: 340px) {
+  
+  body {
+    width: 110%;
+  }
 
+  .ht-header {
+    width: 110%;
+
+}
+}
+</style>
 {% if peliculaa.portada %}
 <div class="hero mv-single-hero" style="background: url({{ peliculaa.portada.url  }}) no-repeat;
   height: 598px; background-size: 1400px;">
@@ -1165,17 +1177,18 @@ $(this).remove();
      </form>
      </div>
      <div class="movie-rate" style=" width: 100%; margin-left: -45px; height: 60px;">
-      <div class="rate" style="  width: 160px; height: 60px; position: relative; z-index: 5;">
+      <div class="rate" id="imdb" style="  width: 160px; height: 60px; position: relative; z-index: 5;">
        <i class="fa fa-star point" aria-hidden="true">
 </i>
-       <p><span>{{ peliculaa.puntuacion }}</span> /10  IMB<br>
+       <p class="pimdb"> <span>{{ peliculaa.puntuacion }}</span> /10  IMB<br>
         <span id="rv" class="rv">{{ comentariosc }} {% if comentariosc > 1 %}comentarios{%  else %}comentario{% endif %}</span>
        </p>
       </div>
       <div class="rate-star" style="width: auto; ">
-       <div class="rate" style="position: relative; left:-22px; width: 200px; height: 60px; " >
+       <div class="rate" id="waorate" style="position: relative; left:-22px; width: 200px; height: 60px; " >
+        
         <a href=""type="button" data-toggle="collapse" data-target="{%  if request.user.is_authenticated %}#collapseExampl{% else %}#collapseExamplee{% endif %}" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;"><img width="58" height="58" src="{% static 'img/wamovieslogo.png' %}" ></a>
-       <p><span id="the-div-that-should-be-refreshe">{{promedio}}</span><small class="" style="font-size: 14px; font-family: sans-serif;"> /5 WAO</small> <br>
+       <p class="mojon"><span id="the-div-that-should-be-refreshe">{{promedio}}</span><small class="" style="font-size: 14px; font-family: sans-serif;"> /5 WAO</small> <br>
         <span id="vot" class="rv">{{ votacion2c }} {% if votacion2c > 1 %}votos{%  else %}voto{% endif %}</span>
        </p>
        </div>
@@ -1210,28 +1223,7 @@ $(this).remove();
        {% endfor %}
 
        {% else %}
-       <!-- Collapsible element -->
-            <div style=" margin-left:-50px;  width: 195px; height: 60px;"  class="collapse container" id="collapseExampl">
-                <div class="mt-3">
-                 <div class="md-form form-lg">
-    
-               <form  class="my-ajax-form" method='POST'data-url="/waomovies/votaciono/{{peliculaa.id}}/" >{% csrf_token %}
-                   <ul class="rate-area">
-                <input  type="radio" id="5-star" name="votacion" value="5" /><label   style="font-size: 180%;"  for="5-star" title="Amazing">5 stars</label>
-                <input type="radio" id="4-star" name="votacion" value="4" /><label   style="font-size: 180%;" for="4-star" title="Good">4 stars</label>
-                <input type="radio" id="3-star" name="votacion" value="3" /><label  style="font-size: 180%;"  for="3-star" title="Average">3 stars</label>
-                <input type="radio" id="2-star" name="votacion" value="2" /><label   style="font-size: 180%;" for="2-star" title="Not Good">2 stars</label>
-                <input type="radio" id="1-star" name="votacion" value="1" /><label   style="font-size: 180%;" for="1-star" title="Bad">1 star</label>
-                <input type="number" value="{{peliculaa.id}}" name="pelicula">
-
-            </ul>
-      <button onclick="votar(this)" style="background:none; border: none; cursor: pointer;" type="submit"><i style="font-size: 14px;" class="fa fa-send point"></i></button>
-      </form>
-           </div>
-                               
-                </div>
-            </div>
-            <!-- / Collapsible element -->
+       
     
        {% endif %}
       </div>
@@ -1263,7 +1255,7 @@ $(this).remove();
         <li class=""><a href="#reproducir">Reproducir</a></li>
         <li><a href="#reviews"> Comentarios </a></li>
         <!--li><a href="#cast">  Cast & Crew </a></li-->
-        <li><a href="#moviesrelated"> Películas relacionadas</a></li>                        
+        <li class="offrelated"><a href="#moviesrelated"> Películas relacionadas</a></li>                        
        </ul>
           <div class="tab-content">
               <div id="overview" class="tab active">
@@ -1328,20 +1320,25 @@ $(this).remove();
               <div id="reviews" class="tab review">
                  <div class="row">
                    <div class="rv-hd">
-                    <div class="div">
+                    <div class="div" style="display: block; width: 90%;">
                    <h2>{{ peliculaa.titulo }}</h2>
                    
                     </div>
-                    <div style="position: inline">
-                
-                <a class="redbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer; position: relative; top: 0px;">
-                    Dejar un comentario
-                </a>
-            </div>
+
+
+                    
 
             
 
                    </div>
+                   <div class="block-comentar" >
+                
+                <a class="redbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer; position: relative; top: 0px;">
+                    Dejar un comentario
+                </a>
+
+            </div>
+            <br>
                    <div class="topbar-filter">
            <p><span id="rva">{{comentariosc}} comentarios </span>encontrados </p>
            <label>Ordenado por:</label>
@@ -1361,8 +1358,8 @@ $(this).remove();
 
               <input autocomplete="off" type="text" id="inputLGEx" class="form-control form-control-lg" name="content" style="width: 700px; color: #abb7c4;" size="25">
                   <label for="inputLGEx" style="font-size: 16px; color: silver;">Dejar un comentario</label>
-                  <a data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"style="color: hsl(0, 0%, 53.3%); font-size: 16px; position: relative; left: 44.5%;">Cerrar</a>
-              <button onclick="send(this)" class="btn btn-primary" type="submit" style="background-color: hsl(206.1, 79.3%, 52.7%); font-size: 16px; position: relative; left: 46%;">Comentar<i class="fa fa-paper-plane-o ml-2"></i></button>
+                  <a class="buttoncoment" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"style="color: hsl(0, 0%, 53.3%); font-size: 16px; position: relative; left: 44.5%;">Cerrar</a>
+              <button  onclick="send(this)" class="btn btn-primary " type="submit" style="background-color: hsl(206.1, 79.3%, 52.7%); font-size: 16px; position: relative; left: 47%;">Comentar<i class="fa fa-paper-plane-o ml-2"></i></button>
               
               </form>
 </div>
@@ -2268,7 +2265,7 @@ document.getElementById('panelstreamcloud').style.display="none"
               </div>
               
                
-               <div id="moviesrelated" class="tab">
+               <div id="moviesrelated" class="tab offrelated">
                 <h3>Películas relacionadas a:</h3>
                    <h2>{{peliculaa.titulo}}</h2>
             <div class="topbar-filter">
