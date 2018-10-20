@@ -4903,12 +4903,12 @@ background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, F
   }
 }
 
-@media (max-width: 353px) {
+@media (max-width: 355px) {
   
 
   .reportar {
     position: relative;
-    left: -300px;
+    left: -500px;
   }
 }
 
@@ -4919,6 +4919,26 @@ background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, F
     position: relative;
     left: -500px;
   }
+
+  
+}
+
+@media (max-width: 321px) {
+  
+
+  #reportar {
+    position: relative;
+    left: -500px;
+  }
+}
+
+@media (max-width: 321px) {
+  
+
+  #reportar {
+    position: relative;
+    left: -250px;
+  }
 }
 
 @media (max-width: 321px) {
@@ -4927,6 +4947,14 @@ background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, F
   .reportar {
     position: relative;
     left: -250px;
+  }
+}
+
+@media (min-width: 351px) {
+  
+
+  #moviebtna {
+    width: 296px;
   }
 }
 .topbar-filter option {

@@ -984,16 +984,22 @@ $(this).remove();
 
 
 <style type="text/css">
-    @media (max-width: 340px) {
+    @media (max-width: 360px) {
   
   body {
-    width: 110%;
+    position: absolute;
   }
 
-  .ht-header {
-    width: 110%;
+  .coment {
+    width: 100px;
+  }
 
-}
+  .buttoncoment {
+    left: 0px;
+    position: relative;
+  }
+
+  
 }
 </style>
 <style type="text/css">
@@ -1161,27 +1167,27 @@ $(this).remove();
 					
             			<button title="Ver más tarde" class="loginLink btn-ver" type="submit" style="position: relative; left: 50%;"><i style="color: black; font-size: 24px;" class="fa  fa-eye" aria-hidden="true"></i></button>
 					{% endif %}
-					<!--form class="reportar" method='POST' data-url='/waomovies/reportar_serie/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+					<form   method='POST' data-url='/waomovies/reportar_serie/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
 						<input type="numero" name="reportes" style="visibility:hidden;" value="1">
-						<button onclick="reportar(this)" id="none"  title="Reportar" class="" type="submit" style="position: relative; left: 200%; background: none; border: none; cursor: pointer;"><i id="load" style="text-shadow: 2px 2px black; color: white; font-size: 24px;" class="fa fa-bug" aria-hidden="true"></i></button>
+						<button onclick="reportar(this)" id="none"  title="Reportar" class="" type="submit" style="position: relative;  padding-left: 30px; top: -8px; background: none; border: none; cursor: pointer;"><i id="load" style="text-shadow: 2px 2px black; color: white; font-size: 24px;" class="fa fa-bug" aria-hidden="true"></i></button>
 						<h6 id="gone"></h6>
-					</form-->
+					</form>
 					</div>
-                    </div>
-					<div class="movie-rate container" style=" width: 100%; margin-left: -45px; height: 60px;">
-						<div class="rate" style="  width: 160px; height: 60px; position: relative; z-index: 5;">
-							<i class="fa fa-star point" aria-hidden="true">
+</div>
+<div class="movie-rate container" style=" width: 100%; margin-left: -45px; height: 60px;">
+	<div class="rate" id="imdb" style="  width: 160px; height: 60px; position: relative; z-index: 5;">
+		<i class="fa fa-star point" aria-hidden="true">
 </i>
-							<p><span>{{ series.puntuacion }}</span> /10  IMB<br>
-								<span id="rv" class="rv">{{ comentariosc }} {% if comentariosc > 1 %}comentarios{%  else %}comentario{% endif %}</span>
-							</p>
-						</div>
-						<div class="rate-star" style="width: auto; ">
-							<div class="rate" style="position: relative; left:-22px; width: 200px; height: 60px; " >
-								<a href=""type="button" data-toggle="collapse" data-target="{%  if request.user.is_authenticated %}#collapseExampl{% else %}#collapseExamplee{% endif %}" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;"><img width="58" height="58" src="{% static 'img/wamovieslogo.png' %}" ></a>
-							<p><span id="the-div-that-should-be-refreshe">{{promedio}}</span><small class="" style="font-size: 14px; font-family: sans-serif;"> /5 WAO</small> <br>
-								<span id="vot" class="rv">{{ votacion2c }} {% if votacion2c > 1 %}votos{%  else %}voto{% endif %}</span>
-							</p>
+		<p class="pimdb"><span>{{ series.puntuacion }}</span> /10  IMB<br>
+			<span id="rv" class="rv">{{ comentariosc }} {% if comentariosc > 1 %}comentarios{%  else %}comentario{% endif %}</span>
+		</p>
+	</div>
+	<div class="rate-star" style="width: auto; ">
+		<div class="rate" id="waorate" style="position: relative; left:-22px; width: 200px; height: 60px; " >
+			<a href=""type="button" data-toggle="collapse" data-target="{%  if request.user.is_authenticated %}#collapseExampl{% else %}#collapseExamplee{% endif %}" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;"><img width="58" height="58" src="{% static 'img/wamovieslogo.png' %}" ></a>
+		<p class="mojon"><span id="the-div-that-should-be-refreshe">{{promedio}}</span><small class="" style="font-size: 14px; font-family: sans-serif;"> /5 WAO</small> <br>
+			<span id="vot" class="rv">{{ votacion2c }} {% if votacion2c > 1 %}votos{%  else %}voto{% endif %}</span>
+		</p>
 							</div>
 							
 
@@ -1261,17 +1267,17 @@ $(this).remove();
 								<li class="active"><a  class="d" href="#overview">Overview</a></li>
 								<li><a href="#season" class="d" > Capitulos</a></li> 
 								<li><a href="#reviews" class="d" > Comentarios </a></li>
-								<li><a href="#moviesrelated" class="d" >Series relacionadas</a></li>                        
+								<li class="offrelated"><a href="#moviesrelated" class="d" >Series relacionadas</a></li>                        
 							</ul>
 						    <div class="tab-content">
-						    	<div id="moviesrelated" class="tab">
-					       	 		<h3>Películas relacionadas a:</h3>
+						    	<div id="moviesrelated" class="tab offrelated">
+					       	 		<h3>Series relacionadas a:</h3>
 					       	 					<h2>{{series.titulo}}</h2>
 												<div class="topbar-filter">
 													{% if relacionarc == 1 %}
-											<p><span>{{relacionarc}}</span> Película encontrada en total</p>
+											<p><span>{{relacionarc}}</span> Series encontrada en total</p>
 											{% else %}
-											<p><span>{{relacionarc}}</span> Películas encontradas en total</p>
+											<p><span>{{relacionarc}}</span> Series encontradas en total</p>
 
 											{%  endif%}
 											<label>Ordenada por</label>
@@ -1713,19 +1719,21 @@ for (i = 0; i < acc.length; i++) {
 						        <div id="reviews" class="tab review">
 						           <div class="row">
 						            	<div class="rv-hd">
-						            		<div class="div">
+						            		<div class="div" style="display: block; width: 90%;">
 						       	 				<h2>{{ series.titulo }}</h2>
 							            	</div>
 							            	
-<div>
-												    
-												    <a class="redbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
-												        Dejar un comentario
-												    </a>
-												</div>
-												
+
 
 						            	</div>
+                                        <div class="block-comentar">
+                                                    
+                                                    <a class="redbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
+                                                        Dejar un comentario
+                                                    </a>
+                                                </div>
+                                                
+<br>
 						            	<div class="topbar-filter">
 											<p><span id="rva" >{{comentariosc}} comentarios </span>encontrados </p>
 											<label>Ordenado por:</label>

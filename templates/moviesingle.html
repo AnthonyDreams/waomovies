@@ -1012,16 +1012,22 @@ $(this).remove();
 
 
 <style type="text/css">
-    @media (max-width: 340px) {
+    @media (max-width: 360px) {
   
   body {
-    width: 110%;
+    position: absolute;
   }
 
-  .ht-header {
-    width: 110%;
+  .coment {
+    width: 100px;
+  }
 
-}
+  .buttoncoment {
+    left: 0px;
+    position: relative;
+  }
+
+  
 }
 </style>
 {% if peliculaa.portada %}
@@ -1051,7 +1057,7 @@ $(this).remove();
    <div class="col-md-4 col-sm-12 col-xs-12">
     <div class="movie-img sticky-sb" >
      <img src="{{ peliculaa.Cover.url }}" alt="" style="height: 440px; width: auto;">
-     <div class="movie-btn" style="width: 296px;"> 
+     <div id="moviebtna" class="movie-btn" > 
       <div class="btn-transform transform-vertical red">
        <div><a href="#" class="item item-1 redbtn">  Ver Trailer</a></div>
        <div><a href="{{peliculaa.links}}" class="item item-2 redbtn fancybox-media hvr-grow"><i class="fa fa-play point"></i></a></div>
@@ -1170,9 +1176,9 @@ $(this).remove();
      
                <button title="Ver más tarde" class="loginLink btn-ver" type="submit" style="position: relative; left: 50%;"><i style="color: black; font-size: 24px;" class="fa  fa-eye" aria-hidden="true"></i></button>
      {% endif %}
-     <form class="reportar" method='POST' data-url='/waomovies/reportar/{{ peliculaa.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+     <form class="" method='POST' data-url='/waomovies/reportar/{{ peliculaa.id }}/' enctype='multipart/form-data'>{% csrf_token %}
       <input type="numero" name="reportes" style="visibility:hidden;" value="1">
-      <button onclick="reportar(this)"  id="none" title="Reportar" class="" type="submit" style="position: relative; left: 200%; background: none; border: none; cursor: pointer;"><i id="load" style="text-shadow: 2px 2px black; color: white; font-size: 24px;" class="fa fa-bug" aria-hidden="true"></i></button>
+      <button onclick="reportar(this)"  id="none" title="Reportar" class="" type="submit" style="position: relative; padding-left: 30px; top: -8px; background: none; border: none; cursor: pointer;"><i id="load" style="text-shadow: 2px 2px black; color: white; font-size: 24px;" class="fa fa-bug" aria-hidden="true"></i></button>
       <h6 id="gone"></h6>
      </form>
      </div>

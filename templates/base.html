@@ -1038,10 +1038,16 @@ var resultac = document.getElementById('result').style.display= "none";
    background-color: #f1f1f1;
 
   }
+
+  @media (max-width: 767px) {
+    #searchshow {
+      display: none;
+    }
+  }
   </style>
       <form method="post" action="{% if not series_filt %}/waomovies/search/{% else %}/waomovies/buscar_series/{% endif %}" name="formaa">
 
-      <div id="searchshow" class="top-search" style="width: 90%; margin-left: 20px; display: none;">
+      <div id="searchshow" class="top-search" style="width: 90%; margin-left: 20px; ">
         <select{% if not series_filt %} onchange='myfunctionss()'{% else %} onchange='myfunctionssa()'{% endif %}>
         <option value="united"{% if not series_filt %}selected{% endif %}>Películas</option>
         <option value="saab"{% if series_filt %}selected{% endif %}>Series</option>
