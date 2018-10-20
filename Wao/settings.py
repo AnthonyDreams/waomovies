@@ -149,7 +149,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 #STATIC_URL = '/static/'
-STATIC_URL = 'https://%s/' %os.environ.get('AWS_BUCKET_URL')
 STATIC_DIRS = 'static'
 STATICFILES_DIRS = [
     STATIC_DIRS,
@@ -171,5 +170,7 @@ STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 S3_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
+STATIC_URL = 'http://' + S3_BUCKET_NAME + '.s3.amazonaws.com/'
+
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
