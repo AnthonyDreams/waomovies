@@ -14,3 +14,5 @@ six==1.11.0
 sqlparse==0.2.4
 whitenoise==4.1
 ww==0.2.1
+boto==2.49.0
+django-storages==1.7.1
