@@ -435,10 +435,8 @@ document.getElementById('panelstreamcloud').style.display="none"
                         <p class="txt1">{{capitulo.num_episodio}}. {{capitulo.nombre}} <span class="txt2"><i class="fa fa-eye icon1"></i>{{h.hitcount}}</span></p>
                         <p class="txt2"></p>
                     </div>
-                    <p class="txt3">
-                        <!--span class="color1">Director:</span> <a href="#" class="link2 color2">fashionTV</a>
-                        <span class="vline1"></span-->
-                        <span style="display: inline-block;"><i class="fa fa-share icon2"></i><a data-toggle="modal" data-target="#modalSocial" href="#">Compartir</a></span>
+                    <div style="display: block">
+                                      <span style="display: inline-block;"><i class="fa fa-share icon2"></i><a data-toggle="modal" data-target="#modalSocial" href="#">Compartir</a></span>
                         <span><i id="load" class="fa fa-bug icon2"></i><button form="reporte" onclick="reportar(this)" type="submit" style="color: #9DA1A5; background:none; border:none; cursor: pointer;">Reportar episodio</button></span>
                         <span style="display: none;"><form id="reporte" class="reportar" method="post" data-url="/waomovies/reportar_capitulo/{{capitulo.id}}/reportar/" style="display: initial; position: relative; margin-top: -50px;" >{%csrf_token%}
 
@@ -485,6 +483,13 @@ document.getElementById('panelstreamcloud').style.display="none"
     </div>
 </div>
 <!--Modal: modalSocial-->
+                    </div>
+                    <br>
+                    <br>
+                    <p class="txt3">
+                        <!--span class="color1">Director:</span> <a href="#" class="link2 color2">fashionTV</a>
+                        <span class="vline1"></span-->
+        
                         <div id="like_div_capi">
                         <div class="fright"  style="margin-top: -35px;">
                             <form {% if not request.user in capitulo.vote_capitulo.all %} data-url="/waomovies/like_capi/{{capitulo.id}}/gustar/" {% else %} data-url="/waomovies/outlike_capi/{{capitulo.id}}/outgustar/" {% endif %} method="POST" style="display: inline;" class="like_capi">{%csrf_token%}
