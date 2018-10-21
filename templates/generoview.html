@@ -13,14 +13,22 @@
 
 
 
-<div class="hero common-hero"{% if not genero3 == "ROM" %} style="background: url({% static '' %}img/{{genero3}}.jpg) no-repeat;
-  height: 598px;  "{% else %} style="background: url({% static '' %}img/{{genero3}}.jpg) no-repeat;
-  height: 598px;  
+<div class="hero user-hero"{% if not genero3 == "ROM" %} style="background: url({% static '' %}img/{{genero3}}.jpg) no-repeat;
+  height: 598px; background-position: center;
+                      text-align: center;
+                      background-size: cover;
+                      position: relative;
+                      display: -webkit-flex;
+                      display: -moz-box;
+                      display: -ms-flexbox;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center; "{% else %} style="background: url({% static '' %}img/{{genero3}}.jpg) no-repeat;
+  height: 598px; 
   background-position: center;
                       text-align: center;
                       background-size: cover;
                       position: relative;
-                      padding-bottom: 50px;
                       display: -webkit-flex;
                       display: -moz-box;
                       display: -ms-flexbox;
