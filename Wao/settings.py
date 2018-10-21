@@ -172,9 +172,7 @@ if DEB:
 	STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 else:
-	MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-
-	MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+	
 	STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 	DEFAULT_FILE_STORAGE = 'Wao.storage_backends.PublicMediaStorage'
 
@@ -200,3 +198,6 @@ else:
 	AWS_PRELOAD_METADATA = True
 	STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 	ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+	MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+
+	MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
