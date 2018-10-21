@@ -11,8 +11,12 @@
 
 {% block content %}
 
-<style type="text/css">
-	.hero {background-position: center;
+
+
+<div class="hero common-hero"{% if not genero3 == "ROM" %} style="background: url({% static '' %}img/{{genero3}}.jpg) no-repeat;
+  height: 598px;  "{% else %} style="background: url({% static '' %}img/{{genero3}}.jpg) no-repeat;
+  height: 598px;  
+  background-position: center;
                       text-align: center;
                       background-size: cover;
                       position: relative;
@@ -22,12 +26,7 @@
                       display: -ms-flexbox;
                       display: flex;
                       align-items: center;
-                      justify-content: center;}
-</style>
-
-<div class="hero common-hero"{% if not genero3 == "ROM" %} style="background: url({% static '' %}img/{{genero3}}.jpg) no-repeat;
-  height: 598px;  "{% else %} style="background: url({% static '' %}img/{{genero3}}.jpg) no-repeat;
-  height: 598px; background-position: center;" {% endif %}
+                      justify-content: center;" {% endif %}
   >
 	<div class="container">
 		<div class="row">
