@@ -648,7 +648,7 @@ $(this).remove();
 
               
 
-             var $myForm = $('.reportar')
+             var $myForm = $('.reportarr')
              $myForm.submit(function(event){
                  event.preventDefault()
                  event.stopImmediatePropagation();
@@ -1167,7 +1167,7 @@ $(this).remove();
 					
             			<button title="Ver más tarde" class="loginLink btn-ver" type="submit" style="position: relative; left: 50%;"><i style="color: black; font-size: 24px;" class="fa  fa-eye" aria-hidden="true"></i></button>
 					{% endif %}
-					<form   method='POST' data-url='/reportar_serie/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+					<form class="reportarr"  method='POST' data-url='/reportar_serie/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
 						<input type="numero" name="reportes" style="visibility:hidden;" value="1">
 						<button onclick="reportar(this)" id="none"  title="Reportar" class="" type="submit" style="position: relative;  padding-left: 30px; top: -8px; background: none; border: none; cursor: pointer;"><i id="load" style="text-shadow: 2px 2px black; color: white; font-size: 24px;" class="fa fa-bug" aria-hidden="true"></i></button>
 						<h6 id="gone"></h6>
