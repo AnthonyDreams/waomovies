@@ -179,11 +179,21 @@ else:
 	#STATIC_URL = 'http://' + S3_BUCKET_NAME + '.s3.amazonaws.com/'
 	#AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 	#AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+	STATIC_DIRS = 'static'
+	STATICFILES_DIRS = [
+	    STATIC_DIRS,
 
+	]
 	AWS_ACCESS_KEY_ID = 'AKIAJ4IOBCQM32A5LVWQ'
 	AWS_SECRET_ACCESS_KEY = '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'
 	AWS_STORAGE_BUCKET_NAME = 'waomovies'
+	AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+	AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+	AWS_LOCATION = 'static'
+	
 
 	AWS_PRELOAD_METADATA = True
-	STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+	STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 	ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
