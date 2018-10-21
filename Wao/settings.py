@@ -172,11 +172,10 @@ if DEB:
 	STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 else:
-	MEDIA_URL = '/media/'
+	MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 
 	MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 	STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-	AWS_PUBLIC_MEDIA_LOCATION = 'media'
 	DEFAULT_FILE_STORAGE = 'Wao.storage_backends.PublicMediaStorage'
 
 	#S3_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
