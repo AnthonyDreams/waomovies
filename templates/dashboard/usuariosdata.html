@@ -15,8 +15,8 @@
 	<img src="{% static 'img/wamovieslogo.png' %}">
 	<div>
 <ul class="main-nav">
-	<li><a href="/waomovies/dashboard/usuarios/">Usuarios</a></li>
-	<li><a href="/waomovies/dashboard/movies/">Películas</a></li>
+	<li><a href="/dashboard/usuarios/">Usuarios</a></li>
+	<li><a href="/dashboard/movies/">Películas</a></li>
 	<li><a href="">Series</a></li>
 
 	
@@ -47,7 +47,7 @@
 
 $.ajax({
 	method:"GET",
-	url: '/waomovies/dashboard/datojson/',
+	url: '/dashboard/datojson/',
 	success: function(data) {
 		var ctx = document.getElementById("myChart");
 		labels= data.labels
@@ -104,7 +104,7 @@ var myChart = new Chart(ctx, {
 
 $.ajax({
 	method:"GET",
-	url: '/waomovies/dashboard/datojson/',
+	url: '/dashboard/datojson/',
 	success: function(data) {
 		var ctx = document.getElementById("myChart2");
 		labels= data.labelstotal
