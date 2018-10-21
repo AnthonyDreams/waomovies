@@ -1911,7 +1911,7 @@ for (i = 0; i < acc.length; i++) {
   <div  class="collapse container" id="collapseExample{{i.id}}z">
   <form class="respv{{i.id}}" method="post" data-url="/waomovies/responder_serie/{{i.slug}}/">
   {% csrf_token %}<div class="md-form">
-   <img width="40"  height="40" style="border: 50%;" src="{{request.user.profile.perfil_img.url}}">
+   <img width="40"  height="40" style="border-radius: 50%; width: 50px; height: 50px;" src="{{request.user.profile.perfil_img.url}}">
     <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4; " id="input-char-counter" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
 </div>
   </form>
