@@ -30,7 +30,6 @@ handler500 = mi_error_404
 
 urlpatterns = [
     url(r'^', include('apps.peliculas.urls')),
-    url(r'^', include('apps.peliculas.urls')),
     url(r'^', include('apps.usuarios.urls')),
     url(r'^', include('apps.comentarios.urls')),
     url(r'^', include('apps.vermas_tarde.urls')),

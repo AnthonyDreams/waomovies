@@ -581,7 +581,7 @@ from .serializers import ComentSerializer
 
 # Create your views here.
 def indexa(request):
-    return render(request, 'newindex.html')
+    return redirect('/inicio/')
 
 
 # Create your views here.
