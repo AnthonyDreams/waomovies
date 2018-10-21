@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import boto
-conn = boto.connect_s3()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -50,7 +48,6 @@ INSTALLED_APPS = [
     'multiselectfield',
     'apps.contacto',
     'apps.dashboard',
-    'storages',
 ]
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
@@ -143,19 +140,7 @@ USE_TZ = True
 
 LOGIN_URL = '/'
 
-MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-#STATIC_URL = '/static/'
-STATIC_DIRS = 'static'
-STATICFILES_DIRS = [
-    STATIC_DIRS,
-
-]
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_USE_TLS = True
@@ -168,10 +153,34 @@ import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEB = False
 
-S3_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
+if DEB:
+	MEDIA_URL = '/media/'
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+	MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+	# Static files (CSS, JavaScript, Images)
+	# https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+	STATIC_URL = '/static/'
+	STATIC_DIRS = 'static'
+	STATICFILES_DIRS = [
+	    STATIC_DIRS,
+
+	]
+	STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+else:
+	STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+	DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+	#S3_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
+	#STATIC_URL = 'http://' + S3_BUCKET_NAME + '.s3.amazonaws.com/'
+	#AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+	#AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
+	AWS_ACCESS_KEY_ID = 'AKIAJ4IOBCQM32A5LVWQ'
+	AWS_SECRET_ACCESS_KEY = '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'
+	S3_BUCKET_NAME = 'waomovies'
+	STATIC_URL = 'http://' + S3_BUCKET_NAME + '.s3.amazonaws.com/'
