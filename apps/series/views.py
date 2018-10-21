@@ -456,7 +456,7 @@ def reportar(request, id):
 	if not request.user.is_active:
 		raise Http404
 	instances = get_object_or_404(Series, id=id)
-	form = reporte(request.POST or None, request.FILES or None, instance=instance)
+	form = reporte(request.POST or None, request.FILES or None, instance=instances)
 	if request.is_ajax():
 		if form.is_valid():
 			instance = form.save(commit=False)
