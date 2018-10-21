@@ -1032,11 +1032,29 @@ $(this).remove();
 </style>
 {% if peliculaa.portada %}
 <div class="hero mv-single-hero" style="background: url({{ peliculaa.portada.url  }}) no-repeat;
-  height: 598px; background-size: 1400px;">
+  height: 598px; background-position: center;
+                      text-align: center;
+                      background-size: cover;
+                      position: relative;
+                      display: -webkit-flex;
+                      display: -moz-box;
+                      display: -ms-flexbox;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;">
 
   {% else %}
   <div class="hero mv-single-hero" style="background: url({% static 'img/fondo.jpg' %}) no-repeat;
-  background-size: 1400px;">
+  background-position: center;
+                      text-align: center;
+                      background-size: cover;
+                      position: relative;
+                      display: -webkit-flex;
+                      display: -moz-box;
+                      display: -ms-flexbox;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;">
   {% endif %}
 
  <div class="container">
