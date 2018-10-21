@@ -47,11 +47,11 @@ El mago de Oz (1939)</h1>
 					<form name="FORMULARIO">
 					<select name="DESPLEGABLE" onChange='location.replace(document.FORMULARIO.DESPLEGABLE.value);'>
 						
-						<option value="/waomovies/ver%25todo/">Orden de subida</option>
-						<option value="/waomovies/ver%25todo/_puntuacion/">Mejor puntuada</option>
-						<option value="/waomovies/ver%25todo/puntuacion/">Peor puntuada</option>
-						<option value="/waomovies/ver%25todo/_fecha_de_lanzamiento/">Más reciente</option>
-						<option value="/waomovies/ver%25todo/fecha_de_lanzamiento/">Más antigua</option>
+						<option value="/ver%25todo/">Orden de subida</option>
+						<option value="/ver%25todo/_puntuacion/">Mejor puntuada</option>
+						<option value="/ver%25todo/puntuacion/">Peor puntuada</option>
+						<option value="/ver%25todo/_fecha_de_lanzamiento/">Más reciente</option>
+						<option value="/ver%25todo/fecha_de_lanzamiento/">Más antigua</option>
 					</select>
 					</form>
 				</div>
@@ -66,10 +66,10 @@ El mago de Oz (1939)</h1>
 {% if request.user.is_authenticated %}
 {% if not request.user in o.favoritos.all %}					            				<!-- añadir a favoritos -->
 
-<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formfav{{o.id}}" method='POST'data-url="/waomovies/favorito/{{o.id}}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formfav{{o.id}}" method='POST'data-url="/favorito/{{o.id}}/">{% csrf_token %}
 					            				<button  onclick="myFunctionfav(this)" id="fav{{o.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer;" type="submit"><i class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
 					            				</form>
-					            				<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formafav{{o.id}}" method='POST'data-url="/waomovies/eliminar_favorito/{{o.id}}/">{% csrf_token %}
+					            				<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formafav{{o.id}}" method='POST'data-url="/eliminar_favorito/{{o.id}}/">{% csrf_token %}
 					            				<button  onclick="myFunctionfa2(this)" id="afav{{o.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; display: none;" type="submit"><i class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
 					            				</form>
 					            				<script>
@@ -157,10 +157,10 @@ El mago de Oz (1939)</h1>
 
 
 
-<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formsfav{{o.id}}" method='POST'data-url="/waomovies/eliminar_favorito/{{o.id}}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formsfav{{o.id}}" method='POST'data-url="/eliminar_favorito/{{o.id}}/">{% csrf_token %}
 					            				<button  onclick="myFunctionfavs(this)" id="sfav{{o.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; " type="submit"><i class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
 					            				</form>
-<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formfav{{o.id}}" method='POST'data-url="/waomovies/favorito/{{o.id}}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formfav{{o.id}}" method='POST'data-url="/favorito/{{o.id}}/">{% csrf_token %}
 					            				<button  onclick="myFunctionfavs2(this)" id="fav{{o.id}}"title="Favoritos" class="" style="display: none; background: none; border: none; cursor: pointer;" type="submit"><i class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
 					            				</form>
 					            				<script>
@@ -268,11 +268,11 @@ El mago de Oz (1939)</h1>
 
 {% if not o in peliculase %}	
 					            				<!-- ver más tarde -->
-<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-form{{o.id}}" method='POST'data-url="/waomovies/vermastarde/{{ o.id }}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-form{{o.id}}" method='POST'data-url="/vermastarde/{{ o.id }}/">{% csrf_token %}
 					            				<button onclick="myFunction(this)" id="{{o.id}}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i   style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
 					            				
 					            				</form>
-<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-forms{{ o.id }}" method='POST'data-url="/waomovies/eliminar_vermastarde/{{ o.id }}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-forms{{ o.id }}" method='POST'data-url="/eliminar_vermastarde/{{ o.id }}/">{% csrf_token %}
 					            				<button name="eye" style="background: none; border: none; cursor: pointer; display: none;"id="s{{ o.id }}"onclick="myFunction2(this)" title="Ver más tarde" class="example" type="submit"><i  style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye" aria-hidden="true"></i></button>
 					            			</form>
 					            				<!-- termina ver más tarde -->
@@ -371,11 +371,11 @@ El mago de Oz (1939)</h1>
 {% else %}
 
 		<!-- ver más tarde -->
-<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-forms{{o.id}}" method='POST'data-url="/waomovies/eliminar_vermastarde/{{ o.id }}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-forms{{o.id}}" method='POST'data-url="/eliminar_vermastarde/{{ o.id }}/">{% csrf_token %}
 					            				<button onclick="myFunction2(this)" id="s{{ o.id }}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i   style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye" aria-hidden="true"></i></button>
 					            				
 					            				</form>
-<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-form{{ o.id }}" method='POST'data-url="/waomovies/vermastarde/{{ o.id }}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-form{{ o.id }}" method='POST'data-url="/vermastarde/{{ o.id }}/">{% csrf_token %}
 					            				<button name="eye" style="background: none; border: none; cursor: pointer; display: none;"id="{{ o.id }}"onclick="myFunction(this)" title="Ver más tarde" class="example" type="submit"><i  style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
 					            			</form>
 					            				<!-- termina ver más tarde -->
@@ -566,12 +566,12 @@ El mago de Oz (1939)</h1>
 					<form name="FORMULARIO">
 					<select name="DESPLEGABLE" onChange='location.replace(document.FORMULARIO.DESPLEGABLE.value);'>
 						
-						<option value="/waomovies/series_list/orden_de_subida/">Orden de subida</option>
+						<option value="/series_list/orden_de_subida/">Orden de subida</option>
 						<option value="http://www.google.com">Menos popular</option>
-						<option value="/waomovies/series_list/_puntuacion/">Mejor puntuada</option>
-						<option value="/waomovies/series_list/puntuacion/">Peor puntuada</option>
-						<option value="/waomovies/series_list/_fecha_de_lanzamiento/">Más reciente</option>
-						<option value="/waomovies/series_list/fecha_de_lanzamiento/">Más antigua</option>
+						<option value="/series_list/_puntuacion/">Mejor puntuada</option>
+						<option value="/series_list/puntuacion/">Peor puntuada</option>
+						<option value="/series_list/_fecha_de_lanzamiento/">Más reciente</option>
+						<option value="/series_list/fecha_de_lanzamiento/">Más antigua</option>
 					</select>
 					</form>
 				</div>
@@ -581,7 +581,7 @@ El mago de Oz (1939)</h1>
 							<img style=" height: 220px;" src="{{ o.serie_cover.url }}" alt="">
 							{% include 'ajaxserie.html' %}
 							<div style="margin-top: -7px;" class="mv-item-infor">
-								<h6><a href="/waomovies/series/{{ o.id }}">{{ o.titulo }}</a></h6>
+								<h6><a href="/series/{{ o.id }}">{{ o.titulo }}</a></h6>
 								<p class="rate" style="margin-top: -6px;"><i class="fa fa-star point" aria-hidden="true"></i><span>{{ o.puntuacion }}</span> /10</p>
 							</div>
 

@@ -95,10 +95,10 @@ def auths_view(request):
 				user__ = Usuario.objects.get(username=tt.username)
 				if user__.active:
 					messages.success(request, "El usuario solicitado ya está validado")
-					return HttpResponseRedirect("/waomovies/auth/")	 
+					return HttpResponseRedirect("/auth/")	 
 				else:
 					messages.success(request, "Usuario no existe")
-					return HttpResponseRedirect("/waomovies/auth/")
+					return HttpResponseRedirect("/auth/")
 			else: 
 				mina = True
 				email2 = email
@@ -107,11 +107,11 @@ def auths_view(request):
 		if user is not None:
 			if not user.last_login:
 				login(request, user)
-				return HttpResponseRedirect("/waomovies/favoritos/")
+				return HttpResponseRedirect("/favoritos/")
 			login(request, user)
 			
 
-			return HttpResponseRedirect("/waomovies/inicio")
+			return HttpResponseRedirect("/inicio")
 		else:
 			useremail = Usuario.objects.filter(email=bb)
 			activar_link = False
@@ -434,7 +434,7 @@ def profile_edit(request, id):
 		raise Http404
 	instance = get_object_or_404(Profile, user_id=request.user)
 	juan = request.user
-	alber = "/waomovies/usuario/juan"
+	alber = "/usuario/juan"
 	form = Perfil(request.POST or None, request.FILES or None, instance=instance)
 	if form.is_valid():
 		instance = form.save(commit=False)
@@ -459,7 +459,7 @@ def user_detail_edit(request, id):
 
 	instance = get_object_or_404(Usuario, id=id)
 	juan = request.user
-	alber = "/waomovies/usuario/juan"
+	alber = "/usuario/juan"
 	form = user_edit(request.POST or None, request.FILES or None, instance=instance)
 	if request.method=='POST':
 		juana = request.POST['username']
@@ -500,7 +500,7 @@ def user_detail_edit(request, id):
 				instance.save()
 				messages.success(request, "Debes confirmar tu dirección email")
 				error = "Debes confirmar tu dirección email"
-				return HttpResponseRedirect("/waomovies/auth/")
+				return HttpResponseRedirect("/auth/")
 	if form.is_valid():
 		instance = form.save(commit=False)
 		instance.username = request.POST['username']
@@ -509,7 +509,7 @@ def user_detail_edit(request, id):
 		instance.save()
 		messages.success(request, "Debes confirmar tu dirección email")
 		error = "Debes confirmar tu dirección email"
-		return HttpResponseRedirect("/waomovies/auth/")
+		return HttpResponseRedirect("/auth/")
 
 	context = {
 		"instance": instance,
@@ -526,7 +526,7 @@ def username_detail_edit(request, id, username):
 
 	instance = get_object_or_404(Usuario, username=username)
 	juan = request.user
-	alber = "/waomovies/usuario/juan"
+	alber = "/usuario/juan"
 	form = user_username_edit(request.POST or None, request.FILES or None, instance=instance)
 	
 	if form.is_valid():
@@ -550,7 +550,7 @@ def user_delete(request, id):
 	instance = get_object_or_404(Usuario, id=id)
 	instance.delete()
 	messages.success(request, "Cuenta Eliminada")
-	return HttpResponseRedirect("/waomovies/inicio/")
+	return HttpResponseRedirect("/inicio/")
 
 def activate_user_view(request, code=None, *args, **kwargs):
 	if code:
@@ -563,8 +563,8 @@ def activate_user_view(request, code=None, *args, **kwargs):
 				user_.save()
 				profile.activation_key=None
 				profile.save()
-				return redirect("/waomovies/auth/")
-	return redirect("/waomovies/auth/")
+				return redirect("/auth/")
+	return redirect("/auth/")
 
 def reactivate_user_view(request, code=None, *args, **kwargs):
 	if code:
@@ -578,8 +578,8 @@ def reactivate_user_view(request, code=None, *args, **kwargs):
 				profile.activation_key=None
 				profile.save()
 				messages.success("Cuenta validada, ahora inicia sesión")
-				return redirect("/waomovies/auth/")
-	return redirect("/waomovies/auth/")
+				return redirect("/auth/")
+	return redirect("/auth/")
 '''
 def change_email_for_validate(request):
 	if request.method == 'POST':
@@ -588,10 +588,10 @@ def change_email_for_validate(request):
 		user__ = Usuario.objects.get(username=username)
 		if user__.active:
 			messages.success(request, "El usuario solicitado ya está validado")
-			return HttpResponseRedirect("/waomovies/auth/")	 
+			return HttpResponseRedirect("/auth/")	 
 		else:
 			messages.success(request, "Usuario no existe")
-			return HttpResponseRedirect("/waomovies/auth/")
+			return HttpResponseRedirect("/auth/")
 	else: 
 		mina = True
 		context = {'min':mina}
@@ -615,11 +615,11 @@ def change_email(request):
 				instance.save()
 				messages.success(request, "Debes confirmar tu dirección email")
 				error = "Debes confirmar tu dirección email"
-				return HttpResponseRedirect("/waomovies/auth/")
+				return HttpResponseRedirect("/auth/")
 
 def favoritos_first(request):
 	if request.user.profile.fav_peliculas and request.user.profile.fav_series:
-			return HttpResponseRedirect("/waomovies/inicio/")
+			return HttpResponseRedirect("/inicio/")
 
 	peliculas_fav = Peliculas.objects.all().order_by("favoritos")[0:20]
 	series_fav = Series.objects.all().order_by("favoritos")[0:20]
@@ -644,7 +644,7 @@ def favoritos_first(request):
 		a =Usuario.objects.get(id=request.user.id)
 		a.profile.fav_peliculas = True
 		a.save()
-		return HttpResponseRedirect("/waomovies/favoritos/")
+		return HttpResponseRedirect("/favoritos/")
 	if request.user.favoritos_series.all().count() >= 8:
 		end = True
 
@@ -652,7 +652,7 @@ def favoritos_first(request):
 		a =Usuario.objects.get(id=request.user.id)
 		a.profile.fav_series = True
 		a.save()
-		return HttpResponseRedirect("/waomovies/inicio/")
+		return HttpResponseRedirect("/inicio/")
 
 
 
@@ -730,4 +730,4 @@ def password_reset(request,
 
         return TemplateResponse(request, template_name, context)
     else: 
-        return HttpResponseRedirect("/waomovies/inicio/")
+        return HttpResponseRedirect("/inicio/")

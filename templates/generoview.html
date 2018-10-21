@@ -24,14 +24,14 @@
 					<div id="generosdiv">
 {% if request.user in drama.drama.all %}
 
-	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/drama/" method="post">
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/drama/" method="post">
 		{% csrf_token %}
 		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
 	
-<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/drama/" method="post"> {% csrf_token%}
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/drama/" method="post"> {% csrf_token%}
 
 	
 						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
@@ -46,14 +46,14 @@
 					<div id="generosdiv">
 {% if request.user in accion.accion.all %}
 
-	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/accion/" method="post">
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/accion/" method="post">
 		{% csrf_token %}
 		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
 	
-<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/accion/" method="post"> {% csrf_token%}
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/accion/" method="post"> {% csrf_token%}
 
 	
 						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
@@ -68,14 +68,14 @@
 					<div id="generosdiv">
 {% if request.user in ciencia_ficcion.ciencia_ficcion.all %}
 
-	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/ciencia_ficcion/" method="post">
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/ciencia_ficcion/" method="post">
 		{% csrf_token %}
 		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
 	
-<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/ciencia_ficcion/" method="post"> {% csrf_token%}
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/ciencia_ficcion/" method="post"> {% csrf_token%}
 
 	
 						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
@@ -90,14 +90,14 @@
 					<div id="generosdiv">
 {% if request.user in romance.romance.all %}
 
-	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/romance/" method="post">
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/romance/" method="post">
 		{% csrf_token %}
 		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
 	
-<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/romance/" method="post"> {% csrf_token%}
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/romance/" method="post"> {% csrf_token%}
 
 	
 						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
@@ -112,14 +112,14 @@
 					<div id="generosdiv">
 {% if request.user in crimen.crimen.all %}
 
-	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/crimen/" method="post">
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/crimen/" method="post">
 		{% csrf_token %}
 		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
 	
-<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/crimen/" method="post"> {% csrf_token%}
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/crimen/" method="post"> {% csrf_token%}
 
 	
 						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
@@ -134,14 +134,14 @@
 					<div id="generosdiv">
 {% if request.user in comedia.comedia.all %}
 
-	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/comedia/" method="post">
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/comedia/" method="post">
 		{% csrf_token %}
 		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
 	
-<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/comedia/" method="post"> {% csrf_token%}
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/comedia/" method="post"> {% csrf_token%}
 
 	
 						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
@@ -156,14 +156,14 @@
 					<div id="generosdiv">
 {% if request.user in terror.terror.all %}
 
-	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/terror/" method="post">
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/terror/" method="post">
 		{% csrf_token %}
 		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
 	
-<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/terror/" method="post"> {% csrf_token%}
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/terror/" method="post"> {% csrf_token%}
 
 	
 						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
@@ -178,14 +178,14 @@
 					<div id="generosdiv">
 {% if request.user in aventura.aventura.all %}
 
-	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/aventura/" method="post">
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/aventura/" method="post">
 		{% csrf_token %}
 		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
 	
-<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/aventura/" method="post"> {% csrf_token%}
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/aventura/" method="post"> {% csrf_token%}
 
 	
 						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
@@ -200,14 +200,14 @@
 					<div id="generosdiv">
 {% if request.user in suspenso.suspenso.all %}
 
-	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/suspenso/" method="post">
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/suspenso/" method="post">
 		{% csrf_token %}
 		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
 	
-<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/suspenso/" method="post"> {% csrf_token%}
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/suspenso/" method="post"> {% csrf_token%}
 
 	
 						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
@@ -222,14 +222,14 @@
 					<div id="generosdiv">
 {% if request.user in animacion.animacion.all %}
 
-	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/animacion/" method="post">
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/animacion/" method="post">
 		{% csrf_token %}
 		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
 	
-<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/animacion/" method="post"> {% csrf_token%}
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/animacion/" method="post"> {% csrf_token%}
 
 	
 						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
@@ -244,14 +244,14 @@
 					<div id="generosdiv">
 {% if request.user in fantasia.fantasia.all %}
 
-	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/fantasia/" method="post">
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/fantasia/" method="post">
 		{% csrf_token %}
 		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
 	
-<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/fantasia/" method="post"> {% csrf_token%}
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/fantasia/" method="post"> {% csrf_token%}
 
 	
 						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;"  onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
@@ -266,14 +266,14 @@
 					<div id="generosdiv">
 {% if request.user in documental.documental.all %}
 
-	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/documental/" method="post">
+	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/documental/" method="post">
 		{% csrf_token %}
 		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
 	
-<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/documental/" method="post"> {% csrf_token%}
+<form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/documental/" method="post"> {% csrf_token%}
 
 	
 						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>

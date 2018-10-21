@@ -620,10 +620,10 @@ def search_series(request):
 				pass
 		else:
 			srch = "No has buscado nada"
-			return HttpResponseRedirect('/waomovies/series_list/orden_de_subida/')
+			return HttpResponseRedirect('/series_list/orden_de_subida/')
 	else:
 		srch = "No has buscado nada"
-		return HttpResponseRedirect('/waomovies/series_list/orden_de_subida/')
+		return HttpResponseRedirect('/series_list/orden_de_subida/')
 
 			
 	context = {'juan':srch, 'series_filt':series_filt, 'peliculase_serie': peliculase, }
@@ -693,7 +693,7 @@ def filtrar(request):
 			else: 
 				messages.error(request, 'No se han encontrado resultados')
 	else:
-		return HttpResponseRedirect('/waomovies/series_list/orden_de_subida/')
+		return HttpResponseRedirect('/series_list/orden_de_subida/')
 	contexto = {
 			'count':matchc,
 			'series_filt':series_filt,

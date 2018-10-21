@@ -66,7 +66,7 @@
 						{% if  series_filt %}	{% include 'ajaxserielist.html' %}{% else %}{% include 'ajaxlist.html' %}{% endif %}
 
 					<div class="mv-item-infor">
-						<h6><a href="/waomovies/{% if not series_filt %}peliculas{%else%}series{% endif %}/{{ o.slug }}">{{ o.titulo }} <span>  &nbsp; ({{ o.fecha_de_lanzamiento|date:"Y" }})</span></a></h6>
+						<h6><a href="/{% if not series_filt %}peliculas{%else%}series{% endif %}/{{ o.slug }}">{{ o.titulo }} <span>  &nbsp; ({{ o.fecha_de_lanzamiento|date:"Y" }})</span></a></h6>
 						<i class="fa fa-star point" aria-hidden="true"></i><span> {{ o.puntuacion }}</span> /10</p>
 						<p class="describe" id="describe">{{ o.sinopsis }}</p>
 						<p class="">Duración: <a href="">{{ o.run_time }}</a></p>
@@ -113,7 +113,7 @@ Prueba con el nombre original.</p>
 				<div class="sidebar">
 					<div class="searh-form">
 						<h4 class="sb-title">Buscar</h4>
-						<form class="form-style-1" action="{% if not series_filt %}/waomovies/filter/{% else %}/waomovies/filtrar_series/{% endif %}" method="post"> {% csrf_token %}
+						<form class="form-style-1" action="{% if not series_filt %}/filter/{% else %}/filtrar_series/{% endif %}" method="post"> {% csrf_token %}
 							<div class="row">
 								<div class="col-md-12 form-it">
 									<label>Letra</label>

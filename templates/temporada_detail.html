@@ -72,8 +72,8 @@
             <div class="container" style="margin-top: -10px;">
                {% if get_anterior %}
                {% for a in get_anterior %}
-              <span style="font-size:17px; padding-right: 20px;"><a href="/waomovies/{{a.slug}}/{{temporada.slug}}/"><i class="fa fa-chevron-circle-left"></i></a> <span style="color: silver;">Anterior</span></span>{% endfor %}{% endif %}
-                <a href="/waomovies/series/{{temporada.serie.slug}}/"><h2>{{temporada.serie.titulo}}</h2></a>
+              <span style="font-size:17px; padding-right: 20px;"><a href="/{{a.slug}}/{{temporada.slug}}/"><i class="fa fa-chevron-circle-left"></i></a> <span style="color: silver;">Anterior</span></span>{% endfor %}{% endif %}
+                <a href="/series/{{temporada.serie.slug}}/"><h2>{{temporada.serie.titulo}}</h2></a>
 <br>
 <style type="text/css">
     .btn-tw.active {
@@ -438,7 +438,7 @@ document.getElementById('panelstreamcloud').style.display="none"
                     <div style="display: block">
                                       <span style="display: inline-block;"><i class="fa fa-share icon2"></i><a data-toggle="modal" data-target="#modalSocial" href="#">Compartir</a></span>
                         <span><i id="load" class="fa fa-bug icon2"></i><button form="reporte" onclick="reportar(this)" type="submit" style="color: #9DA1A5; background:none; border:none; cursor: pointer;">Reportar episodio</button></span>
-                        <span style="display: none;"><form id="reporte" class="reportar" method="post" data-url="/waomovies/reportar_capitulo/{{capitulo.id}}/reportar/" style="display: initial; position: relative; margin-top: -50px;" >{%csrf_token%}
+                        <span style="display: none;"><form id="reporte" class="reportar" method="post" data-url="/reportar_capitulo/{{capitulo.id}}/reportar/" style="display: initial; position: relative; margin-top: -50px;" >{%csrf_token%}
 
                           </form></span>
                           
@@ -492,9 +492,9 @@ document.getElementById('panelstreamcloud').style.display="none"
         
                         <div id="like_div_capi">
                         <div class="fright"  style="margin-top: -35px;">
-                            <form {% if not request.user in capitulo.vote_capitulo.all %} data-url="/waomovies/like_capi/{{capitulo.id}}/gustar/" {% else %} data-url="/waomovies/outlike_capi/{{capitulo.id}}/outgustar/" {% endif %} method="POST" style="display: inline;" class="like_capi">{%csrf_token%}
+                            <form {% if not request.user in capitulo.vote_capitulo.all %} data-url="/like_capi/{{capitulo.id}}/gustar/" {% else %} data-url="/outlike_capi/{{capitulo.id}}/outgustar/" {% endif %} method="POST" style="display: inline;" class="like_capi">{%csrf_token%}
                             <button onclick="like_capi(this)" type="submit" style="cursor:pointer;background: none; border:none;"><i class="{% if not request.user in capitulo.vote_capitulo.all %}color4 {% endif %}fa fa-thumbs-up icon2 "></i><span class="color1">{{capitulo.vote_capitulo.all|length}}</span></button></form>
-                            <form method="POST" {% if not request.user in capitulo.unvote_capitulo.all %} data-url="/waomovies/dislike_capi/{{capitulo.id}}/disgustar/"{% else %} data-url="/waomovies/outdislike_capi/{{capitulo.id}}/outdisgustar/" {% endif %} class="dislike_capi" style="display: inline;">{%csrf_token%}<button  onclick="dislike_capi(this)" type="submit"style="cursor:pointer;background: none; border:none;">
+                            <form method="POST" {% if not request.user in capitulo.unvote_capitulo.all %} data-url="/dislike_capi/{{capitulo.id}}/disgustar/"{% else %} data-url="/outdislike_capi/{{capitulo.id}}/outdisgustar/" {% endif %} class="dislike_capi" style="display: inline;">{%csrf_token%}<button  onclick="dislike_capi(this)" type="submit"style="cursor:pointer;background: none; border:none;">
                             <span class="color4"><i class="fa fa-thumbs-down icon2 v2 {% if not request.user in capitulo.unvote_capitulo.all %} color4{% endif %}"></i>{{capitulo.unvote_capitulo.all|length}}</span></button></form>
                         </div></div>
                         <script type="text/javascript">
@@ -637,7 +637,7 @@ $(this).remove();
                 <div class="mt-3">
                  <div class="md-form form-lg">
                  <!-- img width="30" height="30" src="{{ request.user.profile.perfil_img.url }}"-->
-                 <form class="coment" method='POST' data-url='/waomovies/comentar_capitulo/{{ capitulo.id }}/' enctype='multipart/form-data'>
+                 <form class="coment" method='POST' data-url='/comentar_capitulo/{{ capitulo.id }}/' enctype='multipart/form-data'>
                   {% csrf_token %}
 
               <input autocomplete="off" type="text" id="inputLGEx" class="form-control form-control-lg" name="content" style="width: 700px; color: #abb7c4;" size="25">
@@ -717,7 +717,7 @@ $(this).remove();
             </div>
             <div style="margin-top: -40px;" class="modal-body" >
              {% if not i in report_user%}
-                <form  method="post" class="report{{i.id}}" data-url="/waomovies/reportando/{{i.id}}/" style="" > {% csrf_token %}
+                <form  method="post" class="report{{i.id}}" data-url="/reportando/{{i.id}}/" style="" > {% csrf_token %}
     <br />
     <br />
     <label class="containersss">Spoiler<input type="radio" name="reportar" value="Spoiler" /><span class="checkmark"></span></label>
@@ -754,7 +754,7 @@ $(this).remove();
     <div class="dropdown-menu" style=" z-index: 999; position: absolute;">
         <a class="dropdown-item" href="#" data-toggle="collapse" data-target="#{{i.id}}" aria-expanded="false" aria-controls="collapseExample">Editar comentario<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a>
 
-        <form style="display: inline;" class="dele{{ i.id }}" data-url="/waomovies/{{ i.slug }}/delete/" method="post">{% csrf_token %}<button onclick="deletee(this)" id="dele{{ i.id }}" style="background: none; border: none;"><a class="dropdown-item">Eliminar comentario<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form>
+        <form style="display: inline;" class="dele{{ i.id }}" data-url="/{{ i.slug }}/delete/" method="post">{% csrf_token %}<button onclick="deletee(this)" id="dele{{ i.id }}" style="background: none; border: none;"><a class="dropdown-item">Eliminar comentario<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form>
         <!--a class="dropdown-item" href="#">Something else here</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Separated link</a-->
@@ -779,29 +779,29 @@ $(this).remove();
 
 <div id="like_div{{i.id}}" style="margin-top: -15px; margin-bottom: 30px;">
  {% if not request.user in i.vote.all %}
- <form style="display: inline;" method="post" class="like{{i.id}}" data-url="/waomovies/like/{{i.id}}/">{% csrf_token %}
+ <form style="display: inline;" method="post" class="like{{i.id}}" data-url="/like/{{i.id}}/">{% csrf_token %}
  
 <button  class="buttonn" onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a  style=" color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
 </form>
 {% else %}
-<form style="display: inline;" method="post" class="like{{i.id}}" data-url="/waomovies/outlike/{{i.id}}/">{% csrf_token %}
+<form style="display: inline;" method="post" class="like{{i.id}}" data-url="/outlike/{{i.id}}/">{% csrf_token %}
  
 <button class="buttonn"  onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
 </form>
 {% endif %}
 {% if not request.user in i.unvote.all %}
-<form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/waomovies/dislike/{{i.id}}/">{% csrf_token %}
+<form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/dislike/{{i.id}}/">{% csrf_token %}
  <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  > <span id="count">{{i.unvote.all|length}}</span> </i></a></button>
 </form>
 {% else %}
-<form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/waomovies/outdislike/{{i.id}}/">
+<form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/outdislike/{{i.id}}/">
  <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  > <span id="count">{{i.unvote.all|length}}</span> </i></a></button>
 </form>
 {% endif %}
   <a   data-toggle="collapse" data-target="#collapseExample{{i.id}}z" aria-expanded="false
   " aria-controls="collapseExample{{i.id}}z" style="color: grey; font-family: sans-serif; padding-left: 5px; padding-right: 15px; position: relative; top: 10px; text-decoration:none;">Responder</a>
   <div  class="collapse container" id="collapseExample{{i.id}}z">
-  <form class="respv{{i.id}}" method="post" data-url="/waomovies/responder/{{i.slug}}/">
+  <form class="respv{{i.id}}" method="post" data-url="/responder/{{i.slug}}/">
   {% csrf_token %}<div class="md-form">
    <img style="border-radius: 50%; width: 37px; height: 37px;" src="{{request.user.profile.perfil_img.url}}">
     <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4;" id="input-char-counter" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
@@ -844,7 +844,7 @@ $(this).remove();
     <div class="dropdown-menu">
         <a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col{{cm.id}}" aria-expanded="false" aria-controls="collapseExample">Editar respuesta<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a>
 
-        <form style="display: inline;" class="dele_ans{{ cm.id }}" data-url="/waomovies/delete_res/{{ cm.id }}/" method="post">{% csrf_token %}<button onclick="deletee_res(this)" name="{{i.id}}" id="dele_ans{{ cm.id }}" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i  style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form>
+        <form style="display: inline;" class="dele_ans{{ cm.id }}" data-url="/delete_res/{{ cm.id }}/" method="post">{% csrf_token %}<button onclick="deletee_res(this)" name="{{i.id}}" id="dele_ans{{ cm.id }}" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i  style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form>
         <!--a class="dropdown-item" href="#">Something else here</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Separated link</a-->
@@ -884,7 +884,7 @@ $(this).remove();
             </div>
             <div style="margin-top: -40px;" class="modal-body" >
              {% if not cm in report_user_res%}
-                <form  method="post" class="report_res{{cm.id}}" data-url="/waomovies/reportando_res/{{cm.id}}/" style="" > {% csrf_token %}
+                <form  method="post" class="report_res{{cm.id}}" data-url="/reportando_res/{{cm.id}}/" style="" > {% csrf_token %}
     <br />
     <br />
     <label class="containersss">Spoiler<input type="radio" name="reportar" value="Spoiler" /><span class="checkmark"></span></label>
@@ -929,7 +929,7 @@ $(this).remove();
             <div class="collapse container" id="col{{cm.id}}">
                 <div class="mt-3">
                  <div class="md-form form-lg">
-                  <form method="post" class="updateup_ans{{ cm.id }}" data-url="/waomovies/responder_update/{{ cm.id }}/">
+                  <form method="post" class="updateup_ans{{ cm.id }}" data-url="/responder_update/{{ cm.id }}/">
                    {% csrf_token %}
                  <textarea id="textoans{{cm.id}}" onkeypress="return limita(400);" style=" height: 6em;
    width: 400px;" name="respuesta">{{cm.respuesta}}</textarea> 
@@ -959,7 +959,7 @@ $(this).remove();
             <div class="collapse container" id="{{i.id}}">
                 <div class="mt-3">
                  <div class="md-form form-lg">
-                  <form method="post" class="updatecp{{ i.slug }}" data-url="/waomovies/{{ i.slug }}/edit/">
+                  <form method="post" class="updatecp{{ i.slug }}" data-url="/{{ i.slug }}/edit/">
                    {% csrf_token %}
                  <textarea id="textop{{i.slug}}" onkeypress="return limita(400);" style=" height: 6em;
    width: 400px;" name="content">{{i.content}}</textarea> 
@@ -1250,7 +1250,7 @@ input[type="button"].btn-block {
 </style>
 
 {% if comentariosc > 5 %}
-<form method="post" id="noneaaa" class="cabron" data-url="/waomovies/{{capitulo.slug}}/{{temporada.slug}}/">
+<form method="post" id="noneaaa" class="cabron" data-url="/{{capitulo.slug}}/{{temporada.slug}}/">
                     {% csrf_token %}
                     <input type="radio" name="vmore" value="True" checked="True" style="display: none;">
                     <button id="noneaaa" style=" background: silver; font-size: 14px; position: relative; top: 6px;" type="submit"  onclick="vermas(this)" class="btn  btn-lg btn-block"><i class="fa fa-sort-down" aria-hidden="true"></i> Ver los {{ comentariosc }} comentarios</button>
@@ -1307,7 +1307,7 @@ input[type="button"].btn-block {
                             <div class="item" style="margin-bottom: -10px; margin-top: -10px;">
                                 <div class="wrapper">
                                     <figure class="img-polaroid figure_video">
-                                        <a class="various iframe fancybox2 lightbox-video" href="/waomovies/{{kk.slug}}/{{temporada.slug}}/">
+                                        <a class="various iframe fancybox2 lightbox-video" href="/{{kk.slug}}/{{temporada.slug}}/">
                                             <img src="{{kk.cover_capitulo.url}}" alt="" />
                                             <span class="video_icon"></span>
                                             <!--span class="video_title">14:24 </span-->
@@ -1355,7 +1355,7 @@ input[type="button"].btn-block {
                                         <div class="movie-image" data-bg-image="{{kk.cover_capitulo.url}}">
                                             <div class="entry-hover">
                                                 <div class="entry-actions">
-                                                    <a href="/waomovies/{{kk.slug}}/{{temporada.slug}}/" class="btn fill">Ver</a>
+                                                    <a href="/{{kk.slug}}/{{temporada.slug}}/" class="btn fill">Ver</a>
                                                 </div>
                                             </div>
                                             <div class="entry-desc">
@@ -1946,7 +1946,7 @@ $(this).remove();
                  $myForm[0].reset(); 
        $("#j" + c).load(window.location + " #j" + c);
        $("#like_div" + c).load(window.location + " #like_div" + c);
-       $("#ccn" + c).append(' <div id="rs'+data.idp+'"><div class="mv-user-review-item" style="margin-bottom: -6px; width: 70%; position: relative; left: 40px;"><div class="user-infor" style="margin-bottom: -0px;"><img style="border-radius: 50%; width: 50px; height: 50px;" width="50"  src="'+data.perfil+'" alt=""><div style=" margin-top: -52px; margin-left: 60px; " ><h4 style=" display: inline;  font-family: roboto; font-size: 16px; color: white;">'+data.name+'</h4><i id="cog'+data.idp+'" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i><div class="btn-group"><div class="dropdown-menu"><a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample">Editar comentario<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a><form style="display: inline;" class="dele_ans'+data.idp+'" data-url="/waomovies/delete_res/'+data.idp+'/" method="post">'+token+'<button onclick="deletee_res(this)" name="'+data.id+'"id="dele_ans'+data.idp+'" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form><!--a class="dropdown-item" href="#">Something else here</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a--></div></div><p class="time" style="margin-top: -8px;">'+data.fecha+'</p></div></div><p id="cm'+data.idp+'" style="margin-bottom: -15px;">'+data.content+'</p></div></div><div class="collapse container" id="col'+data.idp+'"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans'+data.idp+'" data-url="/waomovies/responder_update/'+data.idp+'/">'+token+'<textarea id="textoans'+data.idp+'" onkeypress="return limita(400);" style=" height: 6em; width: 400px;" name="respuesta">'+data.content+'</textarea><br><input onclick="update_ans(this)" id="up_ans'+data.idp+'" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form></div></div></div><br>');
+       $("#ccn" + c).append(' <div id="rs'+data.idp+'"><div class="mv-user-review-item" style="margin-bottom: -6px; width: 70%; position: relative; left: 40px;"><div class="user-infor" style="margin-bottom: -0px;"><img style="border-radius: 50%; width: 50px; height: 50px;" width="50"  src="'+data.perfil+'" alt=""><div style=" margin-top: -52px; margin-left: 60px; " ><h4 style=" display: inline;  font-family: roboto; font-size: 16px; color: white;">'+data.name+'</h4><i id="cog'+data.idp+'" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i><div class="btn-group"><div class="dropdown-menu"><a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample">Editar comentario<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a><form style="display: inline;" class="dele_ans'+data.idp+'" data-url="/delete_res/'+data.idp+'/" method="post">'+token+'<button onclick="deletee_res(this)" name="'+data.id+'"id="dele_ans'+data.idp+'" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form><!--a class="dropdown-item" href="#">Something else here</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a--></div></div><p class="time" style="margin-top: -8px;">'+data.fecha+'</p></div></div><p id="cm'+data.idp+'" style="margin-bottom: -15px;">'+data.content+'</p></div></div><div class="collapse container" id="col'+data.idp+'"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans'+data.idp+'" data-url="/responder_update/'+data.idp+'/">'+token+'<textarea id="textoans'+data.idp+'" onkeypress="return limita(400);" style=" height: 6em; width: 400px;" name="respuesta">'+data.content+'</textarea><br><input onclick="update_ans(this)" id="up_ans'+data.idp+'" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form></div></div></div><br>');
 
       
 

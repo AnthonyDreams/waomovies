@@ -446,12 +446,12 @@ success: function(){
   var expression = new RegExp(searchField, "i");
   var resultac = document.getElementById('result')
  
-  $.getJSON('/waomovies/pelis_user_novel/') 
+  $.getJSON('/pelis_user_novel/') 
   .done(function(data) {
    $.each(data, function(key, value){
     if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1)
     {
-     $('#panel13').append('<li class="list-group-item link-class"><a style="color: black;" href="/waomovies/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
+     $('#panel13').append('<li class="list-group-item link-class"><a style="color: black;" href="/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
     }
 
 
@@ -510,12 +510,12 @@ success: function(){
   var expression = new RegExp(searchField, "i");
   var resultac = document.getElementById('result')
  
-  $.getJSON('/waomovies/seguirviendo/') 
+  $.getJSON('/seguirviendo/') 
   .done(function(data) {
    $.each(data, function(key, value){
     if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1)
     {
-     $('#panel11p').append('<li class="list-group-item link-class"><a style="color: black;" href="/waomovies/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
+     $('#panel11p').append('<li class="list-group-item link-class"><a style="color: black;" href="/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
     }
 
 
@@ -564,12 +564,12 @@ success: function(){
   var expression = new RegExp(searchField, "i");
   var resultac = document.getElementById('result')
  
-  $.getJSON('/waomovies/seguirviendo_series/') 
+  $.getJSON('/seguirviendo_series/') 
   .done(function(data) {
    $.each(data, function(key, value){
     if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1)
     {
-     $('#panel11s').append('<li class="list-group-item link-class"><a style="color: black;" href="/waomovies/series/'+value.slug+'/"><img src="'+value.serie_cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
+     $('#panel11s').append('<li class="list-group-item link-class"><a style="color: black;" href="/series/'+value.slug+'/"><img src="'+value.serie_cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
     }
 
 
@@ -620,12 +620,12 @@ success: function(){
   var expression = new RegExp(searchField, "i");
   var resultac = document.getElementById('result')
  
-  $.getJSON('/waomovies/seguirviendo/') 
+  $.getJSON('/seguirviendo/') 
   .done(function(data) {
    $.each(data, function(key, value){
     if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1)
     {
-     $('#panel11p').append('<li class="list-group-item link-class"><a style="color: black;" href="/waomovies/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
+     $('#panel11p').append('<li class="list-group-item link-class"><a style="color: black;" href="/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
     }
 
 
@@ -699,12 +699,12 @@ success: function(){
   var expression = new RegExp(searchField, "i");
   var resultac = document.getElementById('result')
  
-  $.getJSON('/waomovies/añadiste/') 
+  $.getJSON('/añadiste/') 
   .done(function(data) {
    $.each(data, function(key, value){
     if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1)
     {
-     $('#panel12').append('<li class="list-group-item link-class"><a style="color: black;" href="/waomovies/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
+     $('#panel12').append('<li class="list-group-item link-class"><a style="color: black;" href="/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
     }
 
 
@@ -773,7 +773,7 @@ var load = false
     <div class="login-content">
         <a href="#" class="close">x</a>
         <h3>Iniciar Sesión</h3>
-        <form method="post" action="/waomovies/auth/">
+        <form method="post" action="/auth/">
         {% csrf_token %}
 
          <div class="row">
@@ -826,7 +826,7 @@ var load = false
     <div class="login-content" >
         <a href="#" class="close">x</a>
         <h3>Bienvenido/a</h3>
-        <form method="post" action="/waomovies/register/" id="formulario" name="formulario" onsubmit="return validarFormulario()">
+        <form method="post" action="/register/" id="formulario" name="formulario" onsubmit="return validarFormulario()">
           {% csrf_token %}
             <div id="full_name_div" class="row">
                  <label>
@@ -927,9 +927,9 @@ var resultac = document.getElementById('result').style.display= "none";
             </div>
             </div>
             </div>
-            <a href="/waomovies/inicio/"><img style="margin-left: 15px;" class="logoz logo" src="{% static 'img/waologo.png' %}" alt="" width="180" height="90"></a>
+            <a href="/inicio/"><img style="margin-left: 15px;" class="logoz logo" src="{% static 'img/waologo.png' %}" alt="" width="180" height="90"></a>
 
-            <a href="/waomovies/inicio/"><img style="width: auto;" class="logo logito" src="{% static 'img/wamovieslogo.png' %}" alt="" ></a>
+            <a href="/inicio/"><img style="width: auto;" class="logo logito" src="{% static 'img/wamovieslogo.png' %}" alt="" ></a>
              
           </div>
         <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
@@ -939,13 +939,13 @@ var resultac = document.getElementById('result').style.display= "none";
             </li>
             
             <li class="dropdown first">
-              <a  href="/waomovies/inicio/" >
+              <a  href="/inicio/" >
               Inicio  
               </a>
              
             </li>
             <li class="dropdown first">
-              <a href="/waomovies/ver%todo/" >
+              <a href="/ver%todo/" >
               Películas
               </a>
               <!--ul class="dropdown-menu level1">
@@ -962,7 +962,7 @@ var resultac = document.getElementById('result').style.display= "none";
               </ul-->
             </li>
             <li class="dropdown first">
-              <a href="/waomovies/series_list/orden_de_subida">
+              <a href="/series_list/orden_de_subida">
               Series 
               </a>
               <!--ul class="dropdown-menu level1">
@@ -989,7 +989,7 @@ var resultac = document.getElementById('result').style.display= "none";
             <li><a href="#">Ayuda  <i style="padding-left: 5px; padding-right: 5px;" class="fa fa-question-circle" aria-hidden="true"></i>|   </a></li>
             {% if request.user.is_authenticated %}
               <li class="dropdown first">
-<a href="/waomovies/usuario/{{user.username}}/"  >
+<a href="/usuario/{{user.username}}/"  >
               {%if user.profile.perfil_img %} 
                <img src="{{ user.profile.perfil_img.url }}" style="border-radius:  50%; left: -6px; top: -3px; position: relative; width: 37px; height: 37px;"> {{ user.username }}{% else %}{{ user.full_name }}{% endif%}          
               
@@ -1003,12 +1003,12 @@ var resultac = document.getElementById('result').style.display= "none";
              
 
               <ul class="dropdown-menu level1" style="background-color: rgba(255, 255, 255, 0.8);">
-                <li><a href="/waomovies/usuario/{{user.username}}/">Cuenta</a></li>
-                <li><a href="/waomovies/ver_más_tarde/{{request.user.username}}/">Ver más tarde</a></li>
+                <li><a href="/usuario/{{user.username}}/">Cuenta</a></li>
+                <li><a href="/ver_más_tarde/{{request.user.username}}/">Ver más tarde</a></li>
               </ul>
            
             </li>      
-              <li class=""><a href="/waomovies/logout/"><i style="padding-left: 8px;" class="fa fa-sign-in" aria-hidden="true"></i>Cerrar Sesión </a></li>
+              <li class=""><a href="/logout/"><i style="padding-left: 8px;" class="fa fa-sign-in" aria-hidden="true"></i>Cerrar Sesión </a></li>
               
 
               {% else %}
@@ -1045,7 +1045,7 @@ var resultac = document.getElementById('result').style.display= "none";
     }
   }
   </style>
-      <form method="post" action="{% if not series_filt %}/waomovies/search/{% else %}/waomovies/buscar_series/{% endif %}" name="formaa">
+      <form method="post" action="{% if not series_filt %}/search/{% else %}/buscar_series/{% endif %}" name="formaa">
 
       <div id="searchshow" class="top-search" style="width: 90%; margin-left: 20px; ">
         <select{% if not series_filt %} onchange='myfunctionss()'{% else %} onchange='myfunctionssa()'{% endif %}>
@@ -1064,7 +1064,7 @@ var resultac = document.getElementById('result').style.display= "none";
   {% if not series_filt %}
 <script type="text/javascript">
   function myfunctionss() {
-      document.forms['formaa'].action = "/waomovies/buscar_series/"
+      document.forms['formaa'].action = "/buscar_series/"
       document.getElementById('search').id = "search_series";
       document.getElementById('result').id = "result_series";
 
@@ -1087,11 +1087,11 @@ $(document).ready(function(){
 
   if (widthscreen >= 767) {
     var search = document.getElementsById('searchshow').style.display = 'initial'
-  $.getJSON('/waomovies/pelis/', function(data) {
+  $.getJSON('/pelis/', function(data) {
    $.each(data, function(key, value){
     if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1 && result.value.length > 1 && widthscreen > 767)
     {
-     $('#result').append('<li class="list-group-item link-class"><a style="color: black;" href="/waomovies/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
+     $('#result').append('<li class="list-group-item link-class"><a style="color: black;" href="/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
     }
 
     if (resulta.value.length == 0)
@@ -1129,7 +1129,7 @@ $(document).ready(function(){
 {% else %}
 <script type="text/javascript">
   function myfunctionssa() {
-      document.forms['formaa'].action = "/waomovies/search/"
+      document.forms['formaa'].action = "/search/"
       
 
   }
@@ -1340,8 +1340,8 @@ function passwordVerify() {
       <div class="flex-child-ft item2 col-md-4">
         <h4>Ayuda</h4>
         <ul>
-          <li><a href="/waomovies/sobre/">Sobre</a></li> 
-          <li><a href="/waomovies/sobre/">Contactanos</a></li>
+          <li><a href="/sobre/">Sobre</a></li> 
+          <li><a href="/sobre/">Contactanos</a></li>
           
           <!--li><a href="#">Centro de ayuda</a></li-->
         </ul>
@@ -1349,8 +1349,8 @@ function passwordVerify() {
       <div class="flex-child-ft item3 col-md-4">
         <h4>Legal</h4>
         <ul>
-          <li><a href="/waomovies/terminosycondiciones/">Terminos de uso</a></li> 
-          <li><a href="/waomovies/politicadeprivacidad/">Políticas de privacidad</a></li>  
+          <li><a href="/terminosycondiciones/">Terminos de uso</a></li> 
+          <li><a href="/politicadeprivacidad/">Políticas de privacidad</a></li>  
           <li><a data-toggle="modal" data-target="#exampleModalLong" style="cursor: pointer;">Derechos de autor</a></li>
           <!-- Button trigger modal -->
 

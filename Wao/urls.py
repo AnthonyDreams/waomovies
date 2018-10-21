@@ -29,13 +29,14 @@ handler500 = mi_error_404
 
 
 urlpatterns = [
-    path('waomovies/', include('apps.peliculas.urls')),
-    path('waomovies/', include('apps.usuarios.urls')),
-    path('waomovies/', include('apps.comentarios.urls')),
-    path('waomovies/', include('apps.vermas_tarde.urls')),
-    path('waomovies/', include('apps.footer.urls')),
+    url(r'^', include('apps.peliculas.urls')),
+    url(r'^', include('apps.peliculas.urls')),
+    url(r'^', include('apps.usuarios.urls')),
+    url(r'^', include('apps.comentarios.urls')),
+    url(r'^', include('apps.vermas_tarde.urls')),
+    url(r'^', include('apps.footer.urls')),
     path('send_email_contact/', include('apps.contacto.urls')),
-    path('waomovies/', include('apps.dashboard.urls')),
+    url(r'^', include('apps.dashboard.urls')),
 
 
     url(r'^reset/password_reset', password_reset, 
@@ -52,11 +53,11 @@ urlpatterns = [
     url(r'^reset/done', password_reset_complete, {'template_name': 'password_reset_complete.html'},
         name='password_reset_complete'),
 
-   # path('waomovies/', include('apps.notificaciones.urls')),
+   # url(r'^', include('apps.notificaciones.urls')),
 
 
 
-    path('waomovies/', include('apps.series.urls')),
+    url(r'^', include('apps.series.urls')),
 
 
     path('admin/', admin.site.urls),

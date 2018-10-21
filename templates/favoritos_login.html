@@ -152,7 +152,7 @@ img.emoji {
 										<nav id="header-navigation" class="header-standard-position">
 													<div class="sh-nav-container"><ul id="menu-header-navigation" class="sh-nav"><li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12"><a href="#">Facebook</a></li>
 <li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13"><a href="#">Instagram</a></li>
-<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="/waomovies/inicio/">Waomovies</a></li>
+<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="/inicio/">Waomovies</a></li>
 </ul></div>											</nav>
 
 				</div>
@@ -166,7 +166,7 @@ img.emoji {
 			<div class="line-test">
 				<div class="container">
 
-					<form method="get" class="sh-header-search-form" action="/waomovies/auth/">
+					<form method="get" class="sh-header-search-form" action="/auth/">
 						<input type="search" class="sh-header-search-input" placeholder="Search Here.." value="" name="s" required="">
 						<button type="submit" class="sh-header-search-submit">
 							<i class="icon-magnifier"></i>
@@ -536,12 +536,12 @@ background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, F
            <img style=" z-index:999;position: relative; left: 35%; margin-top: -280px;" height="50" width="50"  src="{% static 'img/asa.gif' %}">
           </div> <div class="hvr-inner" id="hvr-inner{{peli.id}}">
           	{% if not peli in request.user.favoritos.all %}
-	<form {% if not continuar %} method="post" class="my-ajax-formfavas{{peli.id}}" data-url="/waomovies/favorito/{{peli.id}}/" {% else %} method="post" class="" action="/waomovies/inicio/" {% endif %} style="display: inline;">{% csrf_token %}
+	<form {% if not continuar %} method="post" class="my-ajax-formfavas{{peli.id}}" data-url="/favorito/{{peli.id}}/" {% else %} method="post" class="" action="/inicio/" {% endif %} style="display: inline;">{% csrf_token %}
 					            				<button id="favas{{peli.id}}" type="submit" {% if not continuar %} onclick="myFunctionfavajax(this)" {% endif %} style="background: none; cursor: pointer; border: none; cursor: pointer; width: 100%; height: 100%;  position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 400px; text-align: center; font-weight: bold;" class="fa fa-heart-o point" id="affavas{{peli.id}}" aria-hidden="true" ></i> </button>
 					            				
 					            			</form>
 					            			{% else %}
-					            			<form method="post" class="my-ajax-formfavas{{peli.id}}" data-url="/waomovies/eliminar_favorito/{{peli.id}}/" style="display: inline;">{% csrf_token %}
+					            			<form method="post" class="my-ajax-formfavas{{peli.id}}" data-url="/eliminar_favorito/{{peli.id}}/" style="display: inline;">{% csrf_token %}
 					            				<button id="favas{{peli.id}}" type="submit" onclick="myFunctionfavajax(this)" style="background: none; cursor: pointer; border: none; cursor: pointer; width: 100%; height: 100%;  position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 400px; text-align: center; font-weight: bold;" class="fa fa-heart-o point" id="affavas{{peli.id}}" aria-hidden="true" ></i> </button>
 					            				
 					            			</form>
@@ -558,12 +558,12 @@ background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, F
            <img style=" z-index:999;position: relative; left: 35%; margin-top: -280px;" height="50" width="50"  src="{% static 'img/asa.gif' %}">
           </div> <div class="hvr-inner" id="hvr-inner{{serie.id}}" style="height: 160px;">
           	{% if not serie in request.user.favoritos_series.all %}
-	<form {% if not end %} method="post" class="my-ajax-formfavas{{serie.id}}" data-url="/waomovies/añadirfavorito_series/{{serie.id}}/" {% else %} method="post" class="" action="/waomovies/inicio/" {% endif %} style="display: inline;">{% csrf_token %}
+	<form {% if not end %} method="post" class="my-ajax-formfavas{{serie.id}}" data-url="/añadirfavorito_series/{{serie.id}}/" {% else %} method="post" class="" action="/inicio/" {% endif %} style="display: inline;">{% csrf_token %}
 					            				<button id="favas{{serie.id}}" type="submit" {% if not end %} onclick="myFunctionfavajax(this)" {% endif %} style="background: none; cursor: pointer; border: none; cursor: pointer; width: 100%; height: 100%;  position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 400px; text-align: center; font-weight: bold;" class="fa fa-heart-o point" id="affavas{{serie.id}}" aria-hidden="true" ></i> </button>
 					            				
 					            			</form>
 					            			{% else %}
-					            			<form method="post" class="my-ajax-formfavas{{serie.id}}" data-url="/waomovies/eliminar_añadirfavorito_series/{{serie.id}}/" style="display: inline;">{% csrf_token %}
+					            			<form method="post" class="my-ajax-formfavas{{serie.id}}" data-url="/eliminar_añadirfavorito_series/{{serie.id}}/" style="display: inline;">{% csrf_token %}
 					            				<button id="favas{{serie.id}}" type="submit" onclick="myFunctionfavajax(this)" style="background: none; cursor: pointer; border: none; cursor: pointer; width: 100%; height: 100%;  position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 400px; text-align: center; font-weight: bold;" class="fa fa-heart-o point" id="affavas{{serie.id}}" aria-hidden="true" ></i> </button>
 					            				
 					            			</form>
@@ -655,7 +655,7 @@ background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, F
 <div id="cf7-c15514f11947e5e5a2b480a09848a46a" class="sh-cf7 sh-cf7-style3">
     <div role="form" class="wpcf7" id="wpcf7-f114-p5-o1" lang="en-US" dir="ltr">
 <div class="screen-reader-response"></div>
-<form  method="Post" action="/waomovies/favoritos/" class="wpcf7-form" novalidate="novalidate" style="position: relative; left: 80%; padding:0px; width: 200px;">{% csrf_token %}
+<form  method="Post" action="/favoritos/" class="wpcf7-form" novalidate="novalidate" style="position: relative; left: 80%; padding:0px; width: 200px;">{% csrf_token %}
 
 
 <p><a href="#"><input onclick="series(this)" type="submit" value="Continuar" style="font-size:14px; height: 50px;  border-radius: 50%; padding: 0px; line-height: 5px!important; margin-top: 4px;" class="wpcf7-form-control wpcf7-submit"></a></p>
@@ -668,7 +668,7 @@ background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, F
 <div id="cf7-c15514f11947e5e5a2b480a09848a46a" class="sh-cf7 sh-cf7-style3">
     <div role="form" class="wpcf7" id="wpcf7-f114-p5-o1" lang="en-US" dir="ltr">
 <div class="screen-reader-response"></div>
-<form  method="Post" action="/waomovies/favoritos/" class="wpcf7-form" novalidate="novalidate" style="position: relative; left: 80%; padding:0px; width: 200px;">{% csrf_token %}
+<form  method="Post" action="/favoritos/" class="wpcf7-form" novalidate="novalidate" style="position: relative; left: 80%; padding:0px; width: 200px;">{% csrf_token %}
 
 
 <p><a href="#"><input onclick="series(this)" type="submit" value="Continuar" style="font-size:14px; height: 50px;  border-radius: 50%; padding: 0px; line-height: 5px!important; margin-top: 4px;" class="wpcf7-form-control wpcf7-submit"></a></p>
@@ -708,7 +708,7 @@ background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, F
 								</footer>
 	</div>
 
-/waomovies/inicio/
+/inicio/
 	
 	
 		<div class="sh-back-to-top sh-back-to-top3">

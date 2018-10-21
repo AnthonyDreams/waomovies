@@ -91,7 +91,7 @@ img.emoji {
 
 															    
         <li class="menu-item sh-nav-dropdown">
-            <a href="/waomovies/inicio/" style="font-size: 14px;">
+            <a href="/inicio/" style="font-size: 14px;">
                 INICIO
             </a>
         </li>
@@ -136,7 +136,7 @@ img.emoji {
 										<nav id="header-navigation" class="header-standard-position">
 													<div class="sh-nav-container"><ul id="menu-header-navigation" class="sh-nav"><li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12"><a href="#">Facebook</a></li>
 <li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13"><a href="#">Instagram</a></li>
-<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="/waomovies/inicio/">Waomovies</a></li>
+<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="/inicio/">Waomovies</a></li>
 </ul></div>											</nav>
 
 				</div>
@@ -150,7 +150,7 @@ img.emoji {
 			<div class="line-test">
 				<div class="container">
 
-					<form method="get" class="sh-header-search-form" action="/waomovies/auth/">
+					<form method="get" class="sh-header-search-form" action="/auth/">
 						<input type="search" class="sh-header-search-input" placeholder="Search Here.." value="" name="s" required="">
 						<button type="submit" class="sh-header-search-submit">
 							<i class="icon-magnifier"></i>
@@ -273,7 +273,7 @@ img.emoji {
 <div id="cf7-c15514f11947e5e5a2b480a09848a46a" class="sh-cf7 sh-cf7-style3">
     <div role="form" class="wpcf7" id="wpcf7-f114-p5-o1" lang="en-US" dir="ltr">
 <div class="screen-reader-response"></div>
-<form action="/waomovies/auth/" method="post" class="wpcf7-form" novalidate="novalidate" autocomplete="off">{% csrf_token %}
+<form action="/auth/" method="post" class="wpcf7-form" novalidate="novalidate" autocomplete="off">{% csrf_token %}
 
 <p><span class=""><input style="" type="email" name="email" value="" size="200" class=" wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="Introduce tu email" autocomplete="off"></span></p>
 <p><span class=""><input type="password" name="password" value="" size="40" class="  wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="Introduce tu contraseña" autocomplete="off"></span></p>{% if activar_link %}<input type="checkbox" name="cambiar" value="True"><span style="color: white; background-color: rgba(0,0,0,0.7); margin-left: 4px;">Cambiar email</span>{% endif %}
@@ -286,7 +286,7 @@ img.emoji {
 							¿No tienes una cuenta?
 						</span>
 
-						<a class="txt2" href="/waomovies/register/" style=" font-size: 16px;">
+						<a class="txt2" href="/register/" style=" font-size: 16px;">
 							Registrarte
 						</a>
 					</div>
@@ -327,7 +327,7 @@ img.emoji {
 <div id="cf7-c15514f11947e5e5a2b480a09848a46a" class="sh-cf7 sh-cf7-style3">
     <div role="form" class="wpcf7" id="wpcf7-f114-p5-o1" lang="en-US" dir="ltr">
 <div class="screen-reader-response"></div>
-<form action="/waomovies/cambiar/" class="wpcf7-form" novalidate="novalidate">{% csrf_token %}
+<form action="/cambiar/" class="wpcf7-form" novalidate="novalidate">{% csrf_token %}
 
 
 <p><input type="submit" value="Cambiar de cuenta" class="wpcf7-form-control wpcf7-submit"></p>
@@ -338,7 +338,7 @@ img.emoji {
 				{% endif %}
 
 				{% if min %}
-<form action="/waomovies/change_email/" method="post" class="wpcf7-form" novalidate="novalidate">{% csrf_token %}
+<form action="/change_email/" method="post" class="wpcf7-form" novalidate="novalidate">{% csrf_token %}
 
 <p><span class=""><input  type="email" name="old_email" value="{{email2}}" size="200" class=" wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="Introduce tu email antiguo" style="display: none;"></span></p>
 

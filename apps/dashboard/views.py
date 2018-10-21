@@ -39,7 +39,7 @@ def dashboard_users_data(request):
 		'usuario':usuario,
 		}
 	else: 
-		return HttpResponseRedirect('/waomovies/inicio/')
+		return HttpResponseRedirect('/inicio/')
 
 
 	return render(request, 'dashboard/usuariosdata.html', context)
@@ -60,7 +60,7 @@ def dashboard_movies_data(request):
 		'movies':movies,
 		}
 	else: 
-		return HttpResponseRedirect('/waomovies/inicio/')
+		return HttpResponseRedirect('/inicio/')
 
 
 	return render(request, 'dashboard/usuariosdata.html', context)

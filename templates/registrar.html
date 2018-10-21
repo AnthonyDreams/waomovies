@@ -22,7 +22,7 @@
 
 ">
       <div class="wrap-login100">
-        <form style="position: relative; margin-top: -200px;" class="login100-form" method="post" action="/waomovies/register/" id="formulario" name="formulario" onsubmit="return validarFormulario()" autocomplete="off">{% csrf_token %}
+        <form style="position: relative; margin-top: -200px;" class="login100-form" method="post" action="/register/" id="formulario" name="formulario" onsubmit="return validarFormulario()" autocomplete="off">{% csrf_token %}
           <span class="login100-form-title p-b-34" style="font-size: 40px; font-weight: bold; font-family: forte;">
             Bienvenido
           </span>
@@ -75,7 +75,7 @@
 
           <div class="w-full text-center m-t-18">
             
-            <a href="/waomovies/auth/" class="txt3" style="color: #000; font-family: arial;">
+            <a href="/auth/" class="txt3" style="color: #000; font-family: arial;">
               Iniciar Sesión
             </a>
           </div>
@@ -91,7 +91,7 @@
     </style>
     <div class="mobilenone">
           <h3 style="position: absolute; z-index: 5; font-weight: bold; top: 58%; right: 57%; color: white; text-align: center;" > “Estar en casa sin<strong> películas</strong>, <br>es ser un alma en pena.” </h3>
-        <a href="/waomovies/inicio/"><img src="{%static ''%}img/wamovieslogo.png" style="cursor: pointer; position: absolute; z-index: 5; right: 70%; top: 40%;"></a>
+        <a href="/inicio/"><img src="{%static ''%}img/wamovieslogo.png" style="cursor: pointer; position: absolute; z-index: 5; right: 70%; top: 40%;"></a>
         </div>
         
         <div class="login100-more" style="filter: blur(1px); background-image: url('{% static 'img/tt.png' %}');"></div>

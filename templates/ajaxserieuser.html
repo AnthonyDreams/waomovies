@@ -5,10 +5,10 @@
 {% if request.user.is_authenticated %}
 {% if not request.user in o.series.favoritos.all %}					            				<!-- añadir a favoritos -->
 
-<form style="display: inline;position: relative; top: -29.4%; left: 56%; padding: 0px;" class="my-ajax-formfav{{o.series.id}}" method='POST'data-url="/waomovies/añadirfavorito_series/{{o.series.id}}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -29.4%; left: 56%; padding: 0px;" class="my-ajax-formfav{{o.series.id}}" method='POST'data-url="/añadirfavorito_series/{{o.series.id}}/">{% csrf_token %}
 					            				<button  onclick="myFunctionfav(this)" id="fav{{o.series.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer;" type="submit"><i class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
 					            				</form>
-					            				<form style="display: inline;position: relative; top: -29.4%; left: 56%; padding: 0px;" class="my-ajax-formafav{{o.series.id}}" method='POST'data-url="/waomovies/eliminar_añadirfavorito_series/{{o.series.id}}/">{% csrf_token %}
+					            				<form style="display: inline;position: relative; top: -29.4%; left: 56%; padding: 0px;" class="my-ajax-formafav{{o.series.id}}" method='POST'data-url="/eliminar_añadirfavorito_series/{{o.series.id}}/">{% csrf_token %}
 					            				<button  onclick="myFunctionfa2(this)" id="afav{{o.series.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; display: none;" type="submit"><i class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
 					            				</form>
 					            				<script>
@@ -96,10 +96,10 @@
 
 
 
-<form style="display: inline;position: relative; top: -29.4%; left: 56%; padding: 0px;" class="my-ajax-formsfav{{o.series.id}}" method='POST'data-url="/waomovies/eliminar_añadirfavorito_series/{{o.series.id}}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -29.4%; left: 56%; padding: 0px;" class="my-ajax-formsfav{{o.series.id}}" method='POST'data-url="/eliminar_añadirfavorito_series/{{o.series.id}}/">{% csrf_token %}
 					            				<button  onclick="myFunctionfavs(this)" id="sfav{{o.series.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; " type="submit"><i class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
 					            				</form>
-<form style="display: inline;position: relative; top: -29.4%; left: 56%; padding: 0px;" class="my-ajax-formfav{{o.series.id}}" method='POST'data-url="/waomovies/añadirfavorito_series/{{o.series.id}}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -29.4%; left: 56%; padding: 0px;" class="my-ajax-formfav{{o.series.id}}" method='POST'data-url="/añadirfavorito_series/{{o.series.id}}/">{% csrf_token %}
 					            				<button  onclick="myFunctionfavs2(this)" id="fav{{o.series.id}}"title="Favoritos" class="" style="display: none; background: none; border: none; cursor: pointer;" type="submit"><i class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
 					            				</form>
 					            				<script>
@@ -207,11 +207,11 @@
 
 {% if not o.series in peliculase %}	
 					            				<!-- ver más tarde -->
-<form style="display: inline;position: relative; top: -29.4%; left: 50%; padding: 0px;" class="my-ajax-form{{o.series.id}}" method='POST'data-url="/waomovies/vermastarde_series/{{ o.series.id }}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -29.4%; left: 50%; padding: 0px;" class="my-ajax-form{{o.series.id}}" method='POST'data-url="/vermastarde_series/{{ o.series.id }}/">{% csrf_token %}
 					            				<button onclick="myFunction(this)" id="{{o.series.id}}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i   style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
 					            				
 					            				</form>
-<form style="display: inline;position: relative; top: -29.4%; left: 50%; padding: 0px;" class="my-ajax-forms{{ o.series.id }}" method='POST'data-url="/waomovies/eliminar_vermastarde_series/{{ o.series.id }}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -29.4%; left: 50%; padding: 0px;" class="my-ajax-forms{{ o.series.id }}" method='POST'data-url="/eliminar_vermastarde_series/{{ o.series.id }}/">{% csrf_token %}
 					            				<button name="eye" style="background: none; border: none; cursor: pointer; display: none;"id="s{{ o.series.id }}"onclick="myFunction2(this)" title="Ver más tarde" class="example" type="submit"><i  style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye" aria-hidden="true"></i></button>
 					            			</form>
 					            				<!-- termina ver más tarde -->
@@ -310,11 +310,11 @@
 {% else %}
 
 		<!-- ver más tarde -->
-<form style="display: inline;position: relative; top: -29.4%; left: 50%; padding: 0px;" class="my-ajax-forms{{o.series.id}}" method='POST'data-url="/waomovies/eliminar_vermastarde_series/{{ o.series.id }}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -29.4%; left: 50%; padding: 0px;" class="my-ajax-forms{{o.series.id}}" method='POST'data-url="/eliminar_vermastarde_series/{{ o.series.id }}/">{% csrf_token %}
 					            				<button onclick="myFunction2(this)" id="s{{ o.series.id }}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i   style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye" aria-hidden="true"></i></button>
 					            				
 					            				</form>
-<form style="display: inline;position: relative; top: -29.4%; left: 50%; padding: 0px;" class="my-ajax-form{{ o.series.id }}" method='POST'data-url="/waomovies/vermastarde_series/{{ o.series.id }}/">{% csrf_token %}
+<form style="display: inline;position: relative; top: -29.4%; left: 50%; padding: 0px;" class="my-ajax-form{{ o.series.id }}" method='POST'data-url="/vermastarde_series/{{ o.series.id }}/">{% csrf_token %}
 					            				<button name="eye" style="background: none; border: none; cursor: pointer; display: none;"id="{{ o.series.id }}"onclick="myFunction(this)" title="Ver más tarde" class="example" type="submit"><i  style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
 					            			</form>
 					            				<!-- termina ver más tarde -->

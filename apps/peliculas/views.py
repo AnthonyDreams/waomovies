@@ -742,7 +742,7 @@ esto es un diccionario que iba a implantar para el buscador
 N = 134404155.0 # suma de todas  las frecuencias absolutas
 PALABRAS = dict()
 
-with open('C:/Users/Ant2D/Desktop/WaoMovies/Wao/apps/peliculas/frecuencia.txt', 'r') as datafile:
+with open('C:/Users/Ant2D/Desktop/Wao/apps/peliculas/frecuencia.txt', 'r') as datafile:
 	for line in datafile:
 		valores = line.strip('\n').split()
 		PALABRAS[valores[1]] = int(valores[2])
@@ -862,10 +862,10 @@ def search(request):
 				pass
 		else:
 			srch = "No has buscado nada"
-			return HttpResponseRedirect('/waomovies/ver%todo/')
+			return HttpResponseRedirect('/ver%todo/')
 	else:
 		srch = "No has buscado nada"
-		return HttpResponseRedirect('/waomovies/ver%todo/')
+		return HttpResponseRedirect('/ver%todo/')
 
 				
 	context = {'juan':srch, 'series_filt':series_filt, 'peliculase':peliculase, }
@@ -935,7 +935,7 @@ def filtrar(request):
 			else: 
 				messages.error(request, 'No se han encontrado resultados')
 	else:
-		return HttpResponseRedirect('/waomovies/ver%todo/')
+		return HttpResponseRedirect('/ver%todo/')
 	contexto = {
 			'count':matchc,
 			'series_filt':series_filt,

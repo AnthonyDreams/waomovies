@@ -17,7 +17,7 @@ def send_email(request):
                 fail_silently=False,
             )
             messages.success(request, 'Gracias por contactarnos, estaremos respondiendo lo más rápido posible.')
-            return HttpResponseRedirect('/waomovies/sobre/')
+            return HttpResponseRedirect('/sobre/')
     else:
         form = ContactForm()
  

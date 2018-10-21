@@ -200,3 +200,4 @@ else:
 	ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 	AWS_PUBLIC_MEDIA_LOCATION = 'media'
 	DEFAULT_FILE_STORAGE = 'Wao.storage_backends.PublicMediaStorage'
+	AWS_DEFAULT_ACL = None

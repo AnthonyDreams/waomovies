@@ -753,7 +753,7 @@ $(this).remove();
                  $myForm[0].reset(); 
        $("#j" + c).load(window.location + " #j" + c);
        $("#like_div" + c).load(window.location + " #like_div" + c);
-       $("#ccn" + c).append(' <div id="rs'+data.idp+'"><div class="mv-user-review-item" style="margin-bottom: -6px; width: 70%; position: relative; left: 40px;"><div class="user-infor" style="margin-bottom: -0px;"><img style="border-radius: 50%; width: 50px; height: 50px;" src="'+data.perfil+'" alt=""><div><h3 style="font-size: 16px; display:initial;">'+data.name+'</h3><i id="cog'+data.idp+'" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i><div class="btn-group"><div class="dropdown-menu"><a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample">Editar comentario<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a><form style="display: inline;" class="dele_ans'+data.idp+'" data-url="/waomovies/delete_res/'+data.idp+'/" method="post">'+token+'<button onclick="deletee_res(this)" name="'+data.id+'"id="dele_ans'+data.idp+'" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form><!--a class="dropdown-item" href="#">Something else here</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a--></div></div><p class="time" style="margin-top: -0x;">'+data.fecha+'</p></div></div><p id="cm'+data.idp+'" style="margin-bottom: -15px;">'+data.content+'</p></div></div><div class="collapse container" id="col'+data.idp+'"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans'+data.idp+'" data-url="/waomovies/responder_update/'+data.idp+'/">'+token+'<textarea id="textoans'+data.idp+'" onkeypress="return limita(400);" style=" height: 6em; width: 400px;" name="respuesta">'+data.content+'</textarea><br><input onclick="update_ans(this)" id="up_ans'+data.idp+'" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form></div></div></div>');
+       $("#ccn" + c).append(' <div id="rs'+data.idp+'"><div class="mv-user-review-item" style="margin-bottom: -6px; width: 70%; position: relative; left: 40px;"><div class="user-infor" style="margin-bottom: -0px;"><img style="border-radius: 50%; width: 50px; height: 50px;" src="'+data.perfil+'" alt=""><div><h3 style="font-size: 16px; display:initial;">'+data.name+'</h3><i id="cog'+data.idp+'" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i><div class="btn-group"><div class="dropdown-menu"><a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample">Editar comentario<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a><form style="display: inline;" class="dele_ans'+data.idp+'" data-url="/delete_res/'+data.idp+'/" method="post">'+token+'<button onclick="deletee_res(this)" name="'+data.id+'"id="dele_ans'+data.idp+'" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form><!--a class="dropdown-item" href="#">Something else here</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a--></div></div><p class="time" style="margin-top: -0x;">'+data.fecha+'</p></div></div><p id="cm'+data.idp+'" style="margin-bottom: -15px;">'+data.content+'</p></div></div><div class="collapse container" id="col'+data.idp+'"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans'+data.idp+'" data-url="/responder_update/'+data.idp+'/">'+token+'<textarea id="textoans'+data.idp+'" onkeypress="return limita(400);" style=" height: 6em; width: 400px;" name="respuesta">'+data.content+'</textarea><br><input onclick="update_ans(this)" id="up_ans'+data.idp+'" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form></div></div></div>');
 
       
 
@@ -1117,13 +1117,13 @@ $(this).remove();
             			{% if request.user.is_authenticated %}
 						{% if not seriesf %}
 						
-						<form class="my-ajax-formz{{ series.id }}"method='POST' data-url='/waomovies/añadirfavorito_series/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+						<form class="my-ajax-formz{{ series.id }}"method='POST' data-url='/añadirfavorito_series/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
 						<input type="numero" name="ver_mas_tarde" style="display:none"  value="1">
 						<button onclick="myFunctiona(this)" id="z{{ series.id }}" class="btn-secondary">
 						    <i class="fa fa-heart-o" aria-hidden="true" style="position: relative; left: 2px;"></i>
 						  </button>
 						</form>	
-						<form class="my-ajax-formzz{{ series.id }}" method='POST' data-url='/waomovies/eliminar_añadirfavorito_series/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+						<form class="my-ajax-formzz{{ series.id }}" method='POST' data-url='/eliminar_añadirfavorito_series/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
 						<input type="numero" name="ver_mas_tarde" style="display:none"  value="1">
 						  <button style="cursor: pointer; display: none;"id="zz{{ series.id }}"onclick="myFunctiona2(this)" class="btn-secondary">
 						    <i class="fa fa-heart" aria-hidden="true" style="position: relative; left: 2px;"></i> 
@@ -1131,13 +1131,13 @@ $(this).remove();
 						  
 						</form>
 						{% else %}
-						<form class="my-ajax-formzz{{ series.id }}"method='POST' data-url='/waomovies/eliminar_añadirfavorito_series/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+						<form class="my-ajax-formzz{{ series.id }}"method='POST' data-url='/eliminar_añadirfavorito_series/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
 						<input type="numero" name="ver_mas_tarde" style="display:none"  value="1">
 						<button onclick="myFunctiona2(this)" id="zz{{ series.id }}" class="btn-secondary">
 						    <i class="fa fa-heart" aria-hidden="true" style="position: relative; left: 2px;"></i>
 						  </button>
 						</form>	
-						<form class="my-ajax-formz{{ series.id }}" method='POST' data-url='/waomovies/añadirfavorito_series/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+						<form class="my-ajax-formz{{ series.id }}" method='POST' data-url='/añadirfavorito_series/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
 						<input type="numero" name="ver_mas_tarde" style="display:none"  value="1">
 						  <button style="cursor: pointer; display: none;"id="z{{ series.id }}"onclick="myFunctiona(this)" class="btn-secondary">
 						    <i class="fa fa-heart-o" aria-hidden="true" style="position: relative; left: 2px;"></i> 
@@ -1146,20 +1146,20 @@ $(this).remove();
 						</form>
 						{% endif %}
 						{% if not seriese %}
-						<form  class="my-ajax-form{{ series.id }}" method='POST'data-url="/waomovies/vermastarde_series/{{ series.id }}/">{% csrf_token %}
+						<form  class="my-ajax-form{{ series.id }}" method='POST'data-url="/vermastarde_series/{{ series.id }}/">{% csrf_token %}
 						<input type="numero" name="id" style="display:none; "  value="1">
 						<button onclick="myFunction(this)" id="{{ series.id }}" title="Ver más tarde" class="btn-ver" type="submit" style="position: relative; left: 10%;"><i style="color: #17202A; font-size: 20px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
 					</form>	
 
-<form class="my-ajax-forms{{ series.id }}" method='POST'data-url="/waomovies/eliminar_vermastarde_series/{{ series.id }}/">{% csrf_token %}
+<form class="my-ajax-forms{{ series.id }}" method='POST'data-url="/eliminar_vermastarde_series/{{ series.id }}/">{% csrf_token %}
 					            				<button name="eye" style="position: relative; left: 10%; cursor: pointer; display: none;"id="s{{ series.id }}"onclick="myFunction2(this)" title="Ver más tarde" class="btn-ver" type="submit" style="position: relative; left: 10%;" ><i  style="color: #17202A; font-size: 20px;" class="fa fa-eye" aria-hidden="true"></i></button>
 					            			</form>
 					{% else %}
-<form class="my-ajax-forms{{ series.id }}" method='POST'data-url="/waomovies/eliminar_vermastarde_series/{{ series.id }}/">{% csrf_token %}
+<form class="my-ajax-forms{{ series.id }}" method='POST'data-url="/eliminar_vermastarde_series/{{ series.id }}/">{% csrf_token %}
 					<button onclick="myFunction2(this)" id="s{{ series.id }}" title="Ver más tarde" class="btn-ver" type="submit" style="position: relative; left: 10%;"><i style="color: #17202A; font-size: 20px;" class="fa fa-eye" aria-hidden="true"></i></button>
 					</form>	
 
-<form class="my-ajax-form{{ series.id }}" method='POST'data-url="/waomovies/vermastarde_series/{{ series.id }}/">{% csrf_token %}
+<form class="my-ajax-form{{ series.id }}" method='POST'data-url="/vermastarde_series/{{ series.id }}/">{% csrf_token %}
 					            				<button name="eye" style="cursor: pointer; display: none;position: relative; left: 10%;"id="{{ series.id }}"onclick="myFunction(this)" title="Ver más tarde" class="btn-ver" type="submit"><i  style="color: #17202A; font-size: 20px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
 					            			</form>	
 					{% endif %}
@@ -1167,7 +1167,7 @@ $(this).remove();
 					
             			<button title="Ver más tarde" class="loginLink btn-ver" type="submit" style="position: relative; left: 50%;"><i style="color: black; font-size: 24px;" class="fa  fa-eye" aria-hidden="true"></i></button>
 					{% endif %}
-					<form   method='POST' data-url='/waomovies/reportar_serie/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+					<form   method='POST' data-url='/reportar_serie/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
 						<input type="numero" name="reportes" style="visibility:hidden;" value="1">
 						<button onclick="reportar(this)" id="none"  title="Reportar" class="" type="submit" style="position: relative;  padding-left: 30px; top: -8px; background: none; border: none; cursor: pointer;"><i id="load" style="text-shadow: 2px 2px black; color: white; font-size: 24px;" class="fa fa-bug" aria-hidden="true"></i></button>
 						<h6 id="gone"></h6>
@@ -1204,7 +1204,7 @@ $(this).remove();
 												    <div class="mt-3">
 												    	<div  class="md-form form-lg">
     
-											    <form  class="my-ajax-form" method='POST'data-url="/waomovies/cambiar_votaciono_serie/{{i.id}}/as/" >{% csrf_token %}
+											    <form  class="my-ajax-form" method='POST'data-url="/cambiar_votaciono_serie/{{i.id}}/as/" >{% csrf_token %}
                    
       <button onclick="votar(this)" style="background:none; border: none; cursor: pointer;" type="submit"><i style="font-size: 18px;" class="fa fa-refresh point"></i></button>
       </form>
@@ -1224,7 +1224,7 @@ $(this).remove();
 												    <div class="mt-3">
 												    	<div class="md-form form-lg">
     
-											    <form  class="my-ajax-form" method='POST'data-url="/waomovies/votacion_serie/{{series.id}}/" >{% csrf_token %}
+											    <form  class="my-ajax-form" method='POST'data-url="/votacion_serie/{{series.id}}/" >{% csrf_token %}
 										         <ul class="rate-area">
 										      <input  type="radio" id="5-star" name="votacion" value="5" /><label   style="font-size: 180%;"  for="5-star" title="Amazing">5 stars</label>
 										      <input type="radio" id="4-star" name="votacion" value="4" /><label   style="font-size: 180%;" for="4-star" title="Good">4 stars</label>
@@ -1314,7 +1314,7 @@ $(this).remove();
 											<div class="mv-item-infor">
 
 													
-												<h6><a href="/waomovies/series/{{ i.slug }}/">{{ i.titulo }}  </a> <span class="blank">   ({{ i.fecha_de_lanzamiento|date:"Y" }})</span> </h6>
+												<h6><a href="/series/{{ i.slug }}/">{{ i.titulo }}  </a> <span class="blank">   ({{ i.fecha_de_lanzamiento|date:"Y" }})</span> </h6>
 												<p class="rate"><i class="fa-star fa point"></i><span>{{ i.puntuacion }}</span> /10</p>
 												<p class="describe">{{ i.sinopsis }}</p>
 												<p class="run-time"> País:<span>{{i.pais }}</span>    .     <span>Fecha de estreno: {{i.fecha_de_lanzamiento }}</span></p>
@@ -1338,7 +1338,7 @@ $(this).remove();
 											<div class="mv-item-infor">
 
 													
-												<h6><a href="/waomovies/series/{{ i.slug }}/">{{ i.titulo }}  </a> <span class="blank">   ({{ i.fecha_de_lanzamiento|date:"Y" }})</span> </h6>
+												<h6><a href="/series/{{ i.slug }}/">{{ i.titulo }}  </a> <span class="blank">   ({{ i.fecha_de_lanzamiento|date:"Y" }})</span> </h6>
 												<p class="rate"><i class="fa-star fa point"></i><span>{{ i.puntuacion }}</span> /10</p>
 												<p class="describe">{{ i.sinopsis }}</p>
 												<p class="run-time"> País:<span>{{i.pais }}</span>    .     <span>Fecha de estreno: {{i.fecha_de_lanzamiento }}</span></p>
@@ -1360,7 +1360,7 @@ $(this).remove();
 											<div class="mv-item-infor">
 
 													
-												<h6><a href="/waomovies/series/{{ i.slug }}/">{{ i.titulo }}  </a> <span class="blank">   ({{ i.fecha_de_lanzamiento|date:"Y" }})</span> </h6>
+												<h6><a href="/series/{{ i.slug }}/">{{ i.titulo }}  </a> <span class="blank">   ({{ i.fecha_de_lanzamiento|date:"Y" }})</span> </h6>
 												<p class="rate"><i class="fa-star fa point"></i><span>{{ i.puntuacion }}</span> /10</p>
 												<p class="describe">{{ i.sinopsis }}</p>
 												<p class="run-time"> País:<span>{{i.pais }}</span>    .     <span>Fecha de estreno: {{i.fecha_de_lanzamiento }}</span></p>
@@ -1383,7 +1383,7 @@ $(this).remove();
 											<div class="mv-item-infor">
 
 													
-												<h6><a href="/waomovies/series/{{ i.slug }}/">{{ i.titulo }}  </a> <span class="blank">   ({{ i.fecha_de_lanzamiento|date:"Y" }})</span> </h6>
+												<h6><a href="/series/{{ i.slug }}/">{{ i.titulo }}  </a> <span class="blank">   ({{ i.fecha_de_lanzamiento|date:"Y" }})</span> </h6>
 												<p class="rate"><i class="fa-star fa point"></i><span>{{ i.puntuacion }}</span> /10</p>
 												<p class="describe">{{ i.sinopsis }}</p>
 												<p class="run-time"> País:<span>{{i.pais }}</span>    .     <span>Fecha de estreno: {{i.fecha_de_lanzamiento }}</span></p>
@@ -1502,7 +1502,7 @@ select::-ms-expand {
 
 
 	</style>	
-			<form method="post" class="sendes" data-url="/waomovies/temporadaon/{{series.id}}/post/" id="tempo">{% csrf_token %}
+			<form method="post" class="sendes" data-url="/temporadaon/{{series.id}}/post/" id="tempo">{% csrf_token %}
 				<div class="select">
 				<select name="id" onchange="te(this)" type="submit">
 	{% for tem in temporada %}
@@ -1531,10 +1531,10 @@ select::-ms-expand {
   {% for cc in tem.capitulos.all|order_by:"num_episodio" %}
 
 <div class="movie-item-style-2 movie-item-style-1 col-lg-2 col-md-3 col-sm-4" style="margin-bottom: -13px;">
-	<a href="/waomovies/{{cc.slug}}/{{tem.slug}}/"><img  src="{{cc.cover_capitulo.url}}" style="width: 230px; height: 120px;" alt=""></a>
+	<a href="/{{cc.slug}}/{{tem.slug}}/"><img  src="{{cc.cover_capitulo.url}}" style="width: 230px; height: 120px;" alt=""></a>
 	
 	<div class="mv-item-infor">
-		<h6><a href="/waomovies/{{cc.slug}}/{{tem.slug}}/">{{cc.num_episodio}}.     {{cc.nombre}}</a></h6>
+		<h6><a href="/{{cc.slug}}/{{tem.slug}}/">{{cc.num_episodio}}.     {{cc.nombre}}</a></h6>
 	</div>
 
 	
@@ -1557,10 +1557,10 @@ select::-ms-expand {
   {% if tem.num_temporada == 1  and not request.user.on.all%}
 
 <div class="movie-item-style-2 movie-item-style-1" style="margin-bottom: -13px;">
-	<a href="/waomovies/{{cc.slug}}/{{tem.slug}}/"><img  src="{{cc.cover_capitulo.url}}" style="width: 230px; height: 120px;" alt=""></a>
+	<a href="/{{cc.slug}}/{{tem.slug}}/"><img  src="{{cc.cover_capitulo.url}}" style="width: 230px; height: 120px;" alt=""></a>
 	
 	<div class="mv-item-infor">
-		<h6><a href="/waomovies/{{cc.slug}}/{{tem.slug}}/">{{cc.num_episodio}}.     {{cc.nombre}}</a></h6>
+		<h6><a href="/{{cc.slug}}/{{tem.slug}}/">{{cc.num_episodio}}.     {{cc.nombre}}</a></h6>
 	</div>
 
 	
@@ -1747,7 +1747,7 @@ for (i = 0; i < acc.length; i++) {
 												    <div class="mt-3">
 												    	<div class="md-form form-lg">
     													<!-- img width="30" height="30" src="{{ request.user.profile.perfil_img.url }}"-->
-    													<form class="coment" method='POST' data-url='/waomovies/comentar_serie/{{ series.id }}/' enctype='multipart/form-data'>
+    													<form class="coment" method='POST' data-url='/comentar_serie/{{ series.id }}/' enctype='multipart/form-data'>
     														{% csrf_token %}
 
 														<input autocomplete="off" type="text" id="inputLGEx" class="form-control form-control-lg" name="content" style="width: 700px; color: #abb7c4;" size="25">
@@ -1825,7 +1825,7 @@ for (i = 0; i < acc.length; i++) {
             </div>
             <div style="margin-top: -40px;" class="modal-body" >
              {% if not i in report_user%}
-                <form  method="post" class="report{{i.id}}" data-url="/waomovies/reportando/{{i.id}}/" style="" > {% csrf_token %}
+                <form  method="post" class="report{{i.id}}" data-url="/reportando/{{i.id}}/" style="" > {% csrf_token %}
     <br />
     <br />
     <label class="containersss">Spoiler<input type="radio" name="reportar" value="Spoiler" /><span class="checkmark"></span></label>
@@ -1862,7 +1862,7 @@ for (i = 0; i < acc.length; i++) {
     <div class="dropdown-menu">
         <a class="dropdown-item" href="#" data-toggle="collapse" data-target="#{{i.id}}" aria-expanded="false" aria-controls="collapseExample">Editar comentario<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a>
 
-        <form style="display: inline;" class="dele{{ i.id }}" data-url="/waomovies/{{ i.slug }}/delete/" method="post">{% csrf_token %}<button onclick="deletee(this)" id="dele{{ i.id }}" style="background: none; border: none;"><a class="dropdown-item">Eliminar comentario<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form>
+        <form style="display: inline;" class="dele{{ i.id }}" data-url="/{{ i.slug }}/delete/" method="post">{% csrf_token %}<button onclick="deletee(this)" id="dele{{ i.id }}" style="background: none; border: none;"><a class="dropdown-item">Eliminar comentario<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form>
         <!--a class="dropdown-item" href="#">Something else here</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Separated link</a-->
@@ -1887,29 +1887,29 @@ for (i = 0; i < acc.length; i++) {
  word-wrap: break-word;">{{ i.content }} </p>
 <div id="like_div{{i.id}}" style="">
  {% if not request.user in i.vote.all %}
- <form style="display: inline;" method="post" class="like{{i.id}}" data-url="/waomovies/like_serie/{{i.id}}/">{% csrf_token %}
+ <form style="display: inline;" method="post" class="like{{i.id}}" data-url="/like_serie/{{i.id}}/">{% csrf_token %}
  
 <button  class="buttonn" onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a style="color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
 </form>
 {% else %}
-<form style="display: inline;" method="post" class="like{{i.id}}" data-url="/waomovies/outlike_serie/{{i.id}}/">{% csrf_token %}
+<form style="display: inline;" method="post" class="like{{i.id}}" data-url="/outlike_serie/{{i.id}}/">{% csrf_token %}
  
 <button class="buttonn"  onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
 </form>
 {% endif %}
 {% if not request.user in i.unvote.all %}
-<form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/waomovies/dislike_serie/{{i.id}}/">{% csrf_token %}
+<form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/dislike_serie/{{i.id}}/">{% csrf_token %}
  <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  > <span id="count">{{i.unvote.all|length}}</span> </i></a></button>
 </form>
 {% else %}
-<form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/waomovies/outdislike_serie/{{i.id}}/">
+<form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/outdislike_serie/{{i.id}}/">
  <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  > <span id="count">{{i.unvote.all|length}}</span> </i></a></button>
 </form>
 {% endif %}
   <a   data-toggle="collapse" data-target="#collapseExample{{i.id}}z" aria-expanded="false
   " aria-controls="collapseExample{{i.id}}z" style="color: grey; font-family: sans-serif; padding-left: 5px; padding-right: 15px; position: relative; top: 10px;">Responder</a>
   <div  class="collapse container" id="collapseExample{{i.id}}z">
-  <form class="respv{{i.id}}" method="post" data-url="/waomovies/responder_serie/{{i.slug}}/">
+  <form class="respv{{i.id}}" method="post" data-url="/responder_serie/{{i.slug}}/">
   {% csrf_token %}<div class="md-form">
    <img width="40"  height="40" style="border-radius: 50%; width: 50px; height: 50px;" src="{{request.user.profile.perfil_img.url}}">
     <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4; " id="input-char-counter" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
@@ -1952,7 +1952,7 @@ for (i = 0; i < acc.length; i++) {
     <div class="dropdown-menu">
         <a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col{{cm.id}}" aria-expanded="false" aria-controls="collapseExample">Editar respuesta<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a>
 
-        <form style="display: inline;" class="dele_ans{{ cm.id }}" data-url="/waomovies/delete_res_serie/{{ cm.id }}/" method="post">{% csrf_token %}<button onclick="deletee_res(this)" name="{{i.id}}" id="dele_ans{{ cm.id }}" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i  style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form>
+        <form style="display: inline;" class="dele_ans{{ cm.id }}" data-url="/delete_res_serie/{{ cm.id }}/" method="post">{% csrf_token %}<button onclick="deletee_res(this)" name="{{i.id}}" id="dele_ans{{ cm.id }}" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i  style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form>
         <!--a class="dropdown-item" href="#">Something else here</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Separated link</a-->
@@ -1991,7 +1991,7 @@ for (i = 0; i < acc.length; i++) {
             </div>
             <div style="margin-top: -40px;" class="modal-body" >
              {% if not cm in report_user_res%}
-                <form  method="post" class="report_res{{cm.id}}" data-url="/waomovies/reportando_res/{{cm.id}}/" style="" > {% csrf_token %}
+                <form  method="post" class="report_res{{cm.id}}" data-url="/reportando_res/{{cm.id}}/" style="" > {% csrf_token %}
     <br />
     <br />
     <label class="containersss">Spoiler<input type="radio" name="reportar" value="Spoiler" /><span class="checkmark"></span></label>
@@ -2035,7 +2035,7 @@ for (i = 0; i < acc.length; i++) {
             <div class="collapse container" id="col{{cm.id}}">
                 <div class="mt-3">
                  <div class="md-form form-lg">
-                  <form method="post" class="updateup_ans{{ cm.id }}" data-url="/waomovies/responder_update_serie/{{ cm.id }}/">
+                  <form method="post" class="updateup_ans{{ cm.id }}" data-url="/responder_update_serie/{{ cm.id }}/">
                    {% csrf_token %}
                  <textarea id="textoans{{cm.id}}" onkeypress="return limita(400);" style=" height: 6em;
    width: 400px;" name="respuesta">{{cm.respuesta}}</textarea> 
@@ -2070,7 +2070,7 @@ for (i = 0; i < acc.length; i++) {
             <div class="collapse container" id="{{i.id}}">
                 <div class="mt-3">
                  <div class="md-form form-lg">
-                  <form method="post" class="updatecp{{ i.slug }}" data-url="/waomovies/{{ i.slug }}/edit_serie/">
+                  <form method="post" class="updatecp{{ i.slug }}" data-url="/{{ i.slug }}/edit_serie/">
                    {% csrf_token %}
                  <textarea id="textop{{i.slug}}" onkeypress="return limita(400);" style=" height: 6em;
    width: 400px;" name="content">{{i.content}}</textarea> 
@@ -2261,7 +2261,7 @@ input[type="button"].btn-block {
 </style>
 
 {% if comentariosc > 5 %}
-<form method="post" id="noneaaa" class="cabron" data-url="/waomovies/series/{{series.slug}}/">
+<form method="post" id="noneaaa" class="cabron" data-url="/series/{{series.slug}}/">
                     {% csrf_token %}
                     <button id="noneaaa" style=" background: silver; font-size: 14px; position: relative; top: 6px;" type="submit"  onclick="vermas(this)" class="btn  btn-lg btn-block"><i class="fa fa-sort-down" aria-hidden="true"></i> Ver los {{ comentariosc }} comentarios</button>
                     

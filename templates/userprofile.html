@@ -53,17 +53,17 @@
 				<div class="user-information">
 					<div class="user-img" style="position: relative; top: -30px;">
 						<a href="#"><img id="blah" alt="your image" src="{{ usuario.profile.perfil_img.url }}" alt=""><br></a>
-						<form method='POST' action='/waomovies/edit/{{ request.user.id }}/' enctype='multipart/form-data'>{% csrf_token %}
+						<form method='POST' action='/edit/{{ request.user.id }}/' enctype='multipart/form-data'>{% csrf_token %}
 						<button  type="submit" class="ip-upload btn redbtn"><input class="ip-file" type="file" name="perfil_img" accept="image/*" id="imgInp"><span style="font-size: 14px;">Cambiar foto de perfil</span></input></button>
 						<button class="btn redbtn sendbutton" style="background:#F4BB00;"><i class="fa fa-send" style="position: relative; padding-left: 5px;"></i></button></form>
 					</div>
 					<div class="user-fav">
 						<p>Detalles</p>
 						<ul>
-							<li class="{% if user_details %}active{% endif %}"><a href="/waomovies/usuario/{{request.user.username}}/">Perfil</a></li>
-							<li class="{% if user_favoritos %}active{% endif %}"><a href="/waomovies/user_ver_favoritos/{{request.user.username}}/">Peliculas favoritas</a></li>
-							<li class="{% if series_fav %}active{% endif %}"><a href="/waomovies/user_ver_series_favoritos/{{request.user.username}}/">Series favoritas</a></li>
-							<li class="{% if not user_details and not user_favoritos and not series_fav and vermas%}active{% endif %}"><a href="/waomovies/ver_más_tarde/{{request.user.username}}/">Ver más tarde</a></li>
+							<li class="{% if user_details %}active{% endif %}"><a href="/usuario/{{request.user.username}}/">Perfil</a></li>
+							<li class="{% if user_favoritos %}active{% endif %}"><a href="/user_ver_favoritos/{{request.user.username}}/">Peliculas favoritas</a></li>
+							<li class="{% if series_fav %}active{% endif %}"><a href="/user_ver_series_favoritos/{{request.user.username}}/">Series favoritas</a></li>
+							<li class="{% if not user_details and not user_favoritos and not series_fav and vermas%}active{% endif %}"><a href="/ver_más_tarde/{{request.user.username}}/">Ver más tarde</a></li>
 						</ul>
 					</div>
 
@@ -71,9 +71,9 @@
 <div class="user-fav">
 						<p>Dashboard</p>
 						<ul>
-							<li class="{% if not user_details and not user_favoritos and not series_fav and not vermas%}active{% endif %}"><a href="/waomovies/usuario/{{request.user.username}}/">Usuarios</a></li>
-							<li class="{% if not user_details and not user_favoritos and not series_fav and not vermas%}active{% endif %}"><a href="/waomovies/user_ver_favoritos/{{request.user.username}}/">Películas</a></li>
-							<li class="{% if not user_details and not user_favoritos and not series_fav and not vermas%}active{% endif %}"><a href="/waomovies/user_ver_series_favoritos/{{request.user.username}}/">Series</a></li>
+							<li class="{% if not user_details and not user_favoritos and not series_fav and not vermas%}active{% endif %}"><a href="/usuario/{{request.user.username}}/">Usuarios</a></li>
+							<li class="{% if not user_details and not user_favoritos and not series_fav and not vermas%}active{% endif %}"><a href="/user_ver_favoritos/{{request.user.username}}/">Películas</a></li>
+							<li class="{% if not user_details and not user_favoritos and not series_fav and not vermas%}active{% endif %}"><a href="/user_ver_series_favoritos/{{request.user.username}}/">Series</a></li>
 						</ul>
 					</div>
 {% endif %}
@@ -82,7 +82,7 @@
 						<p>Otros</p>
 
 						<ul>
-							<li><a href="/waomovies/logout/">Cerrar sesión</a></li>
+							<li><a href="/logout/">Cerrar sesión</a></li>
 							
 							<li><a class="btn btn-primary" data-toggle="modal" data-target="#modalConfirmDelete">Eliminar cuenta</a></li>
 
@@ -107,7 +107,7 @@
 
                 <!--Footer-->
                 <div class="modal-footer flex-center">
-                    <a href="/waomovies/user_delete/{{ request.user.id }}/" class="btn  btn-outline-danger">Si</a>
+                    <a href="/user_delete/{{ request.user.id }}/" class="btn  btn-outline-danger">Si</a>
                     <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
                 </div>
             </div>
@@ -123,7 +123,7 @@
   <div class="modal-content">
     <span class="close">&times;</span>
     <strong style="color: black;"> ¿Desea eliminar tu cuenta? {{ request.user.email }}</strong>
-    <form method="post" action="/waomovies/user_delete/{{ request.user.id }}/">{% csrf_token %}
+    <form method="post" action="/user_delete/{{ request.user.id }}/">{% csrf_token %}
     	<input type="submit" name="" title="Eliminar" value="Eliminar">
 </form>
   </div>
@@ -180,7 +180,7 @@
 							<img src="{{o.Cover.url}}" alt="">
 							{% include 'ajax.html' %}
 							<div class="mv-item-infor">
-								<h6><a href="/waomovies/peliculas/{{o.id}}/">{{o.titulo}}</a></h6>
+								<h6><a href="/peliculas/{{o.id}}/">{{o.titulo}}</a></h6>
 								<p class="rate"><i class="fa fa-star"></i><span>{{o.puntuacion}}</span> /10</p>
 							</div>
 						</div>	
@@ -223,7 +223,7 @@
 
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="form-style-1 user-pro" >
-					<form method="post" action="/waomovies/user_edit/{{ usuario.id }}/" class="user">{% csrf_token %}
+					<form method="post" action="/user_edit/{{ usuario.id }}/" class="user">{% csrf_token %}
 						<h4>Cambiar detalles de la cuenta<small> &nbsp; &nbsp; *llena los datos de quieras editar*</small></h4> 
 						<div class="row">
 							<div class="col-md-6 form-it">
@@ -261,11 +261,11 @@
 {% if request.user in comedia.comedia.all %}
 <div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form  class="comedia" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/comedia/" method="post"> {% csrf_token %}
+	<form  class="comedia" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/comedia/" method="post"> {% csrf_token %}
 		{% csrf_token %}
 	{% else %}
 	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
-<form class="comedia" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/comedia/" method="post"> {% csrf_token%}
+<form class="comedia" style="display: inline; position: relative; top:8px;" data-url="/generoz/comedia/" method="post"> {% csrf_token%}
 {% endif %}
 
 	
@@ -281,13 +281,13 @@
 {% if request.user in drama.drama.all %}
 <div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class="col col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form class="drama" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/drama/" method="post">
+	<form class="drama" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/drama/" method="post">
 
 		{% csrf_token%}
 	{% else %}
 	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px;height: 110px; padding:3%; " class="border-select col-lg-2"> 
 
-		<form class="drama" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/drama/" method="post"> {% csrf_token%}
+		<form class="drama" style="display: inline; position: relative; top:8px;" data-url="/generoz/drama/" method="post"> {% csrf_token%}
 {% endif %}
 	
 						<img src="{% static 'img/drama.png' %}" width="60">
@@ -300,11 +300,11 @@
 {% if request.user in accion.accion.all %}
 <div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form class="accion" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/accion/" method="post">
+	<form class="accion" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/accion/" method="post">
 		{% csrf_token %}
 	{% else %}
 	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
-<form class="accion" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/accion/" method="post"> {% csrf_token%}
+<form class="accion" style="display: inline; position: relative; top:8px;" data-url="/generoz/accion/" method="post"> {% csrf_token%}
 {% endif %}
 	
 						<img src="{% static 'img/action.png' %}" width="60">
@@ -317,11 +317,11 @@
 {% if request.user in documental.documental.all %}
 <div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form class="documental" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/documental/" method="post">
+	<form class="documental" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/documental/" method="post">
 		{% csrf_token %}
 	{% else %}
 	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
-<form class="documental" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/documental/" method="post"> {% csrf_token%}
+<form class="documental" style="display: inline; position: relative; top:8px;" data-url="/generoz/documental/" method="post"> {% csrf_token%}
 {% endif %}
 	
 						<img src="{% static 'img/documentary.png' %}" width="60">
@@ -333,11 +333,11 @@
 {% if request.user in fantasia.fantasia.all %}
 <div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form class="fantasia" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/fantasia/" method="post">
+	<form class="fantasia" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/fantasia/" method="post">
 		{% csrf_token %}
 	{% else %}
 	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
-<form class="fantasia" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/fantasia/" method="post"> {% csrf_token%}
+<form class="fantasia" style="display: inline; position: relative; top:8px;" data-url="/generoz/fantasia/" method="post"> {% csrf_token%}
 {% endif %}
 	
 						<img src="{% static 'img/fantasy.png' %}" width="60">
@@ -349,11 +349,11 @@
 {% if request.user in terror.terror.all %}
 <div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form class="terror" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/terror/" method="post">
+	<form class="terror" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/terror/" method="post">
 		{% csrf_token %}
 	{% else %}
 	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
-<form class="terror" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/terror/" method="post"> {% csrf_token%}
+<form class="terror" style="display: inline; position: relative; top:8px;" data-url="/generoz/terror/" method="post"> {% csrf_token%}
 {% endif %}
 	
 						<img src="{% static 'img/horror.png' %}" width="60">
@@ -366,11 +366,11 @@
 {% if request.user in animacion.animacion.all %}
 <div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form class="animacion" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/animacion/" method="post">
+	<form class="animacion" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/animacion/" method="post">
 		{% csrf_token %}
 	{% else %}
 	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
-<form class="animacion" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/animacion/" method="post"> {% csrf_token%}
+<form class="animacion" style="display: inline; position: relative; top:8px;" data-url="/generoz/animacion/" method="post"> {% csrf_token%}
 {% endif %}
 	
 						<img src="{% static 'img/animation.png' %}" width="60">
@@ -383,11 +383,11 @@
 {% if request.user in aventura.aventura.all %}
 <div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form class="aventura" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/aventura/" method="post">
+	<form class="aventura" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/aventura/" method="post">
 		{% csrf_token %}
 	{% else %}
 	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
-<form class="aventura" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/aventura/" method="post"> {% csrf_token%}
+<form class="aventura" style="display: inline; position: relative; top:8px;" data-url="/generoz/aventura/" method="post"> {% csrf_token%}
 {% endif %}
 	
 						<img src="{% static 'img/adventure.png' %}" width="60">
@@ -399,11 +399,11 @@
 {% if request.user in romance.romance.all %}
 <div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form class="romance" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/romance/" method="post">
+	<form class="romance" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/romance/" method="post">
 		{% csrf_token %}
 	{% else %}
 	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
-<form class="romance" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/romance/" method="post"> {% csrf_token%}
+<form class="romance" style="display: inline; position: relative; top:8px;" data-url="/generoz/romance/" method="post"> {% csrf_token%}
 {% endif %}
 	
 						<img src="{% static 'img/romance.png' %}" width="60">
@@ -415,11 +415,11 @@
 {% if request.user in ciencia_ficcion.ciencia_ficcion.all %}
 <div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form class="ciencia_ficcion" style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/ciencia_ficcion/" method="post">
+	<form class="ciencia_ficcion" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/ciencia_ficcion/" method="post">
 		{% csrf_token %}
 	{% else %}
 	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
-<form class="ciencia_ficcion" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/ciencia_ficcion/" method="post"> {% csrf_token%}
+<form class="ciencia_ficcion" style="display: inline; position: relative; top:8px;" data-url="/generoz/ciencia_ficcion/" method="post"> {% csrf_token%}
 {% endif %}
 	
 						<img src="{% static 'img/sci-fi.png' %}" width="60">
@@ -431,11 +431,11 @@
 {% if request.user in crimen.crimen.all %}
 <div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form class="crimen"  style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/crimen/" method="post">
+	<form class="crimen"  style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/crimen/" method="post">
 		{% csrf_token %}
 	{% else %}
 	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
-<form  class="crimen" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/crimen/" method="post"> {% csrf_token%}
+<form  class="crimen" style="display: inline; position: relative; top:8px;" data-url="/generoz/crimen/" method="post"> {% csrf_token%}
 {% endif %}
 	
 						<img src="{% static 'img/thriller.png' %}" width="60">
@@ -447,11 +447,11 @@
 {% if request.user in suspenso.suspenso.all %}
 <div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px; position relative; top: 9px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form class="suspenso"  style="display: inline; position: relative; top:-15px;" data-url="/waomovies/generoz_eliminar/suspenso/" method="post">
+	<form class="suspenso"  style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/suspenso/" method="post">
 		{% csrf_token %}
 	{% else %}
 	<div style="display: inline-block; margin-left: 15px; position: relative; top: -4px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
-<form class="suspenso" style="display: inline; position: relative; top:8px;" data-url="/waomovies/generoz/suspenso/" method="post"> {% csrf_token%}
+<form class="suspenso" style="display: inline; position: relative; top:8px;" data-url="/generoz/suspenso/" method="post"> {% csrf_token%}
 {% endif %}
 	
 						<img src="{% static 'img/suspenso.png' %}" width="45">
@@ -532,7 +532,7 @@
 
 					</div>
 					<div style="border-bottom: solid 1px #0F2133;"></div>
-					<form name="fformulario" method="post" action="/waomovies/change_password/{{request.user.id}}/" class="password" onsubmit="return validarFormulariio()">
+					<form name="fformulario" method="post" action="/change_password/{{request.user.id}}/" class="password" onsubmit="return validarFormulariio()">
 						{% csrf_token %}
 						<h4>Cambiar contraseña</h4>
 						<div id="old_password_div" class="row">
@@ -589,7 +589,7 @@
 
 							{% endif %}
 							<div class="mv-item-infor">
-								<h6><a href="{% if o.peliculas %}/waomovies/peliculas/{{o.peliculas.id}}/{% else %}/waomovies/series/{{o.series.id}}/{% endif %}">{{o.peliculas.titulo}}{{o.series.titulo}}</a></h6>
+								<h6><a href="{% if o.peliculas %}/peliculas/{{o.peliculas.id}}/{% else %}/series/{{o.series.id}}/{% endif %}">{{o.peliculas.titulo}}{{o.series.titulo}}</a></h6>
 								<p class="rate"><i class="fa fa-star"></i><span>{{o.peliculas.puntuacion}}{{o.series.puntuacion}}</span> /10</p>
 							</div>
 						</div>	
@@ -644,7 +644,7 @@
 							<img style=" height: 200px;"src="{{o.serie_cover.url}}" alt="">
 							{% include 'ajaxserie.html' %}
 							<div class="mv-item-infor">
-								<h6><a href="/waomovies/peliculas/{{o.id}}/">{{o.titulo}}</a></h6>
+								<h6><a href="/peliculas/{{o.id}}/">{{o.titulo}}</a></h6>
 								<p class="rate"><i class="fa fa-star"></i><span>{{o.puntuacion}}</span> /10</p>
 							</div>
 						</div>	

@@ -5,10 +5,10 @@
 {% if request.user.is_authenticated %}
 {% if not o in request.user.favoritos_series.all %}					            				<!-- añadir a favoritos -->
 
-<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formfab{{o.id}}" method='POST'data-url="/waomovies/añadirfavorito_series/{{o.id}}/">{% csrf_token %}
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formfab{{o.id}}" method='POST'data-url="/añadirfavorito_series/{{o.id}}/">{% csrf_token %}
 					            				<button  onclick="myFunctionfav(this)" id="fab{{o.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer;" type="submit"><i class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 1); font-size: 20px;"></i></button>
 					            				</form>
-					            				<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formafab{{o.id}}" method='POST'data-url="/waomovies/eliminar_añadirfavorito_series/{{o.id}}/">{% csrf_token %}
+					            				<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formafab{{o.id}}" method='POST'data-url="/eliminar_añadirfavorito_series/{{o.id}}/">{% csrf_token %}
 					            				<button  onclick="myFunctionfa2(this)" id="afab{{o.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; display: none;" type="submit"><i class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 1); font-size: 20px;"></i></button>
 					            				</form>
 					            				<script>
@@ -96,10 +96,10 @@
 
 
 
-<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formsfab{{o.id}}" method='POST'data-url="/waomovies/eliminar_añadirfavorito_series/{{o.id}}/">{% csrf_token %}
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formsfab{{o.id}}" method='POST'data-url="/eliminar_añadirfavorito_series/{{o.id}}/">{% csrf_token %}
 					            				<button  onclick="myfunctionfavss(this)" id="sfab{{o.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; " type="submit"><i class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 1); font-size: 20px;"></i></button>
 					            				</form>
-<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formfab{{o.id}}" method='POST'data-url="/waomovies/añadirfavorito_series/{{o.id}}/">{% csrf_token %}
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formfab{{o.id}}" method='POST'data-url="/añadirfavorito_series/{{o.id}}/">{% csrf_token %}
 					            				<button  onclick="myfunctionfavass2(this)" id="fab{{o.id}}"title="Favoritos" class="" style="display: none; background: none; border: none; cursor: pointer;" type="submit"><i class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 1); font-size: 20px;"></i></button>
 					            				</form>
 					            				<script>
@@ -207,11 +207,11 @@
 
 {% if not o in peliculase_serie %}	
 					            				<!-- ver más tarde -->
-<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formn{{o.id}}" method='POST'data-url="/waomovies/vermastarde_series/{{ o.id }}/">{% csrf_token %}
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formn{{o.id}}" method='POST'data-url="/vermastarde_series/{{ o.id }}/">{% csrf_token %}
 					            				<button onclick="myfunctiona(this)" id="n{{o.id}}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i   style="color: rgba(255, 255, 255, 0.9);  position: relative; right: 7px;  font-size: 20px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
 					            				
 					            				</form>
-<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formñ{{ o.id }}" method='POST'data-url="/waomovies/eliminar_vermastarde_series/{{ o.id }}/">{% csrf_token %}
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formñ{{ o.id }}" method='POST'data-url="/eliminar_vermastarde_series/{{ o.id }}/">{% csrf_token %}
 					            				<button name="eye" style="background: none; border: none; cursor: pointer; display: none;"id="ñ{{ o.id }}"onclick="myfunctiona2(this)" title="Ver más tarde" class="example" type="submit"><i  style="color: rgba(255, 255, 255, 0.9);  position: relative; right: 7px;  font-size: 20px;" class="fa fa-eye" aria-hidden="true"></i></button>
 					            			</form>
 					            				<!-- termina ver más tarde -->
@@ -311,11 +311,11 @@
 {% else %}
 
 		<!-- ver más tarde -->
-<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formñ{{o.id}}" method='POST'data-url="/waomovies/eliminar_vermastarde_series/{{ o.id }}/">{% csrf_token %}
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formñ{{o.id}}" method='POST'data-url="/eliminar_vermastarde_series/{{ o.id }}/">{% csrf_token %}
 					            				<button onclick="myfunctiona2(this)" id="ñ{{ o.id }}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i   style="color: rgba(255, 255, 255, 0.9);  position: relative; right: 7px;  font-size: 20px;" class="fa fa-eye" aria-hidden="true"></i></button>
 					            				
 					            				</form>
-<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formn{{ o.id }}" method='POST'data-url="/waomovies/vermastarde_series/{{ o.id }}/">{% csrf_token %}
+<form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formn{{ o.id }}" method='POST'data-url="/vermastarde_series/{{ o.id }}/">{% csrf_token %}
 					            				<button name="eye" style="background: none; border: none; cursor: pointer; display: none;"id="n{{ o.id }}"onclick="myfunctiona(this)" title="Ver más tarde" class="example" type="submit"><i  style="color: rgba(255, 255, 255, 0.9);  position: relative; right: 7px;  font-size: 20px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
 					            			</form>
 					            				<!-- termina ver más tarde -->
