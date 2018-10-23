@@ -23,7 +23,17 @@
                       display: -ms-flexbox;
                       display: flex;
                      align-items: center;
-                      justify-content: center; "{% else %} style="background: url({% static '' %}img/{{genero3}}.jpg) no-repeat;
+                      justify-content: center; "{% elif genero3 == "DRA" %} style="background: url(https://s3-us-west-1.amazonaws.com/waomovies/static/img/DRA.jpg) no-repeat;
+  height: 598px; background-position: center;
+                      text-align: center;
+                      background-size: cover;
+                      position: relative;
+                      display: -webkit-flex;
+                      display: -moz-box;
+                      display: -ms-flexbox;
+                      display: flex;
+                     align-items: center;
+                      justify-content: center; " {% else %} style="background: url({% static '' %}img/{{genero3}}.jpg) no-repeat;
   height: 598px; 
   background-position: center;
                       text-align: center;

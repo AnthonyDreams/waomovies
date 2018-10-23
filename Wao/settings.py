@@ -163,7 +163,7 @@ if DEB:
 	# Static files (CSS, JavaScript, Images)
 	# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-	STATIC_URL = '/waomovies/static/'
+	STATIC_URL = '/static/'
 	STATIC_DIRS = 'static'
 	STATICFILES_DIRS = [
 	    STATIC_DIRS,
