@@ -1073,8 +1073,25 @@ $(this).remove();
 					<div class="movie-btn">	
 						<div class="btn-transform transform-vertical red">
 							<div><a href="#" class="item item-1 redbtn">  Ver Trailer</a></div>
-							<div><a href="https://www.youtube.com/embed/o-0hcF97wy0" class="item item-2 redbtn fancybox-media hvr-grow"><i class="fa fa-play point"></i></a></div>
+							<div><a data-toggle="modal" data-target="#modalyoutube" class="item item-2 redbtn "><i class="fa fa-play point"></i></a></div>
 						</div>
+
+
+<!--Modal: modalYoutube-->
+<div class="modal fade" id="modalyoutube" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+
+        <!--Content-->
+        <div class="modal-content">
+
+           <iframe width="560" height="315" src="{{series.links}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+        </div>
+        <!--/.Content-->
+
+    </div>
+</div>
+<!--Modal: modalYoutube-->
 						<div class="btn-transform transform-vertical">
 							<div><a href="#" class="item item-1 yellowbtn"> <i class="fa-share-alt fa point"></i> Compartir</a></div>
 							<div><a data-toggle="modal" data-target="#modalSocial"class="item item-2 yellowbtn"><i class="fa-share-alt fa point"></i></a></div>
