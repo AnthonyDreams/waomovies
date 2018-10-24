@@ -7649,6 +7649,13 @@ p.ceb-single {
   width: 170px;
 }
 
+@media (max-width: 667px) {
+  .slick-dots {
+    display: none !important;
+  }
+
+}
+
 #imgslider {
   width: 185px; 
   height:260px;

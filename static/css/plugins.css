@@ -2703,12 +2703,7 @@
     width: 170px !important;
 }
 
-@media (max-width: 667px) {
-  .slick-dots {
-    display: none !important;
-  }
 
-}
 [dir='rtl'] .slick-slide
 {
     float: right;
