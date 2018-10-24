@@ -2672,8 +2672,42 @@
     display: none;
     float: left;
 
-    height: 100%;
+    height: auto;
     min-height: 1px;
+}
+
+#tab3 .slick-slide
+{
+    
+
+    height: auto;
+    min-height: 1px;
+    width: 170px !important;
+}
+
+#tab2 .slick-slide
+{
+    
+
+    height: auto;
+    min-height: 1px;
+    width: 170px !important;
+}
+
+#tab23 .slick-slide
+{
+    
+
+    height: auto;
+    min-height: 1px;
+    width: 170px !important;
+}
+
+@media (max-width: 667px) {
+  .slick-dots {
+    display: none !important;
+  }
+
 }
 [dir='rtl'] .slick-slide
 {

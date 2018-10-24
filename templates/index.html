@@ -135,7 +135,7 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 					<ul class="tab-links">
 						<li class="active"><a href="#tab1">#Popular</a></li>
 						{% if request.user.favoritos %}
-						<li><a href="#tab2"> #Seleccionada para ti</a></li>
+						<li><a href="#tab2"> #Para ti</a></li>
 						{% else %}
 						{% endif %}
 						<!-- lo que tengo que hacer aquí, es decirle a la base de datos
@@ -580,21 +580,24 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 				            	</div>
 				            </div>
 				        </div>
+
+
 				        <div id="tab2" class="tab">
 				           <div id="" class="row">
-				            	<div  class="slick-multiItem">
+				            	<div  class="slick-multiItem" >
 				            	{% if request.user.favoritos %}
 				            		{% for a in peliculasfav %}
 				            			{% if not a.id in favaid %}
-				            		<div id="zzz{{a.id}}"  class="slide-it">
-				            			<div id="" class="movie-item">
-					            			<div class="mv-img">
-					            				<img src="{{ a.Cover.url }}" alt="" width="185" height="284">
+
+				            			<div style="">
+				            		<div id="zzz{{a.id}}"  class="slide-it" style="width: 120px;" >
+				            			<div id="" class="movie-item" style="width: 150px;">
+					            			<div class="mv-img" >
+					            				<img id="imgslider" src="{{ a.Cover.url }}" alt="" >
 					            			</div>
 					            			<div class="hvr-inner" id="hvras{{a.id}}">
 					            				<a href="{% url 'peliculasO' slug=a.slug %}" style="color: white; width: 100%; top: 28% ; position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 50px; text-align: center; font-weight: bold;" class="fa fa-play point" aria-hidden="true"></i> </a>
 	
-
 					            				{% if request.user.is_authenticated %}
 
 
@@ -885,11 +888,14 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 					            			</div>
 					            		</div>
 				            		</div>
+				            		</div>
 				            		{% endif %}
 				            		{% endfor %}
 				            		{% endif %}
+
 									
 				            	</div>
+
 				            </div>
 				        </div>
 				        <div id="tab3" class="tab">
@@ -898,8 +904,8 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 				            		{% if topsemanal %}
 				            		{% for kk in topsemanal %}
 
-				            		<div class="slide-it">
-				            			<div class="movie-item">
+				            		<div class="slide-it" style="width: 120px;">
+				            			<div class="movie-item" style="width: 150px;">
 					            			<div class="mv-img">
 					            				<img src="{{ kk.pelicula.Cover.url }}" alt="" width="185" height="284">
 					            			</div>
@@ -949,10 +955,10 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 				<div class="tabs">
 					<ul class="tab-links-2">
 						<li class="active"><a href="#tab21">#Series</a></li>
-						<li class=""><a href="#tab22">#últimos capitulos</a></li>
+						<li class=""><a href="#tab22">#últimos</a></li>
 						<li><a href="#tab23"> #Top semanal  </a></li>
 						{% if request.user.favoritos_series %}
-						<li><a href="#tab24">#Seleccionada para ti</a></li>
+						<li><a href="#tab24">#Para ti</a></li>
 						{% endif %}
 
 					</ul>
@@ -1344,6 +1350,7 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 				            		{% endif %}
 									
 				            	</div>
+
 				            </div>
 			       	 	</div>
 				    </div>

@@ -172,14 +172,14 @@ def inicio(request):
 	count_series = Hitcount_Series.objects.all()
 
 	if count:
-		topsemanal = Hitcount.objects.filter(publish__day__range=(datetime.now().day - 7,datetime.now().day + 7)).order_by('-hitcount')
+		topsemanal = Hitcount.objects.filter(publish__day__range=(datetime.now().day - 7,datetime.now().day + 7)).order_by('-hitcount')[:20]
 		
 
 	else:
 		topsemanal = False
 		topsemanall = False
 	if count_series:
-		topsemanal_serie = Hitcount_Series.objects.filter(capitulo_id__isnull=True).order_by('-hitcount')
+		topsemanal_serie = Hitcount_Series.objects.filter(capitulo_id__isnull=True).order_by('-hitcount')[:20]
 		
 
 	else:
@@ -296,9 +296,9 @@ def inicio(request):
 		genero1u = resultado[0][0]
 		genero2u = resultado[1][0]
 		if peliculasfavcount < 6:
-			peliculasfav = list(chain(Peliculas.objects.all().filter(Q(tema__icontains=favastema)|Q(tag1__in=favastag1)|Q(tag2__in=favastag2)|Q(tag3__in=favastag3)).exclude(id__in=favaid), Peliculas.objects.all().filter(Q(genero=genero1u)|Q(genero2=genero2u))))
+			peliculasfav = list(chain(Peliculas.objects.all().filter(Q(tema__icontains=favastema)|Q(tag1__in=favastag1)|Q(tag2__in=favastag2)|Q(tag3__in=favastag3)).exclude(id__in=favaid), Peliculas.objects.all().filter(Q(genero=genero1u)|Q(genero2=genero2u))))[:20]
 		else:
-			peliculasfav = Peliculas.objects.all().filter(Q(tema__icontains=favastema)|Q(tag1__in=favastag1)|Q(tag2__in=favastag2)|Q(tag3__in=favastag3)).exclude(id__in=favaid)
+			peliculasfav = Peliculas.objects.all().filter(Q(tema__icontains=favastema)|Q(tag1__in=favastag1)|Q(tag2__in=favastag2)|Q(tag3__in=favastag3)).exclude(id__in=favaid)[:20]
 
 	else:
 		peliculasfav = False
