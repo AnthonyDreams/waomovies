@@ -25,7 +25,7 @@ SECRET_KEY = 'j$z5qv+cug3pd8p6#jnbj+mdn$0x#fonrlk#=&f*1f0_e)=&yt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wmoviestest.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','wmoviestest.herokuapp.com']
 #ALLOWED_HOSTS = []
 
 

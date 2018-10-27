@@ -554,6 +554,7 @@ def search_series(request):
 			peliculase.append(i.series)
 
 		srch = request.POST['src']
+		slugsearch = ""
 		juan = []
 		count = -1
 		index = ""
@@ -561,6 +562,10 @@ def search_series(request):
 		if srch:
 			juan.append(srch)
 
+			for xy in srch:
+				if xy == " ":
+					xy = "-"
+				slugsearch += xy
 
 			for b in srch:
 				count += 1 
@@ -572,8 +577,8 @@ def search_series(request):
 		
 
 		if srch:
-			match = Series.objects.filter(Q(titulo__icontains=srch)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index))
-			matchc = Series.objects.filter(Q(titulo__icontains=srch)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)).count()
+			match = Series.objects.filter(Q(titulo__icontains=srch)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch))
+			matchc = Series.objects.filter(Q(titulo__icontains=srch)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch)).count()
 			paginator = Paginator(match, 20)
 			page = request.GET.get('page')
 			try:
