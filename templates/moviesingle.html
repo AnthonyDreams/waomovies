@@ -1083,13 +1083,40 @@ $(this).remove();
 
       <!-- Button trigger modal-->
 
+<style type="text/css">
+    
+@media (max-width: 628px) {
+
+    .trailerso  {
+        width: 400px;
+    }
+
+    .trailerso iframe {
+        width: 400px;
+    }
+}
+
+@media (max-width: 419px) {
+
+    .trailerso  {
+        width: 300px;
+        margin-left: 50px;
+        top: 60px;
+    }
+
+    .trailerso iframe {
+        width: 300px;
+    }
+}
+
+</style>
 
 <!--Modal: modalYoutube-->
 <div class="modal fade" id="modalyoutube" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog cascading-modal" role="document">
 
         <!--Content-->
-        <div class="modal-content">
+        <div class="modal-content trailerso">
 
            <iframe width="560" height="315" src="{{peliculaa.links}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 

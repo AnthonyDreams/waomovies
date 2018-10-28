@@ -1076,7 +1076,33 @@ $(this).remove();
 							<div><a data-toggle="modal" data-target="#modalyoutube" class="item item-2 redbtn "><i class="fa fa-play point"></i></a></div>
 						</div>
 
+<style type="text/css">
+    
+@media (max-width: 628px) {
 
+    .trailerso  {
+        width: 400px;
+    }
+
+    .trailerso iframe {
+        width: 400px;
+    }
+}
+
+@media (max-width: 419px) {
+
+    .trailerso  {
+        width: 300px;
+        margin-left: 50px;
+        top: 60px;
+    }
+
+    .trailerso iframe {
+        width: 300px;
+    }
+}
+
+</style>
 <!--Modal: modalYoutube-->
 <div class="modal fade" id="modalyoutube" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog cascading-modal" role="document">
@@ -1107,7 +1133,7 @@ $(this).remove();
     <div class="modal-dialog cascading-modal" role="document">
 
         <!--Content-->
-        <div class="modal-content">
+        <div class="modal-content trailerso">
 
             <!--Header-->
             <div class="modal-header light-blue darken-3 white-text">
