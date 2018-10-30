@@ -1,1 +1,1 @@
-web: gunicorn --timeout 120 --workers=8 --preload Wao.wsgi
+web: gunicorn Wao.wsgi --timeout 120 --workers=3 --preload
