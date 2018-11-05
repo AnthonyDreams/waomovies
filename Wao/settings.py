@@ -196,11 +196,12 @@ else:
 	AWS_LOCATION = 'static'
 	AWS_DEFAULT_ACL = "public-read"
 	AWS_CLOUDFRONT_DOMAIN = "d3mp3oxoqwxddf.cloudfront.net"
+	CLOUDFRONT_DOMAIN = "d11nqwgsnjp6i8.cloudfront.net"
 	AWS_CLOUDFRONT_ID = "E1VWKMT8Y4CWEQ"
 
 
 	AWS_PRELOAD_METADATA = True
-	STATIC_URL = 'https://%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, AWS_LOCATION)
+	STATIC_URL = 'https://%s/%s/' % (CLOUDFRONT_DOMAIN, AWS_LOCATION)
 	STATICFILES_STORAGE = 'Wao.storage_backends.StaticStorage'
 	ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 	AWS_PUBLIC_MEDIA_LOCATION = 'media'
