@@ -201,9 +201,10 @@ else:
 
 	AWS_PRELOAD_METADATA = True
 	STATIC_URL = 'https://%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, AWS_LOCATION)
+	STATICFILES_STORAGE = 'Wao.storage_backends.StaticStorage'
 	ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 	AWS_PUBLIC_MEDIA_LOCATION = 'media'
 	MEDIA_URL = '//%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, AWS_PUBLIC_MEDIA_LOCATION)
-	
+
 	DEFAULT_FILE_STORAGE = 'Wao.storage_backends.PublicMediaStorage'
 	AWS_DEFAULT_ACL = None
