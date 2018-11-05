@@ -976,7 +976,7 @@ def Orden(request, generos):
 	peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
 	peliculase = []
 
-	paginator = Paginator(genero, 20)
+	paginator = Paginator(genero, 30)
 	page = request.GET.get('page')
 	try:
 		peliculas = paginator.page(page)
