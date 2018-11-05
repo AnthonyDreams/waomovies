@@ -189,15 +189,21 @@ else:
 	AWS_SECRET_ACCESS_KEY = 'imMFZosZQ//QfFz0IG5Rc7fNvfk0zKvuPldMHlxH'
 	AWS_STORAGE_BUCKET_NAME = 'waomovies'
 	AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-	AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
+	AWS_HEADERS = {
+    'Expires': 'Thu, 15 Apr 2010 20:00:00 GMT',
+    'Cache-Control': 'max-age=86400',
 }
 	AWS_LOCATION = 'static'
+	AWS_DEFAULT_ACL = "public-read"
+	AWS_CLOUDFRONT_DOMAIN = "d3mp3oxoqwxddf.cloudfront.net"
+	AWS_CLOUDFRONT_ID = "E1VWKMT8Y4CWEQ"
 
 
 	AWS_PRELOAD_METADATA = True
-	STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+	STATIC_URL = 'https://%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, AWS_LOCATION)
 	ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 	AWS_PUBLIC_MEDIA_LOCATION = 'media'
+	MEDIA_URL = '//%s/%s/' % (AWS_CLOUDFRONT_DOMAIN, AWS_PUBLIC_MEDIA_LOCATION)
+	
 	DEFAULT_FILE_STORAGE = 'Wao.storage_backends.PublicMediaStorage'
 	AWS_DEFAULT_ACL = None
