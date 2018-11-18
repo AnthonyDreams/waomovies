@@ -861,8 +861,8 @@ def search_result(request, src):
 	
 
 	if srch:
-		match = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch))
-		matchc = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch)).count()
+		match = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(tema__icontains=srch)|Q(tag1__icontains=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(slug__icontains=slugsearch))
+		matchc = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(tema__icontains=srch)|Q(tag1__icontains=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(slug__icontains=slugsearch)).count()
 		paginator = Paginator(match, 30)
 		antes = ""
 		if matchc == 0:
