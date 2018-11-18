@@ -1055,7 +1055,7 @@ var resultac = document.getElementById('result').style.display= "none";
         {% csrf_token %}
       <input type="text" placeholder="Buscar en WaoMovies..." name="src" id="search" autocomplete="off">
       </div>
-      <ul class="list-group" id="result" style="margin-left: -37px;  "></ul>
+      <ul class="list-group" id="result" style="margin-left: -37px; position: absolute;"></ul>
       </form>
       
   </div>
@@ -1071,7 +1071,7 @@ var resultac = document.getElementById('result').style.display= "none";
   }
 </script>
 
-<script>
+<!--script>
 $(document).ready(function(){
  $.ajaxSetup({ cache: false });
  $('#search').keyup(function(es){
@@ -1086,10 +1086,10 @@ $(document).ready(function(){
   var widthscreen = $( window ).width()
 
   if (widthscreen >= 767) {
-    var search = document.getElementsById('searchshow').style.display = 'initial'
+    var search = document.getElementById('searchshow').style.display = 'initial'
   $.getJSON('/pelis/', function(data) {
    $.each(data, function(key, value){
-    if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1 && result.value.length > 1 && widthscreen > 767)
+    if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1 && resulta.value.length > 1 && widthscreen > 767)
     {
      $('#result').append('<li class="list-group-item link-class"><a style="color: black;" href="/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
     }
@@ -1125,7 +1125,7 @@ $(document).ready(function(){
           }
       }
 });
-</script>
+</script-->
 {% else %}
 <script type="text/javascript">
   function myfunctionssa() {

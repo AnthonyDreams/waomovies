@@ -1313,7 +1313,7 @@ $(this).remove();
 												    <div class="mt-3">
 												    	<div class="md-form form-lg">
     
-											    <small><img src="http://127.0.0.1:8000/static/img/star/{{promedio}}.png" style="width: 140px; height: 30px;" title="Inicia Sesión para poder votar"></small>
+											    <small><img src="https://d3mp3oxoqwxddf.cloudfront.net/static/img/star/{{promedio}}.png" style="width: 140px; height: 30px;" title="Inicia Sesión para poder votar"></small>
 											</div>
 																							        
 												    </div>
@@ -1767,7 +1767,7 @@ for (i = 0; i < acc.length; i++) {
 						            			<p class="tags">
 						            				
 
-						            				<span class="time"><a href="#">{{ series.palabra_clave }}</a></span>
+						            				<span class="time"><span class="time"><a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag_principal }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tema }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag1 }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag2 }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag3 }}</a></span></span>
 													
 						            			</p>
 						            		</div>
@@ -1935,7 +1935,7 @@ for (i = 0; i < acc.length; i++) {
             <p class="time">
               {% for aa in votacion3 %}
 {% if i.user_id == aa.user_id %}
-             <img src="http://127.0.0.1:8000/static/img/star/{{aa}}.png" style="top: -24px; position: relative; width: 82px; height: 16px;"> 
+             <img src="https://d3mp3oxoqwxddf.cloudfront.net/static/img/star/{{aa}}.png" style="top: -24px; position: relative; width: 82px; height: 16px;"> 
               {% else %}
               
               {% endif %}

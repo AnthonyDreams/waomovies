@@ -6,7 +6,7 @@ from apps.peliculas.views import (peliculas_list, peliculasO, Generos,
     answer_me, myview, peliculas_listodo,test,
     FavoritoFormView, EliminarFavoritoFormView, filtrar, cookies,
     GeneroF, GeneroF_eliminar,pelis_user_nove,añadiste,
-    seguirviendo,seguirviendo_series,cambiar_votaciono)
+    seguirviendo,seguirviendo_series,cambiar_votaciono, search_result, genero_list)
 
 
 
@@ -21,14 +21,17 @@ urlpatterns = [
 	re_path(r'^peliculas/(?P<slug>[\w-]+)/$', peliculasO, name='peliculasO'),
 	path(r'geneross/', Generos, name='Generos'),
     re_path(r'ver%todo/(?P<filtro>\w+)/$', peliculas_list, name='peliculas_list'),
+    re_path(r'peliculas_por_genero/(?P<generos>\w+)/(?P<filtro>\w+)/$', genero_list, name='genero_list'),
+
     re_path(r'ver%todo/$', peliculas_listodo, name='peliculas_listodo'),
 
     path(r'search/', search, name='search'),
+    re_path(r'^search/(?:search-(?P<src>\w+)/)?$', search_result, name='search_result'),
     path(r'filter/', filtrar, name='filtrar'),
 
 	re_path(r'^peliculas_por_genero/(?P<generos>\w+)/$', Orden, name='Orden'),
-    re_path(r'votaciono/(?P<id>\d+)/$', votaciono, name='votaciono'),
-    re_path(r'cambiar_votaciono/(?P<id>\d+)/as/$', cambiar_votaciono, name='cambiar_votaciono'),
+    re_path(r'votaciono/(?P<id>\d+)/as/$', votaciono, name='votaciono'),
+    re_path(r'cambiar_votaciono/(?P<id>\d+)/asm/$', cambiar_votaciono, name='cambiar_votaciono'),
 
     re_path(r'reportar/(?P<id>\d+)/$', reportar, name='reportar'),
     re_path(r'^join/', VotacionFormView.as_view()),

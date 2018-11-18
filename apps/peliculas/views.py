@@ -680,11 +680,11 @@ def peliculas_list(request, filtro):
 
 	for i in peliculasee:
 		peliculase.append(i.peliculas)
-	if "_" in filtro:
+	if "_" in filtro[0]:
 		peliculas_list = Peliculas.objects.all().order_by("-" + juan)
 	else: 
 		peliculas_list = Peliculas.objects.all().order_by(filtro)
-	paginator = Paginator(peliculas_list, 20)
+	paginator = Paginator(peliculas_list, 30)
 	page = request.GET.get('page')
 	try:
 		peliculas = paginator.page(page)
@@ -781,12 +781,6 @@ def edicion2(palabra):
 def search(request):
 	if request.method=='POST':
 
-		peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
-		peliculase = []
-
-		for i in peliculasee:
-			peliculase.append(i.peliculas)
-
 		srch = request.POST['src']
 		slugsearch = ""
 
@@ -810,72 +804,111 @@ def search(request):
 		# -> NFC
 		
 
-		if srch:
-			match = Peliculas.objects.filter(Q(titulo__icontains=srch)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch))
-			matchc = Peliculas.objects.filter(Q(titulo__icontains=srch)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch)).count()
-			paginator = Paginator(match, 20)
-			antes = ""
-			if matchc == 0:
-				for i in match:
-					if i == " ":
-						break
-					else:
-						antes += i
-				match = Peliculas.objects.filter(titulo__startswith=antes)
-
-			page = request.GET.get('page')
-			try:
-				paginator = paginator.page(page)
-			except PageNotAnInteger:
-				paginator = paginator.page(1)
-			except EmptyPage:
-				paginator = paginator.page(paginator.num_pages)
+		if srch and not srch == "":
+			return HttpResponseRedirect('/search/search-' + b)
+		if srch == "":
+			return HttpResponseRedirect('/ver%todo/')
 
 
+	try:			
+		context = {'juan':srch, 'series_filt':series_filt, 'peliculase':peliculase, }
+	except UnboundLocalError:
+		return HttpResponseRedirect('/ver%todo/')
+	return render(request, 'movielist.html', context)
 
 
-			if paginator:
-				contexto = {
-				'peliculas':paginator,
-				'count':matchc,
-				'juan':srch,
-				'series_filt':series_filt,
-				'peliculase':peliculase,
+def search_result(request, src):
 
-				}
-				return render(request, 'movielist.html', contexto)
-			elif paginator == 0:
-				
-				for i in srch:
-					srch = correccion(i)
-					print(srch)
 
-				match = Peliculas.objects.filter(Q(titulo__icontains=i))
-				
+	peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
+	peliculase = []
+
+	for i in peliculasee:
+		peliculase.append(i.peliculas)
+
+	srch = src
+	slugsearch = ""
+
+	juan = []
+	count = -1
+	index = ""
+	series_filt = False
+	if srch:
+		juan.append(srch)
+		for xy in srch:
+			if xy == "_":
+				xy = "-"
+			slugsearch += xy
+
+		for b in srch:
+			count += 1 
+			if b == "_":
+				b = "_"
+			index += b
+
+	# -> NFC
+	
+
+	if srch:
+		match = Peliculas.objects.filter(Q(titulo__icontains=srch)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch))
+		matchc = Peliculas.objects.filter(Q(titulo__icontains=srch)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch)).count()
+		paginator = Paginator(match, 30)
+		antes = ""
+		if matchc == 0:
+			for i in match:
+				if i == " ":
+					break
+				else:
+					antes += i
+			match = Peliculas.objects.filter(titulo__startswith=antes)
+
+		page = request.GET.get('page')
+		try:
+			paginator = paginator.page(page)
+		except PageNotAnInteger:
+			paginator = paginator.page(1)
+		except EmptyPage:
+			paginator = paginator.page(paginator.num_pages)
+
+
+
+
+		if paginator:
+			contexto = {
+			'peliculas':paginator,
+			'count':matchc,
+			'juan':srch,
+			'series_filt':series_filt,
+			'peliculase':peliculase,
+
+			}
+			return render(request, 'movielist.html', contexto)
+		elif paginator == 0:
+			
+			for i in srch:
+				srch = correccion(i)
+				print(srch)
+
+			match = Peliculas.objects.filter(Q(titulo__icontains=i))
 			
 		
-				contexto = {
-				'sr':match,
-				'count':matchc,
-				'juan':srch,
-				'series_filt':series_filt,
-				'peliculase':peliculase,
+	
+			contexto = {
+			'sr':match,
+			'count':matchc,
+			'juan':srch,
+			'series_filt':series_filt,
+			'peliculase':peliculase,
 
-				}
-				return render(request, 'movielist.html', contexto)
-			else: 
-				pass
+			}
+			return render(request, 'movielist.html', contexto)
 		else:
 			srch = "No has buscado nada"
 			return HttpResponseRedirect('/ver%todo/')
-	else:
-		srch = "No has buscado nada"
-		return HttpResponseRedirect('/ver%todo/')
 
-				
+			
 	context = {'juan':srch, 'series_filt':series_filt, 'peliculase':peliculase, }
 	return render(request, 'movielist.html', context)
-
 
 def filtrar(request):
 	if request.method=='POST':
@@ -948,6 +981,10 @@ def filtrar(request):
 			}
 	return render(request, 'movielist.html', contexto)
 
+def filtrar_resultado(request):
+	pass
+
+
 def Orden(request, generos):
 
 	generocount = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).count()
@@ -1012,27 +1049,80 @@ def Orden(request, generos):
 
 	return render(request, 'generoview.html', contexto)
 
-# este es el formulario de votacion, simple
-def votaciono(request, id):
-	if not request.user.is_active:
-		raise Http404
-		
-	form = votacion(request.POST or None, request.FILES or None)
-	if form.is_valid():
-		instance = form.save(commit=False)
-		instance.user = request.user
-		instance.pelicula_id = id
-		instance.save()
-		# message success
-		messages.success(request, "Votación enviada")
-		return HttpResponseRedirect(instance.get_absolute_url())
+
+def genero_list(request, generos, filtro):
+
+	generocount = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).count()
+	comedia = Generox.objects.get(genero_name="comedia")
+	accion = Generox.objects.get(genero_name="accion")
+	ciencia_ficcion = Generox.objects.get(genero_name="ciencia_ficcion")
+
+	romance = Generox.objects.get(genero_name="romance")
+
+	terror = Generox.objects.get(genero_name="terror")
+
+	fantasia = Generox.objects.get(genero_name="fantasia")
+
+	aventura = Generox.objects.get(genero_name="aventura")
+
+	crimen = Generox.objects.get(genero_name="crimen")
+	documental = Generox.objects.get(genero_name="documental")
+	suspenso = Generox.objects.get(genero_name="suspenso")
+	animacion = Generox.objects.get(genero_name="animacion")
+	drama = Generox.objects.get(genero_name="drama")
+
+	genero = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by('-puntuacion')
+
+	genero2 = Peliculas.objects.filter(genero=generos[0])
+	genero3 = generos
+	seriesall = False
+	juan = filtro.lstrip("_")
+	filtron = filtro
+	
+
+	peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
+	peliculase = []
+
+	for i in peliculasee:
+		peliculase.append(i.peliculas)
+	if "_" in filtro[0]:
+		peliculas_list = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by("-" + juan)
+	else: 
+		peliculas_list = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by(filtro)
+	paginator = Paginator(peliculas_list, 30)
+	page = request.GET.get('page')
+	try:
+		peliculas = paginator.page(page)
+	except PageNotAnInteger:
+		peliculas = paginator.page(1)
+	except EmptyPage:
+		peliculas = paginator.page(paginator.num_pages)
+
+	contexto = {
+	'genero':genero,
+	'generocount':generocount,
+	'genero2':genero2,
+	'genero3':generos,
+	'peliculas':peliculas,
+	'filtro':filtron,
+	'seriesall':seriesall,
+	'peliculase':peliculase,
+	'comedia':comedia,
+	'ciencia_ficcion':ciencia_ficcion,
+	'terror':terror,
+	'romance':romance,
+	'aventura':aventura,
+	'suspenso':suspenso,
+	'documental':documental,
+	'crimen':crimen,
+	'fantasia':fantasia,
+	'animacion':animacion,
+	'drama':drama,
+	'accion':accion,
 
 
-	context = {
-		"form": form,
 	}
-	return render(request, "login.html", context)
-
+	return render(request, 'generoview.html', contexto)
 
 def añadirfavorito(request, id):
 	if not request.user.is_active:

@@ -386,9 +386,16 @@
 				<div class="topbar-filter fw">
 					<p> <span>{{generocount}}{% if generocount > 1 or generocount == 0  %} películas</span> encontradas en total {% else %} película</span> encontrada en total {% endif %}</p>
 					<label>Ordenar por:</label>
-					<select>
-						<option value="popularity">Mejor puntuada</option>
+					<form name="FORMULARIOD">
+					<select name="DESPLEGABLED" onChange='location.replace(document.FORMULARIOD.DESPLEGABLED.value);'>
+						
+						<option value="/peliculas_por_genero/{{ genero3 }}/">Orden de subida</option>
+						<option value="/peliculas_por_genero/{{ genero3 }}/_puntuacion/">Mejor puntuada</option>
+						<option value="/peliculas_por_genero/{{ genero3 }}/puntuacion/">Peor puntuada</option>
+						<option value="/peliculas_por_genero/{{ genero3 }}/_fecha_de_lanzamiento/">Más reciente</option>
+						<option value="/peliculas_por_genero/{{ genero3 }}/fecha_de_lanzamiento/">Más antigua</option>
 					</select>
+					</form>
 					
 				</div>
 				<div class="flex-wrap-movielist mv-grid-fw">
@@ -411,7 +418,7 @@
 				<div class="topbar-filter">
 					<label>Películas por paginas:</label>
 					<select>
-						<option value="range">20</option>
+						<option value="range">30</option>
 					</select>
 					
 					<div class="pagination2" style="position: relative; top: 10px;">
