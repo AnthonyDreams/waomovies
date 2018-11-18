@@ -805,7 +805,7 @@ def search(request):
 		
 
 		if srch and not srch == "":
-			return HttpResponseRedirect('/search/search-' + b)
+			return HttpResponseRedirect('/search/search-' + index)
 		if srch == "":
 			return HttpResponseRedirect('/ver%todo/')
 
@@ -828,7 +828,7 @@ def search_result(request, src):
 
 	srch = src
 	slugsearch = ""
-
+	srchh = ""
 	juan = []
 	count = -1
 	index = ""
@@ -846,12 +846,23 @@ def search_result(request, src):
 				b = "_"
 			index += b
 
+		for b in srch:
+			count += 1 
+			if b == "_":
+				b = "_"
+			index += b
+
+		for n in srch:
+			if n == "_":
+				n = " "
+			srchh += n
+
 	# -> NFC
 	
 
 	if srch:
-		match = Peliculas.objects.filter(Q(titulo__icontains=srch)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch))
-		matchc = Peliculas.objects.filter(Q(titulo__icontains=srch)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch)).count()
+		match = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch))
+		matchc = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch)).count()
 		paginator = Paginator(match, 30)
 		antes = ""
 		if matchc == 0:
@@ -877,7 +888,7 @@ def search_result(request, src):
 			contexto = {
 			'peliculas':paginator,
 			'count':matchc,
-			'juan':srch,
+			'juan':srchh,
 			'series_filt':series_filt,
 			'peliculase':peliculase,
 
@@ -885,9 +896,9 @@ def search_result(request, src):
 			return render(request, 'movielist.html', contexto)
 		elif paginator == 0:
 			
-			for i in srch:
-				srch = correccion(i)
-				print(srch)
+			for i in srchh:
+				srchh = correccion(i)
+				print(srchh)
 
 			match = Peliculas.objects.filter(Q(titulo__icontains=i))
 			
@@ -896,18 +907,16 @@ def search_result(request, src):
 			contexto = {
 			'sr':match,
 			'count':matchc,
-			'juan':srch,
+			'juan':srchh,
 			'series_filt':series_filt,
 			'peliculase':peliculase,
 
 			}
 			return render(request, 'movielist.html', contexto)
-		else:
-			srch = "No has buscado nada"
-			return HttpResponseRedirect('/ver%todo/')
+	
 
 			
-	context = {'juan':srch, 'series_filt':series_filt, 'peliculase':peliculase, }
+	context = {'juan':srchh, 'series_filt':series_filt, 'peliculase':peliculase, }
 	return render(request, 'movielist.html', context)
 
 def filtrar(request):
