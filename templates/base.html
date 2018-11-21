@@ -19,6 +19,8 @@
            <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
+<script type="text/javascript" src="{% static 'js/websocketbridge.js' %}"></script>
+
 
 
 <style type="text/css">
@@ -158,6 +160,21 @@ outline:none;
 </head>
 {% endblock %}
 <body >
+  <ul id="notifylist"></ul>
+    <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const webSocketBridge = new channels.WebSocketBridge();
+      const nl = document.querySelector("#notifylist");
+      
+      webSocketBridge.connect('/ws/');
+      webSocketBridge.listen(function(action, stream) {
+        console.log("RESPONSE:", action, stream);
+        
+      })
+      document.ws = webSocketBridge; /* for debugging */
+    })
+    </script>
 
   <style type="text/css">
   .btn-floating:hover {
