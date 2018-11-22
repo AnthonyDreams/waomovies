@@ -25,7 +25,7 @@ SECRET_KEY = 'j$z5qv+cug3pd8p6#jnbj+mdn$0x#fonrlk#=&f*1f0_e)=&yt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','wmoviestest.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','wmoviestest.herokuapp.com', "0.0.0.0"]
 #ALLOWED_HOSTS = []
 
 
@@ -212,3 +212,15 @@ else:
 
 	DEFAULT_FILE_STORAGE = 'Wao.storage_backends.PublicMediaStorage'
 	AWS_DEFAULT_ACL = None
+
+
+
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('redis-server-name', 6379)],
+        },
+    }
+}

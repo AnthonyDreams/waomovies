@@ -160,16 +160,15 @@ outline:none;
 </head>
 {% endblock %}
 <body >
-  <ul id="notifylist"></ul>
     <script>
 
     document.addEventListener('DOMContentLoaded', function() {
       const webSocketBridge = new channels.WebSocketBridge();
       const nl = document.querySelector("#notifylist");
       
-      webSocketBridge.connect('/ws/');
+      webSocketBridge.connect('ws://' + window.location.host + '/ws/');
       webSocketBridge.listen(function(action, stream) {
-        console.log("RESPONSE:", action, stream);
+        console.log("RESPONSE:", action);
         
       })
       document.ws = webSocketBridge; /* for debugging */

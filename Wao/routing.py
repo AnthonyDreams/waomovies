@@ -1,10 +1,15 @@
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.urls import path, re_path
-
-from apps.notificaciones.consumers import EchoConsumer
-
+from django.conf.urls import url
+from channels.auth import AuthMiddlewareStack
+from apps.notificaciones.consumers import TickTockConsumer
+from apps.notificaciones import routing
 application = ProtocolTypeRouter({
-	"websocket": URLRouter([
-		re_path("ws/", EchoConsumer),
-		])
-	})
+
+    'websocket': AuthMiddlewareStack( 
+    	URLRouter(
+        routing.websocket_urlpatterns
+    )
+    	),
+
+    })
