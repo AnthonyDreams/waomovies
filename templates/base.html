@@ -166,7 +166,7 @@ outline:none;
       const webSocketBridge = new channels.WebSocketBridge();
       const nl = document.querySelector("#notifylist");
       
-      webSocketBridge.connect('ws://' + window.location.host + '/ws/');
+      webSocketBridge.connect('wss://' + window.location.host + '/ws/');
       webSocketBridge.listen(function(action, stream) {
         console.log("RESPONSE:", action);
         
