@@ -8673,7 +8673,7 @@ header#headerv3-light {
     height: auto !important;
     max-height: none !important;
   }
-  header .navbar-header {
+  header .navbar-header .header{
     width: 100%;
   }
   header .navbar-toggle {

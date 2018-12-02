@@ -439,10 +439,10 @@ document.getElementById('panelstreamcloud').style.display="none"
                         <span><i id="load" class="fa fa-bug icon2"></i><button form="reporte" onclick="reportar(this)" type="submit" style="color: #9DA1A5; background:none; border:none; cursor: pointer;">Reportar episodio</button></span>
                         <span style="display: none;"><form id="reporte" class="reportar" method="post" data-url="/reportar_capitulo/{{capitulo.id}}/reportar/" style="display: initial; position: relative; margin-top: -50px;" >{%csrf_token%}
 
-                          </form></span> <form method="post" action="/compartir/{{capitulo.id}}/{{capitulo.slug}}/" id="pu" name="algo">
+                          <!--/form></span> <form method="post" action="/compartir/{{capitulo.id}}/{{capitulo.slug}}/" id="pu" name="algo">
         {% csrf_token %}
    <select class="amigosshare" name="users_to_share" id="boot-multiselect-demo" multiple="multiple" onchange="cuales_seleccionados(document.algo.users_to_share);"></select><input type="hidden" name="oculto"> 
-</form>
+</form-->
                           
                         <!--Modal: modalSocial-->
 <div class="modal fade" id="modalSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
