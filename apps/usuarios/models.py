@@ -103,8 +103,20 @@ class Profile(models.Model):
 	expiration = models.DateTimeField(blank=True, null=True)
 	fav_peliculas = models.BooleanField(default=False)
 	fav_series = models.BooleanField(default=False)
+	codde = models.CharField(max_length=8, blank=True, null=True, unique=True)
+	AmiGos = models.ManyToManyField(Usuario, related_name='amigosfor')
 
+	def __str__(self):
+		return str(self.user.id)
 
+	@property
+	def superamigos(self):
+		selfa = self.AmiGos.all()
+		amiguitos = Usuario.objects.filter(id__in=selfa)
+		username_of_friends = []
+		for i in amiguitos:
+			username_of_friends.append(i.username)
+		return self.user.username
 	def get_absolute_url(self):
 		return reverse("user_detail", kwargs={"id": self.user.username})
 	

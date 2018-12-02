@@ -20,16 +20,18 @@ from apps.comentarios.models import *
 from django.db.models import Sum
 from .forms import *
 from urllib.parse import quote_plus
-from apps.usuarios.models import Usuario
+from apps.usuarios.models import Usuario, Profile
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 import json
 from apps.series.models import Series, Hitcount_Series, Capitulos
 from django.core import serializers
 from rest_framework.views import APIView
-from .serializers import peliserializer, COMENTARIOS,pelisnoveerializer,SEGUIRYVER,serieserializer
+from .serializers import Comparitapi,Friends, peliserializer, COMENTARIOS,notizerializer,pelisnoveerializer,SEGUIRYVER,serieserializer
 from apps.vermas_tarde.models import Vermastarde
-
+from apps.notificaciones.models import Notificaciones, Evento, Compartir
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 class pelis(APIView):
 	serializer = peliserializer
 	def get(self, request, format=None):
@@ -37,6 +39,53 @@ class pelis(APIView):
 		response = self.serializer(lista, many=True)
 		return HttpResponse(json.dumps(response.data))
 
+
+class Friendsitos(APIView):
+	serializer = Friends
+	def get(self, request, format=None):
+		listica = Profile.objects.filter(user=request.user.id)
+		for i in listica:
+			amis = i.AmiGos.all()
+		users_amigos = Profile.objects.filter(user__in=amis)
+		response = self.serializer(users_amigos, many=True)
+		return HttpResponse(json.dumps(response.data))
+
+class CompAPI(APIView):
+	serializer = Comparitapi
+	def get(self, request, format=None):
+		listica = Compartir.objects.filter(users_to_share=request.user.id).order_by('-timestampc')[:20]
+		response = self.serializer(listica, many=True)
+		return HttpResponse(json.dumps(response.data))
+
+class CompRead(APIView):
+	serializer = Comparitapi
+	def get(self, request, format=None):
+		listica = Compartir.objects.filter(users_to_share=request.user.id).order_by('-timestampc')[:20]
+		response = self.serializer(listica, many=True)
+		anadir_read = Compartir.objects.filter(users_to_share=request.user.id)
+		for a in anadir_read:
+			if not request.user in a.user_who_read.all():
+				a.user_who_read.add(request.user.id)
+		return HttpResponse(json.dumps(response.data))
+
+class Notifi(APIView):
+	serializer = notizerializer
+	def get(self, request, format=None):
+		noti = Notificaciones.objects.filter(user_a_notificar=request.user.id)
+		lista_noti = Evento.objects.filter(noti_de_evento__in=noti).order_by("-timestampe")[:20]
+		lista_noticount = Evento.objects.filter(noti_de_evento__in=noti, status="Unread").count()
+		response = self.serializer(lista_noti, many=True)
+		return HttpResponse(json.dumps(response.data))
+
+class Read(APIView):
+	serializer = notizerializer
+	def get(self, request, format=None):
+		noti = Notificaciones.objects.filter(user_a_notificar=request.user.id)
+		lista_noti = Evento.objects.filter(noti_de_evento__in=noti).order_by("-timestampe")[:20]
+		lista_noticount = Evento.objects.filter(noti_de_evento__in=noti, status="Unread").count()
+		response = self.serializer(lista_noti, many=True)
+		Evento.objects.filter(noti_de_evento__in=noti, status="Unread")[:20].update(status="Read")
+		return HttpResponse(json.dumps(response.data))
 
 class pelis_user_nove(APIView):
 	serializer = pelisnoveerializer

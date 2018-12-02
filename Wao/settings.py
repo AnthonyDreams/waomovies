@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['127.0.0.1','wmoviestest.herokuapp.com', "0.0.0.0"]
 # Application definition
 
 INSTALLED_APPS = [
+	'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django_currentuser.middleware.ThreadLocalUserMiddleware',
 ]
 
 ROOT_URLCONF = 'Wao.urls'
@@ -215,12 +217,21 @@ else:
 
 
 
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [('redis-server-name', 6379)],
-        },
-    }
-}
+if DEB:
+	CHANNEL_LAYERS = {
+	    'default': {
+	        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+	        'CONFIG': {
+	            'hosts': [('localhost', 6379)],
+	        },
+	    }
+	}
+else:
+	CHANNEL_LAYERS = {
+	    'default': {
+	        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+	        'CONFIG': {
+	            'hosts': [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+	        },
+	    }
+	}

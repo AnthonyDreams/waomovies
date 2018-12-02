@@ -1337,7 +1337,7 @@ h4 i{font: normal normal 30px/36px 'FontAwesome'; color: #5d6166; margin-right: 
 
 @media only screen and (max-width: 767px) {
 
-	img{width: 100%;}
+	
 	img.no_resize{width: auto;}
 	.box{overflow: visible;}
 	.mobile_txt_cntr{text-align: center;}

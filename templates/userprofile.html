@@ -70,16 +70,14 @@
 						</ul>
 					</div>
 
-{% if request.user.admin %}
 <div class="user-fav">
-						<p>Dashboard</p>
+						<p>Social</p>
 						<ul>
-							<li class="{% if not user_details and not user_favoritos and not series_fav and not vermas%}active{% endif %}"><a href="/usuario/{{request.user.username}}/">Usuarios</a></li>
-							<li class="{% if not user_details and not user_favoritos and not series_fav and not vermas%}active{% endif %}"><a href="/user_ver_favoritos/{{request.user.username}}/">Películas</a></li>
-							<li class="{% if not user_details and not user_favoritos and not series_fav and not vermas%}active{% endif %}"><a href="/user_ver_series_favoritos/{{request.user.username}}/">Series</a></li>
+							<li class="{% if not user_details and not user_favoritos and not series_fav and not vermas and amigosview%}active{% endif %}"><a href="/user_ver_amigos/{{request.user.username}}/">Amigos</a></li>
+							<li class="{% if not user_details and not user_favoritos and not series_fav and not vermas and actividad %}active{% endif %}"><a href="/actividadfeed/{{request.user.username}}/">Actividad</a></li>
+							<li class="{% if not user_details and not user_favoritos and not series_fav and not vermas and notificaciones%}active{% endif %}"><a href="/notificacionesfeed/{{request.user.username}}/">Notificaciones</a></li>
 						</ul>
 					</div>
-{% endif %}
 	
 					<div class="user-fav">
 						<p>Otros</p>
@@ -570,7 +568,7 @@
 				</div>
 			</div>
 		</div>
-		{% elif not user_favoritos and not user_details %}
+		{% elif not user_favoritos and not user_details and not amigosview and not notificaciones and not actividad %}
 		<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="topbar-filter user">
 				<p>{% if peliculas_list and series_list %}	{{ cantidad }}<span> Películas y series encontradas</span> {% elif peliculas_list %} {{ peliculas_list.count }} {% if peliculas_list.count == 1 %} <span>Película encontrada</span>{% else %} <span> Peliculas encontradas</span>{% endif %}{% elif series_list %}{{ series_list.count }}{% if series_list.count == 1 %} <span>Serie encontrada</span>{% else %}<span> Series encontradas</span>{%  endif %}{% else %}0<span>  Películas y series</span>{% endif %} </p>
@@ -686,7 +684,293 @@
 				</div>
 			</div>
 		{%endif %}
-	</div>
+
+{% if amigosview %}
+<div class="col-md-9 col-sm-12 col-xs-12">
+				
+				<br>
+				<div class="flex-wrap-movielist grid-fav">
+				<form  class="codegenerator" style="display: block; position: relative; top:-15px;" data-url="/codegenerator/" method="post"> {% csrf_token %}
+					<button class="btn btn-success btn-rounded" onclick="codegeneratorr(this)" id="codegenerator" type="submit" style="font-size: 16px;">Generar código</button>
+				</form>
+
+				<span style="margin-top: 30px; display: inline-block; position: absolute;"><p> Amigos:{% for amigs in amigos %}  {{amigs.AmiGos.count}}{% endfor %}</p></span>
+				<form class="agregar amigos" method="post" action="/agregaramigos/{{request.user.username}}/">{% csrf_token %}
+					<div class="md-form" style="position: absolute; left: 77%; margin-top: 30px;">
+  <input type="number" name="codigo" id="form1" class="form-control">
+  <label for="form1" style="color: white; font-size: 15px;"><i class="fa fa-add"></i> Añadir Amigo</label>
+</div>
+				</form>
+					<script type="text/javascript">
+	function codegeneratorr(b) {
+		var juan = b.id
+														
+
+
+														
+
+													var $myForm = $('.' + juan)
+													$myForm.submit(function(event){
+													    event.preventDefault()
+                										 event.stopImmediatePropagation();
+
+													    var $formData = $(this).serialize()
+													    var $thisURL = $myForm.attr('data-url') || window.location.href 
+													    $.ajax({
+													        method: "POST",
+													        url: $thisURL,
+													        data: $formData,
+													        success: handleFormSuccess,
+													        error: handleFormError,
+													        beforeSend: function () {
+           //   document.getElementById("sendingfav" + z).style.display = "initial";
+
+                  //  $("#" +z ).src="none";
+                    
+
+                     //Agregamos la clase loading al body
+                },
+													    })
+													})
+
+													function handleFormSuccess(data, textStatus, jqXHR){
+													    console.log(data)
+													    console.log(textStatus)
+													    console.log(jqXHR)
+													    $myForm[0].reset(); 
+    $("#coded").load(window.location + " #coded");
+   
+
+     
+
+
+          //    document.getElementById("sendingfav" + z).style.display = "none";
+
+              
+
+     
+
+
+													}
+
+													function handleFormError(jqXHR, textStatus, errorThrown){
+													    console.log(jqXHR)
+													    console.log(textStatus)
+													    console.log(errorThrown)
+													}
+													
+													
+	}
+</script>
+
+<span id="coded">
+{% if code.codde %}
+
+<span  style="text-align: right; position: absolute; left: 80%;"><p>Código: {{code.codde}}</p></span>
+{% else %}
+<span style="text-align: right; position: absolute; left: 40%;"><p>Aún no tienes un código, genera tu código presionando el boton.</p></span>
+{% endif %}
+</span>
+<!-- Section: Personal card -->
+<section class="my-5">
+
+  <!-- Grid row -->
+  <div class="row">
+{% for amigoss in amigos %}
+{% for obj in amigoss.AmiGos.all %}
+    <!-- Grid column -->
+    <div class="col-md-6 col-lg-3 col-sm-3">
+
+      <!-- Card -->
+      <div class="card card-personal">
+
+        <!-- Card image-->
+        <img class="card-img-top" src="{{obj.profile.perfil_img.url}}" alt="Card image cap">
+        <!-- Card image-->
+
+        <!-- Card content -->
+        <div class="card-body" style="background: white;">
+          <!-- Title-->
+          <a>
+            <h4 class="card-title title-one" style="color: #1C2833;">{{obj.username}}</h4>
+          </a>
+          <p class="card-meta" style="color: black;">Inició Sesión en {{ obj.create_date|date:"Y" }}</p>
+         
+          <hr>
+          <a class="card-meta"><span style="color: #707B7C; padding-left: 10px;"><i class="fa fa-user"></i> {{ obj.profile.AmiGos.count }}</span></a>
+          <a class="card-meta"><span style="color: #707B7C; padding-left: 10px;"><i class="fa fa-heart"></i> {{ obj.favoritos.count }} </span></a>
+          <a class="" style="color: #707B7C;" href="/removeamigos/{{obj.profile.codde}}/"><span style="padding-left: 10px;"><i class="fa fa-times"></i> Eliminar</span></a>
+          
+        </div>
+        <!-- Card content -->
+
+      </div>
+      <!-- Card -->
+
+    </div>
+    <!-- Grid column -->
+
+    {% endfor %}{% endfor %}
+
+   
+
+  </div>
+  <!-- Grid row -->
+
+</section>
+<!-- Section: Personal card -->
+				</div>		
+				
+			</div>
+		{% endif %}
+
+		{% if notificaciones %}
+<div class="col-md-9 col-sm-12 col-xs-12">
+				
+				<br>
+				<div class="flex-wrap-movielist grid-fav">
+				
+
+				<span style="margin-top: 30px; margin-bottom: 30px; display: inline-block; position: absolute; font-size: 16px;"><p> NOTIFICACIONES: {{getevent.count}}</p></span>
+				
+
+				</div>	
+
+				<!-- Section: Social newsfeed v.1 -->
+<section class="my-5" style="position: relative; top: 60px;">
+
+  <!-- Grid row -->
+  <div class="row">
+
+    <!-- Grid column -->
+    <div class="col-md-12">
+
+      <!-- Newsfeed -->
+      <div class="mdb-feed">
+
+{% for getevents in getevent %}
+        <!-- First news -->
+        <div class="news" style="padding-bottom: 35px;">
+
+          <!-- Label -->
+          <div class="label" style="display: inline-block; margin-right: 0px;">
+          	{% for creadores in getevents.creadores.all  %}
+            <img src="{{ creadores.profile.perfil_img.url }}" class="rounded-circle z-depth-1-half" style="width: 40px; height: 40px;">
+            {% endfor %}
+          </div>
+
+          <!-- Excerpt -->
+          <div class="excerpt" style="float: right; text-align: left; position: relative; right: 40%; ">
+
+            <!-- Brief -->
+            <div class="brief">
+              <a class="name text-white" href="#" style="cursor: text;">{{ getevents.mensaje }}</a> en <a href="/peliculas/{{ getevents.noti_de_evento }}/">{{ getevents.noti_de_evento }} {% if getevents.event == "like" %} <!-- Feed footer -->
+            <div class="feed-footer">
+              <a class="like text-white">
+                <i class="fa fa-heart"></i>
+                <span>{{ getevents.noti_de_evento.komentario.vote.all.count }} likes | Hace {{ getevents.timestampe|timesince  }}</span>
+              </a>
+            </div>{% endif %}</a>
+            
+              <div class="date">{% if not getevents.event == "like" %}Hace {{ getevents.timestampe|timesince  }}{% endif %}</div>
+            </div>
+            
+
+         
+
+          </div>
+          <!-- Excerpt -->
+
+        </div>
+        <!-- First news -->
+
+        {% endfor %}
+        
+      </div>
+      <!-- Newsfeed -->
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+</section>
+<!-- Section: Social newsfeed v.1 -->	
+				
+			</div>
+		{% endif %}
+		{% if actividad %}
+<div class="col-md-9 col-sm-12 col-xs-12">
+				
+				<br>
+				<div class="flex-wrap-movielist grid-fav">
+				
+
+				<span style="margin-top: 30px; margin-bottom: 30px; display: inline-block; position: absolute; font-size: 16px;"><p> Actividad: {{getact.count}}</p></span>
+				
+
+				</div>	
+
+				<!-- Section: Social newsfeed v.1 -->
+<section class="my-5" style="position: relative; top: 60px;">
+
+  <!-- Grid row -->
+  <div class="row">
+
+    <!-- Grid column -->
+    <div class="col-md-12">
+
+      <!-- Newsfeed -->
+      <div class="mdb-feed">
+
+{% for getacts in getact %}
+        <!-- First news -->
+        <div class="news" style="padding-bottom: 50px;">
+
+          <!-- Label -->
+          <div class="label" style="display: inline-block; margin-right: 0px;">
+            <img src="{{ getacts.user_who_share.profile.perfil_img.url }}" class="rounded-circle z-depth-1-half" style="width: 40px; height: 40px;">
+          </div>
+
+          <!-- Excerpt -->
+          <div class="excerpt" style="float: right; text-align: left; position: relative; right: 40%; ">
+
+            <!-- Brief -->
+            <div class="brief">
+              <a class="name text-white" href="#" style="cursor: text;">{{ getacts.mensaje }}</a>
+            <blockquote>{{ getacts.nota }}</blockquote>
+              <div class="date">Hace {{getacts.timestampc|timesince  }}</div>
+            </div>
+            
+
+         
+
+          </div>
+          <!-- Excerpt -->
+
+        </div>
+        <!-- First news -->
+
+        {% endfor %}
+        
+      </div>
+      <!-- Newsfeed -->
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+</section>
+<!-- Section: Social newsfeed v.1 -->	
+				
+			</div>
+		{% endif %}
+		</div>
+
+
 
 </div>
 
@@ -867,6 +1151,8 @@ function new_password2Verify() {
 
 
 </script>
+
+
 
 {% endblock %}
 </body>

@@ -4,12 +4,49 @@ from apps.comentarios.models import *
 from apps.vermas_tarde.models import *
 from rest_framework import serializers
 from apps.series.models import Series
+from apps.notificaciones.models import Notificaciones, Evento, Compartir
+from apps.usuarios.models import Profile
 
 class peliserializer(ModelSerializer):
 
 	class Meta:
 		model = Peliculas
 		fields = ('titulo', 'director', 'fecha_de_lanzamiento', 'Cover', 'id', 'slug')
+
+class notizerializer(ModelSerializer):
+	unread = serializers.IntegerField()
+	timesince = serializers.DateTimeField()
+	userimg = serializers.ImageField()
+	slug = serializers.CharField()
+	titulon = serializers.CharField()
+	urlton = serializers.CharField()
+
+	class Meta:
+		model = Evento
+		fields = ('status', 'mensaje', 'event', 'timestampe', 'id', 'unread', 'timesince', 'userimg', 'slug', 'titulon', 'urlton')
+
+class Friends(ModelSerializer):
+	superamigos = serializers.CharField()
+
+	class Meta:
+		model = Profile
+		fields = ('superamigos',)
+
+class Comparitapi(ModelSerializer):
+	unread = serializers.IntegerField()
+	timesince = serializers.DateTimeField()
+	titulon = serializers.CharField()
+	urlton = serializers.CharField()
+	userimg = serializers.ImageField()
+	cover = serializers.ImageField()
+	statu = serializers.CharField()
+
+
+
+
+	class Meta:
+		model = Compartir
+		fields = ('titulon', 'nota', 'timesince', 'urlton', 'mensaje', 'unread', 'userimg', 'statu', 'cover')
 
 class serieserializer(ModelSerializer):
 

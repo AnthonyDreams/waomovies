@@ -372,7 +372,7 @@ def capitulos_detail(request, capitulo, slug):
 	else:
 		try:
 			h = Hitcount_Series.objects.get(capitulo_id=capitulo.id)
-		except objectdoesnotexist:
+		except ObjectDoesNotExist:
 			h = 0
 	siguiente = capitulo.num_episodio +1 
 	anterior = capitulo.num_episodio -1

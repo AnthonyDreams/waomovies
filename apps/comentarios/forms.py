@@ -1,6 +1,6 @@
 from django import forms
 from .models import Post, Answerd, Reporte
-
+from apps.notificaciones.models import Evento
 
 class PostForm(forms.ModelForm):
 	class Meta:
@@ -43,3 +43,16 @@ class REPORTAR(forms.ModelForm):
 	            "reportar",
 	        ]
       
+
+
+class Noti(forms.ModelForm):
+	class Meta:
+		model = Evento
+		fields = [
+			"status",
+			"event",
+			"mensaje",
+  
+
+
+	  ]

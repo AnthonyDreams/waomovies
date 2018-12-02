@@ -12,6 +12,8 @@ from .models import Post, Answerd
 from django.db import IntegrityError
 from django.template import RequestContext
 from django.http import JsonResponse
+from apps.notificaciones.models import Notificaciones, Evento
+from apps.usuarios.models import Usuario
 
 
 
@@ -28,7 +30,6 @@ def post_create(request, id):
 	for i in post:
 		print(i.slug)
 		x.append(i.slug)
-		
 	form = PostForm(request.POST or None, request.FILES or None)
 	if request.is_ajax():
 		if form.is_valid():
@@ -38,15 +39,23 @@ def post_create(request, id):
 			if x:
 				instance.slug = x[0] +1
 				instance.save()
+				sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+				sendnoti.save()
+
 				data = {
 				'message': "Successfully submitted form data."
+
 			}
 				return JsonResponse(data)
 			else: 
 				instance.save()
+				sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+				sendnoti.save()
+
 				data = {
 				'message': "Successfully submitted form data."
 			}
+
 				return JsonResponse(data)
 
 
@@ -106,6 +115,8 @@ def post_create_serie(request, id):
 			if x:
 				instance.slug = x[0] +1
 				instance.save()
+				sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+				sendnoti.save()
 				data = {
 				'message': "Successfully submitted form data.",
 				'content':instance.content
@@ -113,6 +124,8 @@ def post_create_serie(request, id):
 				return JsonResponse(data)
 			else: 
 				instance.save()
+				sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+				sendnoti.save()
 				data = {
 				'message': "Successfully submitted form data.",
 				'content':instance.content
@@ -142,6 +155,16 @@ def like(request, id):
 			data = {
 				'message': "+1"
 			}
+
+			if not instances.user == request.user:
+				comentario = Notificaciones.objects.get(komentario=instances)
+				evenT = Evento(event="like", mensaje=request.user.username + " Ha dado like a tu comentario", noti_de_evento=comentario)
+				evenT.save()
+				evenT.creadores.add(request.user)
+				evenT.save()
+				comentario.estado.add(evenT)
+				comentario.save()
+		
 			return JsonResponse(data)
 
 def unlike(request, id):
@@ -246,10 +269,14 @@ def post_create_serie_capitulo(request, id):
 		if x:
 			instance.slug = x[0] +1
 			instance.save()
+			sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+			sendnoti.save()
 			messages.success(request, "Comentario enviado")
 			return HttpResponseRedirect(instance.get_absolute_url_serie())
 		else: 
 			instance.save()
+			sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+			sendnoti.save()
 			messages.success(request, "Comentario enviado")
 			return HttpResponseRedirect(instance.get_absolute_url_serie())
 
@@ -315,6 +342,46 @@ def responder(request, slug):
 				'token':"%"
 
 			}
+			mencion = False
+			posicion = 0
+			posicion2 = 0
+			usergetusername = ""
+			for i in instance.respuesta:
+				posicion += 1 
+				if i == "@":
+					mencion = True
+					break
+				else:
+					pass
+			if mencion:
+				for i in instance.respuesta:
+					posicion2 += 1
+					if posicion2 >= posicion:
+						if not i == " ":
+							usergetusername += i
+						else:
+							break
+
+			if not mencion and not instances.user == request.user:
+				comentario = Notificaciones.objects.get(komentario=instances, user_a_notificar=instances.user)
+				evenT = Evento(event="respuesta", mensaje=request.user.username + " Ha respondido a tu comentario", noti_de_evento=comentario)
+				evenT.save()
+				evenT.creadores.add(request.user)
+				evenT.save()
+				comentario.estado.add(evenT)
+				comentario.save()
+			elif mencion:
+				mencionado = Usuario.objects.get(username=usergetusername[1:])
+				sendnoti = Notificaciones(respm=instance, user_a_notificar=mencionado)
+				sendnoti.save()
+				comentario = Notificaciones.objects.get(respm=instance, user_a_notificar=mencionado)
+				evenT = Evento(event="mencion", mensaje=request.user.username + " Te ha mencionado en una respuesta", noti_de_evento=comentario)
+				evenT.save()
+				evenT.creadores.add(request.user)
+				evenT.save()
+				comentario.estado.add(evenT)
+				comentario.save()
+
 			return JsonResponse(data)
 
 
@@ -379,12 +446,16 @@ def post_create_capitulos(request, id):
 			if x:
 				instance.slug = x[0] +1
 				instance.save()
+				sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+				sendnoti.save()
 				data = {
 				'message': "Successfully submitted form data."
 			}
 				return JsonResponse(data)
 			else: 
 				instance.save()
+				sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+				sendnoti.save()
 				data = {
 				'message': "Successfully submitted form data."
 			}
@@ -449,6 +520,14 @@ def like_serie(request, id):
 			data = {
 				'message': "+1"
 			}
+			if not instances.user == request.user:
+				comentario = Notificaciones.objects.get(komentario=instances)
+				evenT = Evento(event="like", mensaje=request.user.username + " Ha dado like a tu comentario", noti_de_evento=comentario)
+				evenT.save()
+				evenT.creadores.add(request.user)
+				evenT.save()
+				comentario.estado.add(evenT)
+				comentario.save()
 			return JsonResponse(data)
 
 def unlike_serie(request, id):
@@ -523,6 +602,46 @@ def responder_serie(request, slug):
 				'token':"%"
 
 			}
+
+			mencion = False
+			posicion = 0
+			posicion2 = 0
+			usergetusername = ""
+			for i in instance.respuesta:
+				posicion += 1 
+				if i == "@":
+					mencion = True
+					break
+				else:
+					pass
+			if mencion:
+				for i in instance.respuesta:
+					posicion2 += 1
+					if posicion2 >= posicion:
+						if not i == " ":
+							usergetusername += i
+						else:
+							break
+
+			if not mencion and not instances.user == request.user:
+				comentario = Notificaciones.objects.get(komentario=instances, user_a_notificar=instances.user)
+				evenT = Evento(event="respuesta", mensaje=request.user.username + " Ha respondido a tu comentario", noti_de_evento=comentario)
+				evenT.save()
+				evenT.creadores.add(request.user)
+				evenT.save()
+				comentario.estado.add(evenT)
+				comentario.save()
+			elif mencion:
+				mencionado = Usuario.objects.get(username=usergetusername[1:])
+				sendnoti = Notificaciones(respm=instance, user_a_notificar=mencionado)
+				sendnoti.save()
+				comentario = Notificaciones.objects.get(respm=instance, user_a_notificar=mencionado)
+				evenT = Evento(event="mencion", mensaje=request.user.username + " Te ha mencionado en una respuesta", noti_de_evento=comentario)
+				evenT.save()
+				evenT.creadores.add(request.user)
+				evenT.save()
+				comentario.estado.add(evenT)
+				comentario.save()
 			return JsonResponse(data)
 
 def responder_update_serie(request, id):

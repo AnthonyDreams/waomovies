@@ -35,6 +35,9 @@ from django.contrib.auth.hashers import ( check_password, is_password_usable, ma
 from apps.vermas_tarde.models import Vermastarde
 from apps.peliculas.models import Peliculas, Generox
 from apps.series.models import Series
+from django.http import JsonResponse
+from apps.notificaciones.models import *
+
 from django.utils.datastructures import MultiValueDictKeyError
 usuario = get_user_model()
 
@@ -731,3 +734,200 @@ def password_reset(request,
         return TemplateResponse(request, template_name, context)
     else: 
         return HttpResponseRedirect("/inicio/")
+
+
+from random import randint
+
+def codetofriend(request):
+	if not request.user.is_active:
+		raise Http404
+	juan = Usuario.objects.get(id=request.user.id)
+	instance = get_object_or_404(Usuario, id=juan.id)
+	n = 8
+	c = "".join(["%s" % randint(0, 7) for num in range(0, n)])
+	profilescode = Profile.objects.filter(codde=c).exists()
+	while profilescode:
+		c = "".join(["%s" % randint(0, 7) for num in range(0, n)])
+		profilescode = Profile.objects.filter(codde=c).exists()
+		if not profilescode:
+			break
+	form = CodeFriend(request.POST or None, request.FILES or None, instance=instance)
+	if request.is_ajax():
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.profile.codde = c
+			instance.save()
+			# message success
+				
+			data = {
+				'message': "Código generado."
+			}
+			return JsonResponse(data)
+
+
+def user_ver_amigos(request, id, *args, **kwargs):
+	usuarioname = usuario.objects.get(username=id)
+	amigos = Profile.objects.filter(user=usuarioname.id)
+	code = Profile.objects.get(user=usuarioname)
+	usuarioo = usuario.objects.get(id=usuarioname.id)
+	if not request.user == usuarioo:
+		raise Http404
+	user_details = False
+	user_favoritos = False
+	series_fav = False
+	amigosview = True
+	actividad = False
+	notificaciones = False
+	context = {'usuario':usuarioo,
+				'user_details':user_details,
+				'user_favoritos':user_favoritos,
+				'series_fav':series_fav,
+				'amigosview': amigosview,
+				'actividad':actividad,
+				'notificaciones':notificaciones,
+				'code':code,
+				'amigos':amigos,
+
+
+
+	}
+	return render(request, 'userprofile.html', context)
+
+def notificacionesfeed(request, id):
+	usuarioname = usuario.objects.get(username=id)
+	usuarioo = Usuario.objects.get(id=usuarioname.id)
+	if not request.user == usuarioo:
+		raise Http404
+	getnoti = Notificaciones.objects.filter(user_a_notificar=usuarioo.id)
+	idsnoti = []
+	idscoment = []
+	for i in getnoti:
+		idsnoti.append(i.id)
+		idscoment.append(i.komentario)
+	getevent = Evento.objects.filter(noti_de_evento__in=idsnoti).order_by('-timestampe')
+	
+	user_details = False
+	user_favoritos = False
+	series_fav = False
+	amigosview = False
+	actividad = False
+	notificaciones = True
+	context = {'usuario':usuarioo,
+				'user_details':user_details,
+				'user_favoritos':user_favoritos,
+				'series_fav':series_fav,
+				'amigosview': amigosview,
+				'actividad':actividad,
+				'notificaciones':notificaciones,
+				'getevent':getevent,
+
+
+
+	}
+	return render(request, 'userprofile.html', context)
+
+def actividadfeed(request, id):
+	usuarioname = usuario.objects.get(username=id)
+	usuarioo = Usuario.objects.get(id=usuarioname.id)
+	if not request.user == usuarioo:
+		raise Http404
+	getact = Compartir.objects.filter(users_to_share=usuarioo.id).order_by('-timestampc')
+	
+	user_details = False
+	user_favoritos = False
+	series_fav = False
+	amigosview = False
+	actividad = True
+	notificaciones = False
+	context = {'usuario':usuarioo,
+				'user_details':user_details,
+				'user_favoritos':user_favoritos,
+				'series_fav':series_fav,
+				'amigosview': amigosview,
+				'actividad':actividad,
+				'notificaciones':notificaciones,
+				'getact':getact,
+
+
+
+	}
+	return render(request, 'userprofile.html', context)
+
+
+
+def agregaramigos(request, id):
+	if request.method == 'POST':
+		codigo = request.POST['codigo']
+		usuarioname = usuario.objects.get(username=id)
+		amigos = ""
+		code = Profile.objects.filter(codde=codigo)
+		if code:
+			for a in code:
+				can = a.user
+				caid = a.id
+				coDigo = a.codde
+		else:
+			can=False
+		usuarioo = usuario.objects.get(id=usuarioname.id)
+		if code:
+			instance = get_object_or_404(Usuario, email=can)
+			if not instance == request.user:
+				if not instance in request.user.profile.AmiGos.all():
+					instance.profile.AmiGos.add(request.user)
+					request.user.profile.AmiGos.add(instance)
+					check = Notificaciones.objects.filter(respm=None, user_a_notificar=instance, komentario=None)
+					if not check:
+						sendnoti = Notificaciones(user_a_notificar=instance)
+						sendnoti.save()
+						comentario = Notificaciones.objects.get(respm=None, user_a_notificar=instance, komentario=None)
+						evenT = Evento(event="añadir", mensaje=request.user.username + " Te ha añadido a su lista de amigos", noti_de_evento=comentario)
+						evenT.save()
+						evenT.creadores.add(request.user)
+						evenT.save()
+						comentario.estado.add(evenT)
+						comentario.save()
+						messages.success(request, instance.username + ' Ha sido añadido correctamente')
+						return HttpResponseRedirect('/user_ver_amigos/' + request.user.username + "/")
+					else:
+						comentario = Notificaciones.objects.get(respm=None, user_a_notificar=instance, komentario=None)
+						eliminar = Evento.objects.filter(event="añadir", noti_de_evento=comentario, mensaje__startswith=request.user.username)
+						eliminar.delete()
+						evenT = Evento(event="añadir", mensaje=request.user.username + " Te ha añadido a su lista de amigos", noti_de_evento=comentario)
+						evenT.save()
+						evenT.creadores.add(request.user)
+						evenT.save()
+						comentario.estado.add(evenT)
+						comentario.save()
+						messages.success(request, instance.username + ' Ha sido añadido correctamente')
+						return HttpResponseRedirect('/user_ver_amigos/' + request.user.username + "/")
+				else:
+					messages.error(request, instance.username + ' Ya existe en tu lista de amigos')
+					return HttpResponseRedirect('/user_ver_amigos/' + request.user.username + "/")
+				
+			else:
+				messages.error(request, 'No puedes añadirte a ti mismo')
+				return HttpResponseRedirect('/user_ver_amigos/' + request.user.username + "/")
+		else:
+			messages.error(request, 'No existe usuario con el codigo especificado: ' + codigo)
+			return HttpResponseRedirect('/user_ver_amigos/' + request.user.username + "/")
+
+
+def removeamigos(request, code):
+	usuarioname = usuario.objects.get(username=request.user.username)
+	amigos = ""
+	code = Profile.objects.filter(codde=code)
+	for a in code:
+		can = a.user
+		coDigo = a.codde
+	usuarioo = usuario.objects.get(id=usuarioname.id)
+	instance = get_object_or_404(Usuario, email=can)
+	if code:
+		instance.profile.AmiGos.remove(request.user)
+		request.user.profile.AmiGos.remove(instance)
+
+		messages.success(request, instance.username + ' Ha sido eliminado de tu lista de amigos')
+		return HttpResponseRedirect('/user_ver_amigos/' + request.user.username + "/")
+	else:
+
+		return HttpResponseRedirect(usuarioo.get_absolute_url())
+

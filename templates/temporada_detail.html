@@ -439,7 +439,10 @@ document.getElementById('panelstreamcloud').style.display="none"
                         <span><i id="load" class="fa fa-bug icon2"></i><button form="reporte" onclick="reportar(this)" type="submit" style="color: #9DA1A5; background:none; border:none; cursor: pointer;">Reportar episodio</button></span>
                         <span style="display: none;"><form id="reporte" class="reportar" method="post" data-url="/reportar_capitulo/{{capitulo.id}}/reportar/" style="display: initial; position: relative; margin-top: -50px;" >{%csrf_token%}
 
-                          </form></span>
+                          </form></span> <form method="post" action="/compartir/{{capitulo.id}}/{{capitulo.slug}}/" id="pu" name="algo">
+        {% csrf_token %}
+   <select class="amigosshare" name="users_to_share" id="boot-multiselect-demo" multiple="multiple" onchange="cuales_seleccionados(document.algo.users_to_share);"></select><input type="hidden" name="oculto"> 
+</form>
                           
                         <!--Modal: modalSocial-->
 <div class="modal fade" id="modalSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -944,6 +947,22 @@ $(this).remove();
             </div>
             <!-- / Collapsible element -->
            <p id="cm{{ cm.id }}" tyle="margin-bottom: -15px;">{{cm.respuesta}}</p>
+           {% if not request.user == cm.who %}
+          <a   data-toggle="collapse" data-target="#collapseExample{{i.id}}zzx" aria-expanded="false
+  " aria-controls="collapseExample{{i.id}}z" style="color: grey; font-family: sans-serif; padding-left: 5px; padding-right: 15px; position: relative; top: 10px;">Mencionar</a>
+  <br/>
+  <br/>
+  <br/>
+  
+  <div  class="collapse container" id="collapseExample{{i.id}}zzx">
+  <form class="respv{{i.id}}" method="post" data-url="/responder/{{i.slug}}/">
+  {% csrf_token %}<div class="md-form">
+   <img width="40"  height="40" style="border-radius: 50%; width: 50px; height: 50px;" src="{{request.user.profile.perfil_img.url}}">
+    <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4;" id="input-char-counter" value="@{{cm.who.username}}" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
+</div>
+  </form>
+</div>
+          {% endif %}
           </div>
 
     </div>
@@ -1059,104 +1078,7 @@ $(this).remove();
 
 
 
-.scrollbarr-primary::-webkit-scrollbar {
-  width: 12px;
-  background-color: gray; }
 
-.scrollbarr-primary::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #4285F4; }
-
-.scrollbarr-danger::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #F5F5F5;
-  border-radius: 10px; }
-
-.scrollbarr-danger::-webkit-scrollbar {
-  width: 12px;
-  background-color: gray; }
-
-.scrollbarr-danger::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background: #ED213A;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
- }
-
-.scrollbarr-warning::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #F5F5F5;
-  border-radius: 10px; }
-
-.scrollbarr-warning::-webkit-scrollbar {
-  width: 12px;
-  background-color: #F5F5F5; }
-
-.scrollbarr-warning::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #FF8800; }
-
-.scrollbarr-success::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #F5F5F5;
-  border-radius: 10px; }
-
-.scrollbarr-success::-webkit-scrollbar {
-  width: 12px;
-  background-color: #F5F5F5; }
-
-.scrollbarr-success::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #00C851; }
-
-.scrollbarr-info::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #020D18;
-  border-radius: 10px;
-   }
-
-.scrollbarr-info::-webkit-scrollbar {
-  width: 12px;
-  background-color: #020D18;
-   }
-
-.scrollbarr-info::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #233A50;
-   }
-
-.scrollbarr-default::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #F5F5F5;
-  border-radius: 10px; }
-
-.scrollbarr-default::-webkit-scrollbar {
-  width: 12px;
-  background-color: #F5F5F5; }
-
-.scrollbarr-default::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #2BBBAD; }
-
-.scrollbarr-secondary::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #F5F5F5;
-  border-radius: 10px; }
-
-.scrollbarr-secondary::-webkit-scrollbar {
-  width: 12px;
-  background-color: #F5F5F5; }
-
-.scrollbarr-secondary::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #aa66cc; }
  .btn.btn-lg {
     padding: 1rem 2.4rem;
     font-size: 0.94rem; }
@@ -1248,7 +1170,10 @@ input[type="button"].btn-block {
 
 </style>
 
+
 {% if comentariosc > 5 %}
+<br/>
+<br/>
 <form method="post" id="noneaaa" class="cabron" data-url="/{{capitulo.slug}}/{{temporada.slug}}/">
                     {% csrf_token %}
                     <input type="radio" name="vmore" value="True" checked="True" style="display: none;">
@@ -1942,7 +1867,9 @@ $(this).remove();
                  console.log(data)
                  console.log(textStatus)
                  console.log(jqXHR)
-                 $myForm[0].reset(); 
+                 $myForm[0].reset();
+                 $myForm[1].reset(); 
+                 $myForm[1].style.display = 'none'  
        $("#j" + c).load(window.location + " #j" + c);
        $("#like_div" + c).load(window.location + " #like_div" + c);
        $("#ccn" + c).append(' <div id="rs'+data.idp+'"><div class="mv-user-review-item" style="margin-bottom: -6px; width: 70%; position: relative; left: 40px;"><div class="user-infor" style="margin-bottom: -0px;"><img style="border-radius: 50%; width: 50px; height: 50px;" width="50"  src="'+data.perfil+'" alt=""><div style=" margin-top: -52px; margin-left: 60px; " ><h4 style=" display: inline;  font-family: roboto; font-size: 16px; color: white;">'+data.name+'</h4><i id="cog'+data.idp+'" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i><div class="btn-group"><div class="dropdown-menu"><a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample">Editar comentario<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a><form style="display: inline;" class="dele_ans'+data.idp+'" data-url="/delete_res/'+data.idp+'/" method="post">'+token+'<button onclick="deletee_res(this)" name="'+data.id+'"id="dele_ans'+data.idp+'" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form><!--a class="dropdown-item" href="#">Something else here</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a--></div></div><p class="time" style="margin-top: -8px;">'+data.fecha+'</p></div></div><p id="cm'+data.idp+'" style="margin-bottom: -15px;">'+data.content+'</p></div></div><div class="collapse container" id="col'+data.idp+'"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans'+data.idp+'" data-url="/responder_update/'+data.idp+'/">'+token+'<textarea id="textoans'+data.idp+'" onkeypress="return limita(400);" style=" height: 6em; width: 400px;" name="respuesta">'+data.content+'</textarea><br><input onclick="update_ans(this)" id="up_ans'+data.idp+'" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form></div></div></div><br>');

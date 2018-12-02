@@ -13,128 +13,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>WaoMovies</title>
-    
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600'>
          <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
            <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-multiselect.css' %}">
 <script type="text/javascript" src="{% static 'js/websocketbridge.js' %}"></script>
 
+<link rel="stylesheet" type="text/css" href="{% static '' %}styles/style.css">
+<link rel="stylesheet" type="text/css" href="{% static '' %}styles/menu.css">
 
+<script type="text/javascript" src="{% static '' %}scripts/plugins.js"></script>
+<script type="text/javascript" src="{% static '' %}scripts/custom.js"></script>
 
-<style type="text/css">
- 
-
-
- .none {
-  display: none;
- }
- .fa-circle-o-notch {
-  animation-name: spin;
-  animation-duration: 5000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear; 
-  /* transform: rotate(3deg); */
-   /* transform: rotate(0.3rad);/ */
-   /* transform: rotate(3grad); */ 
-   /* transform: rotate(.03turn);  */
-}
-
-@keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
-}
-</style>
-
-<style type="text/css">
-.alert {
-    background-color: #f44336; 
-    color: white;
-    position: fixed;
-}
-
-.closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-
-}
-
-.success {
-  background-color: #2ECC71;
-
-}
-
-.info {
-  background-color: purple;
-
-}
-.closebtn:hover {
-    color: black;
-}
-
-#summary {
-}
-
-#summary:hover {
-    cursor: pointer;
-}
-
-#detail {
-    width: 300px;
-    height: 300px;
-    background: black;
-    display: none;
-}
-
-button{
-outline:none;
-}
-
-.buttonn {
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
-    width: 60px;
-    height: 40px;
-    overflow: hidden;
-    position: relative;
-    background-color: #4CAF50;
-
-
-}
-
-.buttonn:after {
-    content: "";
-    background: #949494;
-    border-radius: 50%;
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px!important;
-    margin-top: -120%;
-    opacity: 0;
-    transition: all 0.8s;
-}
-
-.buttonn:active:after {
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s
-}
-</style>
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -160,147 +51,293 @@ outline:none;
 </head>
 {% endblock %}
 <body >
-    <script>
 
+<style type="text/css">
+  #searches {
+    border-radius: 20px;
+    width: 120%;
+    position: relative;
+    right: 30px;
+  }
+  #putaso {
+    width: 120%;
+    border-radius: 15px;
+    position: relative;
+    right: -10px;
+    overflow-y: scroll;
+    max-height: 350px;
+  }
+</style>
+  <div id="page-transitions">
+
+<div class="header " style="height: 68px; background: #020D18;">
+<a href="#" class="header-icon-1 show-left-sidebar" style="color: white;"><i class="fa fa-navicon"></i></a>
+<a href="#" class="header-logo"><img style="height: 35px; margin-left:20%; margin-top: 15px; " src="{% static 'img/waologo.png' %}"></a>
+  <a onclick="mac()" class="{% if request.user.is_authenticated %}header-icon-3{% else %}header-icon-4{% endif %}" {% if request.user.is_authenticated %}  style="margin-right:-5%;" {% endif %}>
+ 
+              <i class="fa fa-search" id="searchshower" style="color: white;" ></i></a>
+              {% if request.user.is_authenticated %}
+<a href="#" class="header-icon-4 show-right-sidebar" style="border: none; color: white;"><i class="fa fa-bell-o"></i><span id="totalnotisa" class="" style="margin-left: 3px; "></span> </a>
+{% endif %}
+</div>
+
+<div id="searchdiv" style=" display: none;background-color: rgba(0,0,0,0.80); width: 100%; height: 100%; position: fixed; z-index: 1;">
+  <div style="display: block; background: blue;">
+  <form id="searchdiv" style=" position: absolute; top: 100px; z-index: 1000; left: 25%;">
+  <input class="form-control" type="search" placeholder="Search" id="searches">
+  <ul class="list-group" id="putaso" style=" position: absolute;"></ul>
+</form>
+
+<div style="display: block; position: fixed; top: 130px; z-index: 1000; background: blue;" ></div>
+  </div>
+</div>
+<script>
+$(document).ready(function(){
+ $.ajaxSetup({ cache: false });
+ $('#searches').keyup(function(es){
+  es.stopImmediatePropagation();
+
+  $('#putaso').html('');
+  $('#state').val('');
+  var searchField = $('#searches').val();
+  var expression = new RegExp(searchField, "i");
+  var resulta = document.getElementById('searches');
+  var resultac = document.getElementById('putaso')
+  var widthscreen = $( window ).width()
+
+  if (widthscreen <= 767) {
+    var search = document.getElementById('searchshow').style.display = 'initial'
+  $.getJSON('/pelis/', function(data) {
+   $.each(data, function(key, value){
+    if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1 && resulta.value.length > 3 && widthscreen < 767)
+    {
+     $('#putaso').append('<li id="'+value.slug+'" class=" '+value.slug+' list-group-item link-class"><a style="color: black;" href="/peliculas/'+value.slug+'/"><img src="'+value.Cover+'" height="40" width="40" class="img-thumbnail" /> '+value.titulo+' | <span class="text-muted">'+value.director+'</span></a></li>');
+     if (document.getElementsByClassName(''+value.slug+'').length > 1)
+     {
+      node = document.getElementById(''+value.slug+'')
+        node.parentNode.removeChild(node)
+     }
+    }
+
+    if (resulta.value.length == 0)
+    {
+      $('#putaso').empty();
+      resultac.style.display = "none"
+    }
+     window.onclick = function(event) {
+          if (event.target != result) {
+              result.style.display = "none";
+          }
+      }
+    if (resulta.value.length > 3 && widthscreen < 767)
+    {
+      resultac.style.display = "initial"
+
+    }
+   });   
+  });
+  }
+ });
+ 
+ $('#putaso').on('click', 'li', function() {
+  var click_text = $(this).text().split('|');
+  $('#searches').val($.trim(click_text[0]));
+  $("#putaso").html('');
+ });
+ // When the user clicks anywhere outside of the modal, close it
+ var result = document.getElementById('pustaso');
+      window.onclick = function(event) {
+          if (event.target == result) {
+              result.style.display = "none";
+          }
+      }
+});
+</script>
+<script type="text/javascript">
+
+            function mac() {
+
+              if (document.getElementById("searchdiv").style.display === "none") {
+              var verga = document.getElementById("searchdiv").style.display = "initial";
+
+                
+              } else {
+var verga = document.getElementById("searchdiv").style.display = "none";
+var resultac = document.getElementById('result').style.display= "none";
+
+              }
+
+
+            }
+           
+          </script>
+<div class="sidebar-left">
+<div class="sidebar-scroll-left sidebar-dark-clean">
+<div class="">
+
+<div class="sidebar-overlay"></div>
+{% if not request.user.is_authenticated %}
+<div style="text-align: center;  font-weight:bold; margin-top: 20px;">
+<li class="btn loginLink" style="font-size: 15px;"><a href="#">Iniciar Sesión</a></li>
+<li class="btn signupLink" style="font-size: 15px;"><a href="#">Registrarse</a></li>
+</div>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+<img style="border-radius: 50%; width: 80px; height: 80px;position: relative; top: 40px; display: block; margin:auto;" src="{{ request.user.profile.perfil_img.url }}" alt="img" class="responsive-image">
+<div style="text-align: center; padding-top: 50px;">
+<h3>{{ request.user.username }}</h3>
+<em>{{ request.user.profile.codde }}</em>
+</div>
+{% endif %}
+</div>
+<div class="sidebar-divider no-bottom no-top"></div>
+<p class="sidebar-divider">Navegacion</p>
+<div class="sidebar-menu">
+
+<div class="has-submenu">
+<a class="menu-item" href="/inicio/">
+<em>Inicio</em>
+</a>
+</div>
+{% if request.user.is_authenticated %}
+<div class="has-submenu">
+<a class="menu-item show-submenu" href="#">
+<i class="fa fa-cog bg-orange-dark"></i>
+<em>Perfil</em>
+</a>
+<div class="submenu">
+  <a class="submenu-item" href="/usuario/{{user.username}}/"> <i class="fa fa-angle-right"></i><em> Cuenta </em><i class="fa fa-circle"></i></a>
+<a class="submenu-item" href="/user_ver_favoritos/{{request.user.username}}/"> <i class="fa fa-angle-right"></i><em>Películas Favoritas </em><i class="fa fa-circle"></i></a>
+<a class="submenu-item" href="/user_ver_series_favoritos/{{request.user.username}}/"> <i class="fa fa-angle-right"></i><em>Series Favoritas </em><i class="fa fa-circle"></i></a>
+<a class="submenu-item" href="/ver_más_tarde/{{request.user.username}}/"> <i class="fa fa-angle-right"></i><em> Ver más tarde </em><i class="fa fa-circle"></i></a>
+<a class="submenu-item" href="/user_ver_amigos/{{request.user.username}}/"> <i class="fa fa-angle-right"></i><em> Amigos </em><i class="fa fa-circle"></i></a>
+<a class="submenu-item" href="/notificacionesfeed/{{ request.user.username }}/"> <i class="fa fa-angle-right"></i><em> Notificaciones </em><i class="fa fa-circle"></i></a>
+<a class="submenu-item" href="/actividadfeed/{{ request.user.username }}/"> <i class="fa fa-angle-right"></i><em> Actividad </em><i class="fa fa-circle"></i></a>
+</div>
+</div>
+
+{% endif %}
+
+<div class="has-submenu">
+<a class="menu-item" href="/ver%todo/">
+<em>Películas</em>
+</a>
+</div>
+
+<div class="has-submenu">
+<a class="menu-item" href="/series_list/orden_de_subida/">
+<em>Series</em>
+</a>
+</div>
+{% if request.user.is_authenticated %}
+<div class="has-submenu" style="border-top: solid 1px gray; ">
+  <br/>
+<a href="/logout/" style=" "><i style="padding-left: 20px; padding-right: 20px;" class="fa fa-sign-in" aria-hidden="true"></i><em>Cerrar Sesión</em>
+</a>
+
+</div>
+
+
+{% endif %}
+
+</div>
+<br/>
+
+<p class="sidebar-divider">Redes</p>
+<div class="sidebar-menu">
+<a class="default-link menu-item" href="https://www.facebook.com/enabled.labs">
+<em>Facebook</em>
+</a>
+<a class="default-link menu-item" href="https://twitter.com/iEnabled">
+<em>Twitter</em>
+</a>
+<a class="default-link menu-item" href="https://plus.google.com/u/1/100477648973116025417/posts">
+<em>Google Plus</em>
+</a>
+<a class="default-link menu-item" href="#">
+<em>YouTube</em>
+</a>
+</div>
+<p class="sidebar-divider">Contactanos</p>
+<div class="sidebar-menu">
+<a class="default-link menu-item" href="/sobre/">
+<em>Wao</em>
+</a>
+
+<a class="menu-item close-sidebar" href="#">
+ <em>Close</em>
+</a>
+</div>
+</div>
+</div>
+<div class="sidebar-right">
+<div class="sidebar-scroll-right sidebar-dark-clean">
+<ul class="nav md-pills nav-justified pills-secondary">
+    
+    <li class="nav-item">
+        <a class="nav-link active"  data-toggle="tab" id="panelnotificaciones" href="#panel11noti" role="tab"  >Notificaciones <span id="noticountmovil" class="label" style="color: #F1C40F; padding-right: 3px; "></span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" id="panelactividad"  href="#panel12acti" role="tab">Actividad <span class="label" id="labelcountact" style="color: #F1C40F; padding-right: 3px;"> </span></a>
+    </li>
+    
+</ul>
+<!-- Tab panels -->
+<div class="tab-content" style="">
+<div id="displayloadmovil" style="display: none;"><img style="position: relative; left: 45%;" height="50" width="50" src="{% static "img/fancybox_loading@2x.gif" %}"></div>
+    <div class="tab-pane fade scrollbarr-warning" id="panel11noti" role="tabpanel" style="overflow-y: scroll; max-height: 500px; margin-top: 15px; ">
+        
+
+
+    </div>
+
+    <!--Panel 2-->
+    <div class="tab-pane fade scrollbarr-warning" id="panel12acti" role="tabpanel" style="overflow-y: scroll; max-height: 500px; margin-top: 15px; ">
+        
+
+        
+
+    </div>
+    <!--/.Panel 2-->
+
+   
+
+</div>
+
+</div>
+</div>
+
+</div>
+   <!--h1>Notifier</h1>
+    <p>Notifications</p>
+    <ul id="notifylist"></ul-->
+    <script>
+      var loc = window.location
+var wsStart = 'ws://'
+if (loc.protocol == 'https:'){
+  wsStart = 'wss://'
+}
     document.addEventListener('DOMContentLoaded', function() {
       const webSocketBridge = new channels.WebSocketBridge();
       const nl = document.querySelector("#notifylist");
       
-      webSocketBridge.connect('wss://' + window.location.host + '/ws/');
+      webSocketBridge.connect(wsStart + window.location.host + '/ws/');
       webSocketBridge.listen(function(action, stream) {
         console.log("RESPONSE:", action);
         
+        if(action.event == "New User") {
+          var el = document.createElement("li");
+          el.innerHTML = `New user <b>${action.username}</b> has joined!`;
+          nl.appendChild(el);
+        }
       })
       document.ws = webSocketBridge; /* for debugging */
     })
     </script>
 
-  <style type="text/css">
-  .btn-floating:hover {
-    animation-duration: 1s;
-    animation-name: rotar;
-    animation-iteration-count: 0.6;
-  }
-  @keyframes rotar {
-    from {
-     transform:  rotate(0deg);
-    }
-    to {
-      transform:rotate(362deg);
-    }
-  }
-  .pills-secondary .nav-link.active {
-    background-color: none;
-    border-bottom: #f2ba2e solid 1px !important;
-    border-radius: 2px;
-}
-.pills-secondary .nav-link {
-    color: white;
-}
 
-.scrollbarr-primary::-webkit-scrollbar {
-  width: 12px;
-  background-color: gray; }
-
-.scrollbarr-primary::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #4285F4; }
-
-.scrollbarr-danger::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #F5F5F5;
-  border-radius: 10px; }
-
-.scrollbarr-danger::-webkit-scrollbar {
-  width: 12px;
-  background-color: gray; }
-
-.scrollbarr-danger::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background: #ED213A;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
- }
-
-.scrollbarr-warning::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: none;
-  border-radius: 10px; }
-
-.scrollbarr-warning::-webkit-scrollbar {
-  width: 8px;
-  background-color: none; }
-
-.scrollbarr-warning:hover::-webkit-scrollbar {
-  width: 12px;
-  background-color: none; }
-
-.scrollbarr-warning::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #FF8800; }
-
-.scrollbarr-success::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #F5F5F5;
-  border-radius: 10px; }
-
-.scrollbarr-success::-webkit-scrollbar {
-  width: 12px;
-  background-color: #F5F5F5; }
-
-.scrollbarr-success::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #00C851; }
-
-.scrollbarr-info::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #020D18;
-  border-radius: 10px;
-   }
-
-.scrollbarr-info::-webkit-scrollbar {
-  width: 12px;
-  background-color: #020D18;
-   }
-
-.scrollbarr-info::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #233A50;
-   }
-
-.scrollbarr-default::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #F5F5F5;
-  border-radius: 10px; }
-
-.scrollbarr-default::-webkit-scrollbar {
-  width: 12px;
-  background-color: #F5F5F5; }
-
-.scrollbarr-default::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #2BBBAD; }
-
-.scrollbarr-secondary::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #F5F5F5;
-  border-radius: 10px; }
-
-.scrollbarr-secondary::-webkit-scrollbar {
-  width: 12px;
-  background-color: #F5F5F5; }
-
-.scrollbarr-secondary::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #aa66cc; }
-  </style>
+  
 {% if request.user.is_authenticated %}
 <div class="fixed-action-btn" style="">
   <a class="btn-floating btn-large "class="btn btn-primary" id="buttonunos" style="-moz-box-shadow: 0px 6px 5px #ccc;
@@ -490,7 +527,16 @@ var load = false
   
   
 </script>
+<script type="text/javascript">
+  $.getJSON('/friendsitos/') 
 
+  .done(function(data) {
+    $.each(data, function(key, value){
+$('#boot-multiselect-demo').append('<option value="'+value.superamigos+'">'+value.superamigos+'</option>');
+});
+ 
+   });
+</script>
 <script type="text/javascript">
       $('#buttonuno').click(function(){
   $('#panel11p').addClass("active");
@@ -906,42 +952,15 @@ var load = false
     window.onload=miFuncionload;
 </script>
 
-<header class="ht-header" >
+<header class="ht-header" id="coño">
   <div class="container-fluid">
     <nav class="navbar navbar-default navbar-custom" >
         <div class="navbar-header logo">
-          <script type="text/javascript">
-
-            function mac() {
-
-              if (document.getElementById("searchshow").style.display === "none") {
-              var verga = document.getElementById("searchshow").style.display = "initial";
-
-                
-              } else {
-var verga = document.getElementById("searchshow").style.display = "none";
-var resultac = document.getElementById('result').style.display= "none";
-
-              }
-
-
-            }
-           
-          </script>
+          
          
           <div class="col-md-6" style="position: relative; left: 40px;">
-          <div class="toggle-search col-md-6" >
-              <i class="fa fa-search" id="searchshower"onclick="mac()" style="color: white;" ></i>
-            </div>
-            <div class="navbar-toggle col-md-6" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-
-              <span class="sr-only">Toggle navigation</span>
-              <div id="nav-icon1">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            </div>
+          
+            
             </div>
             <a href="/inicio/"><img id="logoz" style="margin-left: 15px; width: 155px;" class="logoz logo" src="{% static 'img/waologo.png' %}" alt="" ></a>
 
@@ -978,7 +997,7 @@ var resultac = document.getElementById('result').style.display= "none";
               </ul-->
             </li>
             <li class="dropdown first">
-              <a href="/series_list/orden_de_subida">
+              <a href="/series_list/orden_de_subida/">
               Series 
               </a>
               <!--ul class="dropdown-menu level1">
@@ -1002,15 +1021,525 @@ var resultac = document.getElementById('result').style.display= "none";
           </ul>
           <ul class="nav navbar-nav flex-child-menu menu-right">
                       
-            <li><a href="#">Ayuda  <i style="padding-left: 5px; padding-right: 5px;" class="fa fa-question-circle" aria-hidden="true"></i>|   </a></li>
+            <!--li><a href="#">Ayuda  <i style="padding-left: 5px; padding-right: 5px;" class="fa fa-question-circle" aria-hidden="true"></i>|   </a></li-->
             {% if request.user.is_authenticated %}
-              <li class="dropdown first">
-<a href="/usuario/{{user.username}}/"  >
-              {%if user.profile.perfil_img %} 
-               <img src="{{ user.profile.perfil_img.url }}" style="border-radius:  50%; left: -6px; top: -3px; position: relative; width: 37px; height: 37px;"> {{ user.username }}{% else %}{{ user.full_name }}{% endif%}          
+            <li><a id="actibtn" href="javascript:;" data-toggle="dropdown" class="dropdown-toggle" style="margin-top: -6px; background: none;"><i class="fa fa-users gray-text" aria-hidden="true" style="font-size: 18px; text-shadow: 0px 3px 3px rgba(255,255,255,0.5),0px -1px 1px rgba(0,0,0,.3);"></i>
+            <span class="label" id="labelcountcomp" style="color: #F1C40F; padding-right: 3px;"> </span>
+<ul class="dropdown-menu media-list pull-right" style="background: #121212;" >
+              <div id="acticount" style="margin-top: -3px;"></div>
               
-              </a>
+                            <div id="displayloada" style="display: none; "><img style="position: relative; left: 45%;  top: 175px;" height="50" width="50" src="{% static "img/fancybox_loading@2x.gif" %}"></div>
+                            <div id="panelacti" class="scrollbarr-warning" style="width: 350px;overflow-y: scroll; height: 320px;">
+                              
+
+                            </div>
+                            <li class="dropdown-footer text-center ">
+                                <a href="/notificacionesfeed/{{ request.user.username }}/" class="white-text" ><p style="color: white; ">Ver más</p></a>
+                            </li>
+            </ul>
+
+
+          </a>
             </li>
+  <li class="">
+            <a href="javascript:;" id="btnnoti" data-toggle="dropdown" style="background: none; margin-top: -6px;" class="dropdown-toggle f-s-14">
+              <i style="font-size:18px;"  class="fa fa-bell-o"></i> 
+              <span id="noticount" class="label" style="color: #F1C40F; padding-right: 3px; "></span>
+            </a>
+            <ul class="dropdown-menu media-list pull-right" style="background: #121212;" >
+              <div id="noticountt" style="margin-top: -3px;"></div>
+<br/>
+
+                            <div id="displayloadn" style="display: none; "><img style="position: relative; left: 45%;  top: 175px;" height="50" width="50" src="{% static "img/fancybox_loading@2x.gif" %}"></div>
+                            <div id="panelnoti" class="scrollbarr-warning" style="width: 300px;overflow-y: scroll; height: 360px;">
+                              
+
+                            </div>
+                            <li class="dropdown-footer text-center vermahover">
+                                <a href="/notificacionesfeed/{{ request.user.username }}/" class="white-text" ><p style="color: white; ">Ver más</p></a>
+                            </li>
+            </ul>
+          </li>
+
+
+
+<script type="text/javascript">
+      $('#btnnoti').click(function(e){
+ 
+
+
+  $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+      load=  document.getElementById('displayloadn').style.display="initial"
+    }, 
+success: function(){
+         load =  document.getElementById('displayloadn').style.display="none"
+         setTimeout(function(){
+
+   $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+      load=  document.getElementById('displayloadn').style.display="none"
+    }, 
+success: function(){
+         load =  document.getElementById('displayloadn').style.display="none"
+    }
+
+
+
+ });
+$('#noticount').empty();
+
+     $.getJSON('/noti/') 
+  .done(function(data) {
+    if(data[0].unread > 0){
+$('#noticount').append(''+data[0].unread+'');
+}
+ 
+   });
+}, 3000);
+    }
+
+
+
+ });
+
+var notidiv = document.getElementsByClassName('notihover')
+if (notidiv.length >= 1) {
+$('#panelnoti').empty();
+$('#notid').remove();
+}
+
+  $.getJSON('/noti/') 
+
+  .done(function(data) {
+    
+$('#noticountt').append('<li id="notid" class="dropdown-header" style="background: #1C2833; color: white; font-weight: bold; margin-top: -2px; text-align: center; font-size: 16px;">Notificaciones ('+data[0].unread+')</li>');
+
+   $.each(data, function(key, value){
+    if(value.status == "Unread") {
+     $('#panelnoti').append('<li class="media notihover"><a href="'+value.urlton+'"><div class="pull-left"><i class="fa fa-circle" aria-hidden="true" style="color:#21618C; font-size: 10px; margin-top: 6px; margin-right: 8px;"></i><img src="'+value.userimg+'" class="media-object" style="width:30px; height:30px; border-radius: 50%; margin-right: 10px;" alt="" /></div><div class="media-body"><p style="font-weight: bold;">'+value.mensaje+' en '+value.titulon+'.</p><div class="text-muted" style="font-size: 12px; text-align: right; ">Hace '+value.timesince+'</div></div></a></li>');
+    } else {
+      $('#panelnoti').append('<li class="media notihover"><a href="'+value.urlton+'"><div class="pull-left"><img src="'+value.userimg+'" class="media-object" style="width:30px; height:30px; border-radius: 50%; margin-right: 10px;" alt="" /></div><div class="media-body"><p style="font-weight: bold;">'+value.mensaje+' en '+value.titulon+'.</p><div class="text-muted" style="font-size: 12px; text-align: right; ">Hace '+value.timesince+'</div></div></a></li>');
+
+    }
+
+    
+   
+
+   });  
+   });
+
+$.getJSON('/read/') 
+})
+
+$(document).ready(function(){
+ 
+
+
+ 
+  $.getJSON('/noti/') 
+
+  .done(function(data) {
+    if(data[0].unread > 0){
+$('#noticount').append(''+data[0].unread+'');
+}
+ 
+   });
+
+
+
+});  
+</script>
+
+<script type="text/javascript">
+      $('#actibtn').click(function(e){
+ 
+
+
+  $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+      load=  document.getElementById('displayloada').style.display="initial"
+    }, 
+success: function(){
+         load =  document.getElementById('displayloada').style.display="none"
+         setTimeout(function(){
+
+   $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+      load=  document.getElementById('displayloadn').style.display="none"
+    }, 
+success: function(){
+         load =  document.getElementById('displayloadn').style.display="none"
+    }
+
+
+
+ });
+$('#labelcountcomp').empty();
+
+     $.getJSON('/compartir/') 
+  .done(function(data) {
+ if(data[0].unread > 0){   
+$('#labelcountcomp').append(''+data[0].unread+'');
+}
+ 
+   });
+}, 3000);
+    }
+
+
+
+ });
+var actiidiv = document.getElementsByClassName('notihover')
+if (actiidiv.length >= 1) {
+$('#panelacti').empty();
+$('#comp').remove();
+}
+ 
+  $.getJSON('/compartir/') 
+
+  .done(function(data) {
+    
+$('#acticount').append('<li id="comp" class="dropdown-header" style="background: #1C2833; color: white; font-weight: bold; margin-top: -2px; text-align: center; font-size: 16px;">Actividad ('+data[0].unread+')</li>');
+
+   $.each(data, function(key, value){
+    if(value.statu == "Unread") {
+     $('#panelacti').append('<li class="media notihover"><a  href="'+value.urlton+'"><div class="pull-left"><i class="fa fa-circle" aria-hidden="true" style="color:#21618C; font-size: 10px; margin-top: 6px; margin-right: 8px;"></i><img src="'+value.userimg+'" class="media-object" style="width:30px; height:30px; border-radius: 50%; margin-right: 10px;" alt="" /></div><div class="media-body"><p style="font-weight: bold;">'+value.mensaje+'.</p></div></a>   </li><div class="added-images"><a href="'+value.urlton+'"><img src="'+value.cover+'" class="z-depth-1 rounded mb-md-0 mb-2" style="height:150px;"></a> </div><br/><div class="text-muted" style="font-size: 12px; text-align: right; ">Hace '+value.timesince+'</div> <blockquote style="color:#616A6B; font-size:14.5px; ">"'+value.nota+'"</blockquote>');
+    } else {
+      $('#panelacti').append('<li class="media notihover"><a href="'+value.urlton+'"><div class="pull-left"><img src="'+value.userimg+'" class="media-object" style="width:30px; height:30px; border-radius: 50%; margin-right: 10px;" alt="" /></div><div class="media-body"><p style="font-weight: bold;">'+value.mensaje+'.</p></div></a></li><!-- Added images --><div class="added-images"><a href="'+value.urlton+'"><img src="'+value.cover+'" class="z-depth-1 rounded mb-md-0 mb-2" style="height:150px;"></a> </div><br/><div class="text-muted" style="font-size: 12px; text-align: right; ">Hace '+value.timesince+'</div> <blockquote style="color:#616A6B; font-size:14.5px; ">"'+value.nota+'"</blockquote>');
+
+    }
+
+    
+   
+
+   });  
+   });
+$.getJSON('/compread/') 
+
+})
+
+
+ $(document).ready(function(){
+ 
+
+
+ 
+  $.getJSON('/compartir/') 
+
+  .done(function(data) {
+    if(data[0].unread > 0){
+$('#labelcountcomp').append(''+data[0].unread+'');
+}
+ 
+   });
+
+
+});
+
+
+  
+</script>
+
+
+
+<!-- aquí comienza el script para pantallas pequeñas -->
+
+<script type="text/javascript">
+      $('#panelnotificaciones').click(function(e){
+ var pasar = 0
+var pasar2 = 0
+
+
+ $.getJSON('/noti/') 
+
+  .done(function(data) {
+    if(data[0].unread > 0){
+      pasar = data[0].unread
+        
+}
+ 
+   });
+
+
+   $.getJSON('/compartir/') 
+
+  .done(function(data) {
+    if(data[0].unread > 0){
+      pasar2 = data[0].unread
+        
+}
+ 
+   });
+
+
+
+
+  $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+      load=  document.getElementById('displayloadmovil').style.display="initial"
+    }, 
+success: function(){
+         load =  document.getElementById('displayloadmovil').style.display="none"
+         setTimeout(function(){
+
+   $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+      load=  document.getElementById('displayloadmovil').style.display="none"
+    }, 
+success: function(){
+         load =  document.getElementById('displayloadmovil').style.display="none"
+    }
+
+
+
+ });
+   $('#totalnotisa').empty();
+   var jiji = pasar + pasar2
+   if (jiji > 0) {
+    $('#totalnotisa').addClass('have')
+$('#totalnotisa').append(pasar + pasar2);
+   } else {
+    $('#totalnotisa').removeClass('have')
+   }
+$('#noticountmovil').empty();
+
+     $.getJSON('/noti/') 
+  .done(function(data) {
+    if(data[0].unread > 0){
+$('#noticountmovil').append(''+data[0].unread+'');
+}
+ 
+   });
+}, 3000);
+    }
+
+
+
+ });
+
+var notidiv = document.getElementsByClassName('notihover')
+if (notidiv.length >= 1) {
+$('#panel11noti').empty();
+}
+
+  $.getJSON('/noti/') 
+
+  .done(function(data) {
+    
+
+
+   $.each(data, function(key, value){
+    if(value.status == "Unread") {
+     $('#panel11noti').append('<li class="media notihover"><a href="'+value.urlton+'"><div class="pull-left"><i class="fa fa-circle" aria-hidden="true" style="color:#21618C; font-size: 10px; margin-top: 6px; margin-right: 8px;"></i><img src="'+value.userimg+'" class="media-object" style="width:30px; height:30px; border-radius: 50%; margin-right: 10px;" alt="" /></div><div class="media-body"><p style="font-weight: bold; width:90%; margin-left:20px;">'+value.mensaje+' en '+value.titulon+'.</p><div class="text-muted" style="font-size: 15px; text-align: right; ">Hace '+value.timesince+'</div></div></a></li><br/>');
+    } else {
+      $('#panel11noti').append('<li class="media notihover"><a href="'+value.urlton+'"><div class="pull-left"><img src="'+value.userimg+'" class="media-object" style="width:30px; height:30px; border-radius: 50%; margin-right: 10px;" alt="" /></div><div class="media-body"><p style="font-weight: bold; width:90%; margin-left:20px;">'+value.mensaje+' en '+value.titulon+'.</p><div class="text-muted" style="font-size: 15px; text-align: right; ">Hace '+value.timesince+'</div></div></a></li><br/>');
+
+    }
+
+    
+   
+
+   });  
+   });
+
+$.getJSON('/read/') 
+})
+
+$(document).ready(function(){
+ 
+
+
+ 
+  $.getJSON('/noti/') 
+
+  .done(function(data) {
+    if(data[0].unread > 0){
+$('#noticountmovil').append(''+data[0].unread+'');
+}
+ 
+   });
+
+
+
+}); 
+
+var pasar = 0
+var pasar2 = 0
+
+
+ $.getJSON('/noti/') 
+
+  .done(function(data) {
+    if(data[0].unread > 0){
+      pasar = data[0].unread
+        
+}
+ 
+   });
+
+
+   $.getJSON('/compartir/') 
+
+  .done(function(data) {
+    if(data[0].unread > 0){
+      pasar2 = data[0].unread
+        
+}
+ 
+   });
+$(document).ready(function(){
+var jiji = pasar + pasar2
+if (jiji > 0) {
+    $('#totalnotisa').addClass('have')
+$('#totalnotisa').append(pasar + pasar2);
+   } else {
+    $('#totalnotisa').removeClass('have')
+   }
+  });
+</script>
+
+<script type="text/javascript">
+      $('#panelactividad').click(function(e){
+ var pasar = 0
+var pasar2 = 0
+
+
+ $.getJSON('/noti/') 
+
+  .done(function(data) {
+    if(data[0].unread > 0){
+      pasar = data[0].unread
+        
+}
+ 
+   });
+
+
+   $.getJSON('/compartir/') 
+
+  .done(function(data) {
+    if(data[0].unread > 0){
+      pasar2 = data[0].unread
+        
+}
+ 
+   });
+
+
+
+  $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+      load=  document.getElementById('displayloadmovil').style.display="initial"
+    }, 
+success: function(){
+         load =  document.getElementById('displayloadmovil').style.display="none"
+
+         setTimeout(function(){
+
+   $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+      load=  document.getElementById('displayloadmovil').style.display="none"
+    }, 
+success: function(){
+         load =  document.getElementById('displayloadmovil').style.display="none"
+    }
+
+
+
+ });
+   $('#totalnotisa').empty();
+   var jiji = pasar + pasar2
+   if (jiji > 0) {
+    $('#totalnotisa').addClass('have')
+$('#totalnotisa').append(pasar + pasar2);
+   } else {
+    $('#totalnotisa').removeClass('have')
+   }
+$('#labelcountact').empty();
+
+     $.getJSON('/compartir/') 
+  .done(function(data) {
+ if(data[0].unread > 0){   
+$('#labelcountact').append(''+data[0].unread+'');
+}
+ 
+   });
+}, 3000);
+    }
+
+
+
+ });
+var actiidiv = document.getElementsByClassName('notihover')
+if (actiidiv.length >= 1) {
+$('#panel12acti').empty();
+}
+ 
+  $.getJSON('/compartir/') 
+
+  .done(function(data) {
+    
+
+
+   $.each(data, function(key, value){
+    if(value.statu == "Unread") {
+     $('#panel12acti').append('<li class="media notihover"><a  href="'+value.urlton+'"><div class="pull-left"><i class="fa fa-circle" aria-hidden="true" style="color:#21618C; font-size: 10px; margin-top: 6px; margin-right: 8px;"></i><img src="'+value.userimg+'" class="media-object" style="width:30px; height:30px; border-radius: 50%; margin-right: 10px;" alt="" /></div><div class="media-body"><p style="font-weight: bold; width: 88%; margin-left: 20px;">'+value.mensaje+'.</p ></div></a>   </li><div class="added-images"><a href="'+value.urlton+'"><img src="'+value.cover+'" class="z-depth-1 rounded mb-md-0 mb-2" style="height:150px;"></a> </div><br/><div class="text-muted" style="font-size: 15px; text-align: right; color:#A26060;">Hace '+value.timesince+'</div> <blockquote style="color:#A7A7A7; font-size:17px; ">"'+value.nota+'"</blockquote>');
+    } else {
+      $('#panel12acti').append('<li class="media notihover"><a  href="'+value.urlton+'"><div class="pull-left"><img src="'+value.userimg+'" class="media-object" style="width:30px; height:30px; border-radius: 50%; margin-right: 10px;" alt="" /></div><div class="media-body"><p style="font-weight: bold; width: 88%; margin-left: 20px;">'+value.mensaje+'.</p ></div></a>   </li><div class="added-images"><a href="'+value.urlton+'"><img src="'+value.cover+'" class="z-depth-1 rounded mb-md-0 mb-2" style="height:150px;"></a> </div><br/><div class="text-muted" style="font-size: 15px; text-align: right; color:#A26060;">Hace '+value.timesince+'</div> <blockquote style="color:#A7A7A7; font-size:17px; ">"'+value.nota+'"</blockquote>');
+
+    }
+
+    
+   
+
+   });  
+   });
+$.getJSON('/compread/') 
+
+})
+
+
+ $(document).ready(function(){
+ 
+
+
+ 
+  $.getJSON('/compartir/') 
+
+  .done(function(data) {
+    if(data[0].unread > 0){
+$('#labelcountact').append(''+data[0].unread+'');
+}
+ 
+   });
+
+
+});
+
+
+  
+</script>
+              <li class=" navbar-user">
+
+              
+<a href="/usuario/{{user.username}}/"  class="dropdown-toggle" data-toggle="dropdown" style="background: none;">
+              {%if user.profile.perfil_img %} 
+               <img src="{{ user.profile.perfil_img.url }}" style="border-radius:  50%; left: -6px; top: -3px; position: relative; width: 37px; height: 37px;">         
+              
+              <span class="hidden-xs"> {{ user.username }}{% else %}{{ user.full_name }}{% endif%} </span> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu ">
+              <li class="arrow"></li>
+              <li><a href="/usuario/{{user.username}}/" style="cursor: pointer;">Perfil</a></li>
+              <li><a href="/ver_más_tarde/{{request.user.username}}/">Ver más tarde</a></li>
+              <li><a href="/user_ver_favoritos/{{request.user.username}}/">Películas Fav</a></li>
+              <li><a href="/user_ver_series_favoritos/{{request.user.username}}/">Series Fav</a></li>
+              <li><a href="/user_ver_amigos/{{request.user.username}}/">Amigos</a></li>
+              <li class="divider"></li>
+              <li class=""><a href="/logout/"><i style="padding-left: 8px;" class="fa fa-sign-in" aria-hidden="true"></i>Cerrar Sesión </a></li>
+            </ul>
+          </li>
 
 
             {% endif %}
@@ -1021,10 +1550,11 @@ var resultac = document.getElementById('result').style.display= "none";
               <ul class="dropdown-menu level1" style="background-color: rgba(255, 255, 255, 0.8);">
                 <li><a href="/usuario/{{user.username}}/">Cuenta</a></li>
                 <li><a href="/ver_más_tarde/{{request.user.username}}/">Ver más tarde</a></li>
+
               </ul>
            
             </li>      
-              <li class=""><a href="/logout/"><i style="padding-left: 8px;" class="fa fa-sign-in" aria-hidden="true"></i>Cerrar Sesión </a></li>
+              
               
 
               {% else %}
@@ -1055,11 +1585,7 @@ var resultac = document.getElementById('result').style.display= "none";
 
   }
 
-  @media (max-width: 767px) {
-    #searchshow {
-      display: none;
-    }
-  }
+  
   </style>
       <form method="post" action="{% if not series_filt %}/search/{% else %}/buscar_series/{% endif %}" name="formaa">
 
@@ -1329,9 +1855,62 @@ function passwordVerify() {
 
    {% block scriptt %}
   {% endblock %}
+ <script type="text/javascript">
 
+
+        $(document).ready(function() {
+            $('#boot-multiselect-demo').multiselect({
+            includeSelectAllOption: true,
+            buttonWidth: 150,
+            enableFiltering: true,
+            nonSelectedText: 'Compartir con amigos',
+            buttonClass: 'btn btn-light multiselect-clear-filter'
+        });
+        });
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+    
+    
+    $(".multiselect-container").append('<div class="md-form" style="width:80%; margin-left: 20px;"><input id="input-char-counter" type="text" maxlength="150" class="form-control" name="nota" ><label for="input-char-counter" style="font-size: 14px;">Dejar un mensaje</label></div> <button id="envir" type="submit" class="btn btn-primary btn-md mt-0" style="font-size:15px; margin-left:20px;">Compartir</button>')
+
+
+ 
+  
+  });
+
+        $("#envir").click(function(){
+            $("#boot-multiselect-demo option").each(function (){
+                  $(this).prop('selected',true);
+            });
+         });
+
+     
+  </script>
+
+  <script type="text/JavaScript"> 
+   function cuales_seleccionados(objetoSelect) // Esta función servirá para guardar los valores y textos de los docentes que harán el examen en las variables valores_seleccionados y textos_seleccionados 
+   { 
+      var valores_seleccionados = new Array(); 
+      var index = 0; 
+
+      for ( var i = 0; i < objetoSelect.options.length; i++ ) // recorremos todas las opciones 
+      { 
+         if ( objetoSelect.options[i].selected ) // si la opcion fue seleccionada la guardamos en el array 
+         { 
+            valores_seleccionados[index] = objetoSelect.options[i].value; // guardamos los valores de la selección 
+            index++; 
+         } 
+      } 
+
+      if ( valores_seleccionados.length > 0 ) 
+      { 
+         document.algo.oculto.value = valores_seleccionados; // le asignamos como valor al campo oculto los valores seleccionados 
+      } 
+   } 
+</script> 
  <script src="{% static 'js/jquery.js' %}"></script>
-
+<script type="text/javascript" src="{% static 'js/bootstrap-multiselect.js' %}"></script>
 
 <script src="{% static 'frameworks/js/jquery.Jcrop.min.js' %}"></script>
 <script src="{% static 'frameworks/js/jquery.imgpicker.js' %}"></script>
