@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'multiselectfield',
     'apps.contacto',
     'apps.dashboard',
-    'channels',
 ]
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
@@ -92,7 +91,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Wao.wsgi.application'
 
-ASGI_APPLICATION = 'Wao.routing.application'
+#ASGI_APPLICATION = 'Wao.routing.application'
 
 
 # Database
@@ -217,21 +216,23 @@ else:
 
 
 
-if DEB:
-	CHANNEL_LAYERS = {
-	    'default': {
-	        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-	        'CONFIG': {
-	            'hosts': [('localhost', 6379)],
-	        },
-	    }
-	}
-else:
-	CHANNEL_LAYERS = {
-	    'default': {
-	        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-	        'CONFIG': {
-	            'hosts': [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
-	        },
-	    }
-	}
+channell = False
+if channell:
+	if DEB:
+		CHANNEL_LAYERS = {
+		    'default': {
+		        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+		        'CONFIG': {
+		            'hosts': [('localhost', 6379)],
+		        },
+		    }
+		}
+	else:
+		CHANNEL_LAYERS = {
+		    'default': {
+		        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+		        'CONFIG': {
+		            'hosts': [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+		        },
+		    }
+		}
