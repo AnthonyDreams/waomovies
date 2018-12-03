@@ -84,7 +84,7 @@ class Read(APIView):
 		lista_noti = Evento.objects.filter(noti_de_evento__in=noti).order_by("-timestampe")[:20]
 		lista_noticount = Evento.objects.filter(noti_de_evento__in=noti, status="Unread").count()
 		response = self.serializer(lista_noti, many=True)
-		Evento.objects.filter(noti_de_evento__in=noti, status="Unread")[:20].update(status="Read")
+		Evento.objects.filter(noti_de_evento__in=noti, status="Unread").update(status="Read")
 		return HttpResponse(json.dumps(response.data))
 
 class pelis_user_nove(APIView):

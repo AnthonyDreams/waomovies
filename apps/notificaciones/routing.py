@@ -1,7 +1,7 @@
-from django.conf.urls import url
+#from django.conf.urls import url
 
-from . import consumers
+#from . import consumers
 
-websocket_urlpatterns = [
-    url(r'^ws/$', consumers.NoseyConsumer),
-]
+#websocket_urlpatterns = [
+#    url(r'^ws/$', consumers.NoseyConsumer),
+#]

@@ -8673,7 +8673,7 @@ header#headerv3-light {
     height: auto !important;
     max-height: none !important;
   }
-  header .navbar-header .header{
+  header .navbar-header {
     width: 100%;
   }
   header .navbar-toggle {
@@ -10267,7 +10267,7 @@ button.close {
   background: black;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
     #searchshow {
       display: none;
     }
@@ -10276,7 +10276,7 @@ button.close {
     }
   }
 
-  @media (min-width: 767px) {
+  @media (min-width: 992px) {
     #page-transitions {
       display:none;
     }

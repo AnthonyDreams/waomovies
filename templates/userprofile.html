@@ -40,7 +40,8 @@
 				<div class="hero-ct">
 
 					<h1>{{ usuario.full_name }}</h1>
-			
+			<br/>
+			<br/>
 				</div>
 			</div>
 		</div>
@@ -686,21 +687,23 @@
 		{%endif %}
 
 {% if amigosview %}
-<div class="col-md-9 col-sm-12 col-xs-12">
+<div class="col-md-12 col-sm-12 col-xs-12">
 				
 				<br>
-				<div class="flex-wrap-movielist grid-fav">
+				<div class="flex-wrap-movielist">
 				<form  class="codegenerator" style="display: block; position: relative; top:-15px;" data-url="/codegenerator/" method="post"> {% csrf_token %}
 					<button class="btn btn-success btn-rounded" onclick="codegeneratorr(this)" id="codegenerator" type="submit" style="font-size: 16px;">Generar código</button>
 				</form>
 
 				<span style="margin-top: 30px; display: inline-block; position: absolute;"><p> Amigos:{% for amigs in amigos %}  {{amigs.AmiGos.count}}{% endfor %}</p></span>
 				<form class="agregar amigos" method="post" action="/agregaramigos/{{request.user.username}}/">{% csrf_token %}
-					<div class="md-form" style="position: absolute; left: 77%; margin-top: 30px;">
-  <input type="number" name="codigo" id="form1" class="form-control">
-  <label for="form1" style="color: white; font-size: 15px;"><i class="fa fa-add"></i> Añadir Amigo</label>
+					<div class="" style="position: absolute; left: 77%; margin-top: 50px;">
+  <input type="number" name="codigo" id="form1" class="form-control" placeholder="Añadir amigo" style="border-radius: 20px; width: 150px; position: absolute; right: 0;">
 </div>
+
+
 				</form>
+
 					<script type="text/javascript">
 	function codegeneratorr(b) {
 		var juan = b.id
@@ -771,6 +774,9 @@
 <span style="text-align: right; position: absolute; left: 40%;"><p>Aún no tienes un código, genera tu código presionando el boton.</p></span>
 {% endif %}
 </span>
+<br/>
+<br/>
+<br/>
 <!-- Section: Personal card -->
 <section class="my-5">
 
@@ -779,10 +785,10 @@
 {% for amigoss in amigos %}
 {% for obj in amigoss.AmiGos.all %}
     <!-- Grid column -->
-    <div class="col-md-6 col-lg-3 col-sm-3">
+    <div class="col-md-3 col-lg-3 col-sm-3" style="padding-bottom: 20px;">
 
       <!-- Card -->
-      <div class="card card-personal">
+      <div class="card card-personal" style="max-width: 80%;">
 
         <!-- Card image-->
         <img class="card-img-top" src="{{obj.profile.perfil_img.url}}" alt="Card image cap">
@@ -825,10 +831,10 @@
 		{% endif %}
 
 		{% if notificaciones %}
-<div class="col-md-9 col-sm-12 col-xs-12">
+<div class="col-md-12 col-sm-12 col-xs-12">
 				
 				<br>
-				<div class="flex-wrap-movielist grid-fav">
+				<div class=" ">
 				
 
 				<span style="margin-top: 30px; margin-bottom: 30px; display: inline-block; position: absolute; font-size: 16px;"><p> NOTIFICACIONES: {{getevent.count}}</p></span>
@@ -847,23 +853,26 @@
 
       <!-- Newsfeed -->
       <div class="mdb-feed">
-
+<table class="egt">
 {% for getevents in getevent %}
-        <!-- First news -->
+
+  <tr>
+    <td style=" width: 60px;"><!-- First news -->
         <div class="news" style="padding-bottom: 35px;">
 
           <!-- Label -->
           <div class="label" style="display: inline-block; margin-right: 0px;">
           	{% for creadores in getevents.creadores.all  %}
-            <img src="{{ creadores.profile.perfil_img.url }}" class="rounded-circle z-depth-1-half" style="width: 40px; height: 40px;">
+            <img src="{{ creadores.profile.perfil_img.url }}" class="rounded-circle z-depth-1-half" style="width: 40px; height: 40px; ">
             {% endfor %}
           </div>
+</td>
 
-          <!-- Excerpt -->
-          <div class="excerpt" style="float: right; text-align: left; position: relative; right: 40%; ">
+   <td>       <!-- Excerpt -->
+          <div class="excerpt" style="  position: relative; font-size: 14px;">
 
             <!-- Brief -->
-            <div class="brief">
+            <div class="brief" style=" " id="brief">
               <a class="name text-white" href="#" style="cursor: text;">{{ getevents.mensaje }}</a> en <a href="/peliculas/{{ getevents.noti_de_evento }}/">{{ getevents.noti_de_evento }} {% if getevents.event == "like" %} <!-- Feed footer -->
             <div class="feed-footer">
               <a class="like text-white">
@@ -880,11 +889,15 @@
 
           </div>
           <!-- Excerpt -->
-
+</td>
         </div>
-        <!-- First news -->
+        <!-- First news --></td>
+  </tr>
+{% endfor %}
 
-        {% endfor %}
+
+</table>
+
         
       </div>
       <!-- Newsfeed -->
@@ -923,24 +936,30 @@
 
       <!-- Newsfeed -->
       <div class="mdb-feed">
+<table class="egt">
+{%  for getacts in getact %}
 
-{% for getacts in getact %}
-        <!-- First news -->
-        <div class="news" style="padding-bottom: 50px;">
+  <tr>
+    <td style=" width: 60px;"><!-- First news -->
+        <div class="news" style="padding-bottom: 35px;">
 
           <!-- Label -->
           <div class="label" style="display: inline-block; margin-right: 0px;">
-            <img src="{{ getacts.user_who_share.profile.perfil_img.url }}" class="rounded-circle z-depth-1-half" style="width: 40px; height: 40px;">
+          	
+            <img src="{{ getacts.user_who_share.profile.perfil_img.url }}" class="rounded-circle z-depth-1-half" style="width: 40px; height: 40px; ">
+           
           </div>
+</td>
 
-          <!-- Excerpt -->
-          <div class="excerpt" style="float: right; text-align: left; position: relative; right: 40%; ">
+   <td>       <!-- Excerpt -->
+          <div class="excerpt" style="  position: relative; font-size: 14px;">
 
             <!-- Brief -->
-            <div class="brief">
-              <a class="name text-white" href="#" style="cursor: text;">{{ getacts.mensaje }}</a>
-            <blockquote>{{ getacts.nota }}</blockquote>
+            <div class="brief" style=" " id="brief">
+              <a class="name text-white" href="#" style="cursor: text;">{{ getacts.mensaje }}</a> <blockquote style="color: gray;">{{ getacts.nota }}</blockquote>
               <div class="date">Hace {{getacts.timestampc|timesince  }}</div>
+            
+         
             </div>
             
 
@@ -948,11 +967,15 @@
 
           </div>
           <!-- Excerpt -->
-
+</td>
         </div>
-        <!-- First news -->
+        <!-- First news --></td>
+  </tr>
+{% endfor %}
 
-        {% endfor %}
+
+</table>
+
         
       </div>
       <!-- Newsfeed -->
