@@ -1242,10 +1242,10 @@ $(this).remove();
      
                <button title="Ver más tarde" class="loginLink btn-ver" type="submit" style="position: relative; left: 50%;"><i style="color: black; font-size: 24px;" class="fa  fa-eye" aria-hidden="true"></i></button>
      {% endif %}
-     <form method="post" action="/compartir/{{peliculaa.id}}/{{peliculaa.slug}}/" id="pu" name="algo">
+     <!--form method="post" action="/compartir/{{peliculaa.id}}/{{peliculaa.slug}}/" id="pu" name="algo">
         {% csrf_token %}
    <select class="amigosshare" name="users_to_share" id="boot-multiselect-demo" multiple="multiple" onchange="cuales_seleccionados(document.algo.users_to_share);"></select><input type="hidden" name="oculto"> 
-</form>
+</form-->
 
 
      <form class="reportarr" method='POST' data-url='/reportar/{{ peliculaa.id }}/' enctype='multipart/form-data'>{% csrf_token %}

@@ -136,7 +136,265 @@
     }
   }
 
+.alert {
+    background-color: #f44336; 
+    color: white;
+    position: fixed;
+}
 
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+
+}
+
+.success {
+  background-color: #2ECC71;
+
+}
+
+.info {
+  background-color: purple;
+
+}
+.closebtn:hover {
+    color: black;
+}
+
+#summary {
+}
+
+#summary:hover {
+    cursor: pointer;
+}
+
+#detail {
+    width: 300px;
+    height: 300px;
+    background: black;
+    display: none;
+}
+
+button{
+outline:none;
+}
+
+.buttonn {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 60px;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+    background-color: #4CAF50;
+
+
+}
+
+.buttonn:after {
+    content: "";
+    background: #949494;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s;
+}
+
+.buttonn:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.notihover:hover {
+  background-color: #434343;
+}
+
+.have {
+  padding: 5px; border-radius: 50%; background: #B61919; width: 15px; height: 15px;
+}
+
+ 
+
+
+ .none {
+  display: none;
+ }
+ .fa-circle-o-notch {
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+  /* transform: rotate(3deg); */
+   /* transform: rotate(0.3rad);/ */
+   /* transform: rotate(3grad); */ 
+   /* transform: rotate(.03turn);  */
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+.btn-floating:hover {
+    animation-duration: 1s;
+    animation-name: rotar;
+    animation-iteration-count: 0.6;
+  }
+  @keyframes rotar {
+    from {
+     transform:  rotate(0deg);
+    }
+    to {
+      transform:rotate(362deg);
+    }
+  }
+  .pills-secondary .nav-link.active {
+    background-color: none;
+    border-bottom: #f2ba2e solid 1px !important;
+    border-radius: 2px;
+}
+.pills-secondary .nav-link {
+    color: white;
+}
+
+.scrollbarr-primary::-webkit-scrollbar {
+  width: 12px;
+  background-color: gray; }
+
+.scrollbarr-primary::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #4285F4; }
+
+.scrollbarr-danger::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+
+.scrollbarr-danger::-webkit-scrollbar {
+  width: 12px;
+  background-color: gray; }
+
+.scrollbarr-danger::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background: #ED213A;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ }
+
+.scrollbarr-warning::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: none;
+  border-radius: 10px; }
+
+.scrollbarr-warning::-webkit-scrollbar {
+  width: 8px;
+  background-color: none; }
+
+.scrollbarr-warning:hover::-webkit-scrollbar {
+  width: 12px;
+  background-color: none; }
+
+.scrollbarr-warning::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #FF8800; }
+
+.scrollbarr-success::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+
+.scrollbarr-success::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5; }
+
+.scrollbarr-success::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #00C851; }
+
+.scrollbarr-info::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #020D18;
+  border-radius: 10px;
+   }
+
+.scrollbarr-info::-webkit-scrollbar {
+  width: 12px;
+  background-color: #020D18;
+   }
+
+.scrollbarr-info::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #233A50;
+   }
+
+.scrollbarr-default::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+
+.scrollbarr-default::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5; }
+
+.scrollbarr-default::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #2BBBAD; }
+
+.scrollbarr-secondary::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+
+.scrollbarr-secondary::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5; }
+
+.scrollbarr-secondary::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #aa66cc; }
+
+  .vermahover:hover{
+    background-color: #000000;
+  }
+
+  .multiselect-clear-filter {
+    position: relative;
+    left: 100%;
+  }
+
+  .btn-default {
+    background-color: #21618C: 
+
+  }
+
+  .multiselect-container {
+    width: 300px;
+  }
 </style>
   <div id="page-transitions">
 
@@ -322,7 +580,7 @@ var resultac = document.getElementById('result').style.display= "none";
 <em>Instagram</em>
 </a>
 
-<a class="default-link menu-item" href="#">
+<a class="default-link menu-item" href="https://www.youtube.com/channel/UCuw-LsD59D59tKwVvtEGJCA">
 <em>YouTube</em>
 </a>
 </div>
