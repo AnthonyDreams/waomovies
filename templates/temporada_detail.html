@@ -9,7 +9,7 @@
 
   
 {% endblock %}
-    
+
 
  {% block content %}
 
@@ -435,17 +435,12 @@ document.getElementById('panelstreamcloud').style.display="none"
                         <p class="txt2"></p>
                     </div>
                     <div style="display: block">
-                                      <span style="display: inline-block;"><i class="fa fa-share icon2"></i><a data-toggle="modal" data-target="#modalSocial" href="#">Compartir</a></span>
-                        <span><i id="load" class="fa fa-bug icon2"></i><button form="reporte" onclick="reportar(this)" type="submit" style="color: #9DA1A5; background:none; border:none; cursor: pointer;">Reportar episodio</button></span>
-                        <span style="display: none;"><form id="reporte" class="reportar" method="post" data-url="/reportar_capitulo/{{capitulo.id}}/reportar/" style="display: initial; position: relative; margin-top: -50px;" >{%csrf_token%}
+                                      <span style="display: inline-block;"><i class="fa fa-share icon2"></i><a data-toggle="modal" data-target="#modalSocial" id="sharebuttono" href="#">Compartir</a></span>
+                                      <!-- Button trigger modal-->
 
-                          <!--/form></span> <form method="post" action="/compartir/{{capitulo.id}}/{{capitulo.slug}}/" id="pu" name="algo">
-        {% csrf_token %}
-   <select class="amigosshare" name="users_to_share" id="boot-multiselect-demo" multiple="multiple" onchange="cuales_seleccionados(document.algo.users_to_share);"></select><input type="hidden" name="oculto"> 
-</form-->
-                          
-                        <!--Modal: modalSocial-->
-<div class="modal fade" id="modalSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<!--Modal: modalSocial-->
+<div class="modal fade" id="modalSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 60px;">
     <div class="modal-dialog cascading-modal" role="document">
 
         <!--Content-->
@@ -453,15 +448,38 @@ document.getElementById('panelstreamcloud').style.display="none"
 
             <!--Header-->
             <div class="modal-header light-blue darken-3 white-text">
-                <h4 class="title"><i class="fa fa-users"></i> ¡Comparte!</h4>
+                <h4 class="title" id="titlemodal"><i class="fa fa-users"></i> ¡Comparte!</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
 
             <!--Body-->
-            <div class="modal-body mb-0 text-center">
+            
+            <div  class="modal-body mb-0 text-center" style="max-height: 350px;">
+
+             <div id="displayloaz" style="display: none; "><img style="position: relative; " height="50" width="50" src="{% static "img/fancybox_loading@2x.gif" %}"></div>  
+
+             <div id="mensajeshare"></div> 
+<div id="moda-bodycharge">
+
+<a onclick="select(this)" id="todos"><i class="fa fa-users" style="font-size: 30px; color: black;"></i> <span style="color: gray; font-weight: bold;">¡Click aquí para compartir con todos!</span></a>
+<br/>
+<br/>
+<div class="container">
+                <ul id="friendiv" style="float: left;">
+
+                   
+                </ul>
+                </div>
+                <form class="formshare" method="post" data-url='/compartir/{{capitulo.id}}/{{capitulo.slug}}/'>
+        {% csrf_token %}
+   <input type="hidden" name="users_to_share" value="" id="compartir">
+   <input type="hidden" name="oculto" id="ocultado">
+   <div class="md-form" style="width:80%; margin-left: 20px; height: 30px; float: left;"><input id="contado" type="text" maxlength="150" class="form-control" name="nota" ><label for="contado" style="font-size: 14px;">Dejar un mensaje</label></div> <button onclick="compartirshare(this)" type="submit" class="btn btn-primary" style="font-size:15px; margin-left:10px; margin-top: 35px; width: 30px; "><i class="fa fa-send"></i></button>
+</form>
+<br/>
 
  <!--Facebook-->
-                <a type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook"></i></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/peliculas/{{peliculaa.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook"></i></a>
                 <!--Twitter-->
                 <a type="button" style="background-color: #00acee" class="btn-floating btn-tw"><i class="fa fa-twitter"></i></a>
                 <!--Google +-->
@@ -478,14 +496,21 @@ document.getElementById('panelstreamcloud').style.display="none"
                 <a type="button" class="btn-floating btn-email"><i class="fa fa-envelope"></i></a-->
 
             </div>
-
+</div>
         </div>
         <!--/.Content-->
 
     </div>
 </div>
 <!--Modal: modalSocial-->
+                        <span><i id="load" class="fa fa-bug icon2"></i><button form="reporte" onclick="reportar(this)" type="submit" style="color: #9DA1A5; background:none; border:none; cursor: pointer;">Reportar episodio</button></span>
+                        <span style="display: none;"><form id="reporte" class="reportar" method="post" data-url="/reportar_capitulo/{{capitulo.id}}/reportar/" style="display: initial; position: relative; margin-top: -50px;" >{%csrf_token%}
+
+             
                     </div>
+
+                        
+
                     <br>
                     <br>
                     <p class="txt3">
@@ -1330,13 +1355,72 @@ input[type="button"].btn-block {
 
 
 {% block scriptt %}
+
+<script type="text/javascript">
+function compartirshare(b) {
+
+              
+
+             var $myForm = $('.formshare')
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+              document.getElementById('displayloaz').style.display="initial"
+              document.getElementById('moda-bodycharge').style.display="none"
+
+                    
+                },
+                    
+
+
+                 })
+
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+       
+document.getElementById('displayloaz').style.display="none"
+              
+              $("#moda-bodycharge").load(window.location + " #moda-bodycharge");
+              $('#mensajeshare').append('<big style="color: gray;"><strong>¡Se ha compartido con exito!</strong></big>');
+              valores = ""
+              no_a_enviar = ""
+                 
+$(this).remove();
+         }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+
+
+             </script>
  <!-- Include jQuery and Scripts -->
 
     <script type="text/javascript" src="{% static '' %}js/packages.min.js"></script>
     <script type="text/javascript" src="{% static '' %}js/scripts.min.js"></script>
 <!-- jQuery easing plugin -->
 
-
+  
 <script>
              function send(b) {
               var juan = b.id
@@ -1431,7 +1515,60 @@ input[type="button"].btn-block {
 
 
 
+function compartirsharee(mi) {
 
+              
+
+             var $myForm = $('.formsshare')
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+              document.getElementById('displayloaz').style.display="initial"
+              document.getElementById('moda-bodycharge').style.display="none"
+
+                    
+                },
+                    
+
+
+                 })
+
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+       
+document.getElementById('displayloaz').style.display="none"
+              
+              $("#moda-bodycharge").load(window.location + " #moda-bodycharge");
+              $('#mensajeshare').append('<big style="color: gray;"><strong>¡Se ha compartido con exito!</strong></big>');
+              valores = ""
+              no_a_enviar = ""
+                 
+$(this).remove();
+         }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
 
 
 
@@ -1742,8 +1879,6 @@ function update_ans(b) {
                  $("#act").load(window.location + " #act");
                  $("#load").removeClass('fa-circle-o-notch')
                   $("#load").addClass('fa-check')
-                 document.getElementById("none").style.cursor= "default"
-                 document.getElementById("none").disabled= "true"
 $(this).remove();
          }
 

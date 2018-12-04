@@ -30,7 +30,7 @@ class Friends(ModelSerializer):
 
 	class Meta:
 		model = Profile
-		fields = ('superamigos',)
+		fields = ('superamigos', 'perfil_img',)
 
 class Comparitapi(ModelSerializer):
 	unread = serializers.IntegerField()

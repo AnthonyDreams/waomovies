@@ -60,9 +60,9 @@ class CompAPI(APIView):
 class CompRead(APIView):
 	serializer = Comparitapi
 	def get(self, request, format=None):
-		listica = Compartir.objects.filter(users_to_share=request.user.id).order_by('-timestampc')[:20]
+		listica = Compartir.objects.filter(users_to_share=request.user.id).order_by('-timestampc').exclude(user_who_read=request.user.id)[:20]
 		response = self.serializer(listica, many=True)
-		anadir_read = Compartir.objects.filter(users_to_share=request.user.id)
+		anadir_read = Compartir.objects.filter(users_to_share=request.user.id).exclude(user_who_read=request.user.id)
 		for a in anadir_read:
 			if not request.user in a.user_who_read.all():
 				a.user_who_read.add(request.user.id)
@@ -118,7 +118,7 @@ class pelis_user_nove(APIView):
 			if request.user in a.animacion.all():
 				generos.append('ANI')	
 
-		lista = Peliculas.objects.filter((Q(genero__in=generos)|Q(genero2__in=generos))).order_by("-id")[:10]
+		lista = Peliculas.objects.filter((Q(genero__in=generos)|Q(genero2__in=generos))).order_by("-id")[:20]
 		response = self.serializer(lista, many=True)
 		return HttpResponse(json.dumps(response.data))
 
@@ -138,7 +138,7 @@ class añadiste(APIView):
 			added_tag3.append(use.tag3)
 			added_id.append(use.id)
 
-		lista2 = Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=added_id)
+		lista2 = Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=added_id)[:40]
 
 
 		response = self.serializer(lista2, many=True)

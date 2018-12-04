@@ -8,7 +8,64 @@
 
 
 {% block scriptt %}
+<script type="text/javascript">
+function compartirshare(b) {
 
+              
+
+             var $myForm = $('.formshare')
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+              document.getElementById('displayloaz').style.display="initial"
+              document.getElementById('moda-bodycharge').style.display="none"
+
+                    
+                },
+                    
+
+
+                 })
+
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+       
+document.getElementById('displayloaz').style.display="none"
+              
+              $("#moda-bodycharge").load(window.location + " #moda-bodycharge");
+              $('#mensajeshare').append('<big style="color: gray;"><strong>¡Se ha compartido con exito!</strong></big>');
+              valores = ""
+              no_a_enviar = ""
+                 
+$(this).remove();
+         }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+
+
+             </script>
 
 <script type=”text/javascript”>
       
@@ -1074,9 +1131,9 @@ $(this).remove();
 					<img src="{{ series.serie_cover.url }}" alt="">
 					<div class="movie-btn">	
 						<div class="btn-transform transform-vertical red">
-							<div><a href="#" class="item item-1 redbtn">  Ver Trailer</a></div>
-							<div><a data-toggle="modal" data-target="#modalyoutube" class="item item-2 redbtn "><i class="fa fa-play point"></i></a></div>
-						</div>
+       <div><a data-toggle="modal" data-target="#modalyoutube" class="item item-1 redbtn">  Ver Trailer</a></div>
+       <div><a data-toggle="modal" data-target="#modalyoutube" class="item item-2 redbtn "><i class="fa fa-play point"></i></a></div>
+      </div>
 
 <style type="text/css">
     
@@ -1121,34 +1178,59 @@ $(this).remove();
 </div>
 <!--Modal: modalYoutube-->
 						<div class="btn-transform transform-vertical">
-							<div><a href="#" class="item item-1 yellowbtn"> <i class="fa-share-alt fa point"></i> Compartir</a></div>
-							<div><a data-toggle="modal" data-target="#modalSocial"class="item item-2 yellowbtn"><i class="fa-share-alt fa point"></i></a></div>
-						</div>
+       <div><a data-toggle="modal" data-target="#modalSocial" id="sharebuttono" class="item item-1 yellowbtn"> <i class="fa-share-alt fa point"></i> Compartir</a></div>
+       <div><a data-toggle="modal" data-target="#modalSocial" id="sharebuttono2" class="item item-2 yellowbtn"><i class="fa-share-alt fa point"></i></a></div>
+      </div>
 					</div>
 				</div>
 			</div>
 
 
 
+<!-- Button trigger modal-->
+
+
 <!--Modal: modalSocial-->
-<div class="modal fade" id="modalSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 60px;">
     <div class="modal-dialog cascading-modal" role="document">
 
         <!--Content-->
-        <div class="modal-content trailerso">
+        <div class="modal-content">
 
             <!--Header-->
             <div class="modal-header light-blue darken-3 white-text">
-                <h4 class="title"><i class="fa fa-users"></i> ¡Comparte!</h4>
+                <h4 class="title" id="titlemodal"><i class="fa fa-users"></i> ¡Comparte!</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
 
             <!--Body-->
-            <div class="modal-body mb-0 text-center">
+            
+            <div  class="modal-body mb-0 text-center" style="max-height: 350px;">
 
+             <div id="displayloaz" style="display: none; "><img style="position: relative; " height="50" width="50" src="{% static "img/fancybox_loading@2x.gif" %}"></div>  
 
-                <!--Facebook-->
-                <a type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook"></i></a>
+             <div id="mensajeshare"></div> 
+<div id="moda-bodycharge">
+
+<a onclick="select(this)" id="todos"><i class="fa fa-users" style="font-size: 30px; color: black;"></i> <span style="color: gray; font-weight: bold;">¡Click aquí para compartir con todos!</span></a>
+<br/>
+<br/>
+<div class="container">
+                <ul id="friendiv" style="float: left;">
+
+                   
+                </ul>
+                </div>
+                <form class="formshare" method="post" data-url='/compartir/{{series.id}}/{{series.slug}}/'>
+        {% csrf_token %}
+   <input type="hidden" name="users_to_share" value="" id="compartir">
+   <input type="hidden" name="oculto" id="ocultado">
+   <div class="md-form" style="width:80%; margin-left: 20px; height: 30px; float: left;"><input id="input-char-counter" type="text" maxlength="150" class="form-control" name="nota" ><label for="input-char-counter" style="font-size: 14px;">Dejar un mensaje</label></div> <button onclick="compartirshare(this)" id="formshare" type="submit" class="btn btn-primary" style="font-size:15px; margin-left:10px; margin-top: 35px; width: 30px; "><i class="fa fa-send"></i></button>
+</form>
+<br/>
+
+ <!--Facebook-->
+                <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/peliculas/{{peliculaa.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook"></i></a>
                 <!--Twitter-->
                 <a type="button" style="background-color: #00acee" class="btn-floating btn-tw"><i class="fa fa-twitter"></i></a>
                 <!--Google +-->
@@ -1158,10 +1240,14 @@ $(this).remove();
                 <a type="button"  style="background-color: #3f729b;"class="btn-floating btn-ins"><i class="fa fa-instagram"></i></a>
                 <!--Pinterest-->
                 <a type="button"  style="background-color: #c8232c ;"class="btn-floating btn-pin"><i class="fa fa-pinterest"></i></a>
-              
+    
+                <!--Comments-->
+                <!--a type="button" class="btn-floating btn-comm"><i class="fa fa-comments"></i></a>
+                <Email>
+                <a type="button" class="btn-floating btn-email"><i class="fa fa-envelope"></i></a-->
 
             </div>
-
+</div>
         </div>
         <!--/.Content-->
 
@@ -1230,10 +1316,7 @@ $(this).remove();
 					
             			<button title="Ver más tarde" class="loginLink btn-ver" type="submit" style="position: relative; left: 50%;"><i style="color: black; font-size: 24px;" class="fa  fa-eye" aria-hidden="true"></i></button>
 					{% endif %}
-                     <!--form method="post" action="/compartir/{{series.id}}/{{series.slug}}/" id="pu" name="algo">
-        {% csrf_token %}
-   <select class="amigosshare" name="users_to_share" id="boot-multiselect-demo" multiple="multiple" onchange="cuales_seleccionados(document.algo.users_to_share);"></select><input type="hidden" name="oculto"> 
-</form-->
+                   
 					<form class="reportarr"  method='POST' data-url='/reportar_serie/{{ series.id }}/' enctype='multipart/form-data'>{% csrf_token %}
 						<input type="numero" name="reportes" style="visibility:hidden;" value="1">
 						<button onclick="reportar(this)" id="none"  title="Reportar" class="" type="submit" style="position: relative;  padding-left: 30px; top: -8px; background: none; border: none; cursor: pointer;"><i id="load" style="text-shadow: 2px 2px black; color: white; font-size: 24px;" class="fa fa-bug" aria-hidden="true"></i></button>

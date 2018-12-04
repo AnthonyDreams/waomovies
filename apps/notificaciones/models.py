@@ -154,15 +154,10 @@ class Compartir(models.Model):
 	def unread(self):
 		selfa = self.user_who_share
 		img = Usuario.objects.get(email=selfa)
-		sumar = Compartir.objects.filter(user_who_share=img)
-		contar = 0
-		for a in sumar:
-			cuenta = a.user_who_read.all()
-			if not get_current_authenticated_user() in cuenta:
-				contar += 1
+		sumar = Compartir.objects.filter(users_to_share=get_current_authenticated_user()).exclude(user_who_read=get_current_authenticated_user()).count()
 
 
-		return contar
+		return sumar
 
 
 	@property

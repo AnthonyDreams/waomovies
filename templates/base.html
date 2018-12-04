@@ -53,6 +53,27 @@
 <body >
 
 <style type="text/css">
+
+.imuser {
+  border: #DFBA00 solid 3px;
+    width: 60px;
+    height: 60px;
+    border-radius:50%;
+}
+.border-select{
+    color: #17202A;
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  .ass i {
+    color: #DFBA00 !important;
+    font-size: 35px;
+  }
+
+  .usetos {
+    color: black;
+  }
 @media (min-width: 100px) and (max-width: 450px) {
   #searches {
     border-radius: 20px;
@@ -852,16 +873,7 @@ var load = false
   
   
 </script>
-<script type="text/javascript">
-  $.getJSON('/friendsitos/') 
 
-  .done(function(data) {
-    $.each(data, function(key, value){
-$('#boot-multiselect-demo').append('<option value="'+value.superamigos+'">'+value.superamigos+'</option>');
-});
- 
-   });
-</script>
 <script type="text/javascript">
       $('#buttonuno').click(function(){
   $('#panel11p').addClass("active");
@@ -1479,6 +1491,8 @@ $('#noticount').append(''+data[0].unread+'');
 
 });  
 </script>
+
+
 
 <script type="text/javascript">
       $('#actibtn').click(function(e){
@@ -2429,3 +2443,112 @@ Por favor, espere entre 3 y 7 días hábiles para una respuesta. Tenga en cuenta
 <!-- end of footer section-->
 </body>
 </html>
+
+<script type="text/javascript">
+valores = ""
+no_a_enviar = ""
+function select (e){
+  var personaje = document.getElementById(e.id)
+if (e.id == "todos"){
+  personaje.classList.add('ass')
+
+  document.getElementById('friendiv').style.display="none";
+  } else {
+  var none = document.getElementById('imuser' + e.id)
+  none.classList.add('imuser')
+
+  }
+  personaje.classList.add('border-select')
+
+  var resultado = ""
+  for(i in personaje.classList.value) {
+    resultado +=  personaje.classList.value[i];
+  }
+  personaje.onclick= function() { select2(this); }
+
+  var input = document.getElementById('compartir')
+  valores += e.id + ","
+  input.value = valores
+
+}
+
+function select2(s){
+  var resultado = ""
+  var personaje = document.getElementById(s.id)
+  if (s.id == "todos"){
+  document.getElementById('friendiv').style.display="initial";
+  personaje.classList.remove('ass')
+
+  } else {
+  var none = document.getElementById('imuser' + s.id)
+  none.classList.remove('imuser')
+
+    
+  }
+  for(i in personaje.classList.value) {
+    resultado +=  personaje.classList.value[i];
+  }
+  var True = resultado.split(" ").includes('border-select')
+  if (True){
+  personaje.classList.remove('border-select')
+    var input = document.getElementById('ocultado')
+    no_a_enviar += s.id + ","
+    input.value = no_a_enviar
+  }
+  personaje.onclick= function() { select(this); }
+}
+
+$('#sharebuttono').click(function(){
+              document.getElementById('moda-bodycharge').style.display="initial"
+
+$('#friendiv').empty();
+$('#mensajeshare').empty();
+
+ $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+      load=  document.getElementById('displayloaz').style.display="initial"
+    }, 
+success: function(){
+         load =  document.getElementById('displayloaz').style.display="none"
+    }
+
+
+
+ });
+  $.getJSON('/friendsitos/') 
+
+  .done(function(data) {
+    $.each(data, function(key, value){
+$('#friendiv').append('<li style="float:left; padding-left:20px;"><a class="usetos" id="'+value.superamigos+'" onclick="select(this)"><ul><li><img id="imuser'+value.superamigos+'" style="width:60px; height:60px; border-radius:50%;" src="'+value.perfil_img+'"></img></li><li><span>'+value.superamigos+'</span></li></ul></a></li>');
+});
+ 
+   });
+  });
+
+$('#sharebuttono2').click(function(){
+              document.getElementById('moda-bodycharge').style.display="initial"
+$('#mensajeshare').empty();
+
+$('#friendiv').empty();
+
+$.ajaxSetup({ cache: false,
+ beforeSend: function(){
+      load=  document.getElementById('displayloaz').style.display="initial"
+    }, 
+success: function(){
+         load =  document.getElementById('displayloaz').style.display="none"
+    }
+
+
+
+ });
+  $.getJSON('/friendsitos/') 
+
+  .done(function(data) {
+    $.each(data, function(key, value){
+$('#friendiv').append('<li style="float:left; padding-left:20px;"><a class="usetos" id="'+value.superamigos+'" onclick="select(this)"><ul><li><img id="imuser'+value.superamigos+'" style="width:60px; height:60px; border-radius:50%;" src="'+value.perfil_img+'"></img></li><li><span>'+value.superamigos+'</span></li></ul></a></li>');
+});
+ 
+   });
+  });
+</script>
