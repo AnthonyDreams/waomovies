@@ -519,6 +519,27 @@ function update_ans(b) {
               console.log(jqXHR)
      $("#vot").load(window.location + " #vot");
      $("#updatevot").load(window.location + " #updatevot");
+        var len = document.getElementsByClassName("show").length
+        var lambo = document.getElementsByClassName("kratos")
+        if(lambo.length == 0) {
+            var lamb = $("#updatevot")
+            lamb.addClass("kratos")
+        }
+
+        
+     if(len >= 4) {
+        $(".modal-backdrop")[1].remove();
+$(".show")[1].remove();
+     $(".show")[0].remove();
+     } 
+
+     if(len <= 4) {
+        $(".modal-backdrop")[0].remove();
+
+$(".in")[0].remove();
+
+     } 
+
      $(this).remove();
             
                  $myForm[0].reset(); 
@@ -536,6 +557,7 @@ function update_ans(b) {
              
              
              </script>
+
 
 
 <script type="text/javascript">
@@ -1334,7 +1356,7 @@ $(this).remove();
 	</div>
 	<div class="rate-star" style="width: auto; ">
 		<div class="rate" id="waorate" style="position: relative; left:-22px; width: 200px; height: 60px; " >
-			<a href=""type="button" data-toggle="collapse" data-target="{%  if request.user.is_authenticated %}#collapseExampl{% else %}#collapseExamplee{% endif %}" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;"><img width="58" height="58" src="{% static 'img/wamovieslogo.png' %}" ></a>
+			<a {%  if request.user.is_authenticated %} id="putisimo" data-toggle="modal" data-target="#collapseExamppl" aria-expanded="false" aria-controls="collapseExample"{% else %}class=" loginLink" {% endif %} style="cursor: pointer;"><img width="58" height="58" src="{% static 'img/wamovieslogo.png' %}" ></a>
 		<p class="mojon"><span id="the-div-that-should-be-refreshe">{{promedio}}</span><small class="" style="font-size: 14px; font-family: sans-serif;"> /5 WAO</small> <br>
 			<span id="vot" class="rv">{{ votacion2c }} {% if votacion2c > 1 %}votos{%  else %}voto{% endif %}</span>
 		</p>
@@ -1346,69 +1368,94 @@ $(this).remove();
 
 
 						 	{%  if request.user.is_authenticated %}
-						 	<div id="updatevot">
-						 	{% if votacion4  %}
-						 	{% for i in votacion4 %}
+        <div id="updatevot">
+        {% if votacion4  %}
+        {% for i in votacion4 %}
+        
 
-							<div  style="width: 170px; height: 60px;" class="collapse container" id="collapseExampl">
-												    <div class="mt-3">
-												    	<div  class="md-form form-lg">
+       <div  style="position: relative;  top: 60px; padding: 8px; height: 135px; left: -180px; width: 240px; overflow-y: hidden;"  class="modal" id="collapseExamppl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="mt-3">
+                 <div  class="md-form form-lg rate-areas">
     
-											    <form  class="my-ajax-form" method='POST'data-url="/cambiar_votaciono_serie/{{i.id}}/as/" >{% csrf_token %}
+                <form  class="my-ajax-form" method='POST'data-url="/cambiar_votaciono_serie/{{i.id}}/as/" >{% csrf_token %}
                    
       <button onclick="votar(this)" style="background:none; border: none; cursor: pointer;" type="submit"><i style="font-size: 18px;" class="fa fa-refresh point"></i></button>
       </form>
-											</div>
-																							        
-												    </div>
-												</div>
-												<!-- / Collapsible element -->
+           </div>
+                                
+                </div>
+                <div class="modal-footer" style="border: none; position: absolute; margin-top: 15px;">
+                <button style="font-size: 16px; color: white;" type="button" class="btn redbtn" data-dismiss="modal">Cerrar</button>
+                
+            </div> 
+            </div>
+            <!-- / Collapsible element -->
 
 
  
-                            {% endfor %}
+       {% endfor %}
 
-							{% else %}
-							<!-- Collapsible element -->
-												<div style=" margin-left:-50px;  width: 195px; height: 60px;"  class="collapse container" id="collapseExampl">
-												    <div class="mt-3">
-												    	<div class="md-form form-lg">
+       {% else %}
+       
+    <!-- Collapsible element -->
+                                                <div style=" position: relative;  top: 60px; padding: 8px; height: 90px; left: -180px; width: 240px; overflow-y: hidden;"  class="modal" id="collapseExamppl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="mt-3">
+                                                        <div class="md-form form-lg" id="ratel" style=" padding: 8px; margin-top: -25px; position: absolute;  left:0px;">
     
-											    <form  class="my-ajax-form" method='POST'data-url="/votacion_serie/{{series.id}}/" >{% csrf_token %}
-										         <ul class="rate-area">
-										      <input  type="radio" id="5-star" name="votacion" value="5" /><label   style="font-size: 180%;"  for="5-star" title="Amazing">5 stars</label>
-										      <input type="radio" id="4-star" name="votacion" value="4" /><label   style="font-size: 180%;" for="4-star" title="Good">4 stars</label>
-										      <input type="radio" id="3-star" name="votacion" value="3" /><label  style="font-size: 180%;"  for="3-star" title="Average">3 stars</label>
-										      <input type="radio" id="2-star" name="votacion" value="2" /><label   style="font-size: 180%;" for="2-star" title="Not Good">2 stars</label>
-										      <input type="radio" id="1-star" name="votacion" value="1" /><label   style="font-size: 180%;" for="1-star" title="Bad">1 star</label>
-										      <input type="number" value="{{series.id}}" name="pelicula">
+                                                <form  class="my-ajax-form" method='POST'data-url="/votacion_serie/{{series.id}}/" >{% csrf_token %}
+                                                 <ul class="rate-area rate-areas" style="position: relative; top: 0px;">
+                                              <input  type="radio" id="5-star" name="votacion" value="5" /><label   style="font-size: 180%;"  for="5-star" title="Amazing">5 stars</label>
+                                              <input type="radio" id="4-star" name="votacion" value="4" /><label   style="font-size: 180%;" for="4-star" title="Good">4 stars</label>
+                                              <input type="radio" id="3-star" name="votacion" value="3" /><label  style="font-size: 180%;"  for="3-star" title="Average">3 stars</label>
+                                              <input type="radio" id="2-star" name="votacion" value="2" /><label   style="font-size: 180%;" for="2-star" title="Not Good">2 stars</label>
+                                              <input type="radio" id="1-star" name="votacion" value="1" /><label   style="font-size: 180%;" for="1-star" title="Bad">1 star</label>
+                                              <input type="number" value="{{peliculaa.id}}" name="pelicula">
 
-										  </ul>
-				  <button onclick="votar(this)" style="background:none; border: none; cursor: pointer;" type="submit"><i style="font-size: 14px;" class="fa fa-send point"></i></button>
-				  </form>
-											</div>
-																							        
-												    </div>
-												</div>
-												<!-- / Collapsible element -->
-				
-							{% endif %}
-						</div>
+                                          </ul>
+                  <button onclick="votar(this)" style="background:none; border: none; cursor: pointer; margin-top: 11px;" type="submit"><i style="font-size: 14px; color: cyan;" class="fa fa-send point"></i></button>
+                  </form>
+                  <br/>
+                  
+                                            </div>
+                                                    <div class="modal-footer" style="border: none; position: absolute; margin-top: 15px;">
+                <button style="font-size: 16px; color: white;" type="button" class="btn redbtn" data-dismiss="modal">Cerrar</button>
+                
+            </div>                                                
+                                                    </div>
+                                                </div>
+              
 
-							{%  else %}
-							
-								<!-- Collapsible element -->
-												<div class="collapse container" id="collapseExamplee">
-												    <div class="mt-3">
-												    	<div class="md-form form-lg">
+                                                <!-- / Collapsible element -->
+
+                                                <script type="text/javascript">
+                                                    $('#putisimo').click(function(){
+
+                                                    var ass = document.getElementsByClassName("kratos")
+                                                    if (ass.length > 0) {
+                                                        var lam = document.getElementsByClassName("rate-area")[0]
+
+                                                        lam.style.top = "0px"
+                                                    }
+                                                });
+                                                </script>
+       {% endif %}
+       
+      </div>
+
+       {%  else %}
+       
+        <!-- Collapsible element -->
+            <div class="modal fade container" id="collapseExamplee">
+                <div class="mt-3">
+                 <div class="md-form form-lg">
     
-											    <small><img src="https://d3mp3oxoqwxddf.cloudfront.net/static/img/star/{{promedio}}.png" style="width: 140px; height: 30px;" title="Inicia Sesión para poder votar"></small>
-											</div>
-																							        
-												    </div>
-												</div>
-												<!-- / Collapsible element -->
-							{% endif %}
+               <small><img src="https://d3mp3oxoqwxddf.cloudfront.net/static/img/star/{{promedio}}.png" style="width: 140px; height: 30px;" title="Inicia Sesión para poder votar"></small>
+           </div>
+                               
+                </div>
+            </div>
+            <!-- / Collapsible element -->
+       {% endif %}
 						</div>
 					</div>
 					<div class="movie-tabs">

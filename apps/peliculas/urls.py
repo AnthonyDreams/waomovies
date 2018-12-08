@@ -6,7 +6,7 @@ from apps.peliculas.views import (peliculas_list, peliculasO, Generos,
     answer_me, myview, peliculas_listodo,test,
     FavoritoFormView, EliminarFavoritoFormView, filtrar, cookies,
     GeneroF, GeneroF_eliminar,pelis_user_nove,añadiste,
-    seguirviendo,seguirviendo_series,cambiar_votaciono,Read,CompRead, search_result, genero_list, Notifi, Friendsitos, CompAPI)
+    seguirviendo,seguirviendo_series,cambiar_votaciono,Read,CompRead,testing, search_result, genero_list, Notifi, Friendsitos, CompAPI)
 
 
 
@@ -41,6 +41,8 @@ urlpatterns = [
 
 
     path('list_moviejson/', list_moviejson, name='list_moviejson'),
+    path('testing/', testing, name='testing'),
+
     path('pelis/', pelis.as_view(), name='pelis'),
     path('noti/', Notifi.as_view(), name='noti'),
     path('compartir/', CompAPI.as_view(), name='compartir'),

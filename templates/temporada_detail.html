@@ -82,24 +82,51 @@
 </style>
                 <div class="col1">
                                   <!--Facebook-->
+{% if capitulo.rapidvideo %}
 <button type="button" class="btn btn-tw active" onclick="clicker()" style="font-size: 16px;" data-toggle="tab" id="rapidvideo" href="#panelrapidvideo" role="tab">Rapidvideo</button>
+{% endif %}
+{% if capitulo.vidlox %}
 <button type="button" class="btn btn-tw" style="font-size: 16px;" data-toggle="tab"  href="#panelvidlox" role="tab" id="vidlox" onclick="click2()">Vidlox</button>
+{% endif %}
+{% if capitulo.vidoza %}
 <button type="button" class="btn btn-tw"   onclick="click3()" style="font-size: 16px;" data-toggle="tab" id="vidoza" href="#panelvidoza" role="tab">Vidoza</button>
+{% endif %}
+{% if capitulo.openload %}
 <button type="button" class="btn btn-tw"  onclick="click4()" style="font-size: 16px;" data-toggle="tab" id="openload" href="#panelopenload" role="tab">Openload</button>
+{% endif %}
+{% if capitulo.streamago %}
 <button type="button" class="btn btn-tw"  onclick="click5()" style="font-size: 16px;" data-toggle="tab" id="streamago" href="#panelstreamago" role="tab">Streamago</button>
+{% endif %}
 
 
+{% if capitulo.streamcloud %}
 <button type="button" class="btn btn-tw" onclick="click6()" style="font-size: 16px;" onclick="click6()"  data-toggle="tab" id="streamcloud" href="#panelstreamcloud" role="tab">StreamCloud</button>
-<br>
+{% endif %}
+{% if capitulo.servidor1 %}
+<button type="button" class="btn btn-tw"  onclick="click7()" style="font-size: 16px;" data-toggle="tab" id="ser
+vidor1" href="#panelservidor1" role="tab">servidor1</button>
+{% endif %}
+{% if capitulo.servidor2 %}
+<button type="button" class="btn btn-tw"  onclick="click8()" style="font-size: 16px;" data-toggle="tab" id="servidor2" href="#panelservidor2" role="tab">servidor2</button>
+{% endif %}
 
+{% if capitulo.servidor3 %}
+<button type="button" class="btn btn-tw"  onclick="click9()" style="font-size: 16px;" data-toggle="tab" id="servidor3" href="#panelservidor3" role="tab">servidor3</button>
+{% endif %}
+{% if capitulo.servidor4 %}
+<button type="button" class="btn btn-tw"  onclick="click10()" style="font-size: 16px;" data-toggle="tab" id="servidor4" href="#panelservidor4" role="tab">servidor4</button>
+{% endif %}
+<br>
+<br>
+<br>
 
 <div class="tab-content" style="">
 
     <!--Panel 1-->
     <div class="tab-pane fade in show active " id="panelrapidvideo" role="tabpanel" style="">
-<div class="fw_video">
-                            <iframe src="http://player.vimeo.com/video/37582150?byline=0&amp;portrait=0&amp;color=ffffff"></iframe>
-                    </div>
+<div class="row">
+                   <iframe class="responsive-i" src="{{capitulo.rapidvideo}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
        
     </div>
     <!--/.Panel 1-->
@@ -108,9 +135,9 @@
     <div class="tab-pane fade " id="panelvidlox" role="tabpanel" >
         
 
-        <div class="fw_video">
-                            <iframe src="http://player.vimeo.com/video/37582150?byline=0&amp;portrait=0&amp;color=ffffff"></iframe>
-                    </div>
+        <div class="row">
+                   <iframe class="responsive-i" src="{{capitulo.vidlox}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
 
     </div>
     <!--/.Panel 2-->
@@ -119,9 +146,9 @@
     <div class="tab-pane fade " id="panelvidoza" role="tabpanel" >
         
 
-        <div class="fw_video">
-                            <iframe src="http://player.vimeo.com/video/37582150?byline=0&amp;portrait=0&amp;color=ffffff"></iframe>
-                    </div>
+        <div class="row">
+                   <iframe class="responsive-i" src="{{capitulo.vidoza}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
 
     </div>
     <!--/.Panel 3-->
@@ -129,29 +156,64 @@
     <div class="tab-pane fade " id="panelopenload" role="tabpanel" >
         
 
-        <div class="fw_video">
-                            <iframe src="http://player.vimeo.com/video/37582150?byline=0&amp;portrait=0&amp;color=ffffff"></iframe>
-                    </div>
+        <div class="row">
+                   <iframe class="responsive-i" src="{{capitulo.openload}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
 
     </div>
 
     <div class="tab-pane fade " id="panelstreamago" role="tabpanel" >
         
 
-        <div class="fw_video">
-                            <iframe src="http://player.vimeo.com/video/37582150?byline=0&amp;portrait=0&amp;color=ffffff"></iframe>
-                    </div>
+        <div class="row">
+                   <iframe class="responsive-i" src="{{capitulo.streamago}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
 
     </div>
 
 <div class="tab-pane fade " id="panelstreamcloud" role="tabpanel" >
         
 
-        <div class="fw_video">
-                            <iframe src="http://player.vimeo.com/video/37582150?byline=0&amp;portrait=0&amp;color=ffffff"></iframe>
-                    </div>
+        <div class="row">
+                   <iframe class="responsive-i" src="{{capitulo.streamcloud}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
 
     </div>
+    <div class="tab-pane fade " id="panelservidor1" role="tabpanel" >
+        
+
+        <div class="row">
+                   <iframe class="responsive-i" src="{{capitulo.servidor1}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
+
+    </div>
+    <div class="tab-pane fade " id="panelservidor2" role="tabpanel" >
+        
+
+        <div class="row">
+                   <iframe class="responsive-i" src="{{capitulo.servidor2}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
+
+    </div>
+
+    <div class="tab-pane fade " id="panelservidor3" role="tabpanel" >
+        
+
+        <div class="row">
+                   <iframe class="responsive-i" src="{{capitulo.servidor3}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
+
+    </div>
+
+    <div class="tab-pane fade " id="panelservidor4" role="tabpanel" >
+        
+
+        <div class="row">
+                   <iframe class="responsive-i" src="{{capitulo.servidor4}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                  </div>
+
+    </div>
+
 </div>
          
          <script type="text/javascript">
@@ -183,6 +245,30 @@
     $('#panelstreamcloud').removeClass("active");
   $('#panelstreamcloud').removeClass("show");
   $('#panelstreamcloud').removeClass("in");
+
+$('#panelservidor1').removeClass("active");
+  $('#panelservidor1').removeClass("show");
+  $('#panelservidor1').removeClass("in");
+  
+  $('#panelservidor2').removeClass("active");
+  $('#panelservidor2').removeClass("show");
+  $('#panelservidor2').removeClass("in");
+  
+  $('#panelservidor3').removeClass("active");
+  $('#panelservidor3').removeClass("show");
+  $('#panelservidor3').removeClass("in");
+  
+  $('#panelservidor4').removeClass("active");
+  $('#panelservidor4').removeClass("show");
+  $('#panelservidor4').removeClass("in");
+$('#servidor2').removeClass("active")
+  $('#servidor1').removeClass("active")
+  $('#servidor3').removeClass("active")
+  $('#servidor4').removeClass("active")
+document.getElementById('panelservidor1').style.display="none"
+document.getElementById('panelservidor3').style.display="none"
+document.getElementById('panelservidor4').style.display="none"
+document.getElementById('panelservidor2').style.display="none"
 
   $('#rapidvideo').addClass("active")
   $('#vidlox').removeClass("active")
@@ -217,8 +303,33 @@ document.getElementById('panelstreamcloud').style.display="none"
   $('#panelrapidvideo').removeClass("show");
   $('#panelrapidvideo').removeClass("in");
 
+$('#panelservidor1').removeClass("active");
+  $('#panelservidor1').removeClass("show");
+  $('#panelservidor1').removeClass("in");
+  
+  $('#panelservidor2').removeClass("active");
+  $('#panelservidor2').removeClass("show");
+  $('#panelservidor2').removeClass("in");
+  
+  $('#panelservidor3').removeClass("active");
+  $('#panelservidor3').removeClass("show");
+  $('#panelservidor3').removeClass("in");
+  
+  $('#panelservidor4').removeClass("active");
+  $('#panelservidor4').removeClass("show");
+  $('#panelservidor4').removeClass("in");
+
   $('#rapidvideo').removeClass("active")
   $('#vidlox').addClass("active")
+
+$('#servidor2').removeClass("active")
+  $('#servidor1').removeClass("active")
+  $('#servidor3').removeClass("active")
+  $('#servidor4').removeClass("active")
+document.getElementById('panelservidor1').style.display="none"
+document.getElementById('panelservidor3').style.display="none"
+document.getElementById('panelservidor4').style.display="none"
+document.getElementById('panelservidor2').style.display="none"
 
 document.getElementById('panelrapidvideo').style.display="none"
 document.getElementById('panelvidlox').style.display="initial"
@@ -263,6 +374,31 @@ document.getElementById('panelstreamcloud').style.display="none"
     $('#panelstreamcloud').removeClass("active");
   $('#panelstreamcloud').removeClass("show");
   $('#panelstreamcloud').removeClass("in");
+
+$('#panelservidor1').removeClass("active");
+  $('#panelservidor1').removeClass("show");
+  $('#panelservidor1').removeClass("in");
+  
+  $('#panelservidor2').removeClass("active");
+  $('#panelservidor2').removeClass("show");
+  $('#panelservidor2').removeClass("in");
+  
+  $('#panelservidor3').removeClass("active");
+  $('#panelservidor3').removeClass("show");
+  $('#panelservidor3').removeClass("in");
+  
+  $('#panelservidor4').removeClass("active");
+  $('#panelservidor4').removeClass("show");
+  $('#panelservidor4').removeClass("in");
+
+$('#servidor2').removeClass("active")
+  $('#servidor1').removeClass("active")
+  $('#servidor3').removeClass("active")
+  $('#servidor4').removeClass("active")
+document.getElementById('panelservidor1').style.display="none"
+document.getElementById('panelservidor3').style.display="none"
+document.getElementById('panelservidor4').style.display="none"
+document.getElementById('panelservidor2').style.display="none"
 
   $('#rapidvideo').removeClass("active")
   $('#vidoza').addClass("active")
@@ -311,6 +447,31 @@ document.getElementById('panelstreamcloud').style.display="none"
   $('#panelstreamcloud').removeClass("show");
   $('#panelstreamcloud').removeClass("in");
 
+$('#panelservidor1').removeClass("active");
+  $('#panelservidor1').removeClass("show");
+  $('#panelservidor1').removeClass("in");
+  
+  $('#panelservidor2').removeClass("active");
+  $('#panelservidor2').removeClass("show");
+  $('#panelservidor2').removeClass("in");
+  
+  $('#panelservidor3').removeClass("active");
+  $('#panelservidor3').removeClass("show");
+  $('#panelservidor3').removeClass("in");
+  
+  $('#panelservidor4').removeClass("active");
+  $('#panelservidor4').removeClass("show");
+  $('#panelservidor4').removeClass("in");
+
+$('#servidor2').removeClass("active")
+  $('#servidor1').removeClass("active")
+  $('#servidor3').removeClass("active")
+  $('#servidor4').removeClass("active")
+document.getElementById('panelservidor1').style.display="none"
+document.getElementById('panelservidor3').style.display="none"
+document.getElementById('panelservidor4').style.display="none"
+document.getElementById('panelservidor2').style.display="none"
+
   $('#rapidvideo').removeClass("active")
   $('#openload').addClass("active")
 
@@ -357,6 +518,31 @@ document.getElementById('panelstreamcloud').style.display="none"
     $('#panelstreamcloud').removeClass("active");
   $('#panelstreamcloud').removeClass("show");
   $('#panelstreamcloud').removeClass("in");
+
+$('#panelservidor1').removeClass("active");
+  $('#panelservidor1').removeClass("show");
+  $('#panelservidor1').removeClass("in");
+  
+  $('#panelservidor2').removeClass("active");
+  $('#panelservidor2').removeClass("show");
+  $('#panelservidor2').removeClass("in");
+  
+  $('#panelservidor3').removeClass("active");
+  $('#panelservidor3').removeClass("show");
+  $('#panelservidor3').removeClass("in");
+  
+  $('#panelservidor4').removeClass("active");
+  $('#panelservidor4').removeClass("show");
+  $('#panelservidor4').removeClass("in");
+
+$('#servidor2').removeClass("active")
+  $('#servidor1').removeClass("active")
+  $('#servidor3').removeClass("active")
+  $('#servidor4').removeClass("active")
+document.getElementById('panelservidor1').style.display="none"
+document.getElementById('panelservidor3').style.display="none"
+document.getElementById('panelservidor4').style.display="none"
+document.getElementById('panelservidor2').style.display="none"
 
   $('#rapidvideo').removeClass("active")
   $('#streamago').addClass("active")
@@ -405,6 +591,31 @@ document.getElementById('panelstreamcloud').style.display="none"
   $('#panelvidoza').removeClass("show");
   $('#panelvidoza').removeClass("in");
 
+$('#panelservidor1').removeClass("active");
+  $('#panelservidor1').removeClass("show");
+  $('#panelservidor1').removeClass("in");
+  
+  $('#panelservidor2').removeClass("active");
+  $('#panelservidor2').removeClass("show");
+  $('#panelservidor2').removeClass("in");
+  
+  $('#panelservidor3').removeClass("active");
+  $('#panelservidor3').removeClass("show");
+  $('#panelservidor3').removeClass("in");
+  
+  $('#panelservidor4').removeClass("active");
+  $('#panelservidor4').removeClass("show");
+  $('#panelservidor4').removeClass("in");
+
+$('#servidor2').removeClass("active")
+  $('#servidor1').removeClass("active")
+  $('#servidor3').removeClass("active")
+  $('#servidor4').removeClass("active")
+document.getElementById('panelservidor1').style.display="none"
+document.getElementById('panelservidor3').style.display="none"
+document.getElementById('panelservidor4').style.display="none"
+document.getElementById('panelservidor2').style.display="none"
+
   $('#rapidvideo').removeClass("active")
   $('#streamcloud').addClass("active")
 
@@ -418,7 +629,7 @@ document.getElementById('panelvidlox').style.display="none"
 document.getElementById('panelopenload').style.display="none"
   $('#streamago').removeClass("active")
 
-  $('#vidozad').removeClass("active")
+  $('#vidoza').removeClass("active")
 document.getElementById('panelstreamago').style.display="none"
 document.getElementById('panelstreamcloud').style.display="none"
 
@@ -426,7 +637,278 @@ document.getElementById('panelstreamcloud').style.display="none"
 
 
   }
-</script> 
+
+    function click7 () {
+         $('#panelservidor1').addClass("active");
+  $('#panelservidor1').addClass("show");
+  $('#panelservidor1').addClass("in");
+  
+  $('#panelservidor2').removeClass("active");
+  $('#panelservidor2').removeClass("show");
+  $('#panelservidor2').removeClass("in");
+  
+  $('#panelservidor3').removeClass("active");
+  $('#panelservidor3').removeClass("show");
+  $('#panelservidor3').removeClass("in");
+  
+  $('#panelservidor4').removeClass("active");
+  $('#panelservidor4').removeClass("show");
+  $('#panelservidor4').removeClass("in");
+
+
+   $('#panelstreamcloud').removeClass("active");
+  $('#panelstreamcloud').removeClass("show");
+  $('#panelstreamcloud').removeClass("in");
+
+  $('#panelvidlox').removeClass("active");
+  $('#panelvidlox').removeClass("show");
+  $('#panelvidlox').removeClass("in");
+
+  $('#panelrapidvideo').removeClass("active");
+  $('#panelrapidvideo').removeClass("show");
+  $('#panelrapidvideo').removeClass("in");
+
+  $('#panelopenload').removeClass("active");
+  $('#panelopenload').removeClass("show");
+  $('#panelopenload').removeClass("in");
+
+  $('#panelstreamago').removeClass("active");
+  $('#panelstreamago').removeClass("show");
+  $('#panelstreamago').removeClass("in");
+
+    $('#panelvidoza').removeClass("active");
+  $('#panelvidoza').removeClass("show");
+  $('#panelvidoza').removeClass("in");
+
+  $('#rapidvideo').removeClass("active")
+  $('#streamcloud').removeClass("active")
+  $('#servidor1').addClass("active")
+  $('#servidor2').removeClass("active")
+  $('#servidor3').removeClass("active")
+  $('#servidor4').removeClass("active")
+
+document.getElementById('panelrapidvideo').style.display="none"
+document.getElementById('panelservidor1').style.display="initial"
+document.getElementById('panelstreamcloud').style.display="none"
+document.getElementById('panelservidor2').style.display="none"
+document.getElementById('panelservidor3').style.display="none"
+document.getElementById('panelservidor4').style.display="none"
+
+
+
+  $('#vidlox').removeClass("active")
+  $('#openload').removeClass("active")
+document.getElementById('panelvidlox').style.display="none"
+document.getElementById('panelopenload').style.display="none"
+  $('#streamago').removeClass("active")
+
+  $('#vidoza').removeClass("active")
+document.getElementById('panelstreamago').style.display="none"
+document.getElementById('panelstreamcloud').style.display="none"
+
+ 
+
+
+  }
+
+  function click8 () {
+    $('#panelservidor2').addClass("active");
+  $('#panelservidor2').addClass("show");
+  $('#panelservidor2').addClass("in");
+         $('#panelservidor1').removeClass("active");
+  $('#panelservidor1').removeClass("show");
+  $('#panelservidor1').removeClass("in");
+  $('#panelservidor3').removeClass("active");
+  $('#panelservidor3').removeClass("show");
+  $('#panelservidor3').removeClass("in");
+  $('#panelservidor4').removeClass("active");
+  $('#panelservidor4').removeClass("show");
+  $('#panelservidor4').removeClass("in");
+   $('#panelstreamcloud').removeClass("active");
+  $('#panelstreamcloud').removeClass("show");
+  $('#panelstreamcloud').removeClass("in");
+
+  $('#panelvidlox').removeClass("active");
+  $('#panelvidlox').removeClass("show");
+  $('#panelvidlox').removeClass("in");
+
+  $('#panelrapidvideo').removeClass("active");
+  $('#panelrapidvideo').removeClass("show");
+  $('#panelrapidvideo').removeClass("in");
+
+  $('#panelopenload').removeClass("active");
+  $('#panelopenload').removeClass("show");
+  $('#panelopenload').removeClass("in");
+
+  $('#panelstreamago').removeClass("active");
+  $('#panelstreamago').removeClass("show");
+  $('#panelstreamago').removeClass("in");
+
+    $('#panelvidoza').removeClass("active");
+  $('#panelvidoza').removeClass("show");
+  $('#panelvidoza').removeClass("in");
+
+  $('#rapidvideo').removeClass("active")
+  $('#streamcloud').removeClass("active")
+$('#servidor2').addClass("active")
+  $('#servidor1').removeClass("active")
+  $('#servidor3').removeClass("active")
+  $('#servidor4').removeClass("active")
+
+document.getElementById('panelrapidvideo').style.display="none"
+document.getElementById('panelservidor2').style.display="initial"
+document.getElementById('panelstreamcloud').style.display="none"
+document.getElementById('panelservidor1').style.display="none"
+document.getElementById('panelservidor3').style.display="none"
+document.getElementById('panelservidor4').style.display="none"
+
+  $('#vidlox').removeClass("active")
+  $('#openload').removeClass("active")
+document.getElementById('panelvidlox').style.display="none"
+document.getElementById('panelopenload').style.display="none"
+  $('#streamago').removeClass("active")
+
+  $('#vidoza').removeClass("active")
+document.getElementById('panelstreamago').style.display="none"
+document.getElementById('panelstreamcloud').style.display="none"
+
+ 
+
+
+  }
+
+    function click9 () {
+    $('#panelservidor3').addClass("active");
+  $('#panelservidor3').addClass("show");
+  $('#panelservidor3').addClass("in");
+         $('#panelservidor1').removeClass("active");
+  $('#panelservidor1').removeClass("show");
+  $('#panelservidor1').removeClass("in");
+  $('#panelservidor2').removeClass("active");
+  $('#panelservidor2').removeClass("show");
+  $('#panelservidor2').removeClass("in");
+  $('#panelservidor4').removeClass("active");
+  $('#panelservidor4').removeClass("show");
+  $('#panelservidor4').removeClass("in");
+   $('#panelstreamcloud').removeClass("active");
+  $('#panelstreamcloud').removeClass("show");
+  $('#panelstreamcloud').removeClass("in");
+
+  $('#panelvidlox').removeClass("active");
+  $('#panelvidlox').removeClass("show");
+  $('#panelvidlox').removeClass("in");
+
+  $('#panelrapidvideo').removeClass("active");
+  $('#panelrapidvideo').removeClass("show");
+  $('#panelrapidvideo').removeClass("in");
+
+  $('#panelopenload').removeClass("active");
+  $('#panelopenload').removeClass("show");
+  $('#panelopenload').removeClass("in");
+
+  $('#panelstreamago').removeClass("active");
+  $('#panelstreamago').removeClass("show");
+  $('#panelstreamago').removeClass("in");
+
+    $('#panelvidoza').removeClass("active");
+  $('#panelvidoza').removeClass("show");
+  $('#panelvidoza').removeClass("in");
+
+  $('#rapidvideo').removeClass("active")
+  $('#streamcloud').removeClass("active")
+$('#servidor3').addClass("active")
+  $('#servidor1').removeClass("active")
+  $('#servidor2').removeClass("active")
+  $('#servidor4').removeClass("active")
+
+document.getElementById('panelrapidvideo').style.display="none"
+document.getElementById('panelservidor3').style.display="initial"
+document.getElementById('panelstreamcloud').style.display="none"
+document.getElementById('panelservidor1').style.display="none"
+document.getElementById('panelservidor2').style.display="none"
+document.getElementById('panelservidor4').style.display="none"
+
+  $('#vidlox').removeClass("active")
+  $('#openload').removeClass("active")
+document.getElementById('panelvidlox').style.display="none"
+document.getElementById('panelopenload').style.display="none"
+  $('#streamago').removeClass("active")
+
+  $('#vidoza').removeClass("active")
+document.getElementById('panelstreamago').style.display="none"
+document.getElementById('panelstreamcloud').style.display="none"
+
+ 
+
+
+  }
+
+  function click10 () {
+    $('#panelservidor4').addClass("active");
+  $('#panelservidor4').addClass("show");
+  $('#panelservidor4').addClass("in");
+         $('#panelservidor1').removeClass("active");
+  $('#panelservidor1').removeClass("show");
+  $('#panelservidor1').removeClass("in");
+  $('#panelservidor2').removeClass("active");
+  $('#panelservidor2').removeClass("show");
+  $('#panelservidor2').removeClass("in");
+  $('#panelservidor3').removeClass("active");
+  $('#panelservidor3').removeClass("show");
+  $('#panelservidor3').removeClass("in");
+   $('#panelstreamcloud').removeClass("active");
+  $('#panelstreamcloud').removeClass("show");
+  $('#panelstreamcloud').removeClass("in");
+
+  $('#panelvidlox').removeClass("active");
+  $('#panelvidlox').removeClass("show");
+  $('#panelvidlox').removeClass("in");
+
+  $('#panelrapidvideo').removeClass("active");
+  $('#panelrapidvideo').removeClass("show");
+  $('#panelrapidvideo').removeClass("in");
+
+  $('#panelopenload').removeClass("active");
+  $('#panelopenload').removeClass("show");
+  $('#panelopenload').removeClass("in");
+
+  $('#panelstreamago').removeClass("active");
+  $('#panelstreamago').removeClass("show");
+  $('#panelstreamago').removeClass("in");
+
+    $('#panelvidoza').removeClass("active");
+  $('#panelvidoza').removeClass("show");
+  $('#panelvidoza').removeClass("in");
+
+  $('#rapidvideo').removeClass("active")
+  $('#streamcloud').removeClass("active")
+$('#servidor4').addClass("active")
+  $('#servidor1').removeClass("active")
+  $('#servidor2').removeClass("active")
+  $('#servidor3').removeClass("active")
+
+document.getElementById('panelrapidvideo').style.display="none"
+document.getElementById('panelservidor4').style.display="initial"
+document.getElementById('panelstreamcloud').style.display="none"
+document.getElementById('panelservidor1').style.display="none"
+document.getElementById('panelservidor2').style.display="none"
+document.getElementById('panelservidor3').style.display="none"
+
+  $('#vidlox').removeClass("active")
+  $('#openload').removeClass("active")
+document.getElementById('panelvidlox').style.display="none"
+document.getElementById('panelopenload').style.display="none"
+  $('#streamago').removeClass("active")
+
+  $('#vidoza').removeClass("active")
+document.getElementById('panelstreamago').style.display="none"
+document.getElementById('panelstreamcloud').style.display="none"
+
+ 
+
+
+  }
+</script>        
                     
 
                     <div class="wrapper">
@@ -479,7 +961,7 @@ document.getElementById('panelstreamcloud').style.display="none"
 <br/>
 
  <!--Facebook-->
-                <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/peliculas/{{peliculaa.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook"></i></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/peliculas/{{capitulo.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook"></i></a>
                 <!--Twitter-->
                 <a type="button" style="background-color: #00acee" class="btn-floating btn-tw"><i class="fa fa-twitter"></i></a>
                 <!--Google +-->

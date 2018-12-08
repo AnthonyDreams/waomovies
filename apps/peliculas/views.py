@@ -848,6 +848,8 @@ def search(request):
 				count += 1 
 				if b == " ":
 					b = "_"
+				if b == "-":
+					b = "_"
 				index += b
 
 		# -> NFC
@@ -893,13 +895,6 @@ def search_result(request, src):
 			count += 1 
 			if b == "_":
 				b = "_"
-			index += b
-
-		for b in srch:
-			count += 1 
-			if b == "_":
-				b = "_"
-			index += b
 
 		for n in srch:
 			if n == "_":
@@ -1322,6 +1317,22 @@ def cambiar_votaciono(request, id):
 	return JsonResponse(data)
 
 def test(request):
+
+	return render(request, 'test.html')
+
+from django.contrib.sessions.models import Session
+def cookies(request):
+	c = Session.objects.get(session_key='gf4793i7b48ay6tbdhsgfrnbqay879ep')
+
+	a = request.COOKIES
+	
+	context = {'a':a,
+				'c':c.get_decoded(),
+	}
+
+	return render(request, 'cookies.html', context)
+
+def testing(request):
 
 	return render(request, 'test.html')
 

@@ -79,11 +79,6 @@ class Series(models.Model):
 	tag3 = models.CharField(max_length=20, blank=True)
 	reportes = models.IntegerField(default=0)
 	favoritos = models.ManyToManyField(Usuario, blank=True, related_name="favoritos")
-	webtorrent = models.TextField(null=True, blank=True)
-	rapidvideo = models.TextField(null=True, blank=True)
-	openload = models.TextField(null=True, blank=True)
-	vidoza = models.TextField(null=True, blank=True)
-	streamago = models.TextField(null=True, blank=True)
 
 
 	tema = models.CharField(max_length=20, blank=True)
@@ -112,7 +107,16 @@ class Capitulos(models.Model):
 	vote_capitulo = models.ManyToManyField(Usuario, related_name="vote_capitulo", blank=True)
 	unvote_capitulo= models.ManyToManyField(Usuario, related_name="unvote_capitulo", blank=True)
 	reportes = models.IntegerField(default=0, blank=True)
-
+	rapidvideo = models.TextField(null=True, blank=True)
+	vidlox = models.TextField(null=True, blank=True)
+	vidoza = models.TextField(null=True, blank=True)
+	openload = models.TextField(null=True, blank=True)
+	streamago = models.TextField(null=True, blank=True)
+	streamcloud = models.TextField(null=True, blank=True)
+	servidor1 = models.TextField(null=True, blank=True)
+	servidor2 = models.TextField(null=True, blank=True)
+	servidor3 = models.TextField(null=True, blank=True)
+	servidor4 = models.TextField(null=True, blank=True)
 	def _get_unique_slug(self):
 		slug = slugify(self.temporadaa.nombre_serie + "-" + self.temporadaa.num_temporada + "x" + self.num_episodio)
 		unique_slug = slug

@@ -70,6 +70,10 @@ class Peliculas(models.Model):
 	openload = models.TextField(null=True, blank=True)
 	streamago = models.TextField(null=True, blank=True)
 	streamcloud = models.TextField(null=True, blank=True)
+	servidor1 = models.TextField(null=True, blank=True)
+	servidor2 = models.TextField(null=True, blank=True)
+	servidor3 = models.TextField(null=True, blank=True)
+	servidor4 = models.TextField(null=True, blank=True)
 
 	slug = models.SlugField(null=True, unique=True)
 

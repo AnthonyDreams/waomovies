@@ -2,7 +2,10 @@ from django.contrib import admin
 from apps.peliculas.models import Peliculas, Trailers, Cast, Personajes, Votacion
 # Register your models here.
 class PeliculasAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('titulo',)}
+	search_fields = ["titulo"]
+	prepopulated_fields = {'slug': ('titulo',)}
+
+
 
 admin.site.register(Peliculas, PeliculasAdmin)
 admin.site.register(Trailers)

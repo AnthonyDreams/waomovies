@@ -36,6 +36,7 @@
                       align-items: center;
                       justify-content: center;" {% endif %}
   >
+  {% if request.user.is_authenticated %}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -377,6 +378,7 @@
 				</div>
 			</div>
 		</div>
+		{% endif %}
 	</div>
 </div>
 <div class="page-single">
