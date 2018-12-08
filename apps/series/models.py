@@ -181,4 +181,7 @@ class Hitcount_Series(models.Model):
 	capitulo = models.ForeignKey(Capitulos, on_delete=models.CASCADE, null=True)
 
 	def __str__(self):
-		return str(self.pelicula)
+		if self.serie:
+			return str(self.serie)
+		if self.capitulo:
+			return str(self.capitulo)
