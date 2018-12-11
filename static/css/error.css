@@ -29,7 +29,7 @@ img{max-width:100%;}
 /*-- end reset --*/
 body {
     font-family: 'Open Sans', sans-serif;
-    background: url(../images/1.jpg)no-repeat center 0px;
+    background: url(http://cdn.playbuzz.com/cdn/6c4b66b1-56d0-40ae-82ac-0fdaff62b64a/8825c5db-a88f-498a-a928-734c268b595a.gif)no-repeat center 0px;
 	-webkit-background-size:cover;
 	-moz-background-size:cover; 
 	background-size:cover;
@@ -81,12 +81,11 @@ h1 {
 	line-height: 1.8em;
 }  
 p.w3lstext {
-    font-size: 0.9em;
+    font-size: 1.4em;
     color: #fff;
     line-height: 1.8em;
     font-weight: 400;
     width: 65%;
-    text-transform: capitalize;
     margin: 1.5em auto 2.5em;
 }
 p.w3lstext a {
