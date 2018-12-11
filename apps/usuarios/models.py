@@ -109,7 +109,7 @@ class Profile(models.Model):
 	activation_key	= models.CharField(max_length=120, blank=True, null=True)
 	expiration = models.DateTimeField(blank=True, null=True)
 	fav_peliculas = models.BooleanField(default=False)
-	fav_series = models.BooleanField(default=False)
+	fav_series = models.BooleanField(default=True)
 	codde = models.CharField(max_length=8, blank=True, null=True, unique=True)
 	AmiGos = models.ManyToManyField(Usuario, related_name='amigosfor')
 

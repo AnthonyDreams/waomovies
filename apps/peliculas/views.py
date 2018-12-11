@@ -33,6 +33,7 @@ from apps.vermas_tarde.models import Vermastarde
 from apps.notificaciones.models import Notificaciones, Evento, Compartir
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.conf import settings
 class pelis(APIView):
 	serializer = peliserializer
 	def get(self, request, format=None):
@@ -389,6 +390,7 @@ def inicio(request):
 	'capi':capi,
 	'documental':documental,
 	'fantasia':fantasia,
+	'onseries': settings.SERIES,
 
 	}
 	return render(request, 'index.html', contexto)

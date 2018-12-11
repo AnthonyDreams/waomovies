@@ -21,7 +21,7 @@ import json
 from apps.peliculas.models import Cast, Personajes
 from apps.vermas_tarde.models import Vermastarde
 from django.core import serializers
-
+from django.conf import settings
 # Create your views here.
 
 
@@ -30,6 +30,8 @@ from datetime import datetime, date, time, timedelta
 
 
 def series_detail(request, slug):
+	if not settings.SERIES:
+		raise Http404
 
 	peliculasees = Vermastarde.objects.filter(usuario_id=request.user.id)
 	peliculase_seriesa = []
@@ -323,6 +325,8 @@ def series_detail(request, slug):
 
 
 def temporada_detail(request, slug):
+	if not settings.SERIES:
+		raise Http404
 	temporada = Temporada.objects.get(id=slug)
 	capitulo = Capitulos.objects.filter(temporadaa_id=slug)[0]
 	capitulos = Capitulos.objects.filter(temporadaa_id=slug)
@@ -346,7 +350,8 @@ def redirect(request, capitulo, temporada):
 
 
 def capitulos_detail(request, capitulo, slug):
-	
+	if not settings.SERIES:
+		raise Http404
 
 	user_report = Reporte.objects.filter(reportador_id=request.user.id)
 	report_user = []
@@ -430,6 +435,8 @@ def capitulos_detail(request, capitulo, slug):
 
 
 def añadirfavorito(request, id):
+	if not settings.SERIES:
+		raise Http404
 	if not request.user.is_active:
 		raise Http404
 	instance = get_object_or_404(Series, id=id)
@@ -449,6 +456,8 @@ def añadirfavorito(request, id):
 		return JsonResponse(data)
 
 def eliminar_añadirfavorito(request, id):
+	if not settings.SERIES:
+		raise Http404
 	if not request.user.is_active:
 		raise Http404
 	instance = get_object_or_404(Series, id=id)
@@ -468,6 +477,8 @@ def eliminar_añadirfavorito(request, id):
 		return JsonResponse(data)
 
 def reportar(request, id):
+	if not settings.SERIES:
+		raise Http404
 	if not request.user.is_active:
 		raise Http404
 	instances = get_object_or_404(Series, id=id)
@@ -487,6 +498,8 @@ def reportar(request, id):
 
 # este es el formulario de votacion, simple
 def votaciono(request, id):
+	if not settings.SERIES:
+		raise Http404
 	if not request.user.is_active:
 		raise Http404
 		
@@ -504,6 +517,8 @@ def votaciono(request, id):
 				}
 			return JsonResponse(data)
 def cambiar_votaciono_serie(request, id):
+	if not settings.SERIES:
+		raise Http404
 	if not request.user.is_active:
 		raise Http404
 	instance = get_object_or_404(Votacion, id=id)
@@ -520,6 +535,8 @@ def cambiar_votaciono_serie(request, id):
 # este es el formulario de ver mas tarde, simple
 
 def series_list(request, filtro):
+	if not settings.SERIES:
+		raise Http404
 	if filtro == "orden_de_subida":
 		filtro = "_id"
 	seriesall = True
@@ -561,6 +578,8 @@ def series_list(request, filtro):
 
 
 def search_series(request):
+	if not settings.SERIES:
+		raise Http404
 	if request.method=='POST':
 		peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
 		peliculase = []
@@ -651,6 +670,8 @@ def search_series(request):
 
 
 def filtrar(request):
+	if not settings.SERIES:
+		raise Http404
 	if request.method=='POST':
 		peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
 		peliculase = []
@@ -723,6 +744,8 @@ def filtrar(request):
 
 
 def ontemporada(request, id):
+	if not settings.SERIES:
+		raise Http404
 	ser = Series.objects.get(id=id)
 	if request.method =='POST':
 		ona = request.POST['id']
@@ -747,6 +770,8 @@ def ontemporada(request, id):
 
 
 def like(request, id):
+	if not settings.SERIES:
+		raise Http404
 	if not request.user.is_active:
 		raise Http404
 	instances = get_object_or_404(Capitulos, id=id)
@@ -764,6 +789,8 @@ def like(request, id):
 			return JsonResponse(data)
 
 def unlike(request, id):
+	if not settings.SERIES:
+		raise Http404
 	if not request.user.is_active:
 		raise Http404
 	instances = get_object_or_404(Capitulos, id=id)
@@ -779,6 +806,8 @@ def unlike(request, id):
 			return JsonResponse(data)
 
 def dislike(request, id):
+	if not settings.SERIES:
+		raise Http404
 	if not request.user.is_active:
 		raise Http404
 	instances = get_object_or_404(Capitulos, id=id)
@@ -796,6 +825,8 @@ def dislike(request, id):
 			return JsonResponse(data)
 
 def outdislike(request, id):
+	if not settings.SERIES:
+		raise Http404
 	if not request.user.is_active:
 		raise Http404
 	instance = get_object_or_404(Capitulos, id=id)
@@ -811,6 +842,8 @@ def outdislike(request, id):
 			return JsonResponse(data)
 
 def reportar_cap(request, id):
+	if not settings.SERIES:
+		raise Http404
 	if not request.user.is_active:
 		raise Http404
 	instances = get_object_or_404(Capitulos, id=id)

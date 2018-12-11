@@ -37,7 +37,7 @@ from apps.peliculas.models import Peliculas, Generox
 from apps.series.models import Series
 from django.http import JsonResponse
 from apps.notificaciones.models import *
-
+from django.db.models import Q
 from django.utils.datastructures import MultiValueDictKeyError
 usuario = get_user_model()
 
@@ -624,10 +624,9 @@ def favoritos_first(request):
 	if request.user.profile.fav_peliculas and request.user.profile.fav_series:
 			return HttpResponseRedirect("/inicio/")
 
-	peliculas_fav = Peliculas.objects.all().order_by("favoritos")[0:20]
-	series_fav = Series.objects.all().order_by("favoritos")[0:20]
+	peliculas_fav = Peliculas.objects.filter(Q(tag_principal__in=['distopia', 'marvel', 'superheroes', 'basada_en_una_novela', 'disney', 'school', 'inteligencia_artificial', 'lgbt', 'apocalipsis', 'futuro', 'computadoras', 'dc', 'viajes_en_el_tiempo', 'musical'])|Q(tema__in=['distopia', 'superheroes', 'basada_en_una_novela', 'school', 'inteligencia_artificial', 'lgbt', 'apocalipsis', 'futuro', 'computadoras', 'viajes_en_el_tiempo', 'adolescente', 'musical'])|Q(tag1__in=['distopia', 'superheroes', 'basada_en_una_novela', 'school', 'inteligencia_artificial', 'lgbt', 'apocalipsis', 'futuro', 'computadoras', 'viajes_en_el_tiempo', 'adolescente', 'musical'])|Q(tag2__in=['distopia', 'superheroes', 'basada_en_una_novela', 'school', 'inteligencia_artificial', 'lgbt', 'apocalipsis', 'futuro', 'computadoras', 'viajes_en_el_tiempo', 'adolescente', 'musical'])|Q(tag3__in=['distopia', 'superheroes', 'basada_en_una_novela', 'school', 'inteligencia_artificial', 'lgbt', 'apocalipsis', 'futuro', 'computadoras', 'viajes_en_el_tiempo', 'adolescente', 'musical'])).order_by('-puntuacion')[0:30]
+	series_fav = Series.objects.all().order_by("-favoritos")[0:20]
 
-	series_fav = Series.objects.all().order_by("favoritos")[0:20]
 	count = 8 - request.user.favoritos.all().count()
 	count_series = 8 - request.user.favoritos_series.all().count()
 
