@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.core.mail import send_mail
 from .utils import code_generator
 from django.conf import settings
+from django.utils import timezone
 from ww import f
 
 
@@ -155,7 +156,7 @@ def save_user_profile(sender, instance, **kwargs):
 class UserPreference(models.Model):
 	user = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name='preference')
 	week_recomendation = models.ManyToManyField(settings.MOVIES_DEL_WEB,blank=True, related_name='week_recomendation')
-	expired = models.DateTimeField(auto_now=False, auto_now_add=False)
+	expired = models.DateTimeField(auto_now=False, auto_now_add=False, default=timezone.now)
 
 
 @receiver(post_save, sender=Usuario)
