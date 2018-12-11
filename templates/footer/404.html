@@ -26,7 +26,7 @@
 				<div class="agile-search"> 
 					<form method="post" action="/search/">
 						{% csrf_token %}
-						<input type="text" name="Search" placeholder="Buscar en WaoMovies..." id="search" required="" name="src">
+						<input name="src" type="text" placeholder="Buscar en WaoMovies..." id="search" required="" >
 						<input type="submit" value="Buscar">
 					</form> 
 				</div>
