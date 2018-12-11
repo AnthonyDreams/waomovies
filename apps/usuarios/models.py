@@ -75,6 +75,12 @@ class Usuario(AbstractBaseUser):
 			return self.full_name
 		return self.email
 
+	def get_user_name(self):
+		if self.username:
+			return self.username
+		else:
+			return self.email
+
 	def get_short_name(self):
 		return self.email
 		
@@ -130,9 +136,9 @@ class Profile(models.Model):
 			path_ = reverse('activate', kwargs={"code": self.activation_key})
 			subject = 'Activata tu cuenta Wao'
 			from_email = settings.EMAIL_HOST_USER
-			message = f('Activata tu cuenta aquí: wmoviestest.herokuapp.com{path_}')
+			message = f('Activa tu cuenta aquí: wmoviestest.herokuapp.com{path_}')
 			recipient_list = [self.user.email]
-			html_message = f('<p>Activata tu cuenta aquí:wmoviestest.herokuapp.com{path_}</p>')
+			html_message = f('<p>Activa tu cuenta aquí: wmoviestest.herokuapp.com{path_}</p>')
 			print(html_message)
 			sent_mail = send_mail(
 							subject, 
