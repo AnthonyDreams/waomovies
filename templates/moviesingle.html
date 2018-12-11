@@ -941,8 +941,9 @@ $(this).remove();
                      beforeSend: function () {
                     $("#load" + c).removeClass('fa-chevron-down');
                     $("#load" + c).addClass('fa-circle-o-notch');
+                    if($myForm.length > 1){
                  $myForm[1].style.display = 'none'
-
+}
        
                      //Agregamos la clase loading al body
 
@@ -960,8 +961,10 @@ $(this).remove();
                  console.log(textStatus)
                  console.log(jqXHR)
                  $myForm[0].reset(); 
+                 if($myForm.length > 1){
                  $myForm[1].reset(); 
                  $myForm[1].style.display = 'initial'
+             }
 
        $("#j" + c).load(window.location + " #j" + c);
        $("#like_div" + c).load(window.location + " #like_div" + c);
