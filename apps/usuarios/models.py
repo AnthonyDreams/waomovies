@@ -150,3 +150,19 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Usuario)
 def save_user_profile(sender, instance, **kwargs):
 	instance.profile.save()
+
+
+class UserPreference(models.Model):
+	user = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name='preference')
+	week_recomendation = models.ManyToManyField(settings.MOVIES_DEL_WEB,blank=True, related_name='week_recomendation')
+	expired = models.DateTimeField(auto_now=False, auto_now_add=False)
+
+
+@receiver(post_save, sender=Usuario)
+def create_user_UserPreference(sender, instance, created, **kwargs):
+	if created:
+		UserPreference.objects.create(user=instance)
+
+@receiver(post_save, sender=Usuario)
+def save_user_UserPreference(sender, instance, **kwargs):
+	instance.profile.save()

@@ -687,7 +687,7 @@
 		{%endif %}
 
 {% if amigosview %}
-<div class="col-md-12 col-sm-12 col-xs-12">
+<div class="col-md-9 col-sm-9 col-xs-9">
 				
 				<br>
 				<div class="flex-wrap-movielist">
@@ -805,7 +805,7 @@
           <hr>
           <a class="card-meta"><span style="color: #707B7C; padding-left: 10px;"><i class="fa fa-user"></i> {{ obj.profile.AmiGos.count }}</span></a>
           <a class="card-meta"><span style="color: #707B7C; padding-left: 10px;"><i class="fa fa-heart"></i> {{ obj.favoritos.count }} </span></a>
-          <a class="" style="color: #707B7C;" href="/removeamigos/{{obj.profile.codde}}/"><span style="padding-left: 10px;"><i class="fa fa-times"></i> Eliminar</span></a>
+          <a class="" style="color: #707B7C;" href="/removeamigos/{{obj.profile.user_id}}/"><span style="padding-left: 10px;"><i class="fa fa-times"></i> Eliminar</span></a>
           
         </div>
         <!-- Card content -->

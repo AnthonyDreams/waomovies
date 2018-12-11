@@ -175,10 +175,12 @@ class Votacion(models.Model):
 
 class Hitcount_Series(models.Model):
 	hitcount = models.IntegerField(default=0)
+	hitcount_ever = models.IntegerField(default=0)
 	publish = models.DateField(auto_now=False, auto_now_add=True)
 	serie = models.ForeignKey(Series, on_delete=models.CASCADE, null=True)
-	expired = models.DateTimeField(auto_now=True, auto_now_add=False)
+	expired = models.DateTimeField(auto_now=False, auto_now_add=False)
 	capitulo = models.ForeignKey(Capitulos, on_delete=models.CASCADE, null=True)
+
 
 	def __str__(self):
 		if self.serie:

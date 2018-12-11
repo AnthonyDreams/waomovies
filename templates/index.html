@@ -108,7 +108,7 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 	</div>
 </div>
 <script type="text/javascript">
-  function miFuncionloaded() {
+  $(document).ready(function(){
   var sliderhome = document.getElementById('slider')
   var formuser = document.getElementsByClassName('login-wrapper')[0]
   var formuser2 = document.getElementsByClassName('login-wrapper')[1]
@@ -119,9 +119,12 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
   sliderhome.style.display = "initial"
 
       
-    }
-    window.onload=miFuncionloaded;
+    });
+
+    
 </script>
+
+
 
 <div class="movie-items">
 	<div class="container">
@@ -135,7 +138,7 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 					<ul class="tab-links">
 						<li class="active"><a href="#tab1">#Popular</a></li>
 						{% if request.user.favoritos %}
-						<li><a href="#tab2"> #Para ti</a></li>
+						<li><a href="#tab2" id="tabparati"> #Para ti</a></li>
 						{% else %}
 						{% endif %}
 						<!-- lo que tengo que hacer aquí, es decirle a la base de datos
@@ -584,317 +587,34 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 
 				        <div id="tab2" class="tab">
 				           <div id="" class="row">
-				            	<div  class="slick-multiItem" >
-				            	{% if request.user.favoritos %}
-				            		{% for a in peliculasfav %}
-				            			{% if not a.id in favaid %}
+				           	{% if request.user.favoritos %}
 
-				            			<div style="">
-				            		<div id="zzz{{a.id}}"  class="slide-it" style="width: 120px;" >
-				            			<div id="" class="movie-item" style="width: 150px;">
-					            			<div class="mv-img" >
-					            				<img id="imgslider" src="{{ a.Cover.url }}" alt="" >
-					            			</div>
-					            			<div class="hvr-inner" id="hvras{{a.id}}">
-					            				<a href="{% url 'peliculasO' slug=a.slug %}" style="color: white; width: 100%; top: 28% ; position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 50px; text-align: center; font-weight: bold;" class="fa fa-play point" aria-hidden="true"></i> </a>
-	
-					            				{% if request.user.is_authenticated %}
+				            	<div id="tabcontentin" class="slick-multiItem" >
 
-
-					            				<script type="text/javascript">
-	function myFunctionfavajax(b) {
-														var juan = b.id
-														var c = juan.substr(3)
-														var z = juan.substr(5)
-
-
-														
-
-													var $myForm = $('.my-ajax-form' + juan)
-													$myForm.submit(function(event){
-													    event.preventDefault()
-                										 event.stopImmediatePropagation();
-
-													    var $formData = $(this).serialize()
-													    var $thisURL = $myForm.attr('data-url') || window.location.href 
-													    $.ajax({
-													        method: "POST",
-													        url: $thisURL,
-													        data: $formData,
-													        success: handleFormSuccess,
-													        error: handleFormError,
-													        beforeSend: function () {
-                    $("#af" + juan).removeClass('fa-heart-o');
-                    $("#af" + juan).addClass('fa-circle-o-notch');
-                    
-
-                     //Agregamos la clase loading al body
-                },
-													    })
-													})
-
-													function handleFormSuccess(data, textStatus, jqXHR){
-													    console.log(data)
-													    console.log(textStatus)
-													    console.log(jqXHR)
-													    $myForm[0].reset(); 
-     $("#zzz" + z).load(window.location + " #zzz" + z);
-     $("#zzzz" + z).load(window.location + " #zzzz" + z);
-
-
-													}
-
-													function handleFormError(jqXHR, textStatus, errorThrown){
-													    console.log(jqXHR)
-													    console.log(textStatus)
-													    console.log(errorThrown)
-													}
-													
-													
-													 
-													}
-
-													function myFunctionfavajaxd(b) {
-														var juan = b.id
-														var c = juan.substr(4)
-
-														
-
-													var $myForm = $('.my-ax-form' + juan)
-													$myForm.submit(function(event){
-													    event.preventDefault()
-                 										event.stopImmediatePropagation();
-
-													    var $formData = $(this).serialize()
-													    var $thisURL = $myForm.attr('data-url') || window.location.href 
-													    $.ajax({
-													        method: "POST",
-													        url: $thisURL,
-													        data: $formData,
-													        success: handleFormSuccess,
-													        error: handleFormError,
-													        beforeSend: function () {
-                    
-                    $("#af" + juan).removeClass('fa-heart');
-                    $("#af" + juan).addClass('fa-circle-o-notch');
-
-                     //Agregamos la clase loading al body
-                },
-													    })
-													})
-
-													function handleFormSuccess(data, textStatus, jqXHR){
-													    console.log(data)
-													    console.log(textStatus)
-													    console.log(jqXHR)
-													    $myForm[0].reset(); 
-     $("#hvr" + c).load(window.location + " #hvr" + c);
-
-													}
-
-													function handleFormError(jqXHR, textStatus, errorThrown){
-													    console.log(jqXHR)
-													    console.log(textStatus)
-													    console.log(errorThrown)
-     $("#hvr" + c).load(window.location + " #hvr" + c);
-													    
-													}
-													
-													
-													 
-													}
-</script>
-{% if not request.user in a.favoritos.all %}					            				<!-- añadir a favoritos -->
-
-<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ajax-formfavas{{a.id}}" method='POST'data-url="/favorito/{{a.id}}/">{% csrf_token %}
-					            				<button  onclick="myFunctionfavajax(this)" id="favas{{a.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer;" type="submit"><i id="affavas{{a.id}}" class="fa fa-heart-o" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
-					            				</form>
-					            				
-
-
-		{% else %}			            				<!-- Eliminar añadir a favoritos -->
-
-
-
-<form style="display: inline;position: relative; top: -30%; left: 58%; padding: 0px;" class="my-ax-formsfavas{{a.id}}" method='POST'data-url="/eliminar_favorito/{{a.id}}/">{% csrf_token %}
-					            				<button  onclick="myFunctionfavajaxd(this)" id="sfavas{{a.id}}"title="Favoritos" class="" style="background: none; border: none; cursor: pointer; " type="submit"><i id="afsfavas{{a.id}}" class="fa fa-heart" aria-hidden="true" style="color: rgba(199, 0, 57, 0.8); font-size: 17px;"></i></button>
-					            				</form>
-
-					            		
-
-
-{% endif %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-	function myFunctionajax(b) {
-														var juan = b.id
-														var z = juan.substr(2)
-
-
-														
-
-													var $myForm = $('.my-ajax-form' + juan)
-													$myForm.submit(function(event){
-													    event.preventDefault()
-                										 event.stopImmediatePropagation();
-
-													    var $formData = $(this).serialize()
-													    var $thisURL = $myForm.attr('data-url') || window.location.href 
-													    $.ajax({
-													        method: "POST",
-													        url: $thisURL,
-													        data: $formData,
-													        success: handleFormSuccess,
-													        error: handleFormError,
-													        beforeSend: function () {
-                    $("#a" + juan).removeClass('fa-eye-slash');
-                    $("#a" + juan).addClass('fa-circle-o-notch');
-                    
-
-                     //Agregamos la clase loading al body
-                },
-													    })
-													})
-
-													function handleFormSuccess(data, textStatus, jqXHR){
-													    console.log(data)
-													    console.log(textStatus)
-													    console.log(jqXHR)
-													    $myForm[0].reset(); 
-     $("#hvr" + juan).load(window.location + " #hvr" + juan);
-     $("#zzzz" + z).load(window.location + " #zzzz" + z);
-
-
-													}
-
-													function handleFormError(jqXHR, textStatus, errorThrown){
-													    console.log(jqXHR)
-													    console.log(textStatus)
-													    console.log(errorThrown)
-													}
-													
-													
-													 
-													}
-
-													function myFunctionajaxd(b) {
-														var juan = b.id
-														var c = juan.substr(2)
-														var z = juan.substr(4)
-
-
-														
-
-													var $myForm = $('.my-ax-form' + juan)
-													$myForm.submit(function(event){
-													    event.preventDefault()
-                 										event.stopImmediatePropagation();
-
-													    var $formData = $(this).serialize()
-													    var $thisURL = $myForm.attr('data-url') || window.location.href 
-													    $.ajax({
-													        method: "POST",
-													        url: $thisURL,
-													        data: $formData,
-													        success: handleFormSuccess,
-													        error: handleFormError,
-													        beforeSend: function () {
-                    
-                    $("#a" + juan).removeClass('fa-eye');
-                    $("#a" + juan).addClass('fa-circle-o-notch');
-
-                     //Agregamos la clase loading al body
-                },
-													    })
-													})
-
-													function handleFormSuccess(data, textStatus, jqXHR){
-													    console.log(data)
-													    console.log(textStatus)
-													    console.log(jqXHR)
-													    $myForm[0].reset(); 
-     $("#hvr" + c).load(window.location + " #hvr" + c);
-     $("#zzzz" + z).load(window.location + " #zzzz" + z);
-
-
-													}
-
-													function handleFormError(jqXHR, textStatus, errorThrown){
-													    console.log(jqXHR)
-													    console.log(textStatus)
-													    console.log(errorThrown)
-     $("#hvr" + c).load(window.location + " #hvr" + c);
-
-													}
-													
-													
-													 
-													}
-</script>
-
-
-
-
-
-
-{% if not a in peliculase %}	
-					            				<!-- ver más tarde -->
-<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ajax-formas{{a.id}}" method='POST'data-url="/vermastarde/{{ a.id }}/">{% csrf_token %}
-					            				<button onclick="myFunctionajax(this)" id="as{{a.id}}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i id="aas{{a.id}}"  style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>
-					            				
-					            				</form>
-
-					            				<!-- termina ver más tarde -->					            	
-{% else %}
-
-
-
-		<!-- ver más tarde -->
-<form style="display: inline;position: relative; top: -30%; left: 52%; padding: 0px;" class="my-ax-formaaas{{a.id}}" method='POST'data-url="/eliminar_vermastarde/{{ a.id }}/">{% csrf_token %}
-					            				<button onclick="myFunctionajaxd(this)" id="aaas{{ a.id }}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i  id="aaaas{{a.id}}"  style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-eye" aria-hidden="true"></i></button>
-					            				
-					            				</form>
-
-					            				<!-- termina ver más tarde -->
-
-{% endif %}
-<a title="Ver más" class="" type="
-					            				submit" style="position: relative; top: -30%; left: 50%;"><i  id="done" style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-plus" aria-hidden="true"></i></a>
-
-					            				{% else %}
-					            				<a title="Ver más" class="" type="
-					            				submit" style="position: relative; top: -30%; left: 87%;"><i  id="done" style="color: rgba(255, 255, 255, 0.7); font-size: 17px;" class="fa fa-plus" aria-hidden="true"></i></a>
-{%endif%}													
-
-
-
-					            			</div>
-					            			<div class="title-in">
-					            				<h6><a href="#">{{ a.titulo }}</a></h6>
-					            				<p><i class="fa fa-star point" aria-hidden="True"></i><span>{{ a.puntuacion }}</span> /10</p>
-					            			</div>
-					            		</div>
-				            		</div>
-				            		</div>
-				            		{% endif %}
-				            		{% endfor %}
-				            		{% endif %}
+				            		
+				            	
 
 									
 				            	</div>
+				            	{% if request.user.is_authenticated %}
+<script type="text/javascript">
+ 
+
+
+ 
+  $.getJSON('/añadiste/') 
+
+  .done(function(data) {
+  	$.each(data, function(key, value){
+$('#tabcontentin').append('<div id="zzz'+value.id+'"  class="slide-it" style="width: 120px;" ><div id="" class="movie-item" style="width: 150px;"><div class="mv-img" ><img id="imgslider" src="'+value.Cover+'" alt="" ></div><div class="hvr-inner" id="hvras'+value.id+'"><a href="/peliculas/'+value.slug+'/"" style="color: white; width: 100%; top: 28% ; position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 50px; text-align: center; font-weight: bold;" class="fa fa-play point" aria-hidden="true"></i> </a></div><div class="title-in"><h6><a href="#">'+value.titulo+'</a></h6><p><i class="fa fa-star point" aria-hidden="True"></i><span>'+value.puntuacion+'</span> /10</p></div></div></div>');
+   });
+
+});
+
+</script>
+
+{% endif %}
+{% endif %}
 
 				            </div>
 				        </div>
@@ -1589,11 +1309,6 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 
 
 
-
-
-<script type="text/javascript">
-	
-</script>
 
 
 {% endblock %}

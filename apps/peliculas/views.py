@@ -2,6 +2,7 @@
 from django.shortcuts import (render, get_list_or_404, 
 							redirect, get_object_or_404)
 from itertools import chain
+from datetime import datetime, date, time, timedelta
 from apps.peliculas.models import *
 import operator
 import time
@@ -20,7 +21,7 @@ from apps.comentarios.models import *
 from django.db.models import Sum
 from .forms import *
 from urllib.parse import quote_plus
-from apps.usuarios.models import Usuario, Profile
+from apps.usuarios.models import Usuario, Profile, UserPreference
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 import json
@@ -125,24 +126,62 @@ class pelis_user_nove(APIView):
 class añadiste(APIView):
 	serializer = peliserializer
 	def get(self, request, format=None):
-		lista = Peliculas.objects.filter(favoritos=request.user.id)
-		added_tema = []
-		added_tag1 = []
-		added_tag2 = []
-		added_tag3 = []
-		added_id = []
-		for use in lista:
-			added_tema.append(use.tema)
-			added_tag1.append(use.tag1)
-			added_tag2.append(use.tag2)
-			added_tag3.append(use.tag3)
-			added_id.append(use.id)
+		if request.user.is_authenticated:
+			lista = Peliculas.objects.filter(favoritos=request.user.id)
+			added_tema = []
+			added_tag1 = []
+			added_tag2 = []
+			added_tag3 = []
+			added_id = []
+			for use in lista:
+				added_tema.append(use.tema)
+				added_tag1.append(use.tag1)
+				added_tag2.append(use.tag2)
+				added_tag3.append(use.tag3)
+				added_id.append(use.id)
 
-		lista2 = Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=added_id)[:40]
+			lista2 = Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=added_id)[:25]
+			instancess = UserPreference.objects.filter(user=request.user)
+			if instancess:
+				instancess = UserPreference.objects.filter(user=request.user.id)[0]
+				if  timezone.now() >= instancess.expired :
+					peliculass = instancess.week_recomendation.all()
+					idsd = []
+					for peli in peliculass:
+						idsd.append(peli.id)
 
+					mmm2 =Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=list(set(idsd+added_id)))[:25]
+					fecha = timezone.now() + timedelta(days=7)
+					instancess.expired = fecha
+					instancess.week_recomendation.clear()
+					instancess.save()
+					instancess.week_recomendation.add(*mmm2)
+				else:
+					peliculass = instancess.week_recomendation.all()
+					idsd = []
+					for peli in peliculass:
+						idsd.append(peli.id)
 
-		response = self.serializer(lista2, many=True)
-		return HttpResponse(json.dumps(response.data))
+					mmm2 =Peliculas.objects.filter(id__in=idsd)
+			else:
+				if lista and not instancess:
+					asunto = UserPreference(user=request.user, expired = timezone.now() + timedelta(days=7))
+					asunto.save()
+					mmm2 = Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=added_id)[:25]
+					asunto.week_recomendation.add(*mmm2)
+				else:
+					peliculass = instancess.week_recomendation.all()
+					idsd = []
+					for peli in peliculass:
+						idsd.append(peli.id)
+					mmm2 =Peliculas.objects.filter(id__in=idsd)
+			
+			
+
+			response = self.serializer(mmm2, many=True)
+			return HttpResponse(json.dumps(response.data))
+		else: 
+			pass
 
 class seguirviendo(APIView):
 	serializer = peliserializer
@@ -241,43 +280,21 @@ def inicio(request):
 
 	
 
-	favaid = []
-	favastema = []
-	favastag1 = []
-	favastag2 = []
-	favastag3 = []
 	favasgenero = []
-	favaid_serie = []
-	favastema_serie = []
-	favastag1_serie = []
-	favastag2_serie = []
-	favastag3_serie = []
 
 	if request.user.is_active:
 		juan = Usuario.objects.get(id=request.user.id)
 		fav = juan.favoritos.all()
-		fav_series = juan.favoritos_series.all()
-		for favase in fav_series:
-			favastema_serie.append(favase.tema)
-			favastag1_serie.append(favase.tag1)
-			favastag2_serie.append(favase.tag2)
-			favastag3_serie.append(favase.tag3)
-			favaid_serie.append(favase.id)
+
 
 
 		for fava in fav:
-			favastema.append(fava.tema)
-			favastag1.append(fava.tag1)
-			favastag2.append(fava.tag2)
-			favastag3.append(fava.tag3)
 			favasgenero.append(fava.genero)
 			favasgenero.append(fava.genero2)
-			favaid.append(fava.id)
 
 
 
-		peliculasfavcount = Peliculas.objects.all().filter(Q(tema__icontains=favastema)|Q(tag1__in=favastag1)|Q(tag2__in=favastag2)|Q(tag3__in=favastag3)).exclude(id__in=favaid).count()
-		seriesfav = Series.objects.all().filter(Q(tema__icontains=favastema_serie)|Q(tag1__in=favastag1_serie)|Q(tag2__in=favastag2_serie)|Q(tag3__in=favastag3_serie))
+		
 		generodic = {}
 		accionn = 0
 		ciencia_ficcionn = 0
@@ -344,14 +361,6 @@ def inicio(request):
 		resultado.reverse()
 		genero1u = resultado[0][0]
 		genero2u = resultado[1][0]
-		if peliculasfavcount < 6:
-			peliculasfav = list(chain(Peliculas.objects.all().filter(Q(tema__icontains=favastema)|Q(tag1__in=favastag1)|Q(tag2__in=favastag2)|Q(tag3__in=favastag3)).exclude(id__in=favaid), Peliculas.objects.all().filter(Q(genero=genero1u)|Q(genero2=genero2u))))[:20]
-		else:
-			peliculasfav = Peliculas.objects.all().filter(Q(tema__icontains=favastema)|Q(tag1__in=favastag1)|Q(tag2__in=favastag2)|Q(tag3__in=favastag3)).exclude(id__in=favaid)[:20]
-
-	else:
-		peliculasfav = False
-		seriesfav = False
 	peliculas = Peliculas.objects.all().order_by('-id')[:20]
 	series = Series.objects.all().order_by('-id')[:20]
 	movies = Peliculas.objects.all().order_by('-id')[:10]
@@ -373,14 +382,10 @@ def inicio(request):
 	'comedia':comedia,
 	'animacion':animacion,
 	'series':series,
-	'peliculasfav':peliculasfav,
 	'topsemanal':topsemanal,
 	'peliculase':peliculase,
 	'peliculase_serie':peliculase_serie,
 	'topsemanal_serie':topsemanal_serie,
-	'seriesfav':seriesfav,
-	'favaid':favaid,
-	'favaid_serie':favaid_serie,
 	'capi':capi,
 	'documental':documental,
 	'fantasia':fantasia,
@@ -392,7 +397,7 @@ def inicio(request):
 
 '''
 
-from datetime import datetime, date, time, timedelta
+
 def peliculasO(request, slug, *args, **kwargs):
 
 	peliculasees = Vermastarde.objects.filter(usuario_id=request.user.id)
@@ -407,13 +412,18 @@ def peliculasO(request, slug, *args, **kwargs):
 		try:
 			h = Hitcount.objects.get(pelicula_id=id)
 			form = count(request.POST or None, request.FILES or None, instance=h)
-			if h.publish + timedelta(days=7) <= date.today():
-				h.delete()
+			if timezone.now() >= h.expired:
+				if form:
+					instance = form.save(commit=False)
+					instance.hitcount = 0
+					instance.hitcount_ever = h.hitcount_ever + 1
+					instance.expired = timezone.now() + timedelta(days=7)
+					instance.save()
 			else:
 				if form:
 					instance = form.save(commit=False)
 					instance.hitcount = h.hitcount + 1
-					instance.update = date.today()
+					instance.hitcount_ever = h.hitcount_ever + 1
 					instance.save()
 		except ObjectDoesNotExist:
 			instances = get_object_or_404(Peliculas, id=id)
@@ -422,6 +432,8 @@ def peliculasO(request, slug, *args, **kwargs):
 				instance = form.save(commit=False)
 				instance.pelicula_id = id
 				instance.hitcount = 1
+				instance.hitcount_ever = 1
+				instance.expired = timezone.now() + timedelta(days=7)
 				instance.save()
 	else:
 		try:
@@ -1257,6 +1269,7 @@ def FavoritoFormView(request, id):
 			instance.favoritos.add(juan)
 			instance.pelicula_id = id
 			instance.save()
+
 			# message success
 				
 			data = {

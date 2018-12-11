@@ -160,6 +160,8 @@
     background-color: #f44336; 
     color: white;
     position: fixed;
+    width: 100%;
+    z-index: 9999999999;
 }
 
 .closebtn {
@@ -1190,9 +1192,7 @@ var load = false
             </div>
             <div class="row">
               <div class="remember">
-          <div>
-            <input type="checkbox" name="remember" value="Remember me"><span>Recuerdame</span>
-          </div>
+         
                 <a href="#">¿Olvidaste tu contraseña?</a>
               </div>
             </div>
@@ -1288,8 +1288,10 @@ var load = false
     window.onload=miFuncionload;
 </script>
 
-<header class="ht-header" id="coño">
-  <div class="container-fluid">
+<header class="ht-header" id="coño" style="height: 65px;">
+
+
+  <div class="container-fluid"{% if request.user.is_authenticated %} style="margin-top:-8px;" {% else %} style="margin-top:-5px;" {% endif %}>
     <nav class="navbar navbar-default navbar-custom" >
         <div class="navbar-header logo">
           
@@ -1298,7 +1300,7 @@ var load = false
           
             
             </div>
-            <a href="/inicio/"><img id="logoz" style="margin-left: 15px; width: 155px;" class="logoz logo" src="{% static 'img/waologo.png' %}" alt="" ></a>
+            <a href="/inicio/"><img id="logoz" style="margin-left: 15px; width: 130px;" class="logoz logo" src="{% static 'img/waologo.png' %}" alt="" ></a>
 
             <a href="/inicio/"><img style="width: auto;" class="logo logito" src="{% static 'img/wamovieslogo.png' %}" alt="" ></a>
              
@@ -1361,6 +1363,7 @@ var load = false
             {% if request.user.is_authenticated %}
             <li><a id="actibtn" href="javascript:;" data-toggle="dropdown" class="dropdown-toggle" style="margin-top: -6px; background: none;"><i class="fa fa-users gray-text" aria-hidden="true" style="font-size: 18px; text-shadow: 0px 3px 3px rgba(255,255,255,0.5),0px -1px 1px rgba(0,0,0,.3);"></i>
             <span class="label" id="labelcountcomp" style="color: #F1C40F; padding-right: 3px;"> </span>
+  
 <ul class="dropdown-menu media-list pull-right" style="background: #121212;" >
               <div id="acticount" style="margin-top: -3px;"></div>
               
@@ -1939,7 +1942,7 @@ $('#labelcountact').append(''+data[0].unread+'');
               
 <a href="/usuario/{{user.username}}/"  class="dropdown-toggle" data-toggle="dropdown" style="background: none;">
               {%if user.profile.perfil_img %} 
-               <img src="{{ user.profile.perfil_img.url }}" style="border-radius:  50%; left: -6px; top: -3px; position: relative; width: 37px; height: 37px;">         
+               <img src="{{ user.profile.perfil_img.url }}" style="border-radius:  50%; left: -6px; top: 0px; position: relative; width: 33px; height: 33px;">         
               
               <span class="hidden-xs"> {{ user.username }}{% else %}{{ user.full_name }}{% endif%} </span> <b class="caret"></b>
             </a>

@@ -914,13 +914,9 @@ def agregaramigos(request, id):
 
 def removeamigos(request, code):
 	usuarioname = usuario.objects.get(username=request.user.username)
-	amigos = ""
-	code = Profile.objects.filter(codde=code)
-	for a in code:
-		can = a.user
-		coDigo = a.codde
+
 	usuarioo = usuario.objects.get(id=usuarioname.id)
-	instance = get_object_or_404(Usuario, email=can)
+	instance = get_object_or_404(Usuario, id=code)
 	if code:
 		instance.profile.AmiGos.remove(request.user)
 		request.user.profile.AmiGos.remove(instance)

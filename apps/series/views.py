@@ -64,12 +64,18 @@ def series_detail(request, slug):
 		try:
 			h = Hitcount_Series.objects.get(serie_id=id)
 			form = count_series(request.POST or None, request.FILES or None, instance=h)
-			if h.publish + timedelta(days=7) <= date.today():
-				h.delete()
+			if timezone.now() >= h.expired:
+				if form:
+					instance = form.save(commit=False)
+					instance.hitcount = 0
+					instance.hitcount_ever = h.hitcount_ever + 1
+					instance.expired = timezone.now() + timedelta(days=7)
+					instance.save()
 			else:
 				if form:
 					instance = form.save(commit=False)
 					instance.hitcount = h.hitcount + 1
+					instance.hitcount_ever = h.hitcount_ever + 1
 					instance.save()
 		except ObjectDoesNotExist:
 			instances = get_object_or_404(Series, id=id)
@@ -78,6 +84,8 @@ def series_detail(request, slug):
 				instance = form.save(commit=False)
 				instance.serie_id = id
 				instance.hitcount = 1
+				instance.hitcount_ever = 1
+				instance.expired = timezone.now() + timedelta(days=7)
 				instance.save()
 		else:
 			try:
@@ -353,21 +361,28 @@ def capitulos_detail(request, capitulo, slug):
 		try:
 			h = Hitcount_Series.objects.get(capitulo_id=capitulo.id)
 			form = count_series(request.POST or None, request.FILES or None, instance=h)
-			if h.publish + timedelta(days=7) <= date.today():
-				h.delete()
+			if timezone.now() >= h.expired:
+				if form:
+					instance = form.save(commit=False)
+					instance.hitcount = 0
+					instance.hitcount_ever = h.hitcount_ever + 1
+					instance.expired = timezone.now() + timedelta(days=7)
+					instance.save()
 			else:
 				if form:
 					instance = form.save(commit=False)
 					instance.hitcount = h.hitcount + 1
-					instance.update = date.today()
+					instance.hitcount_ever = h.hitcount_ever + 1
 					instance.save()
 		except ObjectDoesNotExist:
-			instances = get_object_or_404(Capitulos, slug=capitulo.slug)
+			instances = get_object_or_404(Peliculas, id=id)
 			form = count_series(request.POST or None, request.FILES or None)
 			if form:
 				instance = form.save(commit=False)
-				instance.capitulo_id = instances.id
+				instance.capitulo_id = id
 				instance.hitcount = 1
+				instance.hitcount_ever = 1
+				instance.expired = timezone.now() + timedelta(days=7)
 				instance.save()
 	else:
 		try:

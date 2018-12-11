@@ -11,7 +11,7 @@ class peliserializer(ModelSerializer):
 
 	class Meta:
 		model = Peliculas
-		fields = ('titulo', 'director', 'fecha_de_lanzamiento', 'Cover', 'id', 'slug')
+		fields = ('titulo', 'director', 'fecha_de_lanzamiento', 'Cover', 'id', 'slug', 'puntuacion')
 
 class notizerializer(ModelSerializer):
 	unread = serializers.IntegerField()

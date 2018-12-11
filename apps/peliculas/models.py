@@ -158,9 +158,10 @@ class Votacion(models.Model):
 
 class Hitcount(models.Model):
 	hitcount = models.IntegerField(default=0)
+	hitcount_ever = models.IntegerField(default=0)
 	publish = models.DateField(auto_now=False, auto_now_add=True)
 	pelicula = models.ForeignKey(Peliculas, on_delete=models.CASCADE)
-	expired = models.DateTimeField(auto_now=True, auto_now_add=False)
+	expired = models.DateTimeField(auto_now=False, auto_now_add=False)
 
 	def __str__(self):
 		return str(self.pelicula)
