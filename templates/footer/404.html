@@ -25,6 +25,7 @@
 				<p class="w3lstext">Tal vez haz accedido a una url que no existe. Por favor, asegurate de que tu url exista. Sino ve a <a href="inicio"> Inicio.</a> </p>
 				<div class="agile-search"> 
 					<form method="post" action="/search/">
+						{% csrf_token %}
 						<input type="text" name="Search" placeholder="Buscar en WaoMovies..." id="search" required="" name="src">
 						<input type="submit" value="Buscar">
 					</form> 
