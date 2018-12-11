@@ -27,14 +27,26 @@ nav.vertical ul li{	display:block;}/* vertical menu */
 nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
 img{max-width:100%;}
 /*-- end reset --*/
+@media (min-width: 991px){
 body {
     font-family: 'Open Sans', sans-serif;
-    background: url(http://cdn.playbuzz.com/cdn/6c4b66b1-56d0-40ae-82ac-0fdaff62b64a/8825c5db-a88f-498a-a928-734c268b595a.gif)no-repeat center 0px;
+    background: url('http://cdn.playbuzz.com/cdn/6c4b66b1-56d0-40ae-82ac-0fdaff62b64a/8825c5db-a88f-498a-a928-734c268b595a.gif')no-repeat center 0px;
 	-webkit-background-size:cover;
 	-moz-background-size:cover; 
 	background-size:cover;
     background-attachment: fixed;
 } 
+}
+@media (max-width: 992px) and (min-width: 0px) {
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: url(https://www.lagzero.net/wp-content/uploads/2018/09/tobey-maguire-crying-spider-man.jpg)no-repeat center 0px;
+    -webkit-background-size:cover;
+    -moz-background-size:cover; 
+    background-size:cover;
+    background-attachment: fixed;
+}   
+}
 /*-- main --*/ 
 .agileinfo-row {
     width: 65%;
