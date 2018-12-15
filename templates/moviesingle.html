@@ -2295,8 +2295,8 @@ input[type="button"].btn-block {
 <div class="tab-content" style="">
 
     <!--Panel 1-->
-    {% if peliculaa.rapidvideo %}
-    <div class="tab-pane fade in show active " id="panelrapidvideo" role="tabpanel" style="">
+    
+    <div class="tab-pane fade in show {% if peliculaa.rapidvideo %} active {% endif %}" id="panelrapidvideo" role="tabpanel" style="">
 <div class="row">
 
     <form id="rapidvideoform" method="post" class="rapidvideo" data-url="/get_embed/{{peliculaa.id}}/">
@@ -2319,7 +2319,7 @@ filter: brightness(50%) blur(2px);" class="imgplay">
 <img src="https://ripshop.es/wp-content/uploads/2014/03/Only-black.png" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
 
 filter: brightness(50%) blur(2px);" class="imgplay">
-{% endif %}
+
         <input type="hidden" name="server" value="rapidvideo">
         <i id="loadinggrapidvideo" class="fa fa-play iconoplay"></i></button>
     </form>
