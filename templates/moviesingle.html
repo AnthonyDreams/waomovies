@@ -2296,7 +2296,7 @@ input[type="button"].btn-block {
 
     <!--Panel 1-->
     
-    <div class="tab-pane fade in show {% if peliculaa.rapidvideo %} active {% endif %}" id="panelrapidvideo" role="tabpanel" style="">
+    <div class="tab-pane fade {% if peliculaa.rapidvideo %} in show  active {% endif %}" id="panelrapidvideo" role="tabpanel" style="">
 <div class="row">
 
     <form id="rapidvideoform" method="post" class="rapidvideo" data-url="/get_embed/{{peliculaa.id}}/">
