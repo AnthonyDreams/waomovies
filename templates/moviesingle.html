@@ -2236,6 +2236,11 @@ input[type="button"].btn-block {
 
 
 }
+
+.tab-pane {
+    min-height: 350px;
+    height: 420px;
+}
 </style>
               <div id="reproducir" class="tab review">
 
@@ -2637,7 +2642,7 @@ filter: brightness(50%) blur(2px);" class="imgplay">
                  console.log(textStatus)
                  console.log(jqXHR)
                  $myForm[0].reset(); 
-       $("#panel" +bas2).append('<iframe id="ifarme" class="responsive-i" src="'+data.embed+'" scrolling="no" frameborder="0" width="100%" height="100%" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>');
+       $("#panel" +bas2).append('<iframe id="ifarme" class="responsive-i" src="'+data.embed+'" scrolling="no" frameborder="0" width="100%" height="400" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>');
        setTimeout(function(){
 $("#" + bas2 + "form").remove()
        document.getElementById("ifarme").style.display="initial"
