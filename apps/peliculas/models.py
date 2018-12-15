@@ -62,6 +62,7 @@ class Peliculas(models.Model):
 	tag1 = models.CharField(max_length=40, blank=True)
 	tag2 = models.CharField(max_length=40, blank=True)
 	tag3 = models.CharField(max_length=40, blank=True)
+	otras_etiquetas_y_busquedas = models.ManyToManyField('Busqueda_y_etiquetas', blank=True, related_name="otras_etiquetas_y_busquedas")
 	reportes = models.IntegerField(default=0)
 	favoritos = models.ManyToManyField(Usuario, blank=True, related_name="favoritos")
 	rapidvideo = models.TextField(null=True, blank=True)
@@ -186,3 +187,10 @@ class Generox(models.Model):
 	genero_name = models.CharField(max_length=40, null=True, unique=True)
 
 
+class Busqueda_y_etiquetas(models.Model):
+	tag = models.CharField(max_length=80, blank=True,null=True)
+	timestamp_tag = models.DateTimeField(auto_now=False, auto_now_add=True)
+	user_who_search = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True)
+	resuelto = models.BooleanField(default=False)
+	def __str__(self):
+		return str(self.tag)

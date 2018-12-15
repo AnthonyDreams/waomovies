@@ -919,11 +919,25 @@ def search_result(request, src):
 	
 
 	if srch:
-		match = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(tema__icontains=srch)|Q(tag_principal=srch)|Q(tag1__icontains=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(slug__icontains=slugsearch))
-		matchc = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(tema__icontains=srch)|Q(tag1__icontains=srch)|Q(tag_principal=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(slug__icontains=slugsearch)).count()
+		buscar =Busqueda_y_etiquetas.objects.filter(tag__icontains=srch)
+		idbuscar = []
+		if buscar.count() > 0:
+			idbuscar.append(buscar[0].id)
+			if buscar.count() > 1:
+				for iss in buscar:
+					idbuscar.append(iss.id)
+
+
+
+		match = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(titulo_orinal__icontains=srchh)|Q(tema__icontains=srch)|Q(tag_principal=srch)|Q(tag1__icontains=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch))
+		matchc = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(titulo_orinal__icontains=srchh)|Q(tema__icontains=srch)|Q(tag1__icontains=srch)|Q(tag_principal=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch)).count()
 		paginator = Paginator(match, 30)
 		antes = ""
 		if matchc == 0:
+			
+
+			guardar = Busqueda_y_etiquetas(tag=srch, user_who_search=request.user)
+			guardar.save()
 			for i in match:
 				if i == " ":
 					break
@@ -1562,3 +1576,37 @@ def GeneroF_eliminar(request, genre):
 				'message': "Successfully submitted form data."
 			}
 			return JsonResponse(data)
+
+
+
+def gettingembed(request, id):
+	get = Peliculas.objects.get(id=id)
+	if request.is_ajax():
+		server = request.POST.get('server')
+		if server == "rapidvideo":
+			embed = get.rapidvideo
+		elif server == "openload":
+			embed = get.openload
+		elif server == "vidoza":
+			embed = get.vidoza
+		elif server == "streamcloud":
+			embed = get.streamcloud
+		elif server == "streamago":
+			embed = get.streamago
+		elif server == "vidlox":
+			embed = get.vidlox
+		elif server == "servidor1":
+			embed = get.servidor1
+		elif server == "servidor2":
+			embed = get.servidor2
+		elif server == "servidor3":
+			embed = get.servidor3
+		elif server == "servidor4":
+			embed = get.servidor4
+		else:
+			embed = None
+		data= {
+		'embed': embed,
+		}
+
+		return JsonResponse(data)

@@ -2115,6 +2115,10 @@ input[type="button"].btn-block {
     .responsive-i {
     width: 100%;
 }
+
+.imgplay {
+    width: 100%;
+}
 }
 </style>
 
@@ -2169,6 +2173,69 @@ input[type="button"].btn-block {
     background-color: #FFC300;
     
 }
+
+.playheader {
+    height: 40px; 
+    width: 100%; 
+    background-color: rgba(0,0,0,0.2); 
+    color: white; 
+    align-items: center; 
+    padding: 5px; 
+    position: relative; 
+    z-index: 3;
+
+}
+
+
+.playheader ul {
+
+}
+
+.playheader img {
+    /*-webkit-animation: down 5s infinite reverse;*/
+
+}
+@-webkit-keyframes down {
+   0%{ left: 1000px; position: relative;}
+    25%{ }
+    50%{  }
+    100%{  left: 0px;  position: relative;}
+}
+
+.iconoplay {
+    font-size: 130px; color: white; text-align: center; position: absolute; margin-top: -33.7%; margin-left:-37px;
+
+}
+
+.rapidvideo, .vidlox, .vidoza, .openload, .streamago, .streamcloud, .servidor1, .servidor2, .servidor3, .servidor4 {
+    display: inline; position: relative; top:-10px;
+}
+
+@media (max-width: 563px){
+.playheader {
+    display:none;
+
+}
+
+.iconoplay {
+    font-size: 80px !important;
+}
+
+
+}
+
+@media (max-width: 440px){
+.playheader {
+    display:none;
+
+}
+
+.iconoplay {
+    font-size: 60px !important;
+}
+
+
+}
 </style>
               <div id="reproducir" class="tab review">
 
@@ -2183,6 +2250,7 @@ input[type="button"].btn-block {
 </form-->
 
 {% if peliculaa.rapidvideo %}
+
 <button type="button" class="btn btn-tw active" onclick="clicker()" style="font-size: 16px;" data-toggle="tab" id="rapidvideo" href="#panelrapidvideo" role="tab">Rapidvideo</button>
 {% endif %}
 {% if peliculaa.vidlox %}
@@ -2225,7 +2293,32 @@ vidor1" href="#panelservidor1" role="tab">servidor1</button>
     <!--Panel 1-->
     <div class="tab-pane fade in show active " id="panelrapidvideo" role="tabpanel" style="">
 <div class="row">
-                   <iframe class="responsive-i" src="{{peliculaa.rapidvideo}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+
+    <form id="rapidvideoform" method="post" class="rapidvideo" data-url="/get_embed/{{peliculaa.id}}/">
+        {% csrf_token %}
+        <button onclick="getembed(this)" style="width: 100%; height: auto; background: none; border: none; cursor: pointer;font-family: 'Fira Sans', sans-serif; " class="imgplay" id="rrapidvideo">
+            <div class="playheader">
+                <img src="{% static 'img/wamovieslogo.png' %}" width="40" style="float: left; position: relative; left: 8px;">
+
+                <ul  style=" list-style: none; position: relative; top: 23%; left: 14px;">
+                <li style="float: left;">Estás viendo {{ peliculaa.titulo }} en WaoMovies. ¡Gracias por preferirnos!</li>
+
+                </ul>
+            </div>
+
+            {% if peliculaa.portada %}
+        <img src="{{ peliculaa.portada.url }}" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% else %}
+<img src="https://ripshop.es/wp-content/uploads/2014/03/Only-black.png" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% endif %}
+        <input type="hidden" name="server" value="rapidvideo">
+        <i id="loadinggrapidvideo" class="fa fa-play iconoplay"></i></button>
+    </form>
+                   
                   </div>
        
     </div>
@@ -2236,7 +2329,29 @@ vidor1" href="#panelservidor1" role="tab">servidor1</button>
         
 
         <div class="row">
-                   <iframe class="responsive-i" src="{{peliculaa.vidlox}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                   <form id="vidloxform" method="post" class="vidlox" data-url="/get_embed/{{peliculaa.id}}/">
+        {% csrf_token %}
+        <button onclick="getembed(this)" style="width: 100%; height: auto; background: none; border: none; cursor: pointer;font-family: 'Fira Sans', sans-serif; "  id="vvidlox" class="imgplay">
+            <div class="playheader">
+                <img src="{% static 'img/wamovieslogo.png' %}" width="40" style="float: left; position: relative; left: 8px;">
+
+                <ul  style=" list-style: none; position: relative; top: 23%; left: 14px;">
+                <li style="float: left;">Estás viendo {{ peliculaa.titulo }} en WaoMovies. ¡Gracias por preferirnos!</li>
+<li style="float: left; position: relative; left: 20%;">Duración: {{ peliculaa.run_time }}min</li>
+                </ul>
+            </div>
+        {% if peliculaa.portada %}
+        <img src="{{ peliculaa.portada.url }}" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% else %}
+<img src="https://ripshop.es/wp-content/uploads/2014/03/Only-black.png" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% endif %}
+        <input type="hidden" name="server" value="vidlox">
+        <i id="loadinggvidlox" class="fa fa-play iconoplay"></i></button>
+    </form>
                   </div>
 
     </div>
@@ -2247,7 +2362,29 @@ vidor1" href="#panelservidor1" role="tab">servidor1</button>
         
 
         <div class="row">
-                   <iframe class="responsive-i" src="{{peliculaa.vidoza}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                   <form id="vidozaform" method="post" class="vidoza" data-url="/get_embed/{{peliculaa.id}}/">
+        {% csrf_token %}
+        <button onclick="getembed(this)" style="width: 100%; height: auto; background: none; border: none; cursor: pointer;font-family: 'Fira Sans', sans-serif; " id="vvidoza" class="imgplay">
+            <div class="playheader">
+                <img src="{% static 'img/wamovieslogo.png' %}" width="40" style="float: left; position: relative; left: 8px;">
+
+                <ul  style=" list-style: none; position: relative; top: 23%; left: 14px;">
+                <li style="float: left;">Estás viendo {{ peliculaa.titulo }} en WaoMovies. ¡Gracias por preferirnos!</li>
+<li style="float: left; position: relative; left: 20%;">Duración: {{ peliculaa.run_time }}min</li>
+                </ul>
+            </div>
+        {% if peliculaa.portada %}
+        <img src="{{ peliculaa.portada.url }}" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% else %}
+<img src="https://ripshop.es/wp-content/uploads/2014/03/Only-black.png" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% endif %}
+        <input type="hidden" name="server" value="vidoza">
+        <i id="loadingg" class="fa fa-play iconoplay"></i></button>
+    </form>
                   </div>
 
     </div>
@@ -2257,7 +2394,29 @@ vidor1" href="#panelservidor1" role="tab">servidor1</button>
         
 
         <div class="row">
-                   <iframe class="responsive-i" src="{{peliculaa.openload}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                   <form id="openloadform" method="post" class="openload" data-url="/get_embed/{{peliculaa.id}}/">
+        {% csrf_token %}
+        <button onclick="getembed(this)" style="width: 100%; height: auto; background: none; border: none; cursor: pointer;font-family: 'Fira Sans', sans-serif; " id="oopenload" class="imgplay">
+            <div class="playheader">
+                <img src="{% static 'img/wamovieslogo.png' %}" width="40" style="float: left; position: relative; left: 8px;">
+
+                <ul  style=" list-style: none; position: relative; top: 23%; left: 14px;">
+                <li style="float: left;">Estás viendo {{ peliculaa.titulo }} en WaoMovies. ¡Gracias por preferirnos!</li>
+<li style="float: left; position: relative; left: 20%;">Duración: {{ peliculaa.run_time }}min</li>
+                </ul>
+            </div>
+        {% if peliculaa.portada %}
+        <img src="{{ peliculaa.portada.url }}" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% else %}
+<img src="https://ripshop.es/wp-content/uploads/2014/03/Only-black.png" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% endif %}
+        <input type="hidden" name="server" value="openload">
+        <i id="loadingg" class="fa fa-play iconoplay"></i></button>
+    </form>
                   </div>
 
     </div>
@@ -2266,7 +2425,29 @@ vidor1" href="#panelservidor1" role="tab">servidor1</button>
         
 
         <div class="row">
-                   <iframe class="responsive-i" src="{{peliculaa.streamago}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                   <form id="streamagoform" method="post" class="streamago" data-url="/get_embed/{{peliculaa.id}}/">
+        {% csrf_token %}
+        <button onclick="getembed(this)" style="width: 100%; height: auto; background: none; border: none; cursor: pointer;font-family: 'Fira Sans', sans-serif; " id="sstreamago" class="imgplay">
+            <div class="playheader">
+                <img src="{% static 'img/wamovieslogo.png' %}" width="40" style="float: left; position: relative; left: 8px;">
+
+                <ul  style=" list-style: none; position: relative; top: 23%; left: 14px;">
+                <li style="float: left;">Estás viendo {{ peliculaa.titulo }} en WaoMovies. ¡Gracias por preferirnos!</li>
+<li style="float: left; position: relative; left: 20%;">Duración: {{ peliculaa.run_time }}min</li>
+                </ul>
+            </div>
+        {% if peliculaa.portada %}
+        <img src="{{ peliculaa.portada.url }}" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% else %}
+<img src="https://ripshop.es/wp-content/uploads/2014/03/Only-black.png" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% endif %}
+        <input type="hidden" name="server" value="streamago">
+        <i id="loadinggstreamago" class="fa fa-play iconoplay"></i></button>
+    </form>
                   </div>
 
     </div>
@@ -2275,7 +2456,22 @@ vidor1" href="#panelservidor1" role="tab">servidor1</button>
         
 
         <div class="row">
-                   <iframe class="responsive-i" src="{{peliculaa.streamcloud}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                   <form id="streamcloudform" method="post" class="streamcloud" data-url="/get_embed/{{peliculaa.id}}/">
+        {% csrf_token %}
+        <button onclick="getembed(this)" style="width: 100%; height: auto; background: none; border: none; cursor: pointer;font-family: 'Fira Sans', sans-serif; " id="sstreamcloud" class="imgplay">
+            <div class="playheader">
+                <img src="{% static 'img/wamovieslogo.png' %}" width="40" style="float: left; position: relative; left: 8px;">
+
+                <ul  style=" list-style: none; position: relative; top: 23%; left: 14px;">
+                <li style="float: left;">Estás viendo {{ peliculaa.titulo }} en WaoMovies. ¡Gracias por preferirnos!</li>
+<li style="float: left; position: relative; left: 20%;">Duración: {{ peliculaa.run_time }}min</li>
+                </ul>
+            </div>
+        <img src="{{ peliculaa.portada.url }}" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px) blur(1px);
+filter: brightness(50%) blur(2px) blur(1px);" class="imgplay">
+        <input type="hidden" name="server" value="streamcloud">
+        <i id="loadinggstreamcloud" class="fa fa-play iconoplay"></i></button>
+    </form>
                   </div>
 
     </div>
@@ -2283,7 +2479,29 @@ vidor1" href="#panelservidor1" role="tab">servidor1</button>
         
 
         <div class="row">
-                   <iframe class="responsive-i" src="{{peliculaa.servidor1}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                   <form id="servidor1form" method="post" class="servidor1" data-url="/get_embed/{{peliculaa.id}}/">
+        {% csrf_token %}
+        <button onclick="getembed(this)" style="width: 100%; height: auto; background: none; border: none; cursor: pointer;font-family: 'Fira Sans', sans-serif; " id="sservidor1" class="imgplay">
+            <div class="playheader">
+                <img src="{% static 'img/wamovieslogo.png' %}" width="40" style="float: left; position: relative; left: 8px;">
+
+                <ul  style=" list-style: none; position: relative; top: 23%; left: 14px;">
+                <li style="float: left;">Estás viendo {{ peliculaa.titulo }} en WaoMovies. ¡Gracias por preferirnos!</li>
+<li style="float: left; position: relative; left: 20%;">Duración: {{ peliculaa.run_time }}min</li>
+                </ul>
+            </div>
+        {% if peliculaa.portada %}
+        <img src="{{ peliculaa.portada.url }}" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% else %}
+<img src="https://ripshop.es/wp-content/uploads/2014/03/Only-black.png" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% endif %}
+        <input type="hidden" name="server" value="servidor1">
+        <i id="loadinggservidor1" class="fa fa-play iconoplay"></i></button>
+    </form>
                   </div>
 
     </div>
@@ -2291,7 +2509,29 @@ vidor1" href="#panelservidor1" role="tab">servidor1</button>
         
 
         <div class="row">
-                   <iframe class="responsive-i" src="{{peliculaa.servidor2}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                   <form id="servidor2form" method="post" class="servidor2" data-url="/get_embed/{{peliculaa.id}}/">
+        {% csrf_token %}
+        <button onclick="getembed(this)" style="width: 100%; height: auto; background: none; border: none; cursor: pointer;font-family: 'Fira Sans', sans-serif; " id="sservidor2" class="imgplay">
+            <div class="playheader">
+                <img src="{% static 'img/wamovieslogo.png' %}" width="40" style="float: left; position: relative; left: 8px;">
+
+                <ul  style=" list-style: none; position: relative; top: 23%; left: 14px;">
+                <li style="float: left;">Estás viendo {{ peliculaa.titulo }} en WaoMovies. ¡Gracias por preferirnos!</li>
+<li style="float: left; position: relative; left: 20%;">Duración: {{ peliculaa.run_time }}min</li>
+                </ul>
+            </div>
+        {% if peliculaa.portada %}
+        <img src="{{ peliculaa.portada.url }}" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% else %}
+<img src="https://ripshop.es/wp-content/uploads/2014/03/Only-black.png" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% endif %}
+        <input type="hidden" name="server" value="servidor2">
+        <i id="loadinggservidor2" class="fa fa-play iconoplay"></i></button>
+    </form>
                   </div>
 
     </div>
@@ -2300,7 +2540,29 @@ vidor1" href="#panelservidor1" role="tab">servidor1</button>
         
 
         <div class="row">
-                   <iframe class="responsive-i" src="{{peliculaa.servidor3}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                   <form id="servidor3form" method="post" class="servidor3" data-url="/get_embed/{{peliculaa.id}}/">
+        {% csrf_token %}
+        <button onclick="getembed(this)" style="width: 100%; height: auto; background: none; border: none; cursor: pointer;font-family: 'Fira Sans', sans-serif; " id="sservidor3" class="imgplay">
+            <div class="playheader">
+                <img src="{% static 'img/wamovieslogo.png' %}" width="40" style="float: left; position: relative; left: 8px;">
+
+                <ul  style=" list-style: none; position: relative; top: 23%; left: 14px;">
+                <li style="float: left;">Estás viendo {{ peliculaa.titulo }} en WaoMovies. ¡Gracias por preferirnos!</li>
+<li style="float: left; position: relative; left: 20%;">Duración: {{ peliculaa.run_time }}min</li>
+                </ul>
+            </div>
+        {% if peliculaa.portada %}
+        <img src="{{ peliculaa.portada.url }}" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% else %}
+<img src="https://ripshop.es/wp-content/uploads/2014/03/Only-black.png" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% endif %}
+        <input type="hidden" name="server" value="sevidor3">
+        <i id="loadinggservidor3" class="fa fa-play iconoplay"></i></button>
+    </form>
                   </div>
 
     </div>
@@ -2309,13 +2571,89 @@ vidor1" href="#panelservidor1" role="tab">servidor1</button>
         
 
         <div class="row">
-                   <iframe class="responsive-i" src="{{peliculaa.servidor4}}" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                   <form id="servidor4form" method="post" class="servidor4" data-url="/get_embed/{{peliculaa.id}}/">
+        {% csrf_token %}
+        <button onclick="getembed(this)" style="width: 100%; height: auto; background: none; border: none; cursor: pointer;font-family: 'Fira Sans', sans-serif; " id="sservidor4" class="imgplay">
+            <div class="playheader">
+                <img src="{% static 'img/wamovieslogo.png' %}" width="40" style="float: left; position: relative; left: 8px;">
+
+                <ul  style=" list-style: none; position: relative; top: 23%; left: 14px;">
+                <li style="float: left;">Estás viendo {{ peliculaa.titulo }} en WaoMovies. ¡Gracias por preferirnos!</li>
+<li style="float: left; position: relative; left: 20%;">Duración: {{ peliculaa.run_time }}min</li>
+                </ul>
+            </div>
+        {% if peliculaa.portada %}
+        <img src="{{ peliculaa.portada.url }}" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% else %}
+<img src="https://ripshop.es/wp-content/uploads/2014/03/Only-black.png" style="width: 100%; position: relative; -webkit-filter: brightness(50%) blur(2px);
+
+filter: brightness(50%) blur(2px);" class="imgplay">
+{% endif %}
+        <input type="hidden" name="server" value="servidor4">
+        <i id="loadinggservidor4" class="fa fa-play iconoplay"></i></button>
+    </form>
                   </div>
 
     </div>
 
 </div>
-         
+        
+
+        <script type="text/javascript">
+            function getembed(b){
+                var bas = b.id
+                var bas2 = bas.substr(1)
+                 var $myForm = $('.' + bas2)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+                    $("#loadingg").removeClass('fa-play');
+       $("#loadingg" + bas2).addClass('fa-circle-o-notch');
+                     //Agregamos la clase loading al body
+
+                },
+
+
+                 })
+
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+              var token = "{% csrf_token %}"
+
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+       $("#panel" +bas2).append('<iframe id="ifarme" class="responsive-i" src="'+data.embed+'" scrolling="no" frameborder="0" width="700" height="430" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" style="display:none;""></iframe>');
+       setTimeout(function(){
+$("#" + bas2 + "form").remove()
+       document.getElementById("ifarme").style.display="initial"
+
+      
+}, 2800);
+                 
+$(this).remove();
+         }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+            }
+        </script> 
          <script type="text/javascript">
             function clicker () {
   $('#panelrapidvideo').addClass("active");
@@ -2386,6 +2724,10 @@ document.getElementById('panelstreamago').style.display="none"
 document.getElementById('panelstreamcloud').style.display="none"
 
  
+
+             
+             
+             
 
 
 }
