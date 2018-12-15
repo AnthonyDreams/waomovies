@@ -27,7 +27,7 @@ urlpatterns = [
     re_path(r'ver%todo/$', peliculas_listodo, name='peliculas_listodo'),
 
     path(r'search/', search, name='search'),
-    re_path(r'^search/(?:search-(?P<src>\w+)/)?$', search_result, name='search_result'),
+    re_path(r'^search/(?:search-(?P<src>.+)/)?$', search_result, name='search_result'),
     path(r'filter/', filtrar, name='filtrar'),
 
 	re_path(r'^peliculas_por_genero/(?P<generos>\w+)/$', Orden, name='Orden'),
