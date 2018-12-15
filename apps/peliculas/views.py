@@ -935,9 +935,12 @@ def search_result(request, src):
 		antes = ""
 		if matchc == 0:
 			
-
-			guardar = Busqueda_y_etiquetas(tag=srch, user_who_search=request.user)
-			guardar.save()
+			if request.user.is_authenticated:
+				guardar = Busqueda_y_etiquetas(tag=srch, user_who_search=request.user)
+				guardar.save()
+			else:
+				guardar = Busqueda_y_etiquetas(tag=srch)
+				guardar.save()
 			for i in match:
 				if i == " ":
 					break
