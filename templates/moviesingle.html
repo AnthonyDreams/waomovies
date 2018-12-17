@@ -2648,13 +2648,12 @@ filter: brightness(50%) blur(2px);" class="imgplay">
 
              function handleFormSuccess(data, textStatus, jqXHR){
               var token = "{% csrf_token %}"
-
+              var widthscreen = $( window ).width()
                  console.log(data)
                  console.log(textStatus)
                  console.log(jqXHR)
                  $myForm[0].reset(); 
-
-                 if (bowser.name == "Chrome"){
+                 if (bowser.name == "Chrome" && movile == false){
 $("#panel" +bas2).append('<iframe id="ifarme" class="responsive-i" src="'+data.embed+'" scrolling="no" frameborder="0" width="100%" height="400" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" ></iframe>');
                     } else {
        $("#panel" +bas2).append('<iframe id="ifarme" class="responsive-i" src="'+data.embed+'" scrolling="no" frameborder="0" width="100%" height="400" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" sandbox = "allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation"></iframe>');
