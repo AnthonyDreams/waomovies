@@ -6,7 +6,7 @@
 
 
 {% block scriptt %}
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bowser/1.9.4/bowser.min.js"></script>
 
 <script type="text/javascript">
  
@@ -2393,7 +2393,7 @@ filter: brightness(50%) blur(2px);" class="imgplay">
 {% endif %}
         <input type="hidden" name="server" value="vidoza">
 <span class="duraciondata">Duración: {{ peliculaa.run_time }}min</span>
-        <i id="loadingg" class="fa fa-play iconoplay"></i></button>
+        <i id="loadinggvidoza" class="fa fa-play iconoplay"></i></button>
     </form>
                   </div>
 
@@ -2653,7 +2653,13 @@ filter: brightness(50%) blur(2px);" class="imgplay">
                  console.log(textStatus)
                  console.log(jqXHR)
                  $myForm[0].reset(); 
-       $("#panel" +bas2).append('<iframe id="ifarme" class="responsive-i" src="'+data.embed+'" scrolling="no" frameborder="0" width="100%" height="400" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" sandbox></iframe>');
+
+                 if (bowser.name == "Chrome"){
+$("#panel" +bas2).append('<iframe id="ifarme" class="responsive-i" src="'+data.embed+'" scrolling="no" frameborder="0" width="100%" height="400" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" ></iframe>');
+                    } else {
+       $("#panel" +bas2).append('<iframe id="ifarme" class="responsive-i" src="'+data.embed+'" scrolling="no" frameborder="0" width="100%" height="400" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" sandbox = "allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation"></iframe>');
+       }
+       console.log(bowser.name, bowser.version);
        setTimeout(function(){
 $("#" + bas2 + "form").remove()
        document.getElementById("ifarme").style.display="initial"
