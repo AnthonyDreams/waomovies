@@ -1167,9 +1167,9 @@ $(this).remove();
     <div class="movie-img sticky-sb" >
      <img src="{{ peliculaa.Cover.url }}" alt="" style="height: 440px; width: auto;">
      <div id="moviebtna" class="movie-btn" > 
-      <div class="btn-transform transform-vertical red">
-       <div><a data-toggle="modal" data-target="#modalyoutube" class="item item-1 redbtn">  Ver Trailer</a></div>
-       <div><a data-toggle="modal" data-target="#modalyoutube" class="item item-2 redbtn "><i class="fa fa-play point"></i></a></div>
+      <div class="btn-transform transform-vertical " style="margin-bottom: 7px !important;">
+       <div><a data-toggle="modal" data-target="#modalyoutube" class="item item-1 redbtn" style="border-radius: 5px !important ; ">  Ver Trailer</a></div>
+       <div><a data-toggle="modal" data-target="#modalyoutube" class="item item-2 redbtn " style="border-radius: 5px !important ; "><i class="fa fa-play point"></i></a></div>
       </div>
 
       <!-- Button trigger modal-->
@@ -1218,8 +1218,8 @@ $(this).remove();
 </div>
 <!--Modal: modalYoutube-->
       <div class="btn-transform transform-vertical">
-       <div><a data-toggle="modal" data-target="#modalSocial" id="sharebuttono" class="item item-1 yellowbtn"> <i class="fa-share-alt fa point"></i> Compartir</a></div>
-       <div><a data-toggle="modal" data-target="#modalSocial" id="sharebuttono2" class="item item-2 yellowbtn"><i class="fa-share-alt fa point"></i></a></div>
+       <div><a data-toggle="modal" data-target="#modalSocial" id="sharebuttono" class="item item-1 yellowbtn" style="background-color: #3498DB;"> <i class="fa-share-alt fa point"></i> Compartir</a></div>
+       <div><a data-toggle="modal" data-target="#modalSocial" id="sharebuttono2" class="item item-2 yellowbtn" style="background-color: #3498DB;"><i class="fa-share-alt fa point"></i></a></div>
       </div>
       
      </div>
@@ -2203,7 +2203,12 @@ input[type="button"].btn-block {
 }
 
 .iconoplay {
-    font-size: 130px; color: white; text-align: center; position: absolute; margin-top: -33.7%; margin-left:-50px;
+    font-size: 50px; color: white; text-align: center; position: absolute; margin-top: -33.7%; 
+    background: #c10000;
+    padding: 9px 13px;
+    border-radius: 48%;
+    margin-left:-90px;
+
 
 }
 
@@ -2218,7 +2223,7 @@ input[type="button"].btn-block {
 }
 
 .iconoplay {
-    font-size: 80px !important;
+    margin-top: -35.7%;
 }
 
 
@@ -2230,9 +2235,7 @@ input[type="button"].btn-block {
 
 }
 
-.iconoplay {
-    font-size: 60px !important;
-}
+
 
 
 }
