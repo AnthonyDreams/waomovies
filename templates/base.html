@@ -424,6 +424,12 @@ background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, F
   .multiselect-container {
     width: 300px;
   }
+
+  .msg {
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+  }
 </style>
   <div id="page-transitions">
 
@@ -1200,7 +1206,7 @@ var load = false
             <div class="row">
               <div class="remember">
          
-                <a href="#">¿Olvidaste tu contraseña?</a>
+                <a href="#" style="color: gray;">¿Olvidaste tu contraseña?</a>
               </div>
             </div>
            <div class="row">
@@ -2453,6 +2459,7 @@ Por favor, espere entre 3 y 7 días hábiles para una respuesta. Tenga en cuenta
 </body>
 </html>
 
+{% if request.user.is_authenticated and request.user.profile.AmiGos.count > 0 %}
 <script type="text/javascript">
 valores = ""
 no_a_enviar = ""
@@ -2561,3 +2568,99 @@ $('#friendiv').append('<li style="float:left; padding-left:20px;"><a class="uset
    });
   });
 </script>
+{% endif %}
+
+{% if not request.user.is_authenticated %}
+
+<script type="text/javascript">
+  $('#sharebuttono').click(function(){
+$('#mensajeshare').empty();
+
+ $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+    }, 
+success: function(){
+    }
+
+
+
+ });
+  $.getJSON('/friendsitos/') 
+
+  .done(function(data) {
+$('#mensajeshare').append('<p class="msg">'+data.msg+'</p>');
+ 
+   });
+  });
+
+
+    $('#sharebuttono2').click(function(){
+$('#mensajeshare').empty();
+
+ $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+    }, 
+success: function(){
+    }
+
+
+
+ });
+  $.getJSON('/friendsitos/') 
+
+  .done(function(data) {
+$('#mensajeshare').append('<p class="msg">'+data.msg+'</p>');
+ 
+   });
+  });
+</script>
+
+{% endif%}
+
+
+{% if request.user.is_authenticated and request.user.profile.AmiGos.count == 0 %}
+
+<script type="text/javascript">
+  $('#sharebuttono').click(function(){
+$('#mensajeshare').empty();
+
+ $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+    }, 
+success: function(){
+    }
+
+
+
+ });
+  $.getJSON('/friendsitos/') 
+
+  .done(function(data) {
+$('#mensajeshare').append('<p class="msg">'+data.msg+' <a href="'+data.url+'">Puedes agregarlos aquí.</a></p>');
+ 
+   });
+  });
+
+
+    $('#sharebuttono2').click(function(){
+$('#mensajeshare').empty();
+
+ $.ajaxSetup({ cache: false,
+ beforeSend: function(){
+    }, 
+success: function(){
+    }
+
+
+
+ });
+  $.getJSON('/friendsitos/') 
+
+  .done(function(data) {
+$('#mensajeshare').append('<p class="msg">'+data.msg+' <a href="'+data.url+'">Puedes agregarlos aquí.</a></p>');
+ 
+   });
+  });
+</script>
+
+{% endif%}

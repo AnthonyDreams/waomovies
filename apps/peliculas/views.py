@@ -45,12 +45,26 @@ class pelis(APIView):
 class Friendsitos(APIView):
 	serializer = Friends
 	def get(self, request, format=None):
-		listica = Profile.objects.filter(user=request.user.id)
-		for i in listica:
-			amis = i.AmiGos.all()
-		users_amigos = Profile.objects.filter(user__in=amis)
-		response = self.serializer(users_amigos, many=True)
-		return HttpResponse(json.dumps(response.data))
+		if request.user.is_authenticated:
+			listica = Profile.objects.filter(user=request.user.id)
+			for i in listica:
+				amis = i.AmiGos.all()
+			users_amigos = Profile.objects.filter(user__in=amis)
+			if users_amigos.count() > 0:
+				response = self.serializer(users_amigos, many=True)
+				return HttpResponse(json.dumps(response.data))
+			else:
+				data = {
+				'msg':'¡Debes agregar amigos para poder compartir en WaoMovies!',
+				'url': '/user_ver_amigos/' + request.user.username + "/"
+				}
+				return JsonResponse(data)
+		else:
+			data = {
+			'msg':'¡Tienes que registrarte/iniciar sesión si quieres compartir con amigos, sino, puedes compartir en tus redes!'
+			}
+			return JsonResponse(data)
+
 
 class CompAPI(APIView):
 	serializer = Comparitapi
