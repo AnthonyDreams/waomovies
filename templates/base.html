@@ -474,7 +474,7 @@ $(document).ready(function(){
     var search = document.getElementById('searchshow').style.display = 'initial'
   $.getJSON('/pelis/', function(data) {
    $.each(data, function(key, value){
-    if (value.titulo.search(expression) != -1 || value.director.search(expression) != -1 && resulta.value.length > 3 && widthscreen < 991)
+    if (value.titulo.search(expression) != -1 && resulta.value.length > 3 && widthscreen < 991)
     {
       document.getElementById('displayloadmovil2').style.display="initial"
       setTimeout(function(){
