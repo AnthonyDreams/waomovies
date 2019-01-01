@@ -1206,6 +1206,7 @@ $(this).remove();
         border-radius: 8px;
         margin-left: 8px;
         font-size: 13px; 
+        display: initial;
     }
 </style>
 
@@ -1649,10 +1650,10 @@ $(this).remove();
               <a href="#" style="color: white; font-weight: bold; padding-left: 0px; "> <h3 style="display: inline;">{{ i.user.username }}</h3></a> 
 
               {% if not i.timestamp.time == i.updated.time %}
-                                    <span class="editado">{{ i.timestamp }}  {{ i.updated }}</span>
-                                    {% else %}
+                                    <span {% if not i.timestamp == i.updated %} class="editado" {% else %} style="display: none;"  {% endif %} >{{ i.timestamp }}  {{ i.updated }}</span>
                                     
-                    {% endif %}
+                                    
+                    
               {% if request.user.is_authenticated %}
               {% if request.user == i.user %}
 
