@@ -1649,7 +1649,6 @@ $(this).remove();
              </div>
               <a href="#" style="color: white; font-weight: bold; padding-left: 0px; "> <h3 style="display: inline;">{{ i.user.username }}</h3></a> 
 
-              {% if not i.timestamp.time == i.updated.time %}
                                     <span {% if not i.timestamp == i.updated %} class="editado" {% else %} style="display: none;"  {% endif %} >{{ i.timestamp }}  {{ i.updated }}</span>
                                     
                                     
