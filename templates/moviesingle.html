@@ -1648,7 +1648,7 @@ $(this).remove();
              </div>
               <a href="#" style="color: white; font-weight: bold; padding-left: 0px; "> <h3 style="display: inline;">{{ i.user.username }}</h3></a> 
 
-              {% if i.timestamp.time != i.updated.time or i.timestamp.date != i.updated.date %}
+              {% if i.timestamp != i.updated %}
                                     <span class="editado">editado</span>
                                     {% endif %}
               {% if request.user.is_authenticated %}

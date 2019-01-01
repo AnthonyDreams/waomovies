@@ -643,7 +643,7 @@ function update_ans(b) {
 							<div class="author-infor" style="width: 100%;">
 								<div class="flex-it2">
 									<h6><a href="#">{{cm.who.username }}</a></h6> <span class="time"> - {{ cm.timestamp|timesince }}</span>
-									{% if cm.timestamp.time != cm.updated.time or cm.timestamp.date != cm.updated.date %}
+									{% if cm.timestamp != cm.updated %}
                                     <span class="editado">editado</span>
                                     {% endif %}
 {% if request.user == cm.who %}
