@@ -353,8 +353,8 @@ $.ajaxSetup({
               console.log(data)
               console.log(textStatus)
               console.log(jqXHR)
-     $("#rv").load(window.location + " #rv");
-     $("#rva").load(window.location + " #rva");
+     
+     
      $("#ven").load(window.location + " #ven");
      document.getElementById("sendingcoment").style.display = "none";
 
@@ -693,8 +693,8 @@ $(".in")[1].remove();
               console.log(textStatus)
               console.log(jqXHR)
               $("#mouse" + c).remove()
-     $("#rv").load(window.location + " #rv");
-     $("#rva").load(window.location + " #rva");
+     
+     
      $("#ven").load(window.location + " #ven");
 
      $(this).remove();
@@ -750,7 +750,7 @@ $(".in")[1].remove();
               console.log(textStatus)
               console.log(jqXHR)
               $("#rs" + c).remove()
-     $("#rv").load(window.location + " #rv");
+     
      $("#rs" + c).load(window.location + " #rs" + c);
      $("#j" + namen).load(window.location + " #j" + namen);
 
@@ -1626,9 +1626,11 @@ $(this).remove();
 
              </div>
               <a href="#" style="color: white; font-weight: bold; padding-left: 0px; "> <h3 style="display: inline;">{{ i.user.username }}</h3></a> 
-
-                                    <span {% if not i.timestamp == i.updated %} class="editado" {% else %} style="display: none;"  {% endif %} >editado</span>
-                                    
+{% for a in editados %}  
+{% if a == i.id %}
+                                    <span  class="editado">editado</span>
+                                    {% endif %}
+                                    {% endfor %}
                                     
                     
               {% if request.user.is_authenticated %}
