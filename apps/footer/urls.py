@@ -19,7 +19,6 @@ urlpatterns = [
     re_path(r'^politicadeprivacidad/$', privacidad),
     re_path(r'^derechosdeautor/$', derechosdeautor),
     re_path(r'^sobre/$', sobre),
-    re_path(r'^blog/$', blog_de_ayuda),
 
 
 

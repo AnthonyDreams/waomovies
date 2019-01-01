@@ -763,3 +763,83 @@ def reportes_res(request, id):
 			return JsonResponse(data)  
 
 
+
+
+
+
+
+
+
+
+
+
+#comentario_articulo
+
+
+def post_create_articulo(request, id):
+	if not request.user.is_active:
+		raise Http404
+	post = Post.objects.all()
+	x = []
+	for i in post:
+		print(i.slug)
+		x.append(i.slug)
+	form = PostForm(request.POST or None, request.FILES or None)
+	if request.is_ajax():
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.user = request.user
+			instance.articulo_id = id
+			if x:
+				instance.slug = x[0] +1
+				instance.save()
+				sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+				sendnoti.save()
+
+				data = {
+				'message': "Successfully submitted form data."
+
+			}
+				return JsonResponse(data)
+			else: 
+				instance.save()
+				sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+				sendnoti.save()
+
+				data = {
+				'message': "Successfully submitted form data."
+			}
+
+				return JsonResponse(data)
+
+
+#actualizar comentario
+def post_update_articulo(request, slug=None):
+	if not request.user.is_active:
+		raise Http404
+	instance = get_object_or_404(Post, slug=slug)
+	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
+	if request.is_ajax():
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.save()
+			data = {
+				'message': "Successfully submitted form data.",
+				'content':instance.content
+			}
+			return JsonResponse(data)
+
+
+
+
+def post_delete_articulo(request, slug):
+	if not request.user.is_active:
+		raise Http404
+	instance = get_object_or_404(Post, slug=slug)
+	if request.is_ajax():
+		instance.delete()
+		data = {
+				'message': "Comentario eliminado.",
+
+			}
+		return JsonResponse(data)

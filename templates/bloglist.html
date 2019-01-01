@@ -1,0 +1,127 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="es" class="no-js">
+
+<head>
+	
+	<title>{% block title %} {{ src }} {% endblock %}</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+
+
+
+</head>
+<body>
+{% block content %}
+
+
+<div class="hero common-hero" style="height: 385px;
+  background: url('{% static 'img/fondo.jpg' %}') no-repeat;">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					<h1> {{ src }}</h1>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- blog list section-->
+<div class="page-single">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9 col-sm-12 col-xs-12">
+				{% if articulos %}
+				{% for articulo in articulos %}
+				<div class="blog-item-style-1 blog-item-style-3">
+            		<img src="{{articulo.cover.url}}" alt="" style="height: 100%;">
+            		<div class="blog-it-infor">
+            			<h3><a href="/blog/{{articulo.categoria}}/{{articulo.slug}}/">{{articulo.titulo}}</a></h3>
+            			<span class="time">{{articulo.publish}}</span>
+            			<p>{{articulo.detail}} ...</p>
+            		</div>
+            	</div>
+            	{% endfor %}
+            	{% else %}
+            	<p style="font-size: 16px;">Sugerencias: <br>
+
+Asegúrate de que todas las palabras estén escritas correctamente. <br>
+Prueba con palabras clave/tags. <br>
+            	{% endif %}
+            	
+            	<ul class="pagination">
+            		{% if articulos.has_previous %}
+            		<li ><a href="?page=1">1</a></li>
+            		<li class="icon-prev"><a href="#"><i class="fa fa-long-arrow-left"></i></a></li>
+
+            		{% endif %}
+            		{% for i in articulos.paginator.page_range %}
+            		{% if articulos.number == i %}
+					<li class="active"><a  href="?page={{ i }}">{{ i }}</a></li>
+					{% elif i > articulos.number|add:'-3' and i < articulos.number|add:'3' %}
+					<li><a class="" href="?page={{ i }}">{{ i }}</a></li>
+					{% endif %}
+						{% endfor %}
+						{% if articulos.has_next %}
+					<li class="icon-next"><a href="?page={{ articulos.next_page_number }}"><i class="fa fa-long-arrow-right"></i></a></li>
+
+
+					<li><a href="?page={{ articulos.paginator.num_pages }}">{{ articulos.paginator.num_pages }}&raquo;</a></li>
+					{% endif %}
+
+            	</ul>
+			</div>
+			<div class="col-md-3 col-sm-12 col-xs-12">
+				<div class="sidebar">
+					<div class="sb-search sb-it">
+						<h4 class="sb-title">Buscar</h4>
+						<form action="/blog_search/search/redirect/" method="POST">
+							{% csrf_token %}
+						<input type="text" name="src" placeholder="Busca con palabras claves..." value="{{ src }}">
+
+						</form>
+					</div>
+					<div class="sb-cate sb-it">
+						<h4 class="sb-title">Categorías</h4>
+						<ul>
+							<li><a href="/blog/noticias/">Noticias ({{noticias_count}})</a></li>
+							<li><a href="/blog/critica/">Crítica de cine ({{critica_count}})</a></li>
+							<li><a href="/blog/global/">Global ({{global_count}})</a></li>
+						</ul>
+					</div>
+					<div class="sb-recentpost sb-it">
+						<h4 class="sb-title">Más populares de la semana</h4>
+						
+
+						{% for a in mas_vistas %}
+						<div class="recent-item">
+							<span>0{{ forloop.counter }}</span><h6><a href="/blog/{{a.articulo.categoria}}/{{a.articulo.slug}}/">{{a.articulo.titulo}}</a></h6>
+						</div>
+						
+						{% endfor %}
+
+
+						
+					</div>
+					
+					<div class="ads">
+						<img src="images/uploads/ads1.png" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end of blog list section-->
+
+
+{% endblock %}
+
+</html>

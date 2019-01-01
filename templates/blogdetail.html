@@ -1,0 +1,805 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+
+<html >
+
+<head>
+	
+	<title>{% block title %} {{ blog.titulo }} {% endblock %}</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+
+
+
+</head>
+<body>
+{% block content %}
+<script type="text/javascript">
+function compartirshare(b) {
+
+              
+
+             var $myForm = $('.formshare')
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+              document.getElementById('displayloaz').style.display="initial"
+              document.getElementById('moda-bodycharge').style.display="none"
+
+                    
+                },
+                    
+
+
+                 })
+
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+       
+document.getElementById('displayloaz').style.display="none"
+              
+              $("#moda-bodycharge").load(window.location + " #moda-bodycharge");
+              $('#mensajeshare').append('<big style="color: gray;"><strong>¡Se ha compartido con exito!</strong></big>');
+              valores = ""
+              no_a_enviar = ""
+                 
+$(this).remove();
+         }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+
+function send(b) {
+              var juan = b.id
+
+              
+
+             var $myForm = $('.coment')
+             $myForm.submit(function(event){
+                 event.preventDefault();
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+              document.getElementById("sendingcoment").style.display = "initial";
+                    
+                },
+                 })
+             })
+
+          function handleFormSuccess(data, textStatus, jqXHR){
+              console.log(data)
+              console.log(textStatus)
+              console.log(jqXHR)
+     $("#comments").load(window.location + " #comments");
+     document.getElementById("sendingcoment").style.display = "none";
+
+     $(this).remove();
+            
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+             
+             function update(b) {
+              var juan = b.id
+
+              
+
+             var $myForm = $('.updatec' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                 })
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 document.getElementById("updateajax" + juan).innerHTML = data.content;
+                 document.getElementById("texto" + juan).innerHTML = data.content;
+                 $myForm[0].reset();
+                  
+             }
+
+ 
+             
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+             
+
+
+function res(b) {
+              var juan = b.id
+              var c = juan.substr(1)
+
+              
+
+             var $myForm = $('.resp' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+                    $("#load" + c).removeClass('fa-chevron-down');
+                    $("#load" + c).addClass('fa-circle-o-notch');
+                    if($myForm.length > 1){
+                 $myForm[1].style.display = 'none'
+}
+       
+                     //Agregamos la clase loading al body
+
+                },
+
+
+                 })
+
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+              var token = "{% csrf_token %}"
+
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 $myForm[0].reset(); 
+                 if($myForm.length > 1){
+                 $myForm[1].reset(); 
+                 $myForm[1].style.display = 'initial'
+             }
+             $("#load" + c).removeClass('fa-circle-o-notch');
+                    $("#load" + c).addClass('fa-chevron-down');
+
+       $("#j" + c).load(window.location + " #j" + c);
+
+       $("#ccn" + c).append('<div class="cmt-item flex-it reply" id="rp'+data.idp+'"><img src="'+data.perfil+'" alt="" style="border-radius: 50%; width: 50px; height: 50px;"><div class="author-infor" style="width:100%;"><div class="flex-it2"><h6><a href="#">'+data.name+'</a></h6> <span class="time"> - '+data.fecha+'</span><i id="cog'+data.idp+'" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i><div class="btn-group"><div class="dropdown-menu"><a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample">Editar respuesta<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a><form style="display: inline;" class="dele_ans'+data.idp+'" data-url="/delete_res/'+data.idp+'/" method="post">'+token+'<button onclick="deletee_res(this)" name="'+data.id+'" id="dele_ans'+data.idp+'" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i  style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form></div></div></div><p id="cm'+data.idp+'" >'+data.content+'</p><div class="collapse container" id="col'+data.idp+'"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans'+data.idp+'" data-url="/responder_update/'+data.idp+'/">'+token+'<textarea id="textoans'+data.idp+'" style=" height: 6em; width: 400px;" name="respuesta">'+data.content+'</textarea> <br><input  onclick="update_ans(this)" id="up_ans'+data.idp+'" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form></div> </div></div></div></div>');
+
+
+                 
+$(this).remove();
+         }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+
+
+function deletee(b) {
+              var juan = b.id
+              var c = juan.substr(4)
+
+              
+
+             var $myForm = $('.' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault();
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+                    $("#cog_co" + c).removeClass('fa-cog');
+                    $("#cog_co" + c).addClass('fa-circle-o-notch'); //Agregamos la clase loading al body
+                },
+                 })
+             })
+
+          function handleFormSuccess(data, textStatus, jqXHR){
+              console.log(data)
+              console.log(textStatus)
+              console.log(jqXHR)
+     $("#comments").load(window.location + " #comments");
+     $(this).remove();
+            
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+             
+
+
+
+
+
+
+             function deletee_res(b) {
+              var juan = b.id
+              var namen = b.name
+              var c = juan.substr(8)
+
+              
+
+             var $myForm = $('.' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault();
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                     beforeSend: function () {
+                    $("#cog" + c).removeClass('fa-cog');
+                    $("#cog" + c).addClass('fa-circle-o-notch'); //Agregamos la clase loading al body
+                },
+
+                 })
+             })
+
+          function handleFormSuccess(data, textStatus, jqXHR){
+              console.log(data)
+              console.log(textStatus)
+              console.log(jqXHR)
+    
+     $("#j" + namen).load(window.location + " #j" + namen);
+       $("#rp" + c).remove()
+
+     $(this).remove();
+            
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+
+function update_ans(b) {
+              var juan = b.id
+              var tt = juan.substr(6)
+
+              
+
+             var $myForm = $('.update' + juan)
+             $myForm.submit(function(event){
+                 event.preventDefault()
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                 })
+             })
+
+             function handleFormSuccess(data, textStatus, jqXHR){
+                 console.log(data)
+                 console.log(textStatus)
+                 console.log(jqXHR)
+                 document.getElementById("cm" + tt).innerHTML = data.content;
+                 document.getElementById("textoans" + tt).innerHTML = data.content;
+                 $myForm[0].reset();
+                  
+             }
+
+ 
+             
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+
+
+             </script>
+
+<style type="text/css">
+	#contenter p  {
+		font-size: 15px;
+		color: #CFCFCF;
+
+	}
+
+
+	.radio-inline li {
+		list-style: none; 
+		float: left;
+		padding: 0px 8px;
+	}
+
+	.editado{
+		background-color: gray;
+		padding: 2px 5px;
+		border-radius: 8px;
+		margin-left: 8px;
+		font-size: 13px; 
+	}
+</style>
+<div class="hero common-hero" style="height: 385px;
+  background: url('{% static 'img/fondo.jpg' %}') no-repeat;">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					<h1> Blog</h1>
+					<ul class="breadcumb">
+						<li class="active"><a href="/blog/{{ blog.categoria }}/">{{ blog.categoria }}</a></li>
+						<li> <span class="fa fa-long-arrow-right"></span> {{ blog.titulo }}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- blog detail section-->
+<div class="page-single">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9 col-sm-12 col-xs-12">
+				<div class="blog-detail-ct">
+					<h1>{{ blog.titulo }}</h1>
+					<span class="time">{{ blog.publish }}</span>
+					<img src="{{ blog.cover.url }}" alt="">
+					<div id="contenter">
+						
+										{{blog.contenido|safe}}
+					
+				</div>
+
+					<!-- share link -->
+					<div class="flex-it share-tag">
+						<div class="social-link">
+							<h4>Compartir</h4>
+							<a data-toggle="modal" data-target="#modalSocial" id="sharebuttono" class="item item-1 yellowbtn" style="background-color: #3498DB;"> <i class="fa-share-alt fa point" style="color: white;"></i> Compartir</a>
+							<!--Modal: modalSocial-->
+<div class="modal fade" id="modalSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 60px;">
+    <div class="modal-dialog cascading-modal" role="document">
+
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="title" id="titlemodal"><i class="fa fa-users"></i> ¡Comparte!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <!--Body-->
+            
+            <div  class="modal-body mb-0 text-center" style="max-height: 350px;">
+{% if request.user.is_authenticated and request.user.profile.AmiGos.count > 0 %}
+             <div id="displayloaz" style="display: none; "><img style="position: relative; " height="50" width="50" src="{% static "img/fancybox_loading@2x.gif" %}"></div>  
+{% endif %}
+
+             <div id="mensajeshare"></div> 
+<div id="moda-bodycharge">
+{% if request.user.is_authenticated and request.user.profile.AmiGos.count > 0 %}
+
+<a onclick="select(this)" id="todos"><i class="fa fa-users" style="font-size: 30px; color: black;"></i> <span style="color: gray; font-weight: bold;">¡Click aquí para compartir con todos!</span></a>
+<br/>
+<br/>
+<div class="container">
+                <ul id="friendiv" style="float: left;">
+
+                   
+                </ul>
+                </div>
+                <form class="formshare" method="post" data-url='/compartir/{{blog.id}}/{{blog.slug}}/'>
+        {% csrf_token %}
+   <input type="hidden" name="users_to_share" value="" id="compartir">
+   <input type="hidden" name="oculto" id="ocultado">
+   <div class="md-form" style="width:80%; margin-left: 20px; height: 30px; float: left;"><input id="input-char-counter" type="text" maxlength="150" class="form-control" name="nota" ><label for="input-char-counter" style="font-size: 14px;">Dejar un mensaje</label></div> <button onclick="compartirshare(this)" id="formshare" type="submit" class="btn btn-primary" style="font-size:15px; margin-left:10px; margin-top: 35px; width: 30px; "><i class="fa fa-send"></i></button>
+</form>
+<br/>
+{% endif %}
+
+ <!--Facebook-->
+                <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/peliculas/{{peliculaa.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998; color:white;"><i class="fa fa-facebook" style="color:white;"></i></a>
+                <!--Twitter-->
+                <a type="button" style="background-color: #00acee; color:white;" class="btn-floating btn-tw"><i class="fa fa-twitter" style="color:white;"></i></a>
+                <!--Google +-->
+                <a type="button" style="background-color: #d34836; color:white;" class="btn-floating btn-gplus"><i class="fa fa-google-plus" style="color:white;"></i></a>
+
+                <!--Instagram-->
+                <a type="button"  style="background-color: #3f729b; color:white;"class="btn-floating btn-ins"><i class="fa fa-instagram" style="color:white;"></i></a>
+                <!--Pinterest-->
+                <a type="button"  style="background-color: #c8232c ; color:white;"class="btn-floating btn-pin"><i class="fa fa-pinterest" style="color:white;"></i></a>
+    
+                <!--Comments-->
+                <!--a type="button" class="btn-floating btn-comm"><i class="fa fa-comments"></i></a>
+                <Email>
+                <a type="button" class="btn-floating btn-email"><i class="fa fa-envelope"></i></a-->
+
+            </div>
+</div>
+        </div>
+        <!--/.Content-->
+
+    </div>
+</div>
+<!--Modal: modalSocial-->
+						</div>
+						<div class="right-it">
+							<h4>Tags</h4>
+							{% for tag in blog.tags.all %}
+							<a href="#">{{tag}},</a>
+							
+							{% endfor %}
+						</div>
+					</div>
+
+					<div class="panel-body" style="  
+    border-bottom: 1px solid #405266;
+    padding-bottom: 30px;
+    margin-bottom: 30px;"><span id="rating-476">
+    
+    <h4>Votar</h4>
+    <div id="change_art" style="display: none; "><img style="position: relative; " height="50" width="50" src="{% static "img/fancybox_loading@2x.gif" %}"></div>
+    <div id="votar_articulo">
+    	
+    {% if not userario%}
+</span><form class="my-ajax-form" role="form" method="post" data-url="/reating_articulos/{{blog.id}}/ar/" >
+    {% csrf_token %}
+    
+    
+    <ul class="radio radio-inline"><li><ul id="id_value"><li><label for="id_value_0"><input type="radio" name="votacion" value="1" required="" id="id_value_0">
+ 1</label></li><li><label for="id_value_1"><input type="radio" name="votacion" value="2" required="" id="id_value_1">
+ 2</label></li><li><label for="id_value_2"><input type="radio" name="votacion" value="3" required="" id="id_value_2">
+ 3</label></li><li><label for="id_value_3"><input type="radio" name="votacion" value="4" required="" id="id_value_3">
+ 4</label></li><li><label for="id_value_4"><input type="radio" name="votacion" value="5" required="" id="id_value_4">
+ 5</label></li></ul></li></ul><input type="submit" class="btn btn-default btn-sm" value="Enviar" onclick="votar(this)"></form></div>
+ {% else %}
+ <br/>
+ <h6>Tu votación:  {{ userario.votacion }}</h6>
+ <form  class="my-ajax-form" method='POST' data-url="/cambiar_votaciono_articulo/{{ userario.id }}/arm/" style="margin-top: 10px;">{% csrf_token %}
+                   
+      <button onclick="votar(this)" style="background:none; border: none; cursor: pointer; color: white;" type="submit">Sí quieres cambiar votación pulsa aquí. <i style="font-size: 18px;" class="fa fa-refresh point"></i></button>
+      </form>
+           </div> 
+{% endif %}
+</div>
+					<!-- comment items -->
+					<div class="comments" id="comments">
+						<h4>{{comentarios.count}} Comentarios</h4>
+						{% for comentario in comentarios %}
+						<div class="cmt-item flex-it">
+							<img src="{{comentario.user.profile.perfil_img.url}}" alt="" style="border-radius: 50%; width: 50px; height: 50px;">
+							<div class="author-infor" style="width: 100%;">
+								<div class="flex-it2">
+									<h6><a href="#">{{comentario.user.username }}</a></h6> <span class="time"> - {{ comentario.timestamp|timesince }}</span>
+									{% if comentario.timestamp.time != comentario.updated.time or comentario.timestamp.date != comentario.updated.date %}
+									<span class="editado">editado</span>
+									{% endif %}
+									{% if request.user.is_authenticated %}
+              {% if request.user == comentario.user %}
+
+
+
+              <i id="cog_co{{comentario.id}}" style="cursor: pointer; color: grey; position: relative; left: 10px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i>
+
+              <div class="btn-group">
+    
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" data-toggle="collapse" data-target="#{{comentario.id}}" aria-expanded="false" aria-controls="collapseExample">Editar comentario<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a>
+
+        <form style="display: inline;" class="dele{{ comentario.id }}" data-url="/{{ comentario.slug }}/delete/" method="post">{% csrf_token %}<button onclick="deletee(this)" id="dele{{ comentario.id }}" style="background: none; border: none;"><a class="dropdown-item">Eliminar comentario<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form>
+        <!--a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a-->
+    </div>
+</div>
+
+              <!-- Split button -->
+              {% else %}
+              {% endif %}
+              {% endif %}
+
+
+								</div>
+								<p id="updateajaxp{{ comentario.slug }}" >{{comentario.content }}</p>
+
+<div class="collapse container" id="{{comentario.id}}">
+                <div class="mt-3">
+                 <div class="md-form form-lg">
+                  <form method="post" class="updatecp{{ comentario.slug }}" data-url="/{{ comentario.slug }}/edit/">
+                   {% csrf_token %}
+                 <textarea id="textop{{comentario.slug}}" onkeypress="return limita(400);" style=" height: 6em;
+   width: 400px;" name="content">{{comentario.content}}</textarea> 
+   <br>
+   <input  onclick="update(this)" id="p{{ comentario.slug }}" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar">
+   <a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#{{comentario.id}}" aria-expanded="false" aria-controls="collapseExample">
+<i class="fa fa-close"  aria-hidden="true"></i>
+</a>
+                 </form>
+</div>
+                    
+                </div>
+            </div>
+								<p><a class="rep-btn" data-toggle="collapse" data-target="#collapseExample{{comentario.id}}z" aria-expanded="false
+  " aria-controls="collapseExample{{comentario.id}}z" style="color: grey; font-family: sans-serif; padding-left: 5px; padding-right: 15px; position: relative; top: 10px;">+ Responder</a></p>
+  <div  class="collapse container" id="collapseExample{{comentario.id}}z">
+  <form class="respv{{comentario.id}}" method="post" data-url="/responder/{{comentario.slug}}/">
+  {% csrf_token %}<div class="md-form">
+   <img style="border-radius: 50%; width: 50px; height: 50px;" src="{{request.user.profile.perfil_img.url}}">
+    <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4;"  placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{comentario.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
+</div>
+  </form>
+</div>
+							</div>
+						</div>
+<div id="j{{comentario.id}}">
+
+						{% if comentario.respuestas.all %}
+<div style="margin-left:auto; margin-right:auto; background-color: none; cursor: pointer; width: 200px;  margin-top: 0px; margin-bottom: 3px;"><a data-toggle="collapse" data-target="#collapseExample{{comentario.id}}x" aria-expanded="false" aria-controls="collapseExample{{comentario.id}}x" style="color: #566CA6; font-family: arial;"> <span id="">{% if comentario.respuestas.all|length == 1 %}Ver {{comentario.respuestas.all|length}} respuesta {%else%} Ver las {{comentario.respuestas.all|length}} respuestas {%endif%}</span> <i id="load{{comentario.id}}" class="fa fa-chevron-down" aria-hidden="true"></i></a></div>
+{% endif %}
+</div>
+<div  class="collapse container" id="collapseExample{{comentario.id}}x">
+   <script type="text/javascript">
+           function mouse_res(b) {
+                   var juan = b.id
+                   var on = juan.substr(2)
+
+                   document.getElementById("pop_res" + on).style.display = "initial"
+           }
+           function mouseout_res(b) {
+                   var juan = b.id
+                   var on = juan.substr(2)
+
+                   document.getElementById("pop_res" + on).style.display = "none"
+           }
+          </script>
+          <div id="ccn{{comentario.id}}">
+ 
+</div>
+{% for cm in comentario.respuestas.all|order_by:"timestamp" %}
+
+						<div class="cmt-item flex-it reply" id="rp{{cm.id}}">
+							<img src="{{cm.who.profile.perfil_img.url}}" alt="" style="border-radius: 50%; width: 50px; height: 50px;">
+							<div class="author-infor" style="width: 100%;">
+								<div class="flex-it2">
+									<h6><a href="#">{{cm.who.username }}</a></h6> <span class="time"> - {{ cm.timestamp|timesince }}</span>
+									{% if cm.timestamp.time != cm.updated.time or cm.timestamp.date != cm.updated.date %}
+                                    <span class="editado">editado</span>
+                                    {% endif %}
+{% if request.user == cm.who %}
+             <i id="cog{{cm.id}}" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i>
+
+             <div class="btn-group">
+    
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col{{cm.id}}" aria-expanded="false" aria-controls="collapseExample">Editar respuesta<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a>
+
+        <form style="display: inline;" class="dele_ans{{ cm.id }}" data-url="/delete_res/{{ cm.id }}/" method="post">{% csrf_token %}<button onclick="deletee_res(this)" name="{{comentario.id}}" id="dele_ans{{ cm.id }}" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i  style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form>
+        <!--a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a-->
+    </div>
+</div>
+{% endif %}
+								</div>
+
+
+								<p id="cm{{ cm.id }}">{{cm.respuesta}}</p><div class="collapse container" id="col{{cm.id}}"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans{{ cm.id }}" data-url="/responder_update/{{ cm.id }}/">{% csrf_token %}<textarea id="textoans{{cm.id}}" onkeypress="return limita(400);" style=" height: 6em; width: 400px;" name="respuesta">{{cm.respuesta}}</textarea> <br><input  onclick="update_ans(this)" id="up_ans{{ cm.id }}" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col{{cm.id}}" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form></div> </div></div>
+							</div>
+							{% if not request.user == cm.who %}
+          <a   data-toggle="collapse" data-target="#collapseExample{{comentario.id}}zzx" aria-expanded="false
+  " aria-controls="collapseExample{{comentario.id}}z" style="color: grey; font-family: sans-serif; padding-left: 5px; padding-right: 15px; position: relative; top: 10px;">Mencionar</a>
+  <div  class="collapse container" id="collapseExample{{comentario.id}}zzx">
+  <form class="respv{{comentario.id}}" method="post" data-url="/responder/{{comentario.slug}}/">
+  {% csrf_token %}<div class="md-form">
+   <img width="40"  height="40" style="border-radius: 50%; width: 50px; height: 50px;" src="{{request.user.profile.perfil_img.url}}">
+    <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4;" id="input-char-counter" value="@{{cm.who.username}}" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{comentario.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
+</div>
+  </form>
+</div>
+          {% endif %}
+						</div>
+						{% endfor %}
+					</div>
+						{% endfor %}
+						
+						
+					</div>
+					{% if request.user.is_authenticated %}
+					<div id="sendingcoment" style="display: none;">
+           <img style="position: relative; left: 45%;" height="50" width="50"  src="{% static 'img/throbber_12.gif' %}">
+          </div>
+					<div class="comment-form">
+						<h4>Comentar</h4>
+						<form class="coment" method='POST' data-url='/comentar_articulo/{{ blog.id }}/'>
+							{% csrf_token %}
+							<div class="row">
+								<div class="col-md-12">
+									<textarea name="content"  placeholder="Deja tu comentario"></textarea>
+								</div>
+							</div>
+							<input class="submit" type="submit" placeholder="Comentar" onclick="send(this)" style="cursor: pointer;">
+						</form>
+					</div>
+					<!-- comment form -->
+					{% endif %}
+
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-12 col-xs-12">
+				<div class="sidebar">
+					<div class="sb-search sb-it">
+						<h4 class="sb-title">Buscar</h4>
+						<form action="/blog_search/search/redirect/" method="POST">
+							{% csrf_token %}
+						<input type="text" name="src" placeholder="Busca con palabras claves...">
+
+						</form>
+					</div>
+					<div class="sb-cate sb-it">
+						<h4 class="sb-title">Categorías</h4>
+						<ul>
+							<li><a href="/blog/noticias/">Noticias ({{noticias_count}})</a></li>
+							<li><a href="/blog/critica/">Crítica de cine ({{critica_count}})</a></li>
+							<li><a href="/blog/global/">Global ({{global_count}})</a></li>
+						</ul>
+					</div>
+					<div class="sb-recentpost sb-it">
+						<h4 class="sb-title">Más populares de la semana</h4>
+						
+
+						{% for a in mas_vistas %}
+						<div class="recent-item">
+							<span>0{{ forloop.counter }}</span><h6><a href="/blog/{{a.articulo.categoria}}/{{a.articulo.slug}}/">{{a.articulo.titulo}}</a></h6>
+						</div>
+						
+						{% endfor %}
+
+
+						
+					</div>
+					
+					<div class="ads">
+						<img src="images/uploads/ads1.png" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end of  blog detail section-->
+<script>
+             function votar(b) {
+              var juan = b.id
+
+              
+
+             var $myForm = $('.my-ajax-form')
+             $myForm.submit(function(event){
+                 event.preventDefault();
+                 event.stopImmediatePropagation();
+                 var $formData = $(this).serialize()
+                 var $thisURL = $myForm.attr('data-url') || window.location.href 
+                 $.ajax({
+                     method: "POST",
+                     url: $thisURL,
+                     data: $formData,
+                     success: handleFormSuccess,
+                     error: handleFormError,
+                      beforeSend: function () {
+                    document.getElementById("change_art").style.display = "initial"
+                     //Agregamos la clase loading al body
+
+                },
+                 })
+             })
+
+          function handleFormSuccess(data, textStatus, jqXHR){
+              console.log(data)
+              console.log(textStatus)
+              console.log(jqXHR)
+              document.getElementById("change_art").style.display = "none"
+     $("#votar_articulo").load(window.location + " #votar_articulo");
+
+     $(this).remove();
+            
+                 $myForm[0].reset(); 
+             }
+
+             function handleFormError(jqXHR, textStatus, errorThrown){
+                 console.log(jqXHR)
+                 console.log(textStatus)
+                 console.log(errorThrown)
+             }
+             
+             
+             
+             }
+             
+             
+             </script>
+{% endblock %}
+
+</body>
+
+</html>

@@ -10,6 +10,7 @@ from .forms import ShareForm
 from apps.peliculas.models import Peliculas
 from apps.series.models import Series, Capitulos
 from apps.usuarios.models import Usuario, Profile
+from apps.news.models import Article
 
 def compartiR(request, to, toslug):
 	if not request.user.is_active:
@@ -17,12 +18,15 @@ def compartiR(request, to, toslug):
 	pelicula = Peliculas.objects.filter(id=to, slug=toslug)
 	serie = Series.objects.filter(id=to, slug=toslug)
 	capitulo = Capitulos.objects.filter(id=to, slug=toslug)
+	articulo = Article.objects.filter(id=to, slug=toslug)
 	if pelicula:
 		pelicula = Peliculas.objects.filter(id=to, slug=toslug)[0]
 	if serie:
 		serie = Series.objects.filter(id=to, slug=toslug)[0]
 	if capitulo:
 		capitulo = Capitulos.objects.filter(id=to, slug=toslug)[0]
+	if articulo:
+		articulo = Article.objects.filter(id=to, slug=toslug)[0]
 
 
 
@@ -58,6 +62,8 @@ def compartiR(request, to, toslug):
 					instance.serie_to_share = serie
 				if capitulo:
 					instance.capitulo_to_share = capitulo
+				if articulo:
+					instance.articulo_to_share = articulo
 				instance.nota = notta
 				instance.event = "Share"
 				if pelicula:
@@ -75,7 +81,11 @@ def compartiR(request, to, toslug):
 						instance.mensaje = request.user.username + " Ha compartido " + capitulo.nombre + " contigo y con " +  str(contar - 1) + " amigos más" 
 					if contar == 1:
 						instance.mensaje = request.user.username + " Ha compartido " + capitulo.nombre + " en " + capitulo.temporadaa.serie.titulo
-
+				elif articulo:
+					if contar > 1:
+						instance.mensaje = request.user.username + " Ha compartido un artículo, " + articulo.titulo + " contigo y con " +  str(contar - 1) + " amigos más" 
+					if contar == 1:
+						instance.mensaje = request.user.username + " Ha compartido un artículo " + articulo.titulo
 				instance.save()
 				amigos_share = []
 				for i in ide:
@@ -98,6 +108,8 @@ def compartiR(request, to, toslug):
 					instance.serie_to_share = serie
 				if capitulo:
 					instance.capitulo_to_share = capitulo
+				if articulo:
+					instance.articulo_to_share = articulo
 				instance.nota = notta
 				instance.event = "Share"
 				if pelicula:
@@ -115,7 +127,11 @@ def compartiR(request, to, toslug):
 						instance.mensaje = request.user.username + " Ha compartido " + capitulo.nombre + " contigo y con " +  str(contar - 1) + " amigos más" 
 					if contar == 1:
 						instance.mensaje = request.user.username + " Ha compartido " + capitulo.nombre + " en " + capitulo.temporadaa.serie.titulo
-
+				elif articulo:
+					if contar > 1:
+						instance.mensaje = request.user.username + " Ha compartido un artículo, " + articulo.titulo + " contigo y con " +  str(contar - 1) + " amigos más" 
+					if contar == 1:
+						instance.mensaje = request.user.username + " Ha compartido un artículo, " + articulo.titulo
 				instance.save()
 				amigos_share = []
 				for i in ide:

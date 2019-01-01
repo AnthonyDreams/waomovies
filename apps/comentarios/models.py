@@ -8,7 +8,7 @@ from django.db.models.signals import pre_save
 from django.utils import timezone
 from apps.peliculas.models import Peliculas
 from apps.series.models import Series, Capitulos
-
+from apps.news.models import Article
 from django.utils.text import slugify
 # Create your models here.
 # MVC MODEL VIEW CONTROLLER
@@ -40,6 +40,7 @@ class Post(models.Model):
 	slug = models.IntegerField(unique=True, blank=False, default=0)
 	series = models.ForeignKey(Series, on_delete=models.CASCADE, null=True, blank=True)
 	capitulos = models.ForeignKey(Capitulos, on_delete=models.CASCADE, null=True, blank=True)
+	articulo = models.ForeignKey(Article, on_delete=models.CASCADE, null=True, blank=True)
 	respuestas = models.ManyToManyField('Answerd', blank=True)
 	vote = models.ManyToManyField(settings.AUTH_USER_MODEL,  blank=True, related_name="vote")
 	unvote = models.ManyToManyField(settings.AUTH_USER_MODEL,  blank=True, related_name="unvote")

@@ -5,6 +5,7 @@ from django.conf import settings
 from apps.comentarios.models import Post, Answerd
 from django.utils import timesince
 from apps.peliculas.models import Peliculas
+from apps.news.models import Article
 from apps.series.models import Series, Capitulos
 from django.db.models import Sum
 from django_currentuser.middleware import (
@@ -24,6 +25,8 @@ class Notificaciones(models.Model):
 			return self.komentario.series.slug
 		elif self.komentario.capitulos:
 			return self.komentario.capitulos.slug
+		elif self.komentario.articulo:
+			return self.komentario.articulo.slug
 
 class Evento(models.Model):
 	creadores = models.ManyToManyField(settings.AUTH_USER_MODEL,  blank=True, related_name="generadores")
@@ -60,6 +63,9 @@ class Evento(models.Model):
 				if getnoti.komentario.capitulos:
 					slug = getnoti.komentario.capitulos.slug
 					return slug
+				elif getnoti.komentario.articulo:
+					slug = getnoti.komentario.articulo.slug
+					return slug
 				else:
 					slug = getnoti.komentario.series.slug
 					return slug
@@ -91,6 +97,9 @@ class Evento(models.Model):
 				if gettitulo.respm.comentario.capitulos:
 					tituloo = gettitulo.respm.comentario.capitulos.nombre
 					return tituloo + " de " + gettitulo.respm.comentario.capitulos.temporadaa.serie.titulo
+				elif gettitulo.respm.comentario.articulo:
+					titulo = gettitulo.respm.comentario.articulo.titulo
+					return  titulo + "(artículo)"
 				else:
 					tituloo = gettitulo.respm.comentario.series.titulo
 					return tituloo
@@ -124,6 +133,10 @@ class Evento(models.Model):
 					slugt = getslugs.respm.comentario.capitulos.slug
 					serie = getslugs.respm.comentario.capitulos.temporadaa.slug
 					return "/" + slugt + "/" + serie + "/"
+				elif getslugs.respm.comentario.articulo:
+					categoria= getslugs.respm.comentario.articulo.categoria
+					slug = getslugs.respm.comentario.articulo.slug
+					return "/blog/" + categoria + "/" + slug + "/"
 				else:
 					getslugs = self.noti_de_evento
 					slusg = getslugs.respm.comentario.series.slug
@@ -141,6 +154,7 @@ class Compartir(models.Model):
 	users_to_share = models.ManyToManyField(settings.AUTH_USER_MODEL,  blank=False, related_name="user_to_share")
 	movie_to_share = models.ForeignKey(Peliculas, null=True, blank=True, on_delete=models.CASCADE)
 	serie_to_share = models.ForeignKey(Series, null=True, blank=True, on_delete=models.CASCADE)
+	articulo_to_share = models.ForeignKey(Article, null=True, blank=True, on_delete=models.CASCADE)
 	capitulo_to_share = models.ForeignKey(Capitulos, null=True, blank=True, on_delete=models.CASCADE)
 	nota = models.CharField(max_length=150, null=True, blank=True)
 	timestampc = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -189,7 +203,11 @@ class Compartir(models.Model):
 		elif self.capitulo_to_share:
 			slugt = self.capitulo_to_share.slug
 			serie = self.capitulo_to_share.temporadaa.slug
-			return "/" + slugt + "/" + serie + ""
+			return "/" + slugt + "/" + serie + "/"
+		elif self.articulo_to_share:
+			categoria= self.articulo_to_share.categoria
+			slug = self.articulo_to_share.slug
+			return "/blog/" + categoria + "/" + slug + "/"
 
 
 	@property
@@ -207,6 +225,9 @@ class Compartir(models.Model):
 		elif self.capitulo_to_share:
 			cover = self.capitulo_to_share.cover_capitulo
 			return cover
+		elif self.articulo_to_share:
+			cover_ = self.articulo_to_share.cover
+			return cover_
 	@property
 	def userimg(self):
 		selfa = self.user_who_share

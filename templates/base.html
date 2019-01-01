@@ -12,6 +12,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="WaoMovies es un blog de películas y noticias relacionadas con el mundo del cine, donde puedes disfrutar de una buena película en casa y compartir con amigos y familiares a través de nuestro portal.">
+    <meta name="description" content="Ver peliculas en hd">
+    <meta name="description" content="Ver peliculas completas en hd">
+    <meta name="description" content="waomovies">
+
+
+
     <title>WaoMovies</title>
 
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600'>
@@ -600,6 +607,11 @@ var resultac = document.getElementById('result').style.display= "none";
 <div class="has-submenu">
 <a class="menu-item" href="/series_list/orden_de_subida/">
 <em>Series</em>
+</a>
+</div>
+<div class="has-submenu">
+<a class="menu-item" href="/blog/">
+<em>Blog</em>
 </a>
 </div>
 {% if request.user.is_authenticated %}
@@ -1369,14 +1381,10 @@ var load = false
               </ul-->
             </li>
             <li class="dropdown first">
-              <a class="dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-              Noticias 
+              <a href="/blog/" >
+              Blog 
               </a>
-              <!--ul class="dropdown-menu level1">
-                <li><a href="bloglist.html">blog List</a></li>
-                <li><a href="bloggrid.html">blog Grid</a></li>
-                <li class="it-last"><a href="blogdetail.html">blog Detail</a></li>
-              </ul-->
+        
             </li>
            
           </ul>

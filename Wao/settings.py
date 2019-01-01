@@ -28,6 +28,7 @@ DEBUG = False
 #ALLOWED_HOSTS = ['127.0.0.1','wmoviestest.herokuapp.com', "0.0.0.0"]
 ALLOWED_HOSTS = ['wmoviestest.herokuapp.com']
 
+NOTICIAS = True
 SERIES = False
 
 # Application definition
@@ -50,11 +51,13 @@ INSTALLED_APPS = [
     'multiselectfield',
     'apps.contacto',
     'apps.dashboard',
+    'apps.news',
 ]
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
 
 MOVIES_DEL_WEB = 'peliculas.Peliculas'
+ARTICLES_DE_WEB = 'news.Article'
 
 
 MIDDLEWARE = [

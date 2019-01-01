@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^', include('apps.footer.urls')),
     path('send_email_contact/', include('apps.contacto.urls')),
     url(r'^', include('apps.dashboard.urls')),
+    url(r'^', include('apps.news.urls')),
 
 
     url(r'^reset/password_reset', password_reset, 
