@@ -522,6 +522,7 @@ function update_ans(b) {
     
     <h4>Votar</h4>
     <div id="change_art" style="display: none; "><img style="position: relative; " height="50" width="50" src="{% static "img/fancybox_loading@2x.gif" %}"></div>
+    {% if request.user.is_authenticated %}
     <div id="votar_articulo">
     	
     {% if not userario%}
@@ -544,8 +545,13 @@ function update_ans(b) {
       </form>
            </div> 
 {% endif %}
+{% else %}
+ <br/>
+<h6>Inicia Sesión para poder votar.</h6>
+    
+
 </div>
-					<!-- comment items -->
+	{% endif %}					<!-- comment items -->
 					<div class="comments" id="comments">
 						<h4>{{comentarios.count}} Comentarios</h4>
 						{% for comentario in comentarios %}
@@ -554,9 +560,9 @@ function update_ans(b) {
 							<div class="author-infor" style="width: 100%;">
 								<div class="flex-it2">
 									<h6><a href="#">{{comentario.user.username }}</a></h6> <span class="time"> - {{ comentario.timestamp|timesince }}</span>
-									{% if comentario.timestamp.time != comentario.updated.time or comentario.timestamp.date != comentario.updated.date %}
-									<span class="editado">editado</span>
-									{% endif %}
+									{% if comentario.editado %}
+                                    <span  class="editado">editado</span>
+                                    {% endif %}
 									{% if request.user.is_authenticated %}
               {% if request.user == comentario.user %}
 
@@ -645,8 +651,8 @@ function update_ans(b) {
 							<div class="author-infor" style="width: 100%;">
 								<div class="flex-it2">
 									<h6><a href="#">{{cm.who.username }}</a></h6> <span class="time"> - {{ cm.timestamp|timesince }}</span>
-									{% if cm.timestamp != cm.updated %}
-                                    <span class="editado">editado</span>
+									{% if cm.editado %}
+                                    <span  class="editado">editado</span>
                                     {% endif %}
 {% if request.user == cm.who %}
              <i id="cog{{cm.id}}" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i>

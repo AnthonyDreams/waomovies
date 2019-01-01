@@ -494,10 +494,7 @@ def peliculasO(request, slug, *args, **kwargs):
 		
 		relacionarportema = Peliculas.objects.filter(Q(tema__iexact=peliculaa.tema)|Q(tag1__iexact=peliculaa.tag1)|Q(tag2__iexact=peliculaa.tag2)|Q(tag3__iexact=peliculaa.tag3)).order_by('-puntuacion')[:10]
 		relacionarportemac = Peliculas.objects.filter(Q(tema__iexact=peliculaa.tema)|Q(tag1__iexact=peliculaa.tag1)|Q(tag2__iexact=peliculaa.tag2)|Q(tag3__iexact=peliculaa.tag3)).order_by('-puntuacion')[:10].count()
-	editados = []
-	for comentario in comentarios_list:
-		if comentario.timestamp != comentario.updated:
-			editados.append(comentario.id)
+	
 	votacion = Votacion.objects.all()
 	user_id = peliculaa.favoritos.all()
 	if user_id:
@@ -576,7 +573,7 @@ def peliculasO(request, slug, *args, **kwargs):
 				'report_user':report_user,
 				'report_user_res':report_user_res,
 				'peliculasa':peliculasa,
-				'editados':editados,
+				
 
 	#			'usuario':usuario,
 
@@ -591,7 +588,7 @@ def peliculasO(request, slug, *args, **kwargs):
 		else:
 			contexto = {
 				'comentarios':comentarios,
-				'editados':editados,
+				
 			}
 
 
@@ -678,7 +675,7 @@ def peliculasO(request, slug, *args, **kwargs):
 					'report_user':report_user,
 					'report_user_res':report_user_res,
 					'peliculasa':peliculasa,
-					'editados':editados,
+					
 
 
 
@@ -693,7 +690,7 @@ def peliculasO(request, slug, *args, **kwargs):
 		else:
 			contexto = {
 				'comentarios':comentarios,
-				'editados':editados,
+				
 				
 			}
 

@@ -98,10 +98,13 @@ def BlogDetail(request, categorie,slug):
 
 
 	mas_vistas = Hitcount_Articulos.objects.all().order_by('-hitcount_week')[:4]
-	try:
-		userario = Votacion_Articulos.objects.filter(user=request.user, articulo_id=blog_detail.id)[0]
-	except IndexError:
-		userario = Votacion_Articulos.objects.filter(user=request.user, articulo_id=blog_detail.id)
+	if request.user.is_authenticated:
+		try:
+			userario = Votacion_Articulos.objects.filter(user=request.user, articulo_id=blog_detail.id)[0]
+		except IndexError:
+			userario = Votacion_Articulos.objects.filter(user=request.user, articulo_id=blog_detail.id)
+	else:
+		userario = False
 
 
 	parrafo = blog_detail.contenido

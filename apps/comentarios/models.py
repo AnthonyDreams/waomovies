@@ -44,6 +44,7 @@ class Post(models.Model):
 	respuestas = models.ManyToManyField('Answerd', blank=True)
 	vote = models.ManyToManyField(settings.AUTH_USER_MODEL,  blank=True, related_name="vote")
 	unvote = models.ManyToManyField(settings.AUTH_USER_MODEL,  blank=True, related_name="unvote")
+	editado = models.BooleanField(default=False)
    
 	
 	objects = PostManager()
@@ -68,6 +69,8 @@ class Answerd(models.Model):
 	respuesta = models.TextField(max_length=400)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+	editado = models.BooleanField(default=False)
+	
 	
 
 class Reporte(models.Model):

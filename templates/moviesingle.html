@@ -1626,11 +1626,9 @@ $(this).remove();
 
              </div>
               <a href="#" style="color: white; font-weight: bold; padding-left: 0px; "> <h3 style="display: inline;">{{ i.user.username }}</h3></a> 
-{% for a in editados %}  
-{% if a == i.id %}
+{% if i.editado %}
                                     <span  class="editado">editado</span>
                                     {% endif %}
-                                    {% endfor %}
                                     
                     
               {% if request.user.is_authenticated %}
@@ -1785,8 +1783,8 @@ $(this).remove();
             <img style="border-radius: 50%; width: 50px; height: 50px;" src="{{cm.who.profile.perfil_img.url}}" alt="">
             <div style="position: relative; right: 20px;">
              <h3 style=" display: inline; font-size: 16px;">{{cm.who.username}}</h3>
-             {% if cm.timestamp.time != cm.updated.time or cm.timestamp.date != cm.updated.date %}
-                                    <span class="editado">editado</span>
+             {% if cm.editado %}
+                                    <span  class="editado">editado</span>
                                     {% endif %}
              {% if request.user == cm.who %}
              <i id="cog{{cm.id}}" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i>

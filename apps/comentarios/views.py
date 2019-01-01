@@ -68,6 +68,7 @@ def post_update(request, slug=None):
 	if request.is_ajax():
 		if form.is_valid():
 			instance = form.save(commit=False)
+			instance.editado= True
 			instance.save()
 			data = {
 				'message': "Successfully submitted form data.",
@@ -226,6 +227,8 @@ def post_update_serie(request, slug=None):
 	if request.is_ajax():
 		if form.is_valid():
 			instance = form.save(commit=False)
+			instance.editado= True
+
 			instance.save()
 			data = {
 					'message': "Successfully submitted form data.",
@@ -296,6 +299,8 @@ def post_update_serie_capitulo(request, slug=None):
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
 	if form.is_valid():
 		instance = form.save(commit=False)
+		instance.editado= True
+
 		instance.save()
 		messages.success(request, "Comentario editado", extra_tags='html_safe')
 		return HttpResponseRedirect(instance.get_absolute_url_serie())
@@ -405,7 +410,10 @@ def responder_update(request, id):
 	if request.is_ajax():
 		if form.is_valid():
 			instance = form.save(commit=False)
+			instance.editado= True
 			instance.save()
+			
+
 			data = {
 				'message': "Respuesta editada.",
 				'content':instance.respuesta
@@ -471,7 +479,10 @@ def post_update_capitulos(request, slug=None):
 	if request.is_ajax():
 		if form.is_valid():
 			instance = form.save(commit=False)
+			instance.editado= True
 			instance.save()
+			
+
 			data = {
 				'message': "Successfully submitted form data.",
 				'content':instance.content
@@ -652,7 +663,10 @@ def responder_update_serie(request, id):
 	if request.is_ajax():
 		if form.is_valid():
 			instance = form.save(commit=False)
+			instance.editado= True
 			instance.save()
+			
+
 			data = {
 				'message': "Respuesta editada.",
 				'content':instance.respuesta
@@ -822,6 +836,8 @@ def post_update_articulo(request, slug=None):
 	if request.is_ajax():
 		if form.is_valid():
 			instance = form.save(commit=False)
+			instance.editado= True
+
 			instance.save()
 			data = {
 				'message': "Successfully submitted form data.",
