@@ -8,32 +8,7 @@
 {% block scriptt %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bowser/1.9.4/bowser.min.js"></script>
 
-<script type="text/javascript">
- 
-var start = 0;
-var limit = 5;
 
-$(document).ready(function(){
- getData();
-})
-
-function getData() {
- if (reachedMax)
-  return;
- $.ajax{{
-  url = window.location.href 
-  method = post;
-  dataType: {
-   start: start,
-   limit: limit,
-  }
-
-  function succes(response) {
-
-  }
- }}
-}
-</script>
 
 <script type="text/javascript">
 function compartirshare(b) {
@@ -717,9 +692,11 @@ $(".in")[1].remove();
               console.log(data)
               console.log(textStatus)
               console.log(jqXHR)
+              $("#mouse" + c).remove()
      $("#rv").load(window.location + " #rv");
      $("#rva").load(window.location + " #rva");
      $("#ven").load(window.location + " #ven");
+
      $(this).remove();
             
                  $myForm[0].reset(); 
@@ -772,6 +749,7 @@ $(".in")[1].remove();
               console.log(data)
               console.log(textStatus)
               console.log(jqXHR)
+              $("#rs" + c).remove()
      $("#rv").load(window.location + " #rv");
      $("#rs" + c).load(window.location + " #rs" + c);
      $("#j" + namen).load(window.location + " #j" + namen);
@@ -1273,7 +1251,7 @@ $(this).remove();
         {% csrf_token %}
    <input type="hidden" name="users_to_share" value="" id="compartir">
    <input type="hidden" name="oculto" id="ocultado">
-   <div class="md-form" style="width:80%; margin-left: 20px; height: 30px; float: left;"><input id="input-char-counter" type="text" maxlength="150" class="form-control" name="nota" ><label for="input-char-counter" style="font-size: 14px;">Dejar un mensaje</label></div> <button onclick="compartirshare(this)" id="formshare" type="submit" class="btn btn-primary" style="font-size:15px; margin-left:10px; margin-top: 35px; width: 30px; "><i class="fa fa-send"></i></button>
+   <div class="md-form" style="width:80%; margin-left: 20px; height: 30px; float: left;"><input type="text" maxlength="150" class="form-control" name="nota" ><label  style="font-size: 14px;">Dejar un mensaje</label></div> <button onclick="compartirshare(this)" id="formshare" type="submit" class="btn btn-primary" style="font-size:15px; margin-left:10px; margin-top: 35px; width: 30px; "><i class="fa fa-send"></i></button>
 </form>
 <br/>
 {% endif %}
@@ -1649,7 +1627,7 @@ $(this).remove();
              </div>
               <a href="#" style="color: white; font-weight: bold; padding-left: 0px; "> <h3 style="display: inline;">{{ i.user.username }}</h3></a> 
 
-                                    <span {% if not i.timestamp == i.updated %} class="editado" {% else %} style="display: none;"  {% endif %} >{{ i.timestamp }}  {{ i.updated }}</span>
+                                    <span {% if not i.timestamp == i.updated %} class="editado" {% else %} style="display: none;"  {% endif %} >editado</span>
                                     
                                     
                     
@@ -1773,7 +1751,7 @@ $(this).remove();
   <form class="respv{{i.id}}" method="post" data-url="/responder/{{i.slug}}/">
   {% csrf_token %}<div class="md-form">
    <img style="border-radius: 50%; width: 50px; height: 50px;" src="{{request.user.profile.perfil_img.url}}">
-    <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4;" id="input-char-counter" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
+    <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4;" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
 </div>
   </form>
 </div>
@@ -1924,7 +1902,7 @@ $(this).remove();
   <form class="respv{{i.id}}" method="post" data-url="/responder/{{i.slug}}/">
   {% csrf_token %}<div class="md-form">
    <img width="40"  height="40" style="border-radius: 50%; width: 50px; height: 50px;" src="{{request.user.profile.perfil_img.url}}">
-    <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4;" id="input-char-counter" value="@{{cm.who.username}}" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
+    <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4;" value="@{{cm.who.username}}" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="d{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
 </div>
   </form>
 </div>
