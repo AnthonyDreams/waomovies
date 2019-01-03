@@ -633,7 +633,7 @@ $('#tabcontentin').append('<div id="zzz'+value.id+'"  class="slide-it" style="wi
 					            				<a href="{% url 'peliculasO' slug=kk.pelicula.slug %}" style="color: white; width: 100%; top: 28% ; position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 50px; text-align: center; font-weight: bold;" class="fa fa-play point" aria-hidden="true"></i> </a>
 					            			</div>
 					            			<div class="title-in">
-					            				<h6><a href="#">{{ kk.pelicula.titulo }}</a></h6>
+					            				<h6><a href="{% url 'peliculasO' slug=kk.pelicula.slug %}">{{ kk.pelicula.titulo }}</a></h6>
 					            				<p><i class="fa fa-star point" aria-hidden="True"></i><span>{{ kk.pelicula.puntuacion }}</span> /10</p>
 					            			</div>
 					            		</div>
@@ -1192,11 +1192,10 @@ $('#tabcontentin').append('<div id="zzz'+value.id+'"  class="slide-it" style="wi
 						{% for trailer in trailers %}
             <div class="item">
 							<div class="trailer-img">
-								<img src="{{ trailer.trailer_cover }}" alt="" width="4096" height="2737">
+								<img src="{{ trailer.trailer_cover.url }}" alt="" width="4096" height="2737">
 							</div>
 							<div class="trailer-infor">
 	                        	<h4 class="desc">{{ trailer.titulo }}</h4>
-	                        	<p>2:30</p>
 	                        </div>
 						</div>
 					           {% endfor %}
