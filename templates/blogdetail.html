@@ -606,6 +606,7 @@ function update_ans(b) {
                     
                 </div>
             </div>
+{% if request.user.is_authenticated %}
 								<p><a class="rep-btn" data-toggle="collapse" data-target="#collapseExample{{comentario.id}}z" aria-expanded="false
   " aria-controls="collapseExample{{comentario.id}}z" style="color: grey; font-family: sans-serif; padding-left: 5px; padding-right: 15px; position: relative; top: 10px;">+ Responder</a></p>
   <div  class="collapse container" id="collapseExample{{comentario.id}}z">
@@ -616,6 +617,9 @@ function update_ans(b) {
 </div>
   </form>
 </div>
+{% endif %}
+
+
 							</div>
 						</div>
 <div id="j{{comentario.id}}">
