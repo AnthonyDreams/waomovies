@@ -1255,9 +1255,16 @@ $(this).remove();
 </form>
 <br/>
 {% endif %}
-<div class="sharethis-inline-share-buttons"></div>
-            
-                
+
+ <!--Facebook-->
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wmoviestest.herokuapp.com/peliculas/{{peliculaa.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook"></i></a>
+                <!--Twitter-->
+                <a target="_blank" href="https://twitter.com/home?status=Ver {{peliculaa.titulo}} completa HD en Waomovies https://wmoviestest.herokuapp.com/peliculas/{{peliculaa.slug}}/" type="button" style="background-color: #00acee" class="btn-floating btn-tw"><i class="fa fa-twitter"></i></a>
+                <!--Google +-->
+                <a target="_blank" href="https://plus.google.com/share?url=https://wmoviestest.herokuapp.com/peliculas/{{peliculaa.slug}}/" type="button" style="background-color: #d34836;" class="btn-floating btn-gplus"><i class="fa fa-google-plus"></i></a>
+
+                <!--Pinterest-->
+                <a target="_blank" href="https://pinterest.com/pin/create/button/?url=https://wmoviestest.herokuapp.com/peliculas/{{peliculaa.slug}}/&media={{peliculaa.Cover.url}}&description=Ver {{peliculaa.titulo}} completa HD en Waomovies" type="button"  style="background-color: #c8232c ;"class="btn-floating btn-pin"><i class="fa fa-pinterest"></i></a>
     
                 <!--Comments-->
                 <!--a type="button" class="btn-floating btn-comm"><i class="fa fa-comments"></i></a>

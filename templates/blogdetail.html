@@ -480,18 +480,15 @@ function update_ans(b) {
 <br/>
 {% endif %}
 
- <!--Facebook-->
-                <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/peliculas/{{peliculaa.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998; color:white;"><i class="fa fa-facebook" style="color:white;"></i></a>
+<!--Facebook-->
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wmoviestest.herokuapp.com/blog/{{blog.categoria}}/{{blog.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook" style="color: white;"></i></a>
                 <!--Twitter-->
-                <a type="button" style="background-color: #00acee; color:white;" class="btn-floating btn-tw"><i class="fa fa-twitter" style="color:white;"></i></a>
+                <a target="_blank" href="https://twitter.com/home?status={{blog.titulo}}:  https://wmoviestest.herokuapp.com/blog/{{blog.categoria}}/{{blog.slug}}/" type="button" style="background-color: #00acee" class="btn-floating btn-tw"><i class="fa fa-twitter" style="color: white;"></i></a>
                 <!--Google +-->
-                <a type="button" style="background-color: #d34836; color:white;" class="btn-floating btn-gplus"><i class="fa fa-google-plus" style="color:white;"></i></a>
+                <a target="_blank" href="https://plus.google.com/share?url=https://wmoviestest.herokuapp.com/blog/{{blog.categoria}}/{{blog.slug}}/" type="button" style="background-color: #d34836;" class="btn-floating btn-gplus"><i class="fa fa-google-plus" style="color: white;"></i></a>
 
-                <!--Instagram-->
-                <a type="button"  style="background-color: #3f729b; color:white;"class="btn-floating btn-ins"><i class="fa fa-instagram" style="color:white;"></i></a>
                 <!--Pinterest-->
-                <a type="button"  style="background-color: #c8232c ; color:white;"class="btn-floating btn-pin"><i class="fa fa-pinterest" style="color:white;"></i></a>
-    
+                <a target="_blank" href="https://pinterest.com/pin/create/button/?url=https://wmoviestest.herokuapp.com/blog/{{blog.categoria}}/{{blog.slug}}/&media={{blog.Cover.url}}&description={{blog.titulo}}" type="button"  style="background-color: #c8232c ;"class="btn-floating btn-pin"><i class="fa fa-pinterest" style="color: white;"></i></a>
                 <!--Comments-->
                 <!--a type="button" class="btn-floating btn-comm"><i class="fa fa-comments"></i></a>
                 <Email>

@@ -960,17 +960,15 @@ document.getElementById('panelstreamcloud').style.display="none"
 </form>
 <br/>
 
- <!--Facebook-->
-                <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/peliculas/{{capitulo.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook"></i></a>
+<!--Facebook-->
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wmoviestest.herokuapp.com/{{capitulo.slug}}/{{temporada.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook"></i></a>
                 <!--Twitter-->
-                <a type="button" style="background-color: #00acee" class="btn-floating btn-tw"><i class="fa fa-twitter"></i></a>
+                <a target="_blank" href="https://twitter.com/home?status=Ver {{capitulo.nombre}} completa HD en Waomovies https://wmoviestest.herokuapp.com/{{capitulo.slug}}/{{temporada.slug}}/" type="button" style="background-color: #00acee" class="btn-floating btn-tw"><i class="fa fa-twitter"></i></a>
                 <!--Google +-->
-                <a type="button" style="background-color: #d34836;" class="btn-floating btn-gplus"><i class="fa fa-google-plus"></i></a>
+                <a target="_blank" href="https://plus.google.com/share?url=https://wmoviestest.herokuapp.com/{{capitulo.slug}}/{{temporada.slug}}/" type="button" style="background-color: #d34836;" class="btn-floating btn-gplus"><i class="fa fa-google-plus"></i></a>
 
-                <!--Instagram-->
-                <a type="button"  style="background-color: #3f729b;"class="btn-floating btn-ins"><i class="fa fa-instagram"></i></a>
                 <!--Pinterest-->
-                <a type="button"  style="background-color: #c8232c ;"class="btn-floating btn-pin"><i class="fa fa-pinterest"></i></a>
+                <a target="_blank" href="https://pinterest.com/pin/create/button/?url=https://wmoviestest.herokuapp.com/{{capitulo.slug}}/{{temporada.slug}}/&media={{capitulo.cover_capitulo.url}}&description=Ver {{capitulo.nombre}} completa HD en Waomovies" type="button"  style="background-color: #c8232c ;"class="btn-floating btn-pin"><i class="fa fa-pinterest"></i></a>
     
                 <!--Comments-->
                 <!--a type="button" class="btn-floating btn-comm"><i class="fa fa-comments"></i></a>
