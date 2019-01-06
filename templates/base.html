@@ -692,32 +692,7 @@ var resultac = document.getElementById('result').style.display= "none";
 </div>
 
 </div>
-   <!--h1>Notifier</h1>
-    <p>Notifications</p>
-    <ul id="notifylist"></ul-->
-    <!--script>
-      var loc = window.location
-var wsStart = 'ws://'
-if (loc.protocol == 'https:'){
-  wsStart = 'wss://'
-}
-    document.addEventListener('DOMContentLoaded', function() {
-      const webSocketBridge = new channels.WebSocketBridge();
-      const nl = document.querySelector("#notifylist");
-      
-      webSocketBridge.connect(wsStart + window.location.host + '/ws/');
-      webSocketBridge.listen(function(action, stream) {
-        console.log("RESPONSE:", action);
-        
-        if(action.event == "New User") {
-          var el = document.createElement("li");
-          el.innerHTML = `New user <b>${action.username}</b> has joined!`;
-          nl.appendChild(el);
-        }
-      })
-      document.ws = webSocketBridge; /* for debugging */
-    })
-    </script-->
+   
 
 
   
@@ -831,13 +806,7 @@ if (loc.protocol == 'https:'){
 
       </div>
 
-      <!--Footer>
-      <div class="modal-footer justify-content-center">
-        <a type="button" class="btn btn-primary waves-effect waves-light">Send
-          <i class="fa fa-paper-plane ml-1"></i>
-        </a>
-        <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Cancel</a>
-      </div-->
+      
     </div>
   </div>
 </div>
@@ -1159,15 +1128,7 @@ var load = false
 
 {% endif %}
   
-  <!--script type="text/javascript">
-    
-   document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.fixed-action-btn');
-    var instances = M.FloatingActionButton.init(elems, options);
-  });
 
-    
-  </script-->
 
   <div id="act">
 {% if messages  %}
@@ -1190,21 +1151,7 @@ var load = false
             
 
 
-<!--div id="preloader" style="  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #E3C813;
-  z-index: 99999;
-  text-align: center;">
 
-<img class="logo" src="{% static 'img/sin título-1.png' %}" alt="" width="280" height="140">
-    <div id="status">
-        <span></span>
-        <span></span>
-    </div>
-</div-->
 <div class="login-wrapper" id="login-content" style="z-index: 500000;">
     <div class="login-content">
         <a href="#" class="close">x</a>
@@ -1239,13 +1186,7 @@ var load = false
              
            </div>
         </form>
-        <!--div class="row">
-          <p>Or via social</p>
-            <div class="social-btn-2">
-              <a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
-              <a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
-            </div>
-        </div-->
+       
     </div>
 </div>
 <style type="text/css">
@@ -1357,29 +1298,13 @@ var load = false
               <a href="/ver%todo/" >
               Películas
               </a>
-              <!--ul class="dropdown-menu level1">
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movie grid<i class="ion-ios-arrow-forward"></i></a>
-                  <ul class="dropdown-menu level2">
-                    <li><a href="moviegrid.html">Movie grid</a></li>
-                    <li><a href="ver%todo/">movie grid full width</a></li>
-                  </ul>
-                </li>     
-                <li><a href="movielist.html">Movie list</a></li>
-                <li><a href="moviesingle.html">Movie single</a></li>
-                <li class="it-last"><a href="seriessingle.html">Series single</a></li>
-              </ul-->
+              
             </li>
             <li class="dropdown first">
               <a href="/series_list/orden_de_subida/">
               Series 
               </a>
-              <!--ul class="dropdown-menu level1">
-                <li><a href="celebritygrid01.html">celebrity grid 01</a></li>
-                <li><a href="celebritygrid02.html">celebrity grid 02 </a></li>
-                <li><a href="celebritylist.html">celebrity list</a></li>
-                <li class="it-last"><a href="celebritysingle.html">celebrity single</a></li>
-              </ul-->
+              
             </li>
             <li class="dropdown first">
               <a href="/blog/" >
@@ -1391,7 +1316,7 @@ var load = false
           </ul>
           <ul class="nav navbar-nav flex-child-menu menu-right">
                       
-            <!--li><a href="#">Ayuda  <i style="padding-left: 5px; padding-right: 5px;" class="fa fa-question-circle" aria-hidden="true"></i>|   </a></li-->
+            
             {% if request.user.is_authenticated %}
             <li><a id="actibtn" href="javascript:;" data-toggle="dropdown" class="dropdown-toggle" style="margin-top: -6px; background: none;"><i class="fa fa-users gray-text" aria-hidden="true" style="font-size: 18px; text-shadow: 0px 3px 3px rgba(255,255,255,0.5),0px -1px 1px rgba(0,0,0,.3);"></i>
             <span class="label" id="labelcountcomp" style="color: #F1C40F; padding-right: 3px;"> </span>

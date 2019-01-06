@@ -35,6 +35,7 @@ function compartirshare(b) {
                  $.ajax({
                      method: "POST",
                      url: $thisURL,
+                     timeout:8000,
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
@@ -52,9 +53,7 @@ function compartirshare(b) {
              })
 
              function handleFormSuccess(data, textStatus, jqXHR){
-                 console.log(data)
-                 console.log(textStatus)
-                 console.log(jqXHR)
+                 
                  $myForm[0].reset(); 
        
 document.getElementById('displayloaz').style.display="none"
@@ -68,9 +67,7 @@ $(this).remove();
          }
 
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 console.log(jqXHR)
-                 console.log(textStatus)
-                 console.log(errorThrown)
+                 
              }
              
              
@@ -91,6 +88,7 @@ function send(b) {
                  $.ajax({
                      method: "POST",
                      url: $thisURL,
+                     timeout:8000,
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
@@ -114,9 +112,7 @@ function send(b) {
              }
 
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 console.log(jqXHR)
-                 console.log(textStatus)
-                 console.log(errorThrown)
+                 
              }
              
              
@@ -136,6 +132,7 @@ function send(b) {
                  $.ajax({
                      method: "POST",
                      url: $thisURL,
+                     timeout:8000,
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
@@ -143,9 +140,7 @@ function send(b) {
              })
 
              function handleFormSuccess(data, textStatus, jqXHR){
-                 console.log(data)
-                 console.log(textStatus)
-                 console.log(jqXHR)
+                 
                  document.getElementById("updateajax" + juan).innerHTML = data.content;
                  document.getElementById("texto" + juan).innerHTML = data.content;
                  $myForm[0].reset();
@@ -155,9 +150,7 @@ function send(b) {
  
              
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 console.log(jqXHR)
-                 console.log(textStatus)
-                 console.log(errorThrown)
+                 
              }
              
              
@@ -181,6 +174,7 @@ function res(b) {
                  $.ajax({
                      method: "POST",
                      url: $thisURL,
+                     timeout:8000,
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
@@ -203,9 +197,7 @@ function res(b) {
              function handleFormSuccess(data, textStatus, jqXHR){
               var token = "{% csrf_token %}"
 
-                 console.log(data)
-                 console.log(textStatus)
-                 console.log(jqXHR)
+                 
                  $myForm[0].reset(); 
                  if($myForm.length > 1){
                  $myForm[1].reset(); 
@@ -224,9 +216,7 @@ $(this).remove();
          }
 
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 console.log(jqXHR)
-                 console.log(textStatus)
-                 console.log(errorThrown)
+                 
              }
              
              
@@ -249,6 +239,7 @@ function deletee(b) {
                  $.ajax({
                      method: "POST",
                      url: $thisURL,
+                     timeout:8000,
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
@@ -270,9 +261,7 @@ function deletee(b) {
              }
 
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 console.log(jqXHR)
-                 console.log(textStatus)
-                 console.log(errorThrown)
+                 
              }
              
              
@@ -301,6 +290,7 @@ function deletee(b) {
                  $.ajax({
                      method: "POST",
                      url: $thisURL,
+                     timeout:8000,
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
@@ -326,9 +316,7 @@ function deletee(b) {
              }
 
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 console.log(jqXHR)
-                 console.log(textStatus)
-                 console.log(errorThrown)
+                 
              }
              
              
@@ -349,6 +337,7 @@ function update_ans(b) {
                  $.ajax({
                      method: "POST",
                      url: $thisURL,
+                     timeout:8000,
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
@@ -356,9 +345,7 @@ function update_ans(b) {
              })
 
              function handleFormSuccess(data, textStatus, jqXHR){
-                 console.log(data)
-                 console.log(textStatus)
-                 console.log(jqXHR)
+                 
                  document.getElementById("cm" + tt).innerHTML = data.content;
                  document.getElementById("textoans" + tt).innerHTML = data.content;
                  $myForm[0].reset();
@@ -368,9 +355,7 @@ function update_ans(b) {
  
              
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 console.log(jqXHR)
-                 console.log(textStatus)
-                 console.log(errorThrown)
+                 
              }
              
              
@@ -773,6 +758,7 @@ function update_ans(b) {
                  $.ajax({
                      method: "POST",
                      url: $thisURL,
+                     timeout:8000,
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
@@ -797,9 +783,7 @@ function update_ans(b) {
              }
 
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 console.log(jqXHR)
-                 console.log(textStatus)
-                 console.log(errorThrown)
+                 
              }
              
              
