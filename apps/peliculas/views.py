@@ -507,30 +507,30 @@ def peliculasO(request, slug, *args, **kwargs):
 
 
 
+
+	#esto saca el promedio de la votacion lo Sum, no es la propia de python sino una que ofrece django
+	votacion2 = Votacion.objects.filter(pelicula_id=id).aggregate(total=Sum('votacion'))['total']
+	#cuenta cuantas personas han votado
+	votacion2c = Votacion.objects.filter(pelicula_id=id).count()
+
+
+	# esto es para saber sí el usuario ha votado, y hacer acciones de acuerdo a eso como no dejarlo votar más,
+	# el objectdoesnotexist es para que sí el usuario no ha votado, no ejecuté el query
+	try:
+		votacion3 = Votacion.objects.filter(user_id=request.user.id).filter(pelicula_id=id)
+	except ObjectDoesNotExist:
+		pass
+
+#	try:
+#		usuario = Usuario.objects.get(id=request.user.id)
+#	except ObjectDoesNotExist:
+#		pass
+
+
+
+	# aquí solo es para contar la cantidad de película en relación el menos 4 es para que en la cuatro querys 
+	# elimine la película abierta... ya que también la cuenta como relacionada
 	if not request.is_ajax():
-		#esto saca el promedio de la votacion lo Sum, no es la propia de python sino una que ofrece django
-		votacion2 = Votacion.objects.filter(pelicula_id=id).aggregate(total=Sum('votacion'))['total']
-		#cuenta cuantas personas han votado
-		votacion2c = Votacion.objects.filter(pelicula_id=id).count()
-
-
-		# esto es para saber sí el usuario ha votado, y hacer acciones de acuerdo a eso como no dejarlo votar más,
-		# el objectdoesnotexist es para que sí el usuario no ha votado, no ejecuté el query
-		try:
-			votacion3 = Votacion.objects.filter(user_id=request.user.id).filter(pelicula_id=id)
-		except ObjectDoesNotExist:
-			pass
-
-	#	try:
-	#		usuario = Usuario.objects.get(id=request.user.id)
-	#	except ObjectDoesNotExist:
-	#		pass
-
-
-		print(votacion2)
-
-		# aquí solo es para contar la cantidad de película en relación el menos 4 es para que en la cuatro querys 
-		# elimine la película abierta... ya que también la cuenta como relacionada
 		relacionarc = relacionarcc + relacionarportituloc + relacionarpordirectc  + relacionarportemac - 4
 		cast = Cast.objects.all()
 	
@@ -587,55 +587,59 @@ def peliculasO(request, slug, *args, **kwargs):
 				}
 		else:
 			contexto = {
+			'peliculaa':peliculaa,
 				'comentarios':comentarios,
+				'votacion2':votacion2,
+				'votacion2c':votacion2c,
+				'votacion':votacion,
 				
 			}
 
 
-		if not request.is_ajax():
-			# esto es para sacar el id del usuario de cada votacion y saber sí el usuario conectado voto
-			if votacion:
-				for a in votacion:
-					print(a.user_id)
-				contexto['a'] = a
-					# recuerda que las votaciones se almacenan todas en tabla sin importar la pelicula
-					# entonces lo que hago de esa tabla sacar la pelicula de acuerdo al id que se pasa en parametros
-					# por la funcion
-					# paso el except por si no hay votacion en la pelicula y no tire un 404
-					# y como necesito tener la variable en el diccionario, porque sino tira error
-					# le paso la variable pero con un false para que lo cuente como vacío
-			try:
-				votacion3 = Votacion.objects.filter(pelicula_id=id)
-				votacion4 = Votacion.objects.filter(user_id=request.user.id).filter(pelicula_id=id)
 
-				contexto['votacion3'] = votacion3
-				contexto['votacion4'] = votacion4
+		# esto es para sacar el id del usuario de cada votacion y saber sí el usuario conectado voto
+		if votacion:
+			for a in votacion:
+				print(a.user_id)
+			contexto['a'] = a
+				# recuerda que las votaciones se almacenan todas en tabla sin importar la pelicula
+				# entonces lo que hago de esa tabla sacar la pelicula de acuerdo al id que se pasa en parametros
+				# por la funcion
+				# paso el except por si no hay votacion en la pelicula y no tire un 404
+				# y como necesito tener la variable en el diccionario, porque sino tira error
+				# le paso la variable pero con un false para que lo cuente como vacío
+		try:
+			votacion3 = Votacion.objects.filter(pelicula_id=id)
+			votacion4 = Votacion.objects.filter(user_id=request.user.id).filter(pelicula_id=id)
 
-			except ObjectDoesNotExist:
-				votacion3 = False
-				votacion4 = False
+			contexto['votacion3'] = votacion3
+			contexto['votacion4'] = votacion4
 
-				contexto['votacion3'] = votacion3
-				contexto['votacion4'] = votacion4
+		except ObjectDoesNotExist:
+			votacion3 = False
+			votacion4 = False
 
-			# aquí es donde saco el promedio, el format es para que no me suelte decimales
-			# de esta manera 4.44443 sino 4.4, 
-			# el value error lo tira cuando el decimal es de 1 digito por lo tanto el format no funciona
-			# el typeerror: es cuando no hay votaciones que promediar
+			contexto['votacion3'] = votacion3
+			contexto['votacion4'] = votacion4
 
-			try:
-				promedio = votacion2/votacion2c
-				juan ="{0:.2}".format(promedio)
-				contexto['promedio'] = juan
-			except ValueError:
-				promedio = votacion2/votacion2c
-				contexto['promedio'] = promedio
-				print(promedio)
-			except TypeError:
-				promedio = 0
-				contexto['promedio'] = promedio
-				print(promedio)
-	
+		# aquí es donde saco el promedio, el format es para que no me suelte decimales
+		# de esta manera 4.44443 sino 4.4, 
+		# el value error lo tira cuando el decimal es de 1 digito por lo tanto el format no funciona
+		# el typeerror: es cuando no hay votaciones que promediar
+
+		try:
+			promedio = votacion2/votacion2c
+			juan ="{0:.2}".format(promedio)
+			contexto['promedio'] = juan
+		except ValueError:
+			promedio = votacion2/votacion2c
+			contexto['promedio'] = promedio
+			print(promedio)
+		except TypeError:
+			promedio = 0
+			contexto['promedio'] = promedio
+			print(promedio)
+
 	
 	else:
 		if request.is_ajax():
@@ -689,45 +693,49 @@ def peliculasO(request, slug, *args, **kwargs):
 				}
 		else:
 			contexto = {
+			'peliculaa':peliculaa,
 				'comentarios':comentarios,
+				'votacion2':votacion2,
+				'votacion2c':votacion2c,
+				'votacion':votacion,
 				
 				
 			}
 
 			# lo mismo de arriba pero para los usuarios registrados
-		if not request.is_ajax():
-			if votacion:
-				for a in votacion:
-					print(a.user_id)
-				contexto['a'] = a
 
-			try:
-				votacion3 = Votacion.objects.filter(pelicula_id=id)
-				contexto['votacion3'] = votacion3
-				votacion4 = Votacion.objects.filter(user_id=request.user.id).filter(pelicula_id=id)
-				contexto['votacion4'] = votacion4
-			except ObjectDoesNotExist:
-				votacion3 = False
-				votacion4 = False
+		if votacion:
+			for a in votacion:
+				print(a.user_id)
+			contexto['a'] = a
 
-				contexto['votacion3'] = votacion3
-				contexto['votacion4'] = votacion4
+		try:
+			votacion3 = Votacion.objects.filter(pelicula_id=id)
+			contexto['votacion3'] = votacion3
+			votacion4 = Votacion.objects.filter(user_id=request.user.id).filter(pelicula_id=id)
+			contexto['votacion4'] = votacion4
+		except ObjectDoesNotExist:
+			votacion3 = False
+			votacion4 = False
 
-
+			contexto['votacion3'] = votacion3
+			contexto['votacion4'] = votacion4
 
 
-			try:
-				promedio = votacion2/votacion2c
-				juan ="{0:.2}".format(promedio)
-				contexto['promedio'] = juan
-			except ValueError:
-				promedio = votacion2/votacion2c
+
+
+		try:
+			promedio = votacion2/votacion2c
+			juan ="{0:.2}".format(promedio)
+			contexto['promedio'] = juan
+		except ValueError:
+			promedio = votacion2/votacion2c
+			contexto['promedio'] = promedio
+			print(promedio)
+		except TypeError:
+				promedio = 0
 				contexto['promedio'] = promedio
 				print(promedio)
-			except TypeError:
-					promedio = 0
-					contexto['promedio'] = promedio
-					print(promedio)
 
 
 	return render(request, 'moviesingle.html', contexto)
