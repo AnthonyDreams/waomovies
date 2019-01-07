@@ -1098,64 +1098,114 @@ def filtrar_resultado(request):
 
 def Orden(request, generos):
 
-	generocount = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).count()
-	comedia = Generox.objects.get(genero_name="comedia")
-	accion = Generox.objects.get(genero_name="accion")
-	ciencia_ficcion = Generox.objects.get(genero_name="ciencia_ficcion")
+	if not request.is_ajax():
+		generocount = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).count()
+		comedia = Generox.objects.get(genero_name="comedia")
+		accion = Generox.objects.get(genero_name="accion")
+		ciencia_ficcion = Generox.objects.get(genero_name="ciencia_ficcion")
 
-	romance = Generox.objects.get(genero_name="romance")
+		romance = Generox.objects.get(genero_name="romance")
 
-	terror = Generox.objects.get(genero_name="terror")
+		terror = Generox.objects.get(genero_name="terror")
 
-	fantasia = Generox.objects.get(genero_name="fantasia")
+		fantasia = Generox.objects.get(genero_name="fantasia")
 
-	aventura = Generox.objects.get(genero_name="aventura")
+		aventura = Generox.objects.get(genero_name="aventura")
 
-	crimen = Generox.objects.get(genero_name="crimen")
-	documental = Generox.objects.get(genero_name="documental")
-	suspenso = Generox.objects.get(genero_name="suspenso")
-	animacion = Generox.objects.get(genero_name="animacion")
-	drama = Generox.objects.get(genero_name="drama")
+		crimen = Generox.objects.get(genero_name="crimen")
+		documental = Generox.objects.get(genero_name="documental")
+		suspenso = Generox.objects.get(genero_name="suspenso")
+		animacion = Generox.objects.get(genero_name="animacion")
+		drama = Generox.objects.get(genero_name="drama")
 
-	genero = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by('-puntuacion')
+		genero = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by('-puntuacion')
 
-	genero2 = Peliculas.objects.filter(genero=generos[0])
-	genero3 = generos
-	peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
-	peliculase = []
+		genero2 = Peliculas.objects.filter(genero=generos[0])
+		genero3 = generos
+		peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
+		peliculase = []
 
-	paginator = Paginator(genero, 30)
-	page = request.GET.get('page')
-	try:
-		peliculas = paginator.page(page)
-	except PageNotAnInteger:
-		peliculas = paginator.page(1)
-	except EmptyPage:
-		peliculas = paginator.page(paginator.num_pages)
-	for i in peliculasee:
-		peliculase.append(i.peliculas)
+		paginator = Paginator(genero, 30)
+		page = request.GET.get('page')
+		try:
+			peliculas = paginator.page(page)
+		except PageNotAnInteger:
+			peliculas = paginator.page(1)
+		except EmptyPage:
+			peliculas = paginator.page(paginator.num_pages)
+		for i in peliculasee:
+			peliculase.append(i.peliculas)
 
 
-	contexto = {
-	'genero':genero,
-	'generocount':generocount,
-	'genero2':genero2,
-	'genero3':generos,
-	'peliculase':peliculase,
-	'peliculas':peliculas,
-	'comedia':comedia,
-	'ciencia_ficcion':ciencia_ficcion,
-	'terror':terror,
-	'romance':romance,
-	'aventura':aventura,
-	'suspenso':suspenso,
-	'documental':documental,
-	'crimen':crimen,
-	'fantasia':fantasia,
-	'animacion':animacion,
-	'drama':drama,
-	'accion':accion,
-	}
+		contexto = {
+		'genero':genero,
+		'generocount':generocount,
+		'genero2':genero2,
+		'genero3':generos,
+		'peliculase':peliculase,
+		'peliculas':peliculas,
+		'comedia':comedia,
+		'ciencia_ficcion':ciencia_ficcion,
+		'terror':terror,
+		'romance':romance,
+		'aventura':aventura,
+		'suspenso':suspenso,
+		'documental':documental,
+		'crimen':crimen,
+		'fantasia':fantasia,
+		'animacion':animacion,
+		'drama':drama,
+		'accion':accion,
+		}
+
+	else:
+		genero2 = Peliculas.objects.filter(genero=generos[0])
+		genero3 = generos
+		contexto = {
+		'genero2':genero2,
+		'genero3':generos,
+
+		}
+
+		if generos == "COME":
+			comedia = Generox.objects.get(genero_name="comedia")
+			contexto['comedia'] = comedia
+		elif generos == "ACC":
+			accion = Generox.objects.get(genero_name="accion")
+			contexto['accion'] = accion
+		elif generos == "SC":
+			ciencia_ficcion = Generox.objects.get(genero_name="ciencia_ficcion")
+			contexto['ciencia_ficcion'] = ciencia_ficcion
+		elif generos == "ROM":
+			romance = Generox.objects.get(genero_name="romance")
+			contexto['romance'] = romance
+		elif generos == "TER":
+			terror = Generox.objects.get(genero_name="terror")
+			contexto['terror'] = terror
+		elif generos == "FANT":
+			fantasia = Generox.objects.get(genero_name="fantasia")
+			contexto['fantasia'] = fantasia
+		elif generos == "AVEN":
+			aventura = Generox.objects.get(genero_name="aventura")
+			contexto['aventura'] = aventura
+		elif generos == "CRI":
+			crimen = Generox.objects.get(genero_name="crimen")
+			contexto['crimen'] = crimen
+		elif generos == "DOCU":
+			documental = Generox.objects.get(genero_name="documental")
+			contexto['documental'] = documental
+		elif generos == "SUS":
+			suspenso = Generox.objects.get(genero_name="suspenso")
+			contexto['suspenso'] = suspenso
+		elif generos == "ANI":
+			animacion = Generox.objects.get(genero_name="animacion")
+			contexto['animacion'] = animacion
+		elif generos == "DRA":
+			drama = Generox.objects.get(genero_name="drama")
+			contexto['drama'] = drama
+		
+		
+		
 
 
 	return render(request, 'generoview.html', contexto)
@@ -1163,76 +1213,125 @@ def Orden(request, generos):
 
 def genero_list(request, generos, filtro):
 
-	generocount = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).count()
-	comedia = Generox.objects.get(genero_name="comedia")
-	accion = Generox.objects.get(genero_name="accion")
-	ciencia_ficcion = Generox.objects.get(genero_name="ciencia_ficcion")
+	if not request.is_ajax():
 
-	romance = Generox.objects.get(genero_name="romance")
+		generocount = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).count()
+		comedia = Generox.objects.get(genero_name="comedia")
+		accion = Generox.objects.get(genero_name="accion")
+		ciencia_ficcion = Generox.objects.get(genero_name="ciencia_ficcion")
 
-	terror = Generox.objects.get(genero_name="terror")
+		romance = Generox.objects.get(genero_name="romance")
 
-	fantasia = Generox.objects.get(genero_name="fantasia")
+		terror = Generox.objects.get(genero_name="terror")
 
-	aventura = Generox.objects.get(genero_name="aventura")
+		fantasia = Generox.objects.get(genero_name="fantasia")
 
-	crimen = Generox.objects.get(genero_name="crimen")
-	documental = Generox.objects.get(genero_name="documental")
-	suspenso = Generox.objects.get(genero_name="suspenso")
-	animacion = Generox.objects.get(genero_name="animacion")
-	drama = Generox.objects.get(genero_name="drama")
+		aventura = Generox.objects.get(genero_name="aventura")
 
-	genero = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by('-puntuacion')
+		crimen = Generox.objects.get(genero_name="crimen")
+		documental = Generox.objects.get(genero_name="documental")
+		suspenso = Generox.objects.get(genero_name="suspenso")
+		animacion = Generox.objects.get(genero_name="animacion")
+		drama = Generox.objects.get(genero_name="drama")
 
-	genero2 = Peliculas.objects.filter(genero=generos[0])
-	genero3 = generos
-	seriesall = False
-	juan = filtro.lstrip("_")
-	filtron = filtro
-	
+		genero = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by('-puntuacion')
 
-	peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
-	peliculase = []
+		genero2 = Peliculas.objects.filter(genero=generos[0])
+		genero3 = generos
+		seriesall = False
+		juan = filtro.lstrip("_")
+		filtron = filtro
+		
 
-	for i in peliculasee:
-		peliculase.append(i.peliculas)
-	if "_" in filtro[0]:
-		peliculas_list = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by("-" + juan)
-	else: 
-		peliculas_list = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by(filtro)
-	paginator = Paginator(peliculas_list, 30)
-	page = request.GET.get('page')
-	try:
-		peliculas = paginator.page(page)
-	except PageNotAnInteger:
-		peliculas = paginator.page(1)
-	except EmptyPage:
-		peliculas = paginator.page(paginator.num_pages)
+		peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
+		peliculase = []
 
-	contexto = {
-	'genero':genero,
-	'generocount':generocount,
-	'genero2':genero2,
-	'genero3':generos,
-	'peliculas':peliculas,
-	'filtro':filtron,
-	'seriesall':seriesall,
-	'peliculase':peliculase,
-	'comedia':comedia,
-	'ciencia_ficcion':ciencia_ficcion,
-	'terror':terror,
-	'romance':romance,
-	'aventura':aventura,
-	'suspenso':suspenso,
-	'documental':documental,
-	'crimen':crimen,
-	'fantasia':fantasia,
-	'animacion':animacion,
-	'drama':drama,
-	'accion':accion,
+		for i in peliculasee:
+			peliculase.append(i.peliculas)
+		if "_" in filtro[0]:
+			peliculas_list = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by("-" + juan)
+		else: 
+			peliculas_list = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by(filtro)
+		paginator = Paginator(peliculas_list, 30)
+		page = request.GET.get('page')
+		try:
+			peliculas = paginator.page(page)
+		except PageNotAnInteger:
+			peliculas = paginator.page(1)
+		except EmptyPage:
+			peliculas = paginator.page(paginator.num_pages)
+
+		contexto = {
+		'genero':genero,
+		'generocount':generocount,
+		'genero2':genero2,
+		'genero3':generos,
+		'peliculas':peliculas,
+		'filtro':filtron,
+		'seriesall':seriesall,
+		'peliculase':peliculase,
+		'comedia':comedia,
+		'ciencia_ficcion':ciencia_ficcion,
+		'terror':terror,
+		'romance':romance,
+		'aventura':aventura,
+		'suspenso':suspenso,
+		'documental':documental,
+		'crimen':crimen,
+		'fantasia':fantasia,
+		'animacion':animacion,
+		'drama':drama,
+		'accion':accion,
 
 
-	}
+		}
+	else:
+		genero2 = Peliculas.objects.filter(genero=generos[0])
+		genero3 = generos
+		contexto = {
+		'genero2':genero2,
+		'genero3':generos,
+
+		}
+
+		if generos == "COME":
+			comedia = Generox.objects.get(genero_name="comedia")
+			contexto['comedia'] = comedia
+		elif generos == "ACC":
+			accion = Generox.objects.get(genero_name="accion")
+			contexto['accion'] = accion
+		elif generos == "SC":
+			ciencia_ficcion = Generox.objects.get(genero_name="ciencia_ficcion")
+			contexto['ciencia_ficcion'] = ciencia_ficcion
+		elif generos == "ROM":
+			romance = Generox.objects.get(genero_name="romance")
+			contexto['romance'] = romance
+		elif generos == "TER":
+			terror = Generox.objects.get(genero_name="terror")
+			contexto['terror'] = terror
+		elif generos == "FANT":
+			fantasia = Generox.objects.get(genero_name="fantasia")
+			contexto['fantasia'] = fantasia
+		elif generos == "AVEN":
+			aventura = Generox.objects.get(genero_name="aventura")
+			contexto['aventura'] = aventura
+		elif generos == "CRI":
+			crimen = Generox.objects.get(genero_name="crimen")
+			contexto['crimen'] = crimen
+		elif generos == "DOCU":
+			documental = Generox.objects.get(genero_name="documental")
+			contexto['documental'] = documental
+		elif generos == "SUS":
+			suspenso = Generox.objects.get(genero_name="suspenso")
+			contexto['suspenso'] = suspenso
+		elif generos == "ANI":
+			animacion = Generox.objects.get(genero_name="animacion")
+			contexto['animacion'] = animacion
+		elif generos == "DRA":
+			drama = Generox.objects.get(genero_name="drama")
+			contexto['drama'] = drama
+		
+		
 	return render(request, 'generoview.html', contexto)
 
 def añadirfavorito(request, id):
