@@ -483,18 +483,29 @@ def peliculasO(request, slug, *args, **kwargs):
 		peliculase = Vermastarde.objects.filter(peliculas_id=id).filter(usuario_id=request.user.id)
 		peliculasf = peliculaa.favoritos.filter(id=request.user.id)
 		# esto es para relacionar las peliculas de acuerdo a las palabras clave, director,titulo, tema, ect
-		relacionarr = Peliculas.objects.filter(Q(tag_principal__icontains=peliculaa.tag_principal)).order_by('-puntuacion')[:10]
-		relacionarcc = Peliculas.objects.filter(Q(tag_principal__icontains=peliculaa.tag_principal)).count()
-
+		if peliculaa.tag_principal != "":
+			relacionarr = Peliculas.objects.filter(Q(tag_principal__icontains=peliculaa.tag_principal)).order_by('-puntuacion')[:10]
+			relacionarcc = Peliculas.objects.filter(Q(tag_principal__icontains=peliculaa.tag_principal)).count()
+		else:
+			relacionarr = Peliculas.objects.filter(Q(tag_principal__icontains="ALSJDHQWIPEQWI")).order_by('-puntuacion')[:10]
+			relacionarcc = Peliculas.objects.filter(Q(tag_principal__icontains="ALSJDHQWIPEQWI")).count()
 		relacionarpordirect = Peliculas.objects.filter(Q(director__icontains=peliculaa.director)).order_by('-puntuacion')[:10]
 		relacionarpordirectc = Peliculas.objects.filter(Q(director__icontains=peliculaa.director)).order_by('-puntuacion').count()
-
+		
 		relacionarportitulo = Peliculas.objects.filter(Q(titulo__startswith=peliculaa.titulo[:3])).order_by('-puntuacion')[:10]
 		relacionarportituloc = Peliculas.objects.filter(Q(titulo__startswith=peliculaa.titulo[:3])).order_by('-puntuacion').count()
-		
+		if peliculaa.tema == "":
+			peliculaa.tema = "ALSJDHQWIPEQWI"
+		if peliculaa.tag1 == "":
+			peliculaa.tag1 = "ALSJDHQWIPEQWI"
+		if peliculaa.tag2 == "":
+			peliculaa.tag2 = "ALSJDHQWIPEQWI"
+		if peliculaa.tag3 == "":
+			peliculaa.tag3 = "ALSJDHQWIPEQWI"
+
 		relacionarportema = Peliculas.objects.filter(Q(tema__iexact=peliculaa.tema)|Q(tag1__iexact=peliculaa.tag1)|Q(tag2__iexact=peliculaa.tag2)|Q(tag3__iexact=peliculaa.tag3)).order_by('-puntuacion')[:10]
 		relacionarportemac = Peliculas.objects.filter(Q(tema__iexact=peliculaa.tema)|Q(tag1__iexact=peliculaa.tag1)|Q(tag2__iexact=peliculaa.tag2)|Q(tag3__iexact=peliculaa.tag3)).order_by('-puntuacion')[:10].count()
-	
+
 	votacion = Votacion.objects.all()
 	user_id = peliculaa.favoritos.all()
 	if user_id:
