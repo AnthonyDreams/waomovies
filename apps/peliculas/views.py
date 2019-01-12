@@ -34,6 +34,7 @@ from apps.notificaciones.models import Notificaciones, Evento, Compartir
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.conf import settings
+from apps.news.models import Hitcount_Articulos
 class pelis(APIView):
 	serializer = peliserializer
 	def get(self, request, format=None):
@@ -258,7 +259,7 @@ def inicio(request):
 	documental = Peliculas.objects.filter(Q(genero='DOCU')|Q(genero2='DOCU')).count()
 
 	peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
-	ultimo = Capitulos.objects.all().order_by('id')[:20]
+	ultimo = Capitulos.objects.all().order_by('id')[:10]
 	capi = []
 	temporada = []
 	for n in ultimo:
@@ -275,14 +276,14 @@ def inicio(request):
 	count_series = Hitcount_Series.objects.all()
 
 	if count:
-		topsemanal = Hitcount.objects.filter(publish__day__range=(datetime.now().day - 7,datetime.now().day + 7)).order_by('-hitcount')[:20]
+		topsemanal = Hitcount.objects.filter(publish__day__range=(datetime.now().day - 7,datetime.now().day + 7)).exclude(hitcount=0).order_by('-hitcount')[:10]
 		
 
 	else:
 		topsemanal = False
 		topsemanall = False
 	if count_series:
-		topsemanal_serie = Hitcount_Series.objects.filter(capitulo_id__isnull=True).order_by('-hitcount')[:20]
+		topsemanal_serie = Hitcount_Series.objects.filter(capitulo_id__isnull=True).order_by('-hitcount')[:10]
 		
 
 	else:
@@ -295,8 +296,8 @@ def inicio(request):
 
 	
 
-	peliculas = Peliculas.objects.all().order_by('-id')[:20]
-	series = Series.objects.all().order_by('-id')[:20]
+	peliculas = Peliculas.objects.all().order_by('-id')[:16]
+	series = Series.objects.all().order_by('-id')[:16]
 	movies = Peliculas.objects.all().order_by('-id')[:10]
 	trailers = Trailers.objects.all()[:10]
 
@@ -1669,3 +1670,36 @@ def gettingembed(request, id):
 		}
 
 		return JsonResponse(data)
+
+def actualizar_tops(request):
+	if not request.is_ajax() and request.user.is_admin:
+		hit = Hitcount.objects.all()
+		hit_serie = Hitcount_Series.objects.all()
+		hit_articulos = Hitcount_Articulos.objects.all()
+		for h in hit: 
+			if timezone.now() >= h.expired:
+				h.hitcount = 0
+				h.expired = timezone.now() + timedelta(days=7)
+				h.save()	
+		for h_serie in hit_serie:
+			if timezone.now() >= h_serie.expired:
+				h_serie.hitcount = 0
+				h_serie.expired = timezone.now() + timedelta(days=7)
+				h_serie.save()
+		for h_articulos in hit_articulos:
+			if timezone.now() >= h_articulos.expired_day:
+				h_articulos.hitcount_day = 0
+				h_articulos.expired_day = timezone.now() + timedelta(days=1)
+				h_articulos.save()
+			
+			if timezone.now() >= h_articulos.expired_week:
+				h_articulos.hitcount_week = 0
+				h_articulos.expired_week = timezone.now() + timedelta(days=7)
+				h_articulos.save()
+			
+			if timezone.now() >= h_articulos.expired_month:
+				h_articulos.hitcount_month = 0
+				h_articulos.expired_month = timezone.now() + timedelta(days=7)
+				h_articulos.save()
+			
+	return HttpResponseRedirect('/inicio/')

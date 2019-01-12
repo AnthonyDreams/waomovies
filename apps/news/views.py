@@ -19,7 +19,7 @@ def NewsList(request):
 	global_count = Article.objects.filter(categoria="Global").count()
 
 	paginator = Paginator(articulos_list, 30)
-	mas_vistas = Hitcount_Articulos.objects.all().order_by('-hitcount_week')[:4]
+	mas_vistas = Hitcount_Articulos.objects.all().exclude(hitcount_week=0).order_by('-hitcount_week')[:4]
 	page = request.GET.get('page')
 	try:
 		articulos = paginator.page(page)
@@ -61,7 +61,7 @@ def Categories(request, categorie):
 	else:
 		raise 404
 	paginator = Paginator(articulos_list, 30)
-	mas_vistas = Hitcount_Articulos.objects.all().order_by('-hitcount_week')[:4]
+	mas_vistas = Hitcount_Articulos.objects.all().exclude(hitcount_week=0).order_by('-hitcount_week')[:4]
 	page = request.GET.get('page')
 	try:
 		articulos = paginator.page(page)
@@ -97,7 +97,7 @@ def BlogDetail(request, categorie,slug):
 	comentarios = Post.objects.filter(articulo_id=blog_detail.id)
 
 
-	mas_vistas = Hitcount_Articulos.objects.all().order_by('-hitcount_week')[:4]
+	mas_vistas = Hitcount_Articulos.objects.all().exclude(hitcount_week=0).order_by('-hitcount_week')[:4]
 	if request.user.is_authenticated:
 		try:
 			userario = Votacion_Articulos.objects.filter(user=request.user, articulo_id=blog_detail.id)[0]
@@ -128,7 +128,7 @@ def BlogDetail(request, categorie,slug):
 					instance.hitcount_day = 0
 					instance.hitcount_week = h.hitcount_week + 1
 					instance.hitcount_month = h.hitcount_month + 1
-					instance.expired_day = timezone.now() + timedelta(days=7)
+					instance.expired_day = timezone.now() + timedelta(days=1)
 					instance.save()
 			else:
 				if form:
@@ -225,7 +225,7 @@ def BlogSearch(request, searched):
 	noticias_count = Article.objects.filter(categoria="Noticias").count()
 	critica_count = Article.objects.filter(categoria="Critica").count()
 	global_count = Article.objects.filter(categoria="Global").count()
-	mas_vistas = Hitcount_Articulos.objects.all().order_by('-hitcount_week')[:4]
+	mas_vistas = Hitcount_Articulos.objects.all().exclude(hitcount_week=0).order_by('-hitcount_week')[:4]
 	src = searched
 	srch = src
 	slugsearch = ""

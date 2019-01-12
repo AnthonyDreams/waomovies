@@ -6,11 +6,13 @@ from apps.peliculas.views import (peliculas_list, peliculasO, Generos,
     answer_me, myview, peliculas_listodo,test,
     FavoritoFormView, EliminarFavoritoFormView, filtrar, cookies,
     GeneroF, GeneroF_eliminar,pelis_user_nove,añadiste,
-    seguirviendo,seguirviendo_series,cambiar_votaciono,Read,CompRead,gettingembed,testing, search_result, genero_list, Notifi, Friendsitos, CompAPI)
+    seguirviendo,seguirviendo_series,actualizar_tops,cambiar_votaciono,Read,CompRead,gettingembed,testing, search_result, genero_list, Notifi, Friendsitos, CompAPI)
 
 
 
 urlpatterns = [
+
+    path('actualizar/', actualizar_tops, name='actualizar_tops'),
     path('inicio/', inicio, name='inicio'),
     path('test/', test, name='test'),
     re_path(r'^generoz/(?P<genre>[\w-]+)/$', GeneroF, name='GeneroF'),
