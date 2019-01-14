@@ -48,7 +48,7 @@
 
 	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/drama/" method="post">
 		{% csrf_token %}
-		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i id="g{{genero3}}" class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
@@ -56,7 +56,7 @@
 <form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/drama/" method="post"> {% csrf_token%}
 
 	
-						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i id="g{{genero3}}" class="fa fa-plus"></i> Seguir</button>
 		
 	</form>
 	
@@ -70,7 +70,7 @@
 
 	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/accion/" method="post">
 		{% csrf_token %}
-		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i id="g{{genero3}}" class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
@@ -78,7 +78,7 @@
 <form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/accion/" method="post"> {% csrf_token%}
 
 	
-						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i id="g{{genero3}}" class="fa fa-plus"></i> Seguir</button>
 		
 	</form>
 	
@@ -92,7 +92,7 @@
 
 	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/ciencia_ficcion/" method="post">
 		{% csrf_token %}
-		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i id="g{{genero3}}" class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
@@ -100,7 +100,7 @@
 <form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/ciencia_ficcion/" method="post"> {% csrf_token%}
 
 	
-						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i id="g{{genero3}}" class="fa fa-plus"></i> Seguir</button>
 		
 	</form>
 	
@@ -114,7 +114,7 @@
 
 	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/romance/" method="post">
 		{% csrf_token %}
-		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i id="g{{genero3}}" class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
@@ -122,7 +122,7 @@
 <form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/romance/" method="post"> {% csrf_token%}
 
 	
-						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i id="g{{genero3}}" class="fa fa-plus"></i> Seguir</button>
 		
 	</form>
 	
@@ -136,7 +136,7 @@
 
 	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/crimen/" method="post">
 		{% csrf_token %}
-		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i id="g{{genero3}}" class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
@@ -144,7 +144,7 @@
 <form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/crimen/" method="post"> {% csrf_token%}
 
 	
-						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i id="g{{genero3}}" class="fa fa-plus"></i> Seguir</button>
 		
 	</form>
 	
@@ -158,7 +158,7 @@
 
 	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/comedia/" method="post">
 		{% csrf_token %}
-		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i id="g{{genero3}}" class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
@@ -166,7 +166,7 @@
 <form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/comedia/" method="post"> {% csrf_token%}
 
 	
-						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i id="g{{genero3}}" class="fa fa-plus"></i> Seguir</button>
 		
 	</form>
 	
@@ -180,7 +180,7 @@
 
 	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/terror/" method="post">
 		{% csrf_token %}
-		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i id="g{{genero3}}" class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
@@ -188,7 +188,7 @@
 <form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/terror/" method="post"> {% csrf_token%}
 
 	
-						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i id="g{{genero3}}" class="fa fa-plus"></i> Seguir</button>
 		
 	</form>
 	
@@ -202,7 +202,7 @@
 
 	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/aventura/" method="post">
 		{% csrf_token %}
-		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit" ><i id="g{{genero3}}" class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
@@ -210,7 +210,7 @@
 <form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/aventura/" method="post"> {% csrf_token%}
 
 	
-						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+						<button id="{{genero3}}" class="btn btn-primary" onclick="generosele(this)" type="submit"  style=""><i id="g{{genero3}}" class="fa fa-plus"></i> Seguir</button>
 		
 	</form>
 	
@@ -224,7 +224,7 @@
 
 	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/suspenso/" method="post">
 		{% csrf_token %}
-		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i id="g{{genero3}}" class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
@@ -232,7 +232,7 @@
 <form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/suspenso/" method="post"> {% csrf_token%}
 
 	
-						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit"  style=""><i id="g{{genero3}}" class="fa fa-plus"></i> Seguir</button>
 		
 	</form>
 	
@@ -246,7 +246,7 @@
 
 	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/animacion/" method="post">
 		{% csrf_token %}
-		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i id="g{{genero3}}" class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
@@ -254,7 +254,7 @@
 <form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/animacion/" method="post"> {% csrf_token%}
 
 	
-						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit"  style=""><i id="g{{genero3}}" class="fa fa-plus"></i> Seguir</button>
 		
 	</form>
 	
@@ -268,7 +268,7 @@
 
 	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/fantasia/" method="post">
 		{% csrf_token %}
-		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i id="g{{genero3}}" class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
@@ -276,7 +276,7 @@
 <form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/fantasia/" method="post"> {% csrf_token%}
 
 	
-						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;"  onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;"  onclick="generosele(this)" type="submit"  style=""><i id="g{{genero3}}" class="fa fa-plus"></i> Seguir</button>
 		
 	</form>
 	
@@ -290,7 +290,7 @@
 
 	<form class="{{genero3}}" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/documental/" method="post">
 		{% csrf_token %}
-		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i class="fa fa-check"></i> Siguiendo</button>
+		<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit" ><i id="g{{genero3}}" class="fa fa-check"></i> Siguiendo</button>
 		
 	</form>
 	{% else %}
@@ -298,7 +298,7 @@
 <form class="{{genero3}}" style="display: inline; position: relative; top:8px;" data-url="/generoz/documental/" method="post"> {% csrf_token%}
 
 	
-						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit"  style=""><i class="fa fa-plus"></i> Seguir</button>
+						<button id="{{genero3}}" class="btn btn-primary" style="padding: 5px 10px; font-size: 15px;" onclick="generosele(this)" type="submit"  style=""><i id="g{{genero3}}" class="fa fa-plus"></i> Seguir</button>
 		
 	</form>
 	
@@ -312,8 +312,8 @@
 	<script type="text/javascript">
 	function generosele(b) {
 		var juan = b.id
-														var c = juan.substr(3)
-														var z = juan.substr(5)
+														var c = juan.substr(1)
+														
 
 
 														
@@ -333,12 +333,9 @@
 													        success: handleFormSuccess,
 													        error: handleFormError,
 													        beforeSend: function () {
-           //   document.getElementById("sendingfav" + z).style.display = "initial";
-
-                  //  $("#" +z ).src="none";
-                    
-
-                     //Agregamos la clase loading al body
+													        	$("#g" + juan).removeClass('fa-check');
+													        	$("#g" + juan).removeClass('fa-plus');
+       $("#g" + juan).addClass('fa-circle-o-notch');
                 },
 													    })
 													})

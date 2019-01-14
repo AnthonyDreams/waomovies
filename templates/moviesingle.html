@@ -955,6 +955,12 @@ $(this).remove();
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
+                     beforeSend: function () {
+                                                                
+        $("#like" + c).removeClass('fa-thumbs-up');
+       $("#like" + c).addClass('fa-circle-o-notch');
+                },
+                        
                     
 
 
@@ -998,6 +1004,12 @@ function unlike(b) {
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
+                     beforeSend: function () {
+                                                                
+        $("#unlike" + c).removeClass('fa-thumbs-down');
+       $("#unlike" + c).addClass('fa-circle-o-notch');
+                },
+                     
                     
 
 
@@ -1684,21 +1696,21 @@ $(this).remove();
  {% if not request.user in i.vote.all %}
  <form style="display: inline;" method="post" class="like{{i.id}}" data-url="/like/{{i.id}}/">{% csrf_token %}
  
-<button  class="buttonn" onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a  style=" color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
+<button  class="buttonn" onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a  style=" color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true" id="like{{i.id}}"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
 </form>
 {% else %}
 <form style="display: inline;" method="post" class="like{{i.id}}" data-url="/outlike/{{i.id}}/">{% csrf_token %}
  
-<button class="buttonn"  onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
+<button class="buttonn"  onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true" id="like{{i.id}}"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
 </form>
 {% endif %}
 {% if not request.user in i.unvote.all %}
 <form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/dislike/{{i.id}}/">{% csrf_token %}
- <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  > <span id="count">{{i.unvote.all|length}}</span> </i></a></button>
+ <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true" id="unlike{{i.id}}" > <span id="count">{{i.unvote.all|length}}</span> </i></a></button>
 </form>
 {% else %}
 <form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/outdislike/{{i.id}}/">
- <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  > <span id="count">{{i.unvote.all|length}}</span> </i></a></button>
+ <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  id="unlike{{i.id}}"> <span id="count">{{i.unvote.all|length}}</span> </i></a></button>
 </form>
 {% endif %}
   <a   data-toggle="collapse" data-target="#collapseExample{{i.id}}z" aria-expanded="false
