@@ -4460,6 +4460,12 @@ background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, F
   }
 }
 
+@media (max-width: 600px) {
+  .mv-item-infor p  {
+    margin-left: -30px;
+  }
+}
+
 @media (max-width: 390px) {
   .mv-item-infor p  {
     font-size: 13px;
@@ -4591,6 +4597,48 @@ background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, F
   color: #dcf836;
 }
 @media (max-width: 667px) {
+  .movie-item-style-1 {
+    margin-left: 0px;
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 555px) {
+  .movie-item-style-1 {
+    margin-left: 0px;
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 530px) {
+  .movie-item-style-1 {
+    margin-left: 0px;
+    max-width: 140px;
+  }
+}
+
+@media (max-width: 520px) {
+  .movie-item-style-1 {
+    margin-left: 0px;
+    max-width: 130px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-item-style-1 {
+    margin-left: 0px;
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 450px) {
+  .movie-item-style-1 {
+    margin-left: 0px;
+    max-width: 110px;
+  }
+}
+
+@media (max-width: 440px) {
   .movie-item-style-1 {
     margin-left: 0px;
     max-width: 160px;
@@ -5188,6 +5236,7 @@ background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, F
 .tabs {
   margin-bottom: 60px;
   overflow: hidden;
+  width: 102%;
 }
 .tabs ul.tab-links,
 .tabs ul.tab-links-2,
