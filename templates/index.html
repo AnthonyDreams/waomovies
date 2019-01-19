@@ -1136,44 +1136,7 @@ $('#tabcontentin').append('<div id="zzz'+value.id+'"  class="slide-it" style="wi
 	</div>
 </div>
 
-<div class="trailers">
-	<div class="container">
-		<div class="row ipad-width">
-			<div class="col-md-12">
-				<div class="title-hd">
-					<h2>Próximamente</h2>
-					
-				</div>
-				<div class="videos">
-				 	<div class="slider-for-2 video-ft">
-				 		{% for trailer in trailers %}
 
-            <div>
-					    	<iframe class="item-video" src="" data-src="{{ trailer.links }}"></iframe>
-					    </div>
-					    
-						{% endfor %}
-						
-					</div>
-					<div class="slider-nav-2 thumb-ft">
-						{% for trailer in trailers %}
-            <div class="item">
-							<div class="trailer-img">
-								<img src="{{ trailer.trailer_cover.url }}" alt="" width="4096" height="2737">
-							</div>
-							<div class="trailer-infor">
-	                        	<h4 class="desc">{{ trailer.titulo }}</h4>
-	                        </div>
-						</div>
-					           {% endfor %}
-
-					
-					</div>
-				</div>   
-			</div>
-		</div>
-	</div>
-</div>
 <!-- latest new v1 section-->
 <div class="latestnew">
 	<div class="container">
