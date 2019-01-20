@@ -1153,7 +1153,7 @@ var load = false
 </div>
             
 
-
+{% if not request.user.is_authenticated %}
 
 <div class="login-wrapper" id="login-content" style="z-index: 500000;">
     <div class="login-content">
@@ -1267,6 +1267,7 @@ var load = false
     }
     window.onload=miFuncionload;
 </script>
+{% endif %}
 
 <header class="ht-header" id="coño" style="height: 65px;">
 
