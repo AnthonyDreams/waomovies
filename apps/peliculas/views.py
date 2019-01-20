@@ -721,6 +721,7 @@ def peliculas_list(request, filtro):
 	'filtro':filtron,
 	'seriesall':seriesall,
 	'peliculase':peliculase,
+	'select':filtro,
 
 
 	}
@@ -1049,7 +1050,7 @@ def Orden(request, generos):
 		animacion = Generox.objects.get(genero_name="animacion")
 		drama = Generox.objects.get(genero_name="drama")
 
-		genero = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by('-puntuacion')
+		genero = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by('-id')
 
 		genero2 = Peliculas.objects.filter(genero=generos[0])
 		genero3 = generos
@@ -1213,6 +1214,7 @@ def genero_list(request, generos, filtro):
 		'animacion':animacion,
 		'drama':drama,
 		'accion':accion,
+		'select':filtro,
 
 
 		}

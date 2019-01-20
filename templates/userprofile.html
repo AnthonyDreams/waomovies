@@ -255,7 +255,7 @@
 						<h4>Generos preferidos</h4>
 						<p style="margin-top: -18px; padding-bottom: 6px;">Selecciona tus generos preferidos para una mejor selección de contendio para ti </p>
 {% if request.user in comedia.comedia.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px; " class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form  class="comedia" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/comedia/" method="post"> {% csrf_token %}
 		{% csrf_token %}
@@ -275,7 +275,7 @@
 	{% if request.user in comedia.comedia.all %}<p style="text-align: center; margin-top:-10px;">Comedia</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Comedia</p>{% endif %}
 </div>
 {% if request.user in drama.drama.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class="col col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class="col col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="drama" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/drama/" method="post">
 
@@ -294,7 +294,7 @@
 	{% if request.user in drama.drama.all %}<p style="text-align: center; margin-top:-10px;">Drama</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Drama</p>{% endif %}
 </div>
 {% if request.user in accion.accion.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="accion" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/accion/" method="post">
 		{% csrf_token %}
@@ -311,7 +311,7 @@
 	
 </div>
 {% if request.user in documental.documental.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="documental" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/documental/" method="post">
 		{% csrf_token %}
@@ -327,7 +327,7 @@
 	{% if request.user in documental.documental.all %}<p style="text-align: center; margin-top:-10px; position: relative; left: -12px;">Documental</p>{% else %}<p style="text-align: center; position:relative; top:14px; left: -12px;">Documental</p>{% endif %}
 </div>
 {% if request.user in fantasia.fantasia.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="fantasia" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/fantasia/" method="post">
 		{% csrf_token %}
@@ -343,7 +343,7 @@
 	{% if request.user in fantasia.fantasia.all %}<p style="text-align: center; margin-top:-10px;">Fantasía</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Fantasía</p>{% endif %}
 </div>
 {% if request.user in terror.terror.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="terror" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/terror/" method="post">
 		{% csrf_token %}
@@ -360,7 +360,7 @@
 </div>
 <br>
 {% if request.user in animacion.animacion.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="animacion" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/animacion/" method="post">
 		{% csrf_token %}
@@ -377,7 +377,7 @@
 </div>
 
 {% if request.user in aventura.aventura.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="aventura" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/aventura/" method="post">
 		{% csrf_token %}
@@ -393,7 +393,7 @@
 	{% if request.user in aventura.aventura.all %}<p style="text-align: center; margin-top:-10px;">Aventura</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Aventura</p>{% endif %}
 </div>
 {% if request.user in romance.romance.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="romance" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/romance/" method="post">
 		{% csrf_token %}
@@ -409,7 +409,7 @@
 	{% if request.user in romance.romance.all %}<p style="text-align: center; margin-top:-10px;">Romance</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Romance</p>{% endif %}
 </div>
 {% if request.user in ciencia_ficcion.ciencia_ficcion.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="ciencia_ficcion" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/ciencia_ficcion/" method="post">
 		{% csrf_token %}
@@ -425,7 +425,7 @@
 	{% if request.user in ciencia_ficcion.ciencia_ficcion.all %}<p style="text-align: center; margin-top:-10px;">Sci Fi</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Sci Fi</p>{% endif %}
 </div>
 {% if request.user in crimen.crimen.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="crimen"  style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/crimen/" method="post">
 		{% csrf_token %}
@@ -441,16 +441,16 @@
 	{% if request.user in crimen.crimen.all %}<p style="text-align: center; margin-top:-10px;">Crimen</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Crimen</p>{% endif %}
 </div>
 {% if request.user in suspenso.suspenso.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 15px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px; position relative; top: 9px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px; position relative; top: 2px;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="suspenso"  style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/suspenso/" method="post">
 		{% csrf_token %}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -4px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
+	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
 <form class="suspenso" style="display: inline; position: relative; top:8px;" data-url="/generoz/suspenso/" method="post"> {% csrf_token%}
 {% endif %}
 	
-						<img src="{% static 'img/suspenso.png' %}" width="45">
+						<img src="{% static 'img/suspenso.png' %}" width="37">
 						<button id="suspenso" class="" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -30px; background:none; margin-left: -70px; border:none; cursor: pointer;"></button>
 		
 	</form>

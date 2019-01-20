@@ -47,12 +47,12 @@ El mago de Oz (1939)</h1>
 					<label>Ordenar por:</label>
 					<form name="FORMULARIO">
 					<select name="DESPLEGABLE" onChange='location.replace(document.FORMULARIO.DESPLEGABLE.value);'>
-						
-						<option value="/ver%25todo/">Orden de subida</option>
-						<option value="/ver%25todo/_puntuacion/">Mejor puntuada</option>
-						<option value="/ver%25todo/puntuacion/">Peor puntuada</option>
-						<option value="/ver%25todo/_fecha_de_lanzamiento/">Más reciente</option>
-						<option value="/ver%25todo/fecha_de_lanzamiento/">Más antigua</option>
+						<option value="/ver%25todo/_id/" {% if filtro == "_id" %} selected {% endif %}>Orden de subida(Últimas)</option>
+						<option value="/ver%25todo/id/" {% if filtro == "id" %} selected {% endif %}>Orden de subida(Primeras)</option>
+						<option value="/ver%25todo/_puntuacion/" {% if filtro == "_puntuacion" %} selected {% endif %}>Mejor puntuada</option>
+						<option value="/ver%25todo/puntuacion/" {% if filtro == "puntuacion" %} selected {% endif %}>Peor puntuada</option>
+						<option value="/ver%25todo/_fecha_de_lanzamiento/" {% if filtro == "_fecha_de_lanzamiento" %} selected {% endif %}>Más reciente</option>
+						<option value="/ver%25todo/fecha_de_lanzamiento/" {% if filtro == "fecha_de_lanzamiento" %} selected {% endif %}>Más antigua</option>
 					</select>
 					</form>
 				</div>

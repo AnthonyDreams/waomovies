@@ -384,12 +384,13 @@
 					<label>Ordenar por:</label>
 					<form name="FORMULARIOD">
 					<select name="DESPLEGABLED" onChange='location.replace(document.FORMULARIOD.DESPLEGABLED.value);'>
+						<option value="/peliculas_por_genero/{{ genero3 }}/_id/" {% if filtro == "_id" %} selected {% endif %}>Orden de subida(Últimas)</option>
+						<option value="/peliculas_por_genero/{{ genero3 }}/id/" {% if filtro == "id" %} selected {% endif %}>Orden de subida(Primeras)</option>
 						
-						<option value="/peliculas_por_genero/{{ genero3 }}/">Orden de subida</option>
-						<option value="/peliculas_por_genero/{{ genero3 }}/_puntuacion/">Mejor puntuada</option>
-						<option value="/peliculas_por_genero/{{ genero3 }}/puntuacion/">Peor puntuada</option>
-						<option value="/peliculas_por_genero/{{ genero3 }}/_fecha_de_lanzamiento/">Más reciente</option>
-						<option value="/peliculas_por_genero/{{ genero3 }}/fecha_de_lanzamiento/">Más antigua</option>
+						<option value="/peliculas_por_genero/{{ genero3 }}/_puntuacion/" {% if filtro == "_puntuacion" %} selected {% endif %}>Mejor puntuada</option>
+						<option value="/peliculas_por_genero/{{ genero3 }}/puntuacion/" {% if filtro == "puntuacion" %} selected {% endif %}>Peor puntuada</option>
+						<option value="/peliculas_por_genero/{{ genero3 }}/_fecha_de_lanzamiento/" {% if filtro == "_fecha_de_lanzamiento" %} selected {% endif %}>Más reciente</option>
+						<option value="/peliculas_por_genero/{{ genero3 }}/fecha_de_lanzamiento/" {% if filtro == "fecha_de_lanzamiento" %} selected {% endif %}>Más antigua</option>
 					</select>
 					</form>
 					
