@@ -62,6 +62,20 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 	    </div>
 	</div>
 </div>
+{% if request.user.is_authenticated %}
+<script type="text/javascript">
+  $(document).ready(function(){
+  var sliderhome = document.getElementById('slider')
+  
+
+  sliderhome.style.display = "initial"
+
+      
+    });
+
+    
+</script>
+{% else %}
 <script type="text/javascript">
   $(document).ready(function(){
   var sliderhome = document.getElementById('slider')
@@ -78,6 +92,8 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 
     
 </script>
+{% endif %}
+
 <div class="generos-content">
 	<ul class="generos-list">
 		<li style="background: #333333;  /* fallback for old browsers */
