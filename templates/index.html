@@ -78,11 +78,67 @@ background: linear-gradient(to right, rgba(248,54,0, 0.7), rgba(254,140,0,0.7));
 
     
 </script>
+<div class="generos-content">
+	<ul class="generos-list">
+		<li style="background: #333333;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #dd1818, #333333);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #dd1818, #333333); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+"><a href="/peliculas_por_genero/ACC/">Acción</a></li>
+		<li style="background: #16222A;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3A6073, #16222A);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+"><a href="/peliculas_por_genero/SC/">Ciencia Ficción</a></li>
+		<li style="background: #f7ff00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #db36a4, #f7ff00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #db36a4, #f7ff00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+"><a href="/peliculas_por_genero/DRA/">Drama</a></li>
+		<li style="background: #12c2e9;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+"><a href="/peliculas_por_genero/ROM/">Romance</a></li>
+		<li style="background: #BA8B02;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #181818, #BA8B02);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #181818, #BA8B02); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+"><a href="/peliculas_por_genero/CRI/">Crimen</a></li>
+		<li style="background: #000000;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */"><a href="/peliculas_por_genero/TER/">Terror</a></li>
+		<li style="background: #3C3B3F;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+"><a href="/peliculas_por_genero/SUS/">Suspenso</a></li>
+		<li style="background: #56ab2f;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+"><a href="/peliculas_por_genero/AVEN/">Aventura</a></li>
+		<li style="background: #FDC830;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+"><a href="/peliculas_por_genero/ANI/">Animación</a></li>
+		<li style="background: #00B4DB;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+"><a href="/peliculas_por_genero/COME/">Comedia</a></li>
+		<li style="background: #4DA0B0;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #D39D38, #4DA0B0);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #D39D38, #4DA0B0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+"><a href="/peliculas_por_genero/FANT/">Fantasía</a></li>
+		<li style="background: #360033;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #0b8793, #360033);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #0b8793, #360033); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+"><a href="/peliculas_por_genero/DOCU/">Documental</a></li>
+
+	</ul>
+	
+</div>
 
 
 <div class="movie-items">
+
 	<div class="container">
+
 		<div class="row ipad-width">
 			<div class="col-md-8">
 				<div class="title-hd">
@@ -1047,7 +1103,7 @@ $('#tabcontentin').append('<div id="zzz'+value.id+'"  class="slide-it" style="wi
 			{% endif %}
 				
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4 generos-full">
 				<div class="sidebar">
 					<div class="ads">
 						<img src="{{anuncios}}" alt="" width="336" height="296">

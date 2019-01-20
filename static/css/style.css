@@ -4596,6 +4596,9 @@ background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, F
 .movie-item-style-1:hover h6 a {
   color: #dcf836;
 }
+
+
+
 @media (max-width: 667px) {
   .movie-item-style-1 {
     margin-left: 0px;
@@ -4603,10 +4606,18 @@ background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, F
   }
 }
 
-@media (max-width: 555px) {
+@media (max-width: 569px) {
   .movie-item-style-1 {
     margin-left: 0px;
     max-width: 150px;
+  }
+}
+
+
+@media (max-width: 555px) {
+  .movie-item-style-1 {
+    margin-left: 0px;
+    max-width: 145px;
   }
 }
 
@@ -4718,9 +4729,49 @@ background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, F
   }
 }
 
+.generos-content {
+    display: none;
+  }
+
 @media (max-width: 991px) {
   .mv-grid-fw {
     max-width: 100%;
+  }
+  .generos-content {
+    display: initial;
+    position: absolute;
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    height: 50px;
+
+  }
+
+  .generos-list {
+    width: 1200px;
+    list-style: none;
+    margin-left: 25px;
+
+
+
+  }
+
+.generos-content .generos-list li{
+    float: left;
+    padding: 4px 14px;
+    text-align: center;
+    cursor:pointer;
+    background-color: blue;
+    border-radius: 20px;
+    margin-left: 8px;
+  }
+
+  .generos-content .generos-list a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Roboto Slab', serif;
+    font-size: 14px;
   }
 }
 
@@ -7938,7 +7989,7 @@ p.ceb-single {
     padding-right: 70px;
   }
   .sidebar {
-    margin-left: 0;
+    display: none;
   }
 }
 @media (max-width: 767px) {
