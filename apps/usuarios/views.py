@@ -349,7 +349,7 @@ def user_ver_favoritos(request, id, *args, **kwargs):
 		raise Http404
 	user_details = False
 	user_favoritos = True
-	peliculas_list = Peliculas.objects.filter(favoritos=usuarioname.id)
+	peliculas_list = Peliculas.objects.filter(favoritos=usuarioname.id).order_by("titulo")
 	paginator = Paginator(peliculas_list, 20)
 	peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
 	peliculase = []
@@ -389,7 +389,7 @@ def user_ver_series_favoritos(request, id, *args, **kwargs):
 
 	for i in peliculasee:
 		peliculase.append(i.series)
-	peliculas_list = Series.objects.filter(favoritos=usuarioname.id)
+	peliculas_list = Series.objects.filter(favoritos=usuarioname.id).order_by("titulo")
 	paginator = Paginator(peliculas_list, 20)
 	page = request.GET.get('page')
 	try:
