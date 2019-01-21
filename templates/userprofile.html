@@ -239,6 +239,16 @@
 							.border-select:hover {
 								display: inline-block; margin-left: 15px;   border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;
 							}
+							@media (max-width: 610px) {
+								.genero-button {
+									margin-left: -15px !important;
+								}
+							}
+							@media (max-width: 480px) {
+								.genero-button {
+									margin-left: -10px !important;
+								}
+							}
 						</style>
 					<script type="text/javascript">
 						function functionas(b)
@@ -255,206 +265,206 @@
 						<h4>Generos preferidos</h4>
 						<p style="margin-top: -18px; padding-bottom: 6px;">Selecciona tus generos preferidos para una mejor selección de contendio para ti </p>
 {% if request.user in comedia.comedia.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px; " class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D;  width: 100px; height: 110px; padding: 3%; border-radius: 7px; text-align:center;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
-	<form  class="comedia" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/comedia/" method="post"> {% csrf_token %}
+	<form  class="comedia" style="display: inline; position: relative; top:-15px; text-align:center;" data-url="/generoz_eliminar/comedia/" method="post"> {% csrf_token %}
 		{% csrf_token %}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
-<form class="comedia" style="display: inline; position: relative; top:8px;" data-url="/generoz/comedia/" method="post"> {% csrf_token%}
+	<div style="display: inline-block; margin-left: 15px; position: relative;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
+<form class="comedia" style="display: inline; position: relative; top:8px; text-align:center;" data-url="/generoz/comedia/" method="post"> {% csrf_token%}
 {% endif %}
 
 	
 
-						<img src="{% static 'img/comedy.png' %}" width="60">
-						<button class="" onclick="generosele(this)" id="comedia" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -70px; background: none; margin-left: -24px; border:none; cursor: pointer;"></button>
+						
+						<button class="genero-button" onclick="generosele(this)" id="comedia" type="submit" style=" width: 100px; height: 100px;  margin-top: -30px; background: none; margin-left: -20px; border:none; cursor: pointer;"><img src="{% static 'img/comedy.png' %}" width="50" style="margin: 0px auto;"></button>
 						
 
 		
 	</form>
-	{% if request.user in comedia.comedia.all %}<p style="text-align: center; margin-top:-10px;">Comedia</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Comedia</p>{% endif %}
+	{% if request.user in comedia.comedia.all %}<p style="text-align: center; margin-top:-39px;">Comedia</p>{% else %}<p style="text-align: center; position:relative; top: -17px; ">Comedia</p>{% endif %}
 </div>
 {% if request.user in drama.drama.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class="col col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D;  width: 100px; height: 110px; padding: 3%; border-radius: 7px; text-align:center;" class="col col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="drama" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/drama/" method="post">
 
 		{% csrf_token%}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px;height: 110px; padding:3%; " class="border-select col-lg-2"> 
+	<div style="display: inline-block; margin-left: 15px; position: relative;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2"> 
 
 		<form class="drama" style="display: inline; position: relative; top:8px;" data-url="/generoz/drama/" method="post"> {% csrf_token%}
 {% endif %}
 	
-						<img src="{% static 'img/drama.png' %}" width="60">
-						<button class="" id="drama" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -70px; background: none; margin-left: -24px; border:none; cursor: pointer;"></button>
+						
+						<button class="genero-button" id="drama" onclick="generosele(this)" type="submit" style=" width: 100px; height: 100px;  margin-top: -30px; background: none; margin-left: -20px; border:none; cursor: pointer;"><img src="{% static 'img/drama.png' %}" width="50" style="margin: 0px auto;"></button>
 
 	</form>
 	
-	{% if request.user in drama.drama.all %}<p style="text-align: center; margin-top:-10px;">Drama</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Drama</p>{% endif %}
+	{% if request.user in drama.drama.all %}<p style="text-align: center; margin-top:-39px;">Drama</p>{% else %}<p style="text-align: center; position:relative; top: -17px; ">Drama</p>{% endif %}
 </div>
 {% if request.user in accion.accion.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D;  width: 100px; height: 110px; padding: 3%; border-radius: 7px; text-align:center;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="accion" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/accion/" method="post">
 		{% csrf_token %}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
+	<div style="display: inline-block; margin-left: 15px; position: relative;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
 <form class="accion" style="display: inline; position: relative; top:8px;" data-url="/generoz/accion/" method="post"> {% csrf_token%}
 {% endif %}
 	
-						<img src="{% static 'img/action.png' %}" width="60">
-						<button id="accion" class="" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -70px; background: none; margin-left: -24px; border:none; cursor: pointer;"></button>
+						
+						<button id="accion" class="genero-button" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px;  margin-top: -30px; background: none; margin-left: -20px; border:none; cursor: pointer;"><img src="{% static 'img/action.png' %}" width="50"></button>
 		
 	</form>
-	{% if request.user in accion.accion.all %}<p style="text-align: center; margin-top:-10px;">Acción</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Acción</p>{% endif %}
+	{% if request.user in accion.accion.all %}<p style="text-align: center; margin-top:-39px;">Acción</p>{% else %}<p style="text-align: center; position:relative; top: -17px; ">Acción</p>{% endif %}
 	
 </div>
 {% if request.user in documental.documental.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D;  width: 100px; height: 110px; padding: 3%; border-radius: 7px; text-align:center;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="documental" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/documental/" method="post">
 		{% csrf_token %}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
+	<div style="display: inline-block; margin-left: 15px; position: relative;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
 <form class="documental" style="display: inline; position: relative; top:8px;" data-url="/generoz/documental/" method="post"> {% csrf_token%}
 {% endif %}
 	
-						<img src="{% static 'img/documentary.png' %}" width="60">
-						<button id="documental" class="" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -70px; background: none; margin-left: -24px; border:none; cursor: pointer;"></button>
+						
+						<button id="documental" class="genero-button" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px;  margin-top: -30px; background: none; margin-left: -20px; border:none; cursor: pointer;"><img src="{% static 'img/documentary.png' %}" width="50"></button>
 		
 	</form>
-	{% if request.user in documental.documental.all %}<p style="text-align: center; margin-top:-10px; position: relative; left: -12px;">Documental</p>{% else %}<p style="text-align: center; position:relative; top:14px; left: -12px;">Documental</p>{% endif %}
+	{% if request.user in documental.documental.all %}<p style="text-align: center; margin-top:-39px;">Documental</p>{% else %}<p style="text-align: center; position:relative; top: -17px; ">Documental</p>{% endif %}
 </div>
 {% if request.user in fantasia.fantasia.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D;  width: 100px; height: 110px; padding: 3%; border-radius: 7px; text-align:center;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="fantasia" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/fantasia/" method="post">
 		{% csrf_token %}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
+	<div style="display: inline-block; margin-left: 15px; position: relative;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
 <form class="fantasia" style="display: inline; position: relative; top:8px;" data-url="/generoz/fantasia/" method="post"> {% csrf_token%}
 {% endif %}
 	
-						<img src="{% static 'img/fantasy.png' %}" width="60">
-						<button id="fantasia" class="" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -70px; background: none; margin-left: -24px; border:none; cursor: pointer;"></button>
+						
+						<button id="fantasia" class="genero-button" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px;  margin-top: -30px; background: none; margin-left: -20px; border:none; cursor: pointer;"><img src="{% static 'img/fantasy.png' %}" width="50"></button>
 		
 	</form>
-	{% if request.user in fantasia.fantasia.all %}<p style="text-align: center; margin-top:-10px;">Fantasía</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Fantasía</p>{% endif %}
+	{% if request.user in fantasia.fantasia.all %}<p style="text-align: center; margin-top:-39px;">Fantasía</p>{% else %}<p style="text-align: center; position:relative; top: -17px; ">Fantasía</p>{% endif %}
 </div>
 {% if request.user in terror.terror.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D;  width: 100px; height: 110px; padding: 3%; border-radius: 7px; text-align:center;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="terror" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/terror/" method="post">
 		{% csrf_token %}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
+	<div style="display: inline-block; margin-left: 15px; position: relative;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
 <form class="terror" style="display: inline; position: relative; top:8px;" data-url="/generoz/terror/" method="post"> {% csrf_token%}
 {% endif %}
 	
-						<img src="{% static 'img/horror.png' %}" width="60">
-						<button id="terror" class="" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -70px; background: none; margin-left: -24px; border:none; cursor: pointer;"></button>
+						
+						<button id="terror" class="genero-button" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px;  margin-top: -30px; background: none; margin-left: -20px; border:none; cursor: pointer;"><img src="{% static 'img/horror.png' %}" width="50"></button>
 		
 	</form>
-	{% if request.user in terror.terror.all %}<p style="text-align: center; margin-top:-10px;">Terror</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Terror</p>{% endif %}
+	{% if request.user in terror.terror.all %}<p style="text-align: center; margin-top:-39px;">Terror</p>{% else %}<p style="text-align: center; position:relative; top: -17px; ">Terror</p>{% endif %}
 </div>
 <br>
 {% if request.user in animacion.animacion.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D;  width: 100px; height: 110px; padding: 3%; border-radius: 7px; text-align:center;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="animacion" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/animacion/" method="post">
 		{% csrf_token %}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
+	<div style="display: inline-block; margin-left: 15px; position: relative;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
 <form class="animacion" style="display: inline; position: relative; top:8px;" data-url="/generoz/animacion/" method="post"> {% csrf_token%}
 {% endif %}
 	
-						<img src="{% static 'img/animation.png' %}" width="60">
-						<button id="animacion" class="" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -70px; background: none; margin-left: -24px; border:none; cursor: pointer;"></button>
+						
+						<button id="animacion" class="genero-button" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px;  margin-top: -30px; background: none; margin-left: -20px; border:none; cursor: pointer;"><img src="{% static 'img/animation.png' %}" width="50"></button>
 		
 	</form>
-	{% if request.user in animacion.animacion.all %}<p style="text-align: center; margin-top:-10px;">Animación</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Animación</p>{% endif %}
+	{% if request.user in animacion.animacion.all %}<p style="text-align: center; margin-top:-39px;">Animación</p>{% else %}<p style="text-align: center; position:relative; top: -17px; ">Animación</p>{% endif %}
 </div>
 
 {% if request.user in aventura.aventura.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D;  width: 100px; height: 110px; padding: 3%; border-radius: 7px; text-align:center;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="aventura" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/aventura/" method="post">
 		{% csrf_token %}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
+	<div style="display: inline-block; margin-left: 15px; position: relative;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
 <form class="aventura" style="display: inline; position: relative; top:8px;" data-url="/generoz/aventura/" method="post"> {% csrf_token%}
 {% endif %}
 	
-						<img src="{% static 'img/adventure.png' %}" width="60">
-						<button id="aventura" class="" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -70px; background: none; margin-left: -24px; border:none; cursor: pointer;"></button>
+						
+						<button id="aventura" class="genero-button" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px;  margin-top: -30px; background: none; margin-left: -20px; border:none; cursor: pointer;"><img src="{% static 'img/adventure.png' %}" width="50"></button>
 		
 	</form>
-	{% if request.user in aventura.aventura.all %}<p style="text-align: center; margin-top:-10px;">Aventura</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Aventura</p>{% endif %}
+	{% if request.user in aventura.aventura.all %}<p style="text-align: center; margin-top:-39px;">Aventura</p>{% else %}<p style="text-align: center; position:relative; top: -17px; ">Aventura</p>{% endif %}
 </div>
 {% if request.user in romance.romance.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D;  width: 100px; height: 110px; padding: 3%; border-radius: 7px; text-align:center;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="romance" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/romance/" method="post">
 		{% csrf_token %}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
+	<div style="display: inline-block; margin-left: 15px; position: relative;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
 <form class="romance" style="display: inline; position: relative; top:8px;" data-url="/generoz/romance/" method="post"> {% csrf_token%}
 {% endif %}
 	
-						<img src="{% static 'img/romance.png' %}" width="60">
-						<button id="romance" class="" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -70px; background: none; margin-left: -24px; border:none; cursor: pointer;"></button>
+						
+						<button id="romance" class="genero-button" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px;  margin-top: -30px; background: none; margin-left: -20px; border:none; cursor: pointer;"><img src="{% static 'img/romance.png' %}" width="50"></button>
 		
 	</form>
-	{% if request.user in romance.romance.all %}<p style="text-align: center; margin-top:-10px;">Romance</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Romance</p>{% endif %}
+	{% if request.user in romance.romance.all %}<p style="text-align: center; margin-top:-39px;">Romance</p>{% else %}<p style="text-align: center; position:relative; top: -17px; ">Romance</p>{% endif %}
 </div>
 {% if request.user in ciencia_ficcion.ciencia_ficcion.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D;  width: 100px; height: 110px; padding: 3%; border-radius: 7px; text-align:center;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="ciencia_ficcion" style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/ciencia_ficcion/" method="post">
 		{% csrf_token %}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
+	<div style="display: inline-block; margin-left: 15px; position: relative;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
 <form class="ciencia_ficcion" style="display: inline; position: relative; top:8px;" data-url="/generoz/ciencia_ficcion/" method="post"> {% csrf_token%}
 {% endif %}
 	
-						<img src="{% static 'img/sci-fi.png' %}" width="60">
-						<button id="ciencia_ficcion" class="" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -70px; background: none; margin-left: -24px; border:none; cursor: pointer;"></button>
+						
+						<button id="ciencia_ficcion" class="genero-button" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px;  margin-top: -30px; background: none; margin-left: -20px; border:none; cursor: pointer;"><img src="{% static 'img/sci-fi.png' %}" width="50"></button>
 		
 	</form>
-	{% if request.user in ciencia_ficcion.ciencia_ficcion.all %}<p style="text-align: center; margin-top:-10px;">Sci Fi</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Sci Fi</p>{% endif %}
+	{% if request.user in ciencia_ficcion.ciencia_ficcion.all %}<p style="text-align: center; margin-top:-39px;">Sci Fi</p>{% else %}<p style="text-align: center; position:relative; top: -17px; ">Sci Fi</p>{% endif %}
 </div>
 {% if request.user in crimen.crimen.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D;  width: 100px; height: 110px; padding: 3%; border-radius: 7px; text-align:center;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="crimen"  style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/crimen/" method="post">
 		{% csrf_token %}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
+	<div style="display: inline-block; margin-left: 15px; position: relative;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
 <form  class="crimen" style="display: inline; position: relative; top:8px;" data-url="/generoz/crimen/" method="post"> {% csrf_token%}
 {% endif %}
 	
-						<img src="{% static 'img/thriller.png' %}" width="60">
-						<button  id="crimen" class="" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -70px; background: none; margin-left: -24px; border:none; cursor: pointer;"></button>
+						
+						<button  id="crimen" class="genero-button" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px;  margin-top: -30px; background: none; margin-left: -20px; border:none; cursor: pointer;"><img src="{% static 'img/thriller.png' %}" width="50"></button>
 		
 	</form>
-	{% if request.user in crimen.crimen.all %}<p style="text-align: center; margin-top:-10px;">Crimen</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Crimen</p>{% endif %}
+	{% if request.user in crimen.crimen.all %}<p style="text-align: center; margin-top:-39px;">Crimen</p>{% else %}<p style="text-align: center; position:relative; top: -17px; ">Crimen</p>{% endif %}
 </div>
 {% if request.user in suspenso.suspenso.all %}
-<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D; width: 100px; height: 110px; padding:3%; border-radius: 7px; position relative; top: 2px;" class=" col-lg-2"> 
+<div style="display: inline-block; margin-left: 15px; margin-bottom: 0px;  border: 1px solid #3DB13D;  width: 100px; height: 110px; padding: 3%; border-radius: 7px; text-align:center;" class=" col-lg-2"> 
 	<i class=" fa fa-check" style="background-color: #3db13d; border-radius: 50%; width: 17px; height: 15px; padding: 2.9%; margin-top: -60px; position: relative; top:-16px; margin-left: 43px; font-size: 13px;"></i>
 	<form class="suspenso"  style="display: inline; position: relative; top:-15px;" data-url="/generoz_eliminar/suspenso/" method="post">
 		{% csrf_token %}
 	{% else %}
-	<div style="display: inline-block; margin-left: 15px; position: relative; top: -12px;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
+	<div style="display: inline-block; margin-left: 15px; position: relative;   width: 100px; height: 110px; padding:3%; " class="border-select col-lg-2">
 <form class="suspenso" style="display: inline; position: relative; top:8px;" data-url="/generoz/suspenso/" method="post"> {% csrf_token%}
 {% endif %}
 	
-						<img src="{% static 'img/suspenso.png' %}" width="37">
-						<button id="suspenso" class="" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px; position: absolute; margin-top: -30px; background:none; margin-left: -70px; border:none; cursor: pointer;"></button>
+						
+						<button id="suspenso" class="genero-button" onclick="generosele(this)" type="submit" style="width: 100px; height: 100px;  margin-top: -30px; background: none; margin-left: -20px; border:none; cursor: pointer;"><img src="{% static 'img/suspenso.png' %}" width="37"></button>
 		
 	</form>
-	{% if request.user in suspenso.suspenso.all %}<p style="text-align: center; margin-top:-10px;">Suspenso</p>{% else %}<p style="text-align: center; position:relative; top:14px;">Suspenso</p>{% endif %}
+	{% if request.user in suspenso.suspenso.all %}<p style="text-align: center; margin-top:-39px;">Suspenso</p>{% else %}<p style="text-align: center; position:relative; top: -17px; ">Suspenso</p>{% endif %}
 </div>
 
 
