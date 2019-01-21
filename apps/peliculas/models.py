@@ -49,6 +49,7 @@ class Peliculas(models.Model):
 	)
 	genero = models.CharField(max_length=20, choices=GENERO_CHOICES)
 	genero2 = models.CharField(max_length=20, choices=GENERO_CHOICES,blank=True, null=True)
+	genero3 = models.CharField(max_length=20, choices=GENERO_CHOICES,blank=True, null=True)
 	pais = models.CharField(max_length=20)
 	sinopsis = models.TextField()
 	puntuacion = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)

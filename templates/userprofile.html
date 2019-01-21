@@ -589,7 +589,7 @@
 					</select>
 					
 				</div>
-				<div class="flex-wrap-movielist grid-fav">
+				<div class="flex-wrap-movielist">
 {% for o in peliculas %}
 						<div class="movie-item-style-2 movie-item-style-1 style-3">
 							<img style=" height: 240px;" src="{% if o.peliculas.Cover %}{{o.peliculas.Cover.url}}{% else %}{{ o.series.serie_cover.url }}{% endif %}" alt="">
@@ -650,7 +650,7 @@
 					</select>
 					
 				</div>
-				<div class="flex-wrap-movielist grid-fav">
+				<div class="flex-wrap-movielist">
 {% for o in peliculas %}
 						<div class="movie-item-style-2 movie-item-style-1 style-3">
 							<img style=" height: 200px;"src="{{o.serie_cover.url}}" alt="">
@@ -923,7 +923,7 @@
 <div class="col-md-9 col-sm-12 col-xs-12">
 				
 				<br>
-				<div class="flex-wrap-movielist grid-fav">
+				<div class="flex-wrap-movielist">
 				
 
 				<span style="margin-top: 30px; margin-bottom: 30px; display: inline-block; position: absolute; font-size: 16px;"><p> Actividad: {{getact.count}}</p></span>

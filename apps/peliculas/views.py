@@ -178,7 +178,7 @@ class pelis_user_nove(APIView):
 			if request.user in a.animacion.all():
 				generos.append('ANI')	
 
-		lista = Peliculas.objects.filter((Q(genero__in=generos)|Q(genero2__in=generos))).order_by("-id")[:20]
+		lista = Peliculas.objects.filter((Q(genero__in=generos)|Q(genero2__in=generos)|Q(genero3__in=generos))).order_by("-id")[:20]
 		response = self.serializer(lista, many=True)
 		return HttpResponse(json.dumps(response.data))
 
@@ -288,18 +288,18 @@ espero hacer uno para poner películas relacionadas según las favoritas del usu
 
 '''
 def inicio(request):
-	accion = Peliculas.objects.filter(Q(genero='ACC')|Q(genero2='ACC')).count()
+	accion = Peliculas.objects.filter(Q(genero='ACC')|Q(genero2='ACC')|Q(genero3='ACC')).count()
 	ciencia_ficcion = Peliculas.objects.filter(genero='SC').count()
-	drama = Peliculas.objects.filter(Q(genero='DRA')|Q(genero2='DRA')).count()
-	romance = Peliculas.objects.filter(Q(genero='ROM')|Q(genero2='ROM')).count()
-	crimen = Peliculas.objects.filter(Q(genero='CRI')|Q(genero2='CRI')).count()
-	suspenso = Peliculas.objects.filter(Q(genero='SUS')|Q(genero2='SUS')).count()
-	aventura = Peliculas.objects.filter(Q(genero='AVEN')|Q(genero2='AVEN')).count()
-	animacion = Peliculas.objects.filter(Q(genero='ANI')|Q(genero2='ANI')).count()
-	comedia = Peliculas.objects.filter(Q(genero='COME')|Q(genero2='COME')).count()
-	terror = Peliculas.objects.filter(Q(genero='TER')|Q(genero2='TER')).count()
-	fantasia = Peliculas.objects.filter(Q(genero='FANT')|Q(genero2='FANT')).count()
-	documental = Peliculas.objects.filter(Q(genero='DOCU')|Q(genero2='DOCU')).count()
+	drama = Peliculas.objects.filter(Q(genero='DRA')|Q(genero2='DRA')|Q(genero3='DRA')).count()
+	romance = Peliculas.objects.filter(Q(genero='ROM')|Q(genero2='ROM')|Q(genero3='DRA;')).count()
+	crimen = Peliculas.objects.filter(Q(genero='CRI')|Q(genero2='CRI')|Q(genero3='CRI')).count()
+	suspenso = Peliculas.objects.filter(Q(genero='SUS')|Q(genero2='SUS')|Q(genero3='SUS')).count()
+	aventura = Peliculas.objects.filter(Q(genero='AVEN')|Q(genero2='AVEN')|Q(genero3='AVEN')).count()
+	animacion = Peliculas.objects.filter(Q(genero='ANI')|Q(genero2='ANI')|Q(genero3='ANI')).count()
+	comedia = Peliculas.objects.filter(Q(genero='COME')|Q(genero2='COME')|Q(genero3='COME')).count()
+	terror = Peliculas.objects.filter(Q(genero='TER')|Q(genero2='TER')|Q(genero3='TER')).count()
+	fantasia = Peliculas.objects.filter(Q(genero='FANT')|Q(genero2='FANT')|Q(genero3='FANT')).count()
+	documental = Peliculas.objects.filter(Q(genero='DOCU')|Q(genero2='DOCU')|Q(genero3='DOCU')).count()
 
 	peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
 	ultimo = Capitulos.objects.all().order_by('id')[:10]
@@ -1022,8 +1022,8 @@ def filtrar(request):
 				matchc = Peliculas.objects.filter(Q(titulo__startswith=letra)&Q(fecha_de_lanzamiento__year__range=(año, añof))).count()
 
 			else:
-				match = Peliculas.objects.filter(Q(titulo__startswith=letra)&Q(genero__icontains=genero)|Q(genero2__icontains=genero)&Q(fecha_de_lanzamiento__year__range=(año, añof))&Q(pais__startswith=pais.capitalize()))
-				matchc = Peliculas.objects.filter(Q(titulo__startswith=letra)&Q(genero__icontains=genero)|Q(genero2__icontains=genero)&Q(fecha_de_lanzamiento__year__range=(año, añof))&Q(pais__startswith=pais.capitalize())).count()
+				match = Peliculas.objects.filter(Q(titulo__startswith=letra)&Q(genero__icontains=genero)|Q(genero2__icontains=genero)|Q(genero3__icontains=genero)&Q(fecha_de_lanzamiento__year__range=(año, añof))&Q(pais__startswith=pais.capitalize()))
+				matchc = Peliculas.objects.filter(Q(titulo__startswith=letra)&Q(genero__icontains=genero)|Q(genero2__icontains=genero)|Q(genero3__icontains=genero)&Q(fecha_de_lanzamiento__year__range=(año, añof))&Q(pais__startswith=pais.capitalize())).count()
 			paginator = Paginator(match, 20)
 			page = request.GET.get('page')
 			try:
@@ -1074,7 +1074,7 @@ def filtrar_resultado(request):
 def Orden(request, generos):
 
 	if not request.is_ajax():
-		generocount = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).count()
+		generocount = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)|Q(genero3=generos)).count()
 		comedia = Generox.objects.get(genero_name="comedia")
 		accion = Generox.objects.get(genero_name="accion")
 		ciencia_ficcion = Generox.objects.get(genero_name="ciencia_ficcion")
@@ -1093,7 +1093,7 @@ def Orden(request, generos):
 		animacion = Generox.objects.get(genero_name="animacion")
 		drama = Generox.objects.get(genero_name="drama")
 
-		genero = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by('-id')
+		genero = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)|Q(genero3=generos)).order_by('-id')
 
 		genero2 = Peliculas.objects.filter(genero=generos[0])
 		genero3 = generos
@@ -1190,7 +1190,7 @@ def genero_list(request, generos, filtro):
 
 	if not request.is_ajax():
 
-		generocount = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).count()
+		generocount = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)|Q(genero3=generos)).count()
 		comedia = Generox.objects.get(genero_name="comedia")
 		accion = Generox.objects.get(genero_name="accion")
 		ciencia_ficcion = Generox.objects.get(genero_name="ciencia_ficcion")
@@ -1209,7 +1209,7 @@ def genero_list(request, generos, filtro):
 		animacion = Generox.objects.get(genero_name="animacion")
 		drama = Generox.objects.get(genero_name="drama")
 
-		genero = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by('-puntuacion')
+		genero = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)|Q(genero3=generos)).order_by('-puntuacion')
 
 		genero2 = Peliculas.objects.filter(genero=generos[0])
 		genero3 = generos
@@ -1224,9 +1224,9 @@ def genero_list(request, generos, filtro):
 		for i in peliculasee:
 			peliculase.append(i.peliculas)
 		if "_" in filtro[0]:
-			peliculas_list = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by("-" + juan)
+			peliculas_list = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)|Q(genero3=generos)).order_by("-" + juan)
 		else: 
-			peliculas_list = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)).order_by(filtro)
+			peliculas_list = Peliculas.objects.filter(Q(genero=generos)|Q(genero2=generos)|Q(genero3=generos)).order_by(filtro)
 		paginator = Paginator(peliculas_list, 30)
 		page = request.GET.get('page')
 		try:
