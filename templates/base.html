@@ -2017,7 +2017,7 @@ $(document).ready(function(){
 </script>
 {% endif %}
 
-{% if request.user.is_authenticated %}
+{% if not request.user.is_authenticated %}
 
 <script type="text/javascript">
   var username = document.forms['formulario']['usuario'];
