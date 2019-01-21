@@ -6,7 +6,7 @@ from apps.peliculas.views import (peliculas_list, peliculasO, Generos,
     answer_me, myview, peliculas_listodo,test,
     FavoritoFormView, EliminarFavoritoFormView, filtrar, cookies,
     GeneroF, GeneroF_eliminar,pelis_user_nove,añadiste,
-    seguirviendo,seguirviendo_series,actualizar_tops,cambiar_votaciono,Read,CompRead,gettingembed,testing, search_result, genero_list, Notifi, Friendsitos, CompAPI)
+    seguirviendo,seguirviendo_series,actualizar_tops, search_result_ajax,cambiar_votaciono,Read,CompRead,gettingembed,testing, search_result, genero_list, Notifi, Friendsitos, CompAPI)
 
 
 
@@ -29,6 +29,8 @@ urlpatterns = [
     re_path(r'ver%todo/$', peliculas_listodo, name='peliculas_listodo'),
 
     path(r'search/', search, name='search'),
+    path(r'search_ajax/', search_result_ajax, name='search_ajax'),
+
     re_path(r'^search/(?:search-(?P<src>.+)/)?$', search_result, name='search_result'),
     path(r'filter/', filtrar, name='filtrar'),
 

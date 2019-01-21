@@ -38,10 +38,118 @@ from apps.news.models import Hitcount_Articulos
 class pelis(APIView):
 	serializer = peliserializer
 	def get(self, request, format=None):
-		lista = Peliculas.objects.all()
-		response = self.serializer(lista, many=True)
+		if request.is_ajax():
+			src = request.POST.get('src')
+			peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
+			peliculase = []
+
+			for i in peliculasee:
+				peliculase.append(i.peliculas)
+
+			srch = src
+			slugsearch = ""
+			srchh = ""
+			juan = []
+			count = -1
+			index = ""
+			series_filt = False
+			if srch:
+				juan.append(srch)
+				for xy in srch:
+					if xy == "_":
+						xy = "-"
+					slugsearch += xy
+
+				for b in srch:
+					count += 1 
+					if b == "_":
+						b = "_"
+
+				for n in srch:
+					if n == "_":
+						n = " "
+					srchh += n
+
+			# -> NFC
+			
+
+			if srch:
+				buscar =Busqueda_y_etiquetas.objects.filter(tag__icontains=srch)
+				idbuscar = []
+				if buscar.count() > 0:
+					idbuscar.append(buscar[0].id)
+					if buscar.count() > 1:
+						for iss in buscar:
+							idbuscar.append(iss.id)
+
+
+
+				match = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(titulo_orinal__icontains=srchh)|Q(tema__icontains=srch)|Q(tag_principal=srch)|Q(tag1__icontains=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch))
+				matchc = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(titulo_orinal__icontains=srchh)|Q(tema__icontains=srch)|Q(tag1__icontains=srch)|Q(tag_principal=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch)).count()
+				paginator = Paginator(match, 30)
+				antes = ""
+				if matchc == 0:
+					
+					if request.user.is_authenticated:
+						guardar = Busqueda_y_etiquetas(tag=srch, user_who_search=request.user)
+						guardar.save()
+					else:
+						guardar = Busqueda_y_etiquetas(tag=srch)
+						guardar.save()
+					for i in match:
+						if i == " ":
+							break
+						else:
+							antes += i
+					match = Peliculas.objects.filter(titulo__startswith=antes)
+		response = self.serializer(match, many=True)
 		return HttpResponse(json.dumps(response.data))
 
+
+
+def search_result_ajax(request):
+
+	if request.is_ajax():
+		src = request.GET.get('term', '')
+
+		srch = src
+		slugsearch = ""
+		srchh = ""
+		juan = []
+		count = -1
+		index = ""
+		series_filt = False
+		if srch:
+			juan.append(srch)
+			for xy in srch:
+				if xy == "_" or xy == " ":
+					xy = "-"
+				slugsearch += xy
+
+
+
+		
+
+		if srch:
+			buscar =Busqueda_y_etiquetas.objects.filter(tag__icontains=srch)
+			idbuscar = []
+			if buscar.count() > 0:
+				idbuscar.append(buscar[0].id)
+				if buscar.count() > 1:
+					for iss in buscar:
+						idbuscar.append(iss.id)
+
+
+			match = Peliculas.objects.filter(Q(titulo__icontains=srch)|Q(titulo_orinal__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch))
+			matchc = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(titulo_orinal__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch)).count()
+
+		results = []
+		for datos in match:
+			results.append(datos.titulo)
+
+		data = json.dumps(results)
+		mimetype = 'application/json'
+		return HttpResponse(data, mimetype)
 
 class Friendsitos(APIView):
 	serializer = Friends
