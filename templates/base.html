@@ -509,6 +509,7 @@ background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, F
         $(document).ready(function(){ 
             $("#searches").autocomplete({
                 source: "/search_ajax/",
+                minLength: 2,
                 open: function(){
                     setTimeout(function () {
                         $('.ui-autocomplete').css('z-index', 99);
