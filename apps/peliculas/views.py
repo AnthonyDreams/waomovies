@@ -862,12 +862,15 @@ def search(request):
 				if b in puntuactions:
 		 			b = ""
 				if b == " " or b == "-" or b == "_":
-					if valor[contar -1] == "-" or valor[contar + 1] =="-":
-						b = ""
-					elif valor[contar -1] == " " or valor[contar + 1] ==" ":
-						b = ""
-					else:
-		 				b="_"
+					try:
+						if valor[contar -1] == "-" or valor[contar + 1] =="-":
+							b = ""
+						elif valor[contar -1] == " " or valor[contar + 1] ==" ":
+							b = ""
+						else:
+			 				b="_"
+					except IndexError:
+						b=""
 					b="_"
 					
 				valor2 += b
