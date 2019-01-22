@@ -850,22 +850,16 @@ def search(request):
 
 		srch = request.POST['src']
 		slugsearch = ""
-		puntuactions = '''!()-[]{};:'"\,<>./?@#$%^&*_'''
+		puntuactions = '''!()[]{};:'"\,<>./?@#$%^&*'''
 		juan = []
 		count = -1
 		index = ""
 		series_filt = False
 		if srch:
 			juan.append(srch)
-			for xy in srch:
-				if xy in puntuactions:
-					xy == ""
-				if xy == " ":
-					xy = "-"
-				slugsearch += xy
-
 			for b in srch:
-				count += 1 
+				if b in puntuactions:
+					b = ""
 				if b == " ":
 					b = "_"
 				if b == "-":
