@@ -75,19 +75,10 @@ def vermastarde(request, id):
 			'message': "Ya está añadida."
 		}
 		return JsonResponse(data)
-	ver2 = Vermastarde.objects.all().count()
-	try:
-		juanver = ver[ver2-1]
-	except AssertionError:
-		juanver = 0
 	form = Fechas(request.POST or None, request.FILES or None)
 	if request.is_ajax():
 		if form.is_valid():
 			instance = form.save(commit=False)
-			try:
-				instance.id =  juanver.id + 1
-			except AttributeError:
-				instance.id = 1
 			instance.usuario_id= juan
 			instance.peliculas_id = id
 			instance.save()
@@ -119,19 +110,10 @@ def vermastarde_series(request, id):
 			'message': "Ya está añadida."
 		}
 		return JsonResponse(data)
-	ver2 = Vermastarde.objects.all().count()
-	try:
-		juanver = ver[ver2-1]
-	except AssertionError:
-		juanver = 0
 	form = Fechas(request.POST or None, request.FILES or None)
 	if request.is_ajax():
 		if form.is_valid():
 			instance = form.save(commit=False)
-			try:
-				instance.id =  juanver.id + 1
-			except AttributeError:
-				instance.id = 1
 			instance.usuario_id= juan
 			instance.series_id = id
 			instance.save()
