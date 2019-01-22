@@ -63,12 +63,15 @@ def search_result_ajax(request):
 					xy = "-"
 				slugsearch += xy
 
+				if xy == " ":
+					xy = "-"
+				srchh += xy
 
 
 		
 
 		if srch:
-			buscar =Busqueda_y_etiquetas.objects.filter(tag__icontains=srch)
+			buscar =Busqueda_y_etiquetas.objects.filter(tag__icontains=srchh)
 			idbuscar = []
 			if buscar.count() > 0:
 				idbuscar.append(buscar[0].id)
