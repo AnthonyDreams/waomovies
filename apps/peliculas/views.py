@@ -62,10 +62,10 @@ def search_result_ajax(request):
 				if xy == " ":
 					xy = "-"
 				slugsearch += xy
-
-				if xy == " ":
-					xy = "_"
-				srchh += xy
+			for values in srch:
+				if values == " ":
+					values = "_"
+				srchh += values
 
 
 		
