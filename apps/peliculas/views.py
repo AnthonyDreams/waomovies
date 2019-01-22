@@ -46,7 +46,7 @@ def search_result_ajax(request):
 
 	if request.is_ajax():
 		src = request.GET.get('term', '')
-		puntuactions = '''!()-[]{};:'"\,<>./?@#$%^&*_'''
+		puntuactions = '''!()[]{};:'"\,<>./?@#$%^&*'''
 		srch = src
 		slugsearch = ""
 		srchh = ""
@@ -848,35 +848,50 @@ def edicion2(palabra):
 def search(request):
 	if request.method=='POST':
 
-		srch = request.POST['src']
-		slugsearch = ""
+		valor = request.POST['src']
 		puntuactions = '''!()[]{};:'"\,<>./?@#$%^&*'''
 		juan = []
-		count = -1
+		contar = -1
+		contar_valor2 = -1
 		index = ""
-		series_filt = False
-		if srch:
-			juan.append(srch)
-			for b in srch:
+
+		valor2 = ""
+		if valor:
+			for b in valor:
+				contar = contar + 1
 				if b in puntuactions:
-					b = ""
-				if b == " ":
-					b = "_"
-				if b == "-":
-					b = "_"
-				index += b
+		 			b = ""
+				if b == " " or b == "-" or b == "_":
+					if valor[contar -1] == "-" or valor[contar + 1] =="-":
+						b = ""
+					elif valor[contar -1] == " " or valor[contar + 1] ==" ":
+						b = ""
+					else:
+		 				b="_"
+					b="_"
+					
+				valor2 += b
+
+
+		if valor2:
+			for b in valor2:
+				contar_valor2 = contar_valor2 + 1
+				if b == "_":  
+					if valor2[contar_valor2 -1] == "_":
+						b = ""
+				index +=b
 
 		# -> NFC
 		
 
-		if srch and not srch == "":
-			return HttpResponseRedirect('/search/search-' + index)
-		if srch == "":
+		if valor and not valor == "":
+			return HttpResponseRedirect('/search/search-' + index.lower())
+		if valor == "":
 			return HttpResponseRedirect('/ver%todo/')
 
 
 	try:			
-		context = {'juan':srch, 'series_filt':series_filt, 'peliculase':peliculase, }
+		context = {'juan':valor, 'series_filt':series_filt, 'peliculase':peliculase, }
 	except UnboundLocalError:
 		return HttpResponseRedirect('/ver%todo/')
 	return render(request, 'movielist.html', context)
