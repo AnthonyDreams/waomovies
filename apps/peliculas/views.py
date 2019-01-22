@@ -46,7 +46,7 @@ def search_result_ajax(request):
 
 	if request.is_ajax():
 		src = request.GET.get('term', '')
-
+		puntuactions = '''!()-[]{};:'"\,<>./?@#$%^&*_'''
 		srch = src
 		slugsearch = ""
 		srchh = ""
@@ -57,7 +57,9 @@ def search_result_ajax(request):
 		if srch:
 			juan.append(srch)
 			for xy in srch:
-				if xy == "_" or xy == " ":
+				if xy in puntuactions:
+					xy = ""
+				if xy == " ":
 					xy = "-"
 				slugsearch += xy
 
@@ -848,7 +850,7 @@ def search(request):
 
 		srch = request.POST['src']
 		slugsearch = ""
-
+		puntuactions = '''!()-[]{};:'"\,<>./?@#$%^&*_'''
 		juan = []
 		count = -1
 		index = ""
@@ -856,6 +858,8 @@ def search(request):
 		if srch:
 			juan.append(srch)
 			for xy in srch:
+				if xy in puntuactions:
+					xy == ""
 				if xy == " ":
 					xy = "-"
 				slugsearch += xy
