@@ -21,6 +21,32 @@
 </head>
 <body>
 {% block content %}
+
+<style type="text/css">
+	.post {
+        width: 80% !important;
+    }
+
+</style>
+
+<script type="text/javascript">
+
+
+    
+
+  $(document).ready(function() {
+      // use esta configuracion simple para valores por defecto
+      //$('div.expandable p').expander();
+      // *** O ***
+      // configure de la siguiente manera
+      $('div.comments p.post').expander({
+      slicePoint: 300, // si eliminamos por defecto es 100 caracteres
+      expandText: '[Ver más...]', // por defecto es 'read more...'
+      collapseTimer: 0, // tiempo de para cerrar la expanción si desea poner 0 para no cerrar
+      userCollapseText: '(Ocultar)' // por defecto es 'read less...'
+    });
+  });
+</script>
 <script type="text/javascript">
 function compartirshare(b) {
 
@@ -77,7 +103,16 @@ $(this).remove();
 function send(b) {
               var juan = b.id
 
-              
+              var input = document.getElementById("sendtext")
+    var input_error = document.getElementById('input_error')
+  // validate input
+  if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_error').style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  } else {
 
              var $myForm = $('.coment')
              $myForm.submit(function(event){
@@ -112,11 +147,13 @@ function send(b) {
              }
 
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 
+                 if (textStatus=="error") {
+                    document.getElementById("sendingcoment").style.display = "none";
+                } 
              }
              
              
-             
+         }    
              }
              
              function update(b) {
@@ -140,7 +177,13 @@ function send(b) {
              })
 
              function handleFormSuccess(data, textStatus, jqXHR){
-                 
+                 var input = document.getElementById("texto" + juan)
+    var input_error = document.getElementById('input_error_update' + juan)
+  // validate input
+    input.style.border = "1px solid green";
+    document.getElementById('input_error_update' + juan).style.color = "green";
+    input_error.textContent = "Editado";
+    input.focus();
                  document.getElementById("updateajax" + juan).innerHTML = data.content;
                  document.getElementById("texto" + juan).innerHTML = data.content;
                  $myForm[0].reset();
@@ -150,7 +193,16 @@ function send(b) {
  
              
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 
+                 var input = document.getElementById("texto" + juan)
+    var input_error = document.getElementById('input_error_update' + juan)
+  // validate input
+  if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_error_update' + juan).style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  }
              }
              
              
@@ -163,7 +215,16 @@ function res(b) {
               var juan = b.id
               var c = juan.substr(1)
 
-              
+              var input = document.getElementById("xv" + c)
+    var input_error = document.getElementById('input_errorv' + c)
+  // validate input
+  if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_errorv' + c).style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  } else {
 
              var $myForm = $('.resp' + juan)
              $myForm.submit(function(event){
@@ -208,7 +269,7 @@ function res(b) {
 
        $("#j" + c).load(window.location + " #j" + c);
 
-       $("#ccn" + c).append('<div class="cmt-item flex-it reply" id="rp'+data.idp+'"><img src="'+data.perfil+'" alt="" style="border-radius: 50%; width: 50px; height: 50px;"><div class="author-infor" style="width:100%;"><div class="flex-it2"><h6><a href="#">'+data.name+'</a></h6> <span class="time"> - '+data.fecha+'</span><i id="cog'+data.idp+'" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i><div class="btn-group"><div class="dropdown-menu"><a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample">Editar respuesta<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a><form style="display: inline;" class="dele_ans'+data.idp+'" data-url="/delete_res/'+data.idp+'/" method="post">'+token+'<button onclick="deletee_res(this)" name="'+data.id+'" id="dele_ans'+data.idp+'" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i  style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form></div></div></div><p id="cm'+data.idp+'" >'+data.content+'</p><div class="collapse container" id="col'+data.idp+'"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans'+data.idp+'" data-url="/responder_update/'+data.idp+'/">'+token+'<textarea id="textoans'+data.idp+'" style=" height: 6em; width: 400px;" name="respuesta">'+data.content+'</textarea> <br><input  onclick="update_ans(this)" id="up_ans'+data.idp+'" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form></div> </div></div></div></div>');
+       $("#ccn" + c).append('<div class="cmt-item flex-it reply" id="rp'+data.idp+'"><img src="'+data.perfil+'" alt="" style="border-radius: 50%; width: 50px; height: 50px;"><div class="author-infor" style="width:100%;"><div class="flex-it2"><h6><a href="#">'+data.name+'</a></h6> <span class="time"> - '+data.fecha+'</span><i id="cog'+data.idp+'" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i><div class="btn-group"><div class="dropdown-menu"><a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample">Editar respuesta<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a><form style="display: inline;" class="dele_ans'+data.idp+'" data-url="/delete_res/'+data.idp+'/" method="post">'+token+'<button onclick="deletee_res(this)" name="'+data.id+'" id="dele_ans'+data.idp+'" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i  style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form></div></div></div><p class="post" id="cm'+data.idp+'" >'+data.content+'</p><div class="collapse container" id="col'+data.idp+'"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans'+data.idp+'" data-url="/responder_update/'+data.idp+'/">'+token+'<textarea id="textoans'+data.idp+'" style=" height: 6em; width: 400px;" name="respuesta">'+data.content+'</textarea> <br><input  onclick="update_ans(this)" id="up_ans'+data.idp+'" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form><div id="input_error_update_ans'+data.idp+'" style="margin-top: 0px;"></div></div> </div></div></div></div>');
 
 
                  
@@ -216,10 +277,18 @@ $(this).remove();
          }
 
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 
+                 if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_error' + juan).style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  } 
+$("#load" + c).removeClass('fa-circle-o-notch');
+                    $("#load" + c).addClass('fa-chevron-down');
              }
              
-             
+             }
              
              }
 
@@ -345,7 +414,13 @@ function update_ans(b) {
              })
 
              function handleFormSuccess(data, textStatus, jqXHR){
-                 
+                 var input = document.getElementById("textoans" + tt)
+    var input_error = document.getElementById('input_error_update_ans' + tt)
+  // validate input
+    input.style.border = "1px solid green";
+    document.getElementById('input_error_update_ans' + tt).style.color = "green";
+    input_error.textContent = "Editado";
+    input.focus();
                  document.getElementById("cm" + tt).innerHTML = data.content;
                  document.getElementById("textoans" + tt).innerHTML = data.content;
                  $myForm[0].reset();
@@ -355,7 +430,16 @@ function update_ans(b) {
  
              
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 
+                 var input = document.getElementById("textoans" + tt)
+    var input_error = document.getElementById('input_error_update_ans' + tt)
+  // validate input
+  if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_error_update_ans' + tt).style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  }
              }
              
              
@@ -365,6 +449,26 @@ function update_ans(b) {
 
              </script>
 
+<script type="text/javascript">
+    function validarSend_ans(b) {
+       var str = b.id
+       var strr = str.substr(4)
+    var input = document.getElementById("xv" + strr)
+    var input_error = document.getElementById('input_errorv' + strr)
+  // validate input
+  if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_errorv' + strr).style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  } else {
+    input.style.border = "1px solid green";
+    document.getElementById('input_errorv' + strr).style.color = "green";
+    input_error.textContent = "Validado con éxito";
+  }
+  }
+</script>
 <style type="text/css">
 	#contenter p  {
 		font-size: 15px;
@@ -572,14 +676,14 @@ function update_ans(b) {
 
 
 								</div>
-								<p id="updateajaxp{{ comentario.slug }}" >{{comentario.content }}</p>
+								<p class="post" id="updateajaxp{{ comentario.slug }}" >{{comentario.content }}</p>
 
 <div class="collapse container" id="{{comentario.id}}">
                 <div class="mt-3">
                  <div class="md-form form-lg">
                   <form method="post" class="updatecp{{ comentario.slug }}" data-url="/{{ comentario.slug }}/edit/">
                    {% csrf_token %}
-                 <textarea id="textop{{comentario.slug}}" onkeypress="return limita(400);" style=" height: 6em;
+                 <textarea id="textop{{comentario.slug}}" onkeypress="return limita(1500);" style=" height: 6em;
    width: 400px;" name="content">{{comentario.content}}</textarea> 
    <br>
    <input  onclick="update(this)" id="p{{ comentario.slug }}" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar">
@@ -587,6 +691,7 @@ function update_ans(b) {
 <i class="fa fa-close"  aria-hidden="true"></i>
 </a>
                  </form>
+                 <div id="input_error_update{{ comentario.slug }}" style="margin-top: 0px;"></div>
 </div>
                     
                 </div>
@@ -595,11 +700,12 @@ function update_ans(b) {
 								<p><a class="rep-btn" data-toggle="collapse" data-target="#collapseExample{{comentario.id}}z" aria-expanded="false
   " aria-controls="collapseExample{{comentario.id}}z" style="color: grey; font-family: sans-serif; padding-left: 5px; padding-right: 15px; position: relative; top: 10px;">+ Responder</a></p>
   <div  class="collapse container" id="collapseExample{{comentario.id}}z">
-  <form class="respv{{comentario.id}}" method="post" data-url="/responder/{{comentario.slug}}/">
+  <form id="anss{{comentario.id}}" class="respv{{comentario.id}}" method="post" data-url="/responder/{{comentario.slug}}/" onsubmit="return validarSend_ans(this)">
   {% csrf_token %}<div class="md-form">
    <img style="border-radius: 50%; width: 50px; height: 50px;" src="{{request.user.profile.perfil_img.url}}">
-    <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4;"  placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{comentario.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
+    <input id="xv{{comentario.id}}" autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4;"  placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{comentario.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
 </div>
+<div id="input_errorv{{comentario.id}}" style="margin-top: -19px;"></div>
   </form>
 </div>
 {% endif %}
@@ -659,7 +765,7 @@ function update_ans(b) {
 								</div>
 
 
-								<p id="cm{{ cm.id }}">{{cm.respuesta}}</p><div class="collapse container" id="col{{cm.id}}"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans{{ cm.id }}" data-url="/responder_update/{{ cm.id }}/">{% csrf_token %}<textarea id="textoans{{cm.id}}" onkeypress="return limita(400);" style=" height: 6em; width: 400px;" name="respuesta">{{cm.respuesta}}</textarea> <br><input  onclick="update_ans(this)" id="up_ans{{ cm.id }}" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col{{cm.id}}" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form></div> </div></div>
+								<p class="post" id="cm{{ cm.id }}">{{cm.respuesta}}</p><div class="collapse container" id="col{{cm.id}}"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans{{ cm.id }}" data-url="/responder_update/{{ cm.id }}/">{% csrf_token %}<textarea id="textoans{{cm.id}}" onkeypress="return limita(400);" style=" height: 6em; width: 400px;" name="respuesta">{{cm.respuesta}}</textarea> <br><input  onclick="update_ans(this)" id="up_ans{{ cm.id }}" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col{{cm.id}}" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form><div id="input_error_update_ans{{cm.id}}" style="margin-top: 0px;"></div></div> </div></div>
 							</div>
 							{% if not request.user == cm.who %}
           <a   data-toggle="collapse" data-target="#collapseExample{{comentario.id}}zzx" aria-expanded="false
@@ -686,15 +792,36 @@ function update_ans(b) {
           </div>
 					<div class="comment-form">
 						<h4>Comentar</h4>
-						<form class="coment" method='POST' data-url='/comentar_articulo/{{ blog.id }}/'>
+              <div id="input_error" style="margin-top: -19px;"></div>
+
+						<form class="coment" method='POST' data-url='/comentar_articulo/{{ blog.id }}/' onsubmit="return validarSend()">
 							{% csrf_token %}
 							<div class="row">
 								<div class="col-md-12">
-									<textarea name="content"  placeholder="Deja tu comentario"></textarea>
+									<textarea id="sendtext" name="content"  placeholder="Deja tu comentario"></textarea>
 								</div>
 							</div>
 							<input class="submit" type="submit" placeholder="Comentar" onclick="send(this)" style="cursor: pointer;">
 						</form>
+
+<script type="text/javascript">
+    function validarSend() {
+    var input = document.getElementById("sendtext")
+    var input_error = document.getElementById('input_error')
+  // validate input
+  if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_error').style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  } else {
+    input.style.border = "1px solid green";
+    document.getElementById('input_error').style.color = "green";
+    input_error.textContent = "Validado con éxito";
+  }
+  }
+</script>
 					</div>
 					<!-- comment form -->
 					{% endif %}

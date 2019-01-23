@@ -33,7 +33,7 @@ class Post(models.Model):
 	peliculas = models.ForeignKey(Peliculas, on_delete=models.CASCADE, null=True)
 	height_field = models.IntegerField(default=0)
 	width_field = models.IntegerField(default=0)
-	content = models.TextField(max_length=500)
+	content = models.TextField(max_length=1500)
 	publish = models.DateField(auto_now=True, auto_now_add=False)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -66,7 +66,7 @@ class Post(models.Model):
 class Answerd(models.Model):
 	comentario = models.ForeignKey(Post, on_delete=models.CASCADE)
 	who = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-	respuesta = models.TextField(max_length=400)
+	respuesta = models.TextField(max_length=1500)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 	editado = models.BooleanField(default=False)
