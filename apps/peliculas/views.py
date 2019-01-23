@@ -294,7 +294,7 @@ espero hacer uno para poner películas relacionadas según las favoritas del usu
 '''
 def inicio(request):
 	accion = Peliculas.objects.filter(Q(genero='ACC')|Q(genero2='ACC')|Q(genero3='ACC')).count()
-	ciencia_ficcion = Peliculas.objects.filter(genero='SC').count()
+	ciencia_ficcion = Peliculas.objects.filter(Q(genero='SC')|Q(genero2='SC')|Q(genero3='SC')).count()
 	drama = Peliculas.objects.filter(Q(genero='DRA')|Q(genero2='DRA')|Q(genero3='DRA')).count()
 	romance = Peliculas.objects.filter(Q(genero='ROM')|Q(genero2='ROM')|Q(genero3='DRA;')).count()
 	crimen = Peliculas.objects.filter(Q(genero='CRI')|Q(genero2='CRI')|Q(genero3='CRI')).count()
