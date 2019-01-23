@@ -267,7 +267,24 @@ $.ajaxSetup({
 
 
 
+<script type="text/javascript">
 
+
+    
+
+  $(document).ready(function() {
+      // use esta configuracion simple para valores por defecto
+      //$('div.expandable p').expander();
+      // *** O ***
+      // configure de la siguiente manera
+      $('div.mv-user-review-item p').expander({
+      slicePoint: 300, // si eliminamos por defecto es 100 caracteres
+      expandText: '[Ver más...]', // por defecto es 'read more...'
+      collapseTimer: 0, // tiempo de para cerrar la expanción si desea poner 0 para no cerrar
+      userCollapseText: '(Ocultar)' // por defecto es 'read less...'
+    });
+  });
+</script>
 
 
 
@@ -336,7 +353,7 @@ $.ajaxSetup({
              })
 
           function handleFormSuccess(data, textStatus, jqXHR){
-              console.log(data)
+              console.log(data.error)
               console.log(textStatus)
               console.log(jqXHR)
      
@@ -1690,7 +1707,7 @@ $(this).remove();
              </p>
             </div>
            </div>
-           <p id="updateajaxp{{ i.slug }}" style=" {% if i.respuestas.all %} margin-top: -20px; {% else %} margin-top: -10px; {% endif %}margin-bottom: -2px; word-break: break-all;
+           <p class="post" id="updateajaxp{{ i.slug }}" style=" {% if i.respuestas.all %} margin-top: -20px; {% else %} margin-top: -10px; {% endif %}margin-bottom: -2px; word-break: break-all;
  word-wrap: break-word;">{{ i.content }} </p>
 <div id="like_div{{i.id}}" style="">
  {% if not request.user in i.vote.all %}
@@ -1862,7 +1879,7 @@ $(this).remove();
                 </div>
             </div>
             <!-- / Collapsible element -->
-           <p id="cm{{ cm.id }}" tyle="margin-bottom: -15px;">{{cm.respuesta}}</p>
+           <p class="post" id="cm{{ cm.id }}" tyle="margin-bottom: -15px;">{{cm.respuesta}}</p>
              {% if not request.user == cm.who %}
           <a   data-toggle="collapse" data-target="#collapseExample{{i.id}}zzx" aria-expanded="false
   " aria-controls="collapseExample{{i.id}}z" style="color: grey; font-family: sans-serif; padding-left: 5px; padding-right: 15px; position: relative; top: 10px;">Mencionar</a>

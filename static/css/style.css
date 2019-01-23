@@ -5122,9 +5122,7 @@ background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, F
 .topbar-filter .pagination2 a:hover {
   color: #dcf836;
 }
-.topbar-filter.fw p {
-  padding-right: 600px;
-}
+
 @media (max-width: 991px) {
   .topbar-filter.fw p {
     padding-right: 170px;

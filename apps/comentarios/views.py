@@ -32,31 +32,38 @@ def post_create(request, id):
 		x.append(i.slug)
 	form = PostForm(request.POST or None, request.FILES or None)
 	if request.is_ajax():
-		if form.is_valid():
-			instance = form.save(commit=False)
-			instance.user = request.user
-			instance.peliculas_id = id
-			if x:
-				instance.slug = x[0] +1
-				instance.save()
-				sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
-				sendnoti.save()
+		if not len(request.POST.get('content')) > 500:
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.user = request.user
+				instance.peliculas_id = id
+				if x:
+					instance.slug = x[0] +1
+					instance.save()
+					sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+					sendnoti.save()
 
-				data = {
-				'message': "Successfully submitted form data."
+					data = {
+					'message': "Successfully submitted form data."
 
-			}
-				return JsonResponse(data)
-			else: 
-				instance.save()
-				sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
-				sendnoti.save()
+				}
+					return JsonResponse(data)
+				else: 
+					instance.save()
+					sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+					sendnoti.save()
 
-				data = {
-				'message': "Successfully submitted form data."
-			}
+					data = {
+					'message': "Successfully submitted form data."
+				}
+					
 
-				return JsonResponse(data)
+					return JsonResponse(data)
+
+		else: 
+			data = {
+					'error': "No puede contener más de 500 caracteres."
+				}
 
 
 #actualizar comentario
@@ -66,15 +73,22 @@ def post_update(request, slug=None):
 	instance = get_object_or_404(Post, slug=slug)
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
 	if request.is_ajax():
-		if form.is_valid():
-			instance = form.save(commit=False)
-			instance.editado= True
-			instance.save()
+		if not len(request.POST.get('content')) > 500:
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.editado= True
+				instance.save()
+				data = {
+					'message': "Successfully submitted form data.",
+					'content':instance.content
+				}
+				return JsonResponse(data)
+		else:
 			data = {
-				'message': "Successfully submitted form data.",
-				'content':instance.content
-			}
+					'error': "No puede contener más de 500 caracteres.",
+				}
 			return JsonResponse(data)
+
 
 
 
@@ -329,66 +343,74 @@ def responder(request, slug):
 	instances = get_object_or_404(Post, slug=slug)
 	form = Answereda(request.POST or None, request.FILES or None)
 	if request.is_ajax():
-		if form.is_valid():
-			instance = form.save(commit=False)
-			instance.who_id = request.user.id
-			instance.comentario_id = instances.id
-			instance.save()
-			instances.respuestas.add(instance.id)
-			data = {
-				'message': "Successfully submitted form data.",
-				'perfil':instance.who.profile.perfil_img.url,
-				'name':instance.who.username,
-				'content':instance.respuesta,
-				'fecha':timesince(instance.timestamp).split(', ')[0],
-				'id':instances.id,
-				'idp':instance.id,
-				'fechad':"fecha",
-				'token':"%"
+		if not len(request.POST.get('content')) > 400:
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.who_id = request.user.id
+				instance.comentario_id = instances.id
+				instance.save()
+				instances.respuestas.add(instance.id)
+				data = {
+					'message': "Successfully submitted form data.",
+					'perfil':instance.who.profile.perfil_img.url,
+					'name':instance.who.username,
+					'content':instance.respuesta,
+					'fecha':timesince(instance.timestamp).split(', ')[0],
+					'id':instances.id,
+					'idp':instance.id,
+					'fechad':"fecha",
+					'token':"%"
 
-			}
-			mencion = False
-			posicion = 0
-			posicion2 = 0
-			usergetusername = ""
-			for i in instance.respuesta:
-				posicion += 1 
-				if i == "@":
-					mencion = True
-					break
-				else:
-					pass
-			if mencion:
+				}
+				mencion = False
+				posicion = 0
+				posicion2 = 0
+				usergetusername = ""
 				for i in instance.respuesta:
-					posicion2 += 1
-					if posicion2 >= posicion:
-						if not i == " ":
-							usergetusername += i
-						else:
-							break
+					posicion += 1 
+					if i == "@":
+						mencion = True
+						break
+					else:
+						pass
+				if mencion:
+					for i in instance.respuesta:
+						posicion2 += 1
+						if posicion2 >= posicion:
+							if not i == " ":
+								usergetusername += i
+							else:
+								break
 
-			if not mencion and not instances.user == request.user:
-				comentario = Notificaciones.objects.get(komentario=instances, user_a_notificar=instances.user)
-				evenT = Evento(event="respuesta", mensaje=request.user.username + " Ha respondido a tu comentario", noti_de_evento=comentario)
-				evenT.save()
-				evenT.creadores.add(request.user)
-				evenT.save()
-				comentario.estado.add(evenT)
-				comentario.save()
-			elif mencion:
-				mencionado = Usuario.objects.get(username=usergetusername[1:])
-				sendnoti = Notificaciones(respm=instance, user_a_notificar=mencionado)
-				sendnoti.save()
-				comentario = Notificaciones.objects.get(respm=instance, user_a_notificar=mencionado)
-				evenT = Evento(event="mencion", mensaje=request.user.username + " Te ha mencionado en una respuesta", noti_de_evento=comentario)
-				evenT.save()
-				evenT.creadores.add(request.user)
-				evenT.save()
-				comentario.estado.add(evenT)
-				comentario.save()
+				if not mencion and not instances.user == request.user:
+					comentario = Notificaciones.objects.get(komentario=instances, user_a_notificar=instances.user)
+					evenT = Evento(event="respuesta", mensaje=request.user.username + " Ha respondido a tu comentario", noti_de_evento=comentario)
+					evenT.save()
+					evenT.creadores.add(request.user)
+					evenT.save()
+					comentario.estado.add(evenT)
+					comentario.save()
+				elif mencion:
+					mencionado = Usuario.objects.get(username=usergetusername[1:])
+					sendnoti = Notificaciones(respm=instance, user_a_notificar=mencionado)
+					sendnoti.save()
+					comentario = Notificaciones.objects.get(respm=instance, user_a_notificar=mencionado)
+					evenT = Evento(event="mencion", mensaje=request.user.username + " Te ha mencionado en una respuesta", noti_de_evento=comentario)
+					evenT.save()
+					evenT.creadores.add(request.user)
+					evenT.save()
+					comentario.estado.add(evenT)
+					comentario.save()
 
+				return JsonResponse(data)
+
+		else:
+			data = {
+					'error': "No puede contener más de 400 caracteres.",
+					
+
+				}
 			return JsonResponse(data)
-
 
 
 
@@ -800,31 +822,39 @@ def post_create_articulo(request, id):
 		x.append(i.slug)
 	form = PostForm(request.POST or None, request.FILES or None)
 	if request.is_ajax():
-		if form.is_valid():
-			instance = form.save(commit=False)
-			instance.user = request.user
-			instance.articulo_id = id
-			if x:
-				instance.slug = x[0] +1
-				instance.save()
-				sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
-				sendnoti.save()
+		if not len(request.POST.get('content')) > 500:
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.user = request.user
+				instance.articulo_id = id
+				if x:
+					instance.slug = x[0] +1
+					instance.save()
+					sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+					sendnoti.save()
 
-				data = {
-				'message': "Successfully submitted form data."
+					data = {
+					'message': "Successfully submitted form data."
 
-			}
-				return JsonResponse(data)
-			else: 
-				instance.save()
-				sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
-				sendnoti.save()
+				}
+					return JsonResponse(data)
+				else: 
+					instance.save()
+					sendnoti = Notificaciones(komentario=instance, user_a_notificar=request.user)
+					sendnoti.save()
 
-				data = {
-				'message': "Successfully submitted form data."
-			}
+					data = {
+					'message': "Successfully submitted form data."
+				}
 
-				return JsonResponse(data)
+					return JsonResponse(data)
+		else:
+			data = {
+					'error': "No puede contener más de 500 caracteres."
+				}
+
+			return JsonResponse(data)
+
 
 
 #actualizar comentario
@@ -834,16 +864,23 @@ def post_update_articulo(request, slug=None):
 	instance = get_object_or_404(Post, slug=slug)
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
 	if request.is_ajax():
-		if form.is_valid():
-			instance = form.save(commit=False)
-			instance.editado= True
+		if not len(request.POST.get('content')) > 500:
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.editado= True
 
-			instance.save()
-			data = {
-				'message': "Successfully submitted form data.",
-				'content':instance.content
-			}
-			return JsonResponse(data)
+				instance.save()
+				data = {
+					'message': "Successfully submitted form data.",
+					'content':instance.content
+				}
+				return JsonResponse(data)
+			else:
+				data = {
+					'error': "No puede contener más de 500 caracteres.",
+				}
+				return JsonResponse(data)
+
 
 
 

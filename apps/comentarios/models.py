@@ -33,7 +33,7 @@ class Post(models.Model):
 	peliculas = models.ForeignKey(Peliculas, on_delete=models.CASCADE, null=True)
 	height_field = models.IntegerField(default=0)
 	width_field = models.IntegerField(default=0)
-	content = models.TextField()
+	content = models.TextField(max_length=500)
 	publish = models.DateField(auto_now=True, auto_now_add=False)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
