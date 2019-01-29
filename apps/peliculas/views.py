@@ -162,8 +162,14 @@ class IP_GET(APIView):
 					count.hitcount += 1
 					count.save()
 				user_ip = USER_IPS.objects.filter(user=request.user.id)
+				if user_ip:
+					pass
+				else:
+					user = USER_IPS(user=request.user)
+					user.save()
 				total = 0
 				false = 0
+				user_ip = USER_IPS.objects.filter(user=request.user.id)
 				for a in user_ip:
 					for ip in a.ips.all():	
 						total +=1			
@@ -178,8 +184,12 @@ class IP_GET(APIView):
 			else:
 				save_ip = IPS(Ip=ip)
 				save_ip.save()
-				user = USER_IPS(user=request.user)
-				user.save()
+				user_ip = USER_IPS.objects.filter(user=request.user.id)
+				if user_ip:
+					pass
+				else:
+					user = USER_IPS(user=request.user)
+					user.save()
 				ipp = IPS.objects.filter(Ip=ip)
 				user_ip = USER_IPS.objects.get(user=request.user.id)
 				for p in ipp:
