@@ -392,10 +392,18 @@ def inicio(request):
 	else:
 		topsemanal = False
 		topsemanall = False
-	if count_series:
-		topsemanal_serie = Hitcount_Series.objects.filter(capitulo_id__isnull=True).order_by('-hitcount')[:10]
-		
+	if request.user.is_authenticated:
+		if request.user.is_admin:
+			if count_series:
+				topsemanal_serie = Hitcount_Series.objects.filter(capitulo_id__isnull=True).order_by('-hitcount')[:10]
+				
 
+			else:
+				topsemanal_serie = False
+				topsemanall_serie = False
+		else:
+				topsemanal_serie = False
+				topsemanall_serie = False
 	else:
 		topsemanal_serie = False
 		topsemanall_serie = False
@@ -407,7 +415,13 @@ def inicio(request):
 	
 
 	peliculas = Peliculas.objects.all().order_by('-id')[:16]
-	series = Series.objects.all().order_by('-id')[:16]
+	if request.user.is_authenticated:
+		if request.user.is_admin:
+			series = Series.objects.all().order_by('-id')[:16]
+		else: 
+			series= False
+	else:
+		series = False
 	movies = Peliculas.objects.all().order_by('-id')[:10]
 	trailers = Trailers.objects.all()[:10]
 	
