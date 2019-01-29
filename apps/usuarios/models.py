@@ -173,3 +173,11 @@ def create_user_UserPreference(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Usuario)
 def save_user_UserPreference(sender, instance, **kwargs):
 	instance.profile.save()
+
+class IPS(models.Model):
+	Ip = models.CharField(max_length=100, blank=True, null=True, unique=True)
+	hitcount = models.IntegerField(default=0)
+
+class USER_IPS(models.Model):
+	user = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="user_ip", null=True)
+	ips = models.ManyToManyField(IPS)

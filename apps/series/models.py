@@ -21,12 +21,13 @@ class Temporada(models.Model):
 	nombre_serie = models.CharField(max_length=20, blank=True)
 	num_temporada = models.IntegerField(blank=True, null=True)
 	slug = models.SlugField(null=True)
-	on = models.ManyToManyField(Usuario, related_name="on")
+	on = models.ManyToManyField(Usuario, related_name="on", blank=True)
 	def __str__(self):
 		return self.serie.titulo + " " + self.temporada_name
 
 class Series(models.Model):
-	titulo = models.CharField(max_length=30)
+	titulo = models.CharField(max_length=100)
+	titulo_original = models.CharField(max_length=100, null=True)
 	ACCION = 'ACC'
 	DRAMA = 'DRA'
 	CIENCIA_FICCION = 'SC'
@@ -61,27 +62,34 @@ class Series(models.Model):
 		default=ACCION,
 	)
 	genero2 = models.CharField(max_length=20, choices=GENERO_CHOICES, blank=True, null=True)
+	genero3 = models.CharField(max_length=20, choices=GENERO_CHOICES, blank=True, null=True)
 
 	reparto = models.ManyToManyField('peliculas.personajes', blank=True, related_name='reparto_serie')
 	sinopsis = models.TextField()
 	fecha_de_lanzamiento = models.DateField()
-	fecha_de_publicacion = models.DateField(default=timezone.now)
+	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 	trailer_link = models.TextField(null=True, blank=True)
 	serie_cover = models.ImageField(upload_to='static', height_field=None, width_field=None)
 	tem = models.ManyToManyField('Temporada', blank=True)
 	portada = models.ImageField(upload_to='static', height_field=None, width_field=None, blank=True, null=True)
 	puntuacion = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
-	palabra_clave = models.CharField(max_length=20, blank=True)
-	director = models.CharField(max_length=30, blank=True)
+	director = models.CharField(max_length=100, blank=True)
 	pais = models.CharField(max_length=40, null=True)
-	tag1 = models.CharField(max_length=20, blank=True)
-	tag2 = models.CharField(max_length=20, blank=True)
-	tag3 = models.CharField(max_length=20, blank=True)
+	tema = models.CharField(max_length=20, blank=True)
+	palabra_clave = models.CharField(max_length=20, blank=True)
+	tag1 = models.CharField(max_length=20, blank=True, null=True)
+	tag2 = models.CharField(max_length=20, blank=True, null=True)
+	tag3 = models.CharField(max_length=20, blank=True, null=True)
+	tag4 = models.CharField(max_length=20, blank=True, null=True)
+	tag5 = models.CharField(max_length=20, blank=True, null=True)
+	tag6 = models.CharField(max_length=20, blank=True, null=True)
+	tag7 = models.CharField(max_length=20, blank=True, null=True)
+	otras_etiquetas_y_busquedas = models.ManyToManyField('Busqueda_y_etiquetas_series', blank=True, related_name="otras_etiquetas_y_busquedas")
 	reportes = models.IntegerField(default=0)
 	favoritos = models.ManyToManyField(Usuario, blank=True, related_name="favoritos")
 
 
-	tema = models.CharField(max_length=20, blank=True)
+	
 
 	reportes = models.IntegerField(default=0)
 
@@ -97,10 +105,13 @@ class Series(models.Model):
 		return reverse("series_detail", kwargs={"slug": self.slug})
 
 class Capitulos(models.Model):
-	nombre = models.CharField(max_length=30)
+	nombre = models.CharField(max_length=100)
+	nombre_original = models.CharField(max_length=100, null=True)
 	cover_capitulo = models.ImageField(upload_to='static', height_field=None, width_field=None)
 	sinopsis = models.CharField(max_length=305)
-	links = models.TextField(blank=True)
+	director = models.CharField(max_length=100, blank=True, null=True)
+	fecha_de_lanzamiento = models.DateField(null=True)
+	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 	num_episodio = models.IntegerField(blank=True, null=True)
 	temporadaa = models.ForeignKey(Temporada, on_delete=models.CASCADE, related_name="temporada_del_capitulo", null=True)
 	slug = models.SlugField(max_length=200, blank=True, unique=True)
@@ -187,3 +198,12 @@ class Hitcount_Series(models.Model):
 			return str(self.serie)
 		if self.capitulo:
 			return str(self.capitulo)
+
+
+class Busqueda_y_etiquetas_series(models.Model):
+	tag = models.CharField(max_length=80, blank=True,null=True)
+	timestamp_tag = models.DateTimeField(auto_now=False, auto_now_add=True)
+	user_who_search = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True)
+	resuelto = models.BooleanField(default=False)
+	def __str__(self):
+		return str(self.tag)

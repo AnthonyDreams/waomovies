@@ -9,8 +9,13 @@
 <body>
 
 {% block content %}
+{% if not series_filt %}
 <div class="hero common-hero" style="height: 385px;
   background: url('{% static 'img/fondo.jpg' %}') no-repeat;">
+  {% else %}
+  <div class="hero common-hero" style="height: 385px;
+  background: url('https://s3-us-west-1.amazonaws.com/waomovies/static/img/TV_Series_banner.jpg') no-repeat;">
+  {% endif %}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">

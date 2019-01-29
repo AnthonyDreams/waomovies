@@ -33,6 +33,7 @@ def NewsList(request):
 		'noticias_count':noticias_count,
 		'critica_count':critica_count,
 		'global_count':global_count,
+		'blog':True,
 
 	}
 	return render(request, 'bloggrid.html', context)
@@ -78,6 +79,8 @@ def Categories(request, categorie):
 		'noticias':Noticias,
 		'critica':Critica,
 		'global':Global,
+		'blog':True,
+
 
 
 	}
@@ -187,6 +190,8 @@ def BlogDetail(request, categorie,slug):
 		'parrafo':parrafoo,
 		'userario':userario,
 		'comentarios':comentarios,
+		'blog':True,
+
 
 	}
 
@@ -277,6 +282,8 @@ def BlogSearch(request, searched):
 		'noticias_count':noticias_count,
 		'critica_count':critica_count,
 		'global_count':global_count,
+		'blog':True,
+		
 	}
 	return render(request, 'bloglist.html', context)
 

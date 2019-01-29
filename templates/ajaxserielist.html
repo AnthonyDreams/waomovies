@@ -193,7 +193,7 @@
 
 
 
-{% if not o in peliculase_serie %}	
+{% if not o in peliculase %}	
 					            				<!-- ver más tarde -->
 <form style="display: inline;position: relative;  padding: 0px;" class="my-ajax-formn{{o.id}}" method='POST'data-url="/vermastarde_series/{{ o.id }}/">{% csrf_token %}
 					            				<button onclick="myfunctiona(this)" id="n{{o.id}}"  title="Ver más tarde" class="" style="background: none; border: none; cursor: pointer; " type="submit" style=""><i   style="color: rgba(255, 255, 255, 0.9);  position: relative; right: 7px;  font-size: 20px;" class="fa fa-eye-slash" aria-hidden="true"></i></button>

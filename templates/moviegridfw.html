@@ -29,9 +29,9 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="hero-ct">
-					<h1>"Se está mejor en casa que en ningún sitio". <br>
+					<h1>"Se está mejor en casa que en ningún sitio".<br><br>
 
-El mago de Oz (1939)</h1>
+<span style="border-bottom:2px solid #00BDE3;"> Películas</span></h1>
 					
 				</div>
 			</div>
@@ -507,7 +507,7 @@ El mago de Oz (1939)</h1>
 </div>
 {% endif %}
 {% if seriesall %}
-<div class="hero common-hero" style="background: url('https://images.wallpaperscraft.com/image/that_awkward_moment_zac_efron_miles_teller_michael_jordan_92870_1920x1080.jpg') no-repeat;
+<div class="hero common-hero" style="background: url('https://s3-us-west-1.amazonaws.com/waomovies/static/img/TV_Series_banner.jpg') no-repeat;
   background-position: center 0px;
                       text-align: center;
                       background-size: cover;
@@ -524,9 +524,9 @@ El mago de Oz (1939)</h1>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="hero-ct">
-					<h1>"Se está mejor en casa que en ningún sitio". <br>
+					<h1>"Se está mejor en casa que en ningún sitio". <br><br>
 
-El mago de Oz (1939)</h1>
+<span style="border-bottom:2px solid #00D786;">Series</span></h1>
 					
 				</div>
 			</div>
@@ -542,20 +542,19 @@ El mago de Oz (1939)</h1>
 					<label>Ordenar por:</label>
 					<form name="FORMULARIO">
 					<select name="DESPLEGABLE" onChange='location.replace(document.FORMULARIO.DESPLEGABLE.value);'>
-						
-						<option value="/series_list/orden_de_subida/">Orden de subida</option>
-						<option value="http://www.google.com">Menos popular</option>
-						<option value="/series_list/_puntuacion/">Mejor puntuada</option>
-						<option value="/series_list/puntuacion/">Peor puntuada</option>
-						<option value="/series_list/_fecha_de_lanzamiento/">Más reciente</option>
-						<option value="/series_list/fecha_de_lanzamiento/">Más antigua</option>
+						<option value="/series_list/_id/" {% if filtro == "_id" %} selected {% endif %}>Orden de subida(Últimas)</option>
+						<option value="/series_list/id/" {% if filtro == "id" %} selected {% endif %}>Orden de subida(Primeras)</option>
+						<option value="/series_list/_puntuacion/" {% if filtro == "_puntuacion" %} selected {% endif %}>Mejor puntuada</option>
+						<option value="/series_list/puntuacion/" {% if filtro == "puntuacion" %} selected {% endif %}>Peor puntuada</option>
+						<option value="/series_list/_fecha_de_lanzamiento/" {% if filtro == "_fecha_de_lanzamiento" %} selected {% endif %}>Más reciente</option>
+						<option value="/series_list/fecha_de_lanzamiento/" {% if filtro == "fecha_de_lanzamiento" %} selected {% endif %}>Más antigua</option>
 					</select>
 					</form>
 				</div>
 				<div class="flex-wrap-movielist mv-grid-fw">
 					{% for o in series %}
 						<div class="movie-item-style-2 movie-item-style-1">
-							<img style=" height: 220px;" src="{{ o.serie_cover.url }}" alt="">
+							<img  src="{{ o.serie_cover.url }}" alt="">
 							{% include 'ajaxserie.html' %}
 							<div style="margin-top: -7px;" class="mv-item-infor">
 								<h6><a href="/series/{{ o.id }}">{{ o.titulo }}</a></h6>

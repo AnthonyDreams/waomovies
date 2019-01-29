@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from .forms import UserAdminChangeForm, UserAdminCreationForm
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import Profile
+from .models import Profile, IPS, USER_IPS
 # Register your models here.
 Usuario = get_user_model()
 
@@ -36,5 +36,7 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 admin.site.register(Usuario, UserAdmin)
+admin.site.register(Profile)
+admin.site.register(Profile)
 admin.site.register(Profile)
 

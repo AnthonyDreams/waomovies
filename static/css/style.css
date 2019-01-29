@@ -7288,10 +7288,11 @@ p.ceb-single {
   }
 }
 .page-single-2 {
-  background: url('../images/uploads/error-bg.jpg') no-repeat;
+  background: url('https://s3-us-west-1.amazonaws.com/waomovies/static/img/TV_Series_Using_Vraky.jpg') no-repeat;
   background-position: center;
   text-align: center;
   background-size: cover;
+  
 }
 .middle-content {
   display: -webkit-flex;

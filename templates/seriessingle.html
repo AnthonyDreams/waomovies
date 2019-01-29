@@ -328,7 +328,16 @@ $.ajaxSetup({
              function send(b) {
               var juan = b.id
 
-              
+              var input = document.getElementById("inputLGEx")
+    var input_error = document.getElementById('input_error')
+  // validate input
+  if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_error').style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  } else {
 
              var $myForm = $('.coment')
              $myForm.submit(function(event){
@@ -351,15 +360,11 @@ $.ajaxSetup({
              })
 
           function handleFormSuccess(data, textStatus, jqXHR){
-              console.log(data)
-              console.log(textStatus)
-              console.log(jqXHR)
-     $("#rv").load(window.location + " #rv");
-     $("#rva").load(window.location + " #rva");
+              
+     
+     
      $("#ven").load(window.location + " #ven");
-
      document.getElementById("sendingcoment").style.display = "none";
-
 
      $(this).remove();
             
@@ -367,10 +372,18 @@ $.ajaxSetup({
              }
 
              function handleFormError(jqXHR, textStatus, errorThrown){
+
+                if (textStatus=="error") {
+                    document.getElementById("sendingcoment").style.display = "none";
+                } 
                  
+
+
+
+
              }
              
-             
+             }
              
              }
              
@@ -395,7 +408,13 @@ $.ajaxSetup({
              })
 
              function handleFormSuccess(data, textStatus, jqXHR){
-                 
+                 var input = document.getElementById("texto" + juan)
+    var input_error = document.getElementById('input_error_update' + juan)
+  // validate input
+    input.style.border = "1px solid green";
+    document.getElementById('input_error_update' + juan).style.color = "green";
+    input_error.textContent = "Editado";
+    input.focus();
                  document.getElementById("updateajax" + juan).innerHTML = data.content;
                  document.getElementById("texto" + juan).innerHTML = data.content;
                  $myForm[0].reset();
@@ -405,7 +424,16 @@ $.ajaxSetup({
  
              
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 
+                 var input = document.getElementById("texto" + juan)
+    var input_error = document.getElementById('input_error_update' + juan)
+  // validate input
+  if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_error_update').style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  }
              }
              
              
@@ -454,8 +482,14 @@ function update_ans(b) {
                  })
              })
 
-             function handleFormSuccess(data, textStatus, jqXHR){
-                 
+            function handleFormSuccess(data, textStatus, jqXHR){
+                 var input = document.getElementById("textoans" + tt)
+    var input_error = document.getElementById('input_error_update_ans' + tt)
+  // validate input
+    input.style.border = "1px solid green";
+    document.getElementById('input_error_update_ans' + tt).style.color = "green";
+    input_error.textContent = "Editado";
+    input.focus();
                  document.getElementById("cm" + tt).innerHTML = data.content;
                  document.getElementById("textoans" + tt).innerHTML = data.content;
                  $myForm[0].reset();
@@ -465,12 +499,22 @@ function update_ans(b) {
  
              
              function handleFormError(jqXHR, textStatus, errorThrown){
-                 
+                 var input = document.getElementById("textoans" + tt)
+    var input_error = document.getElementById('input_error_update_ans' + tt)
+  // validate input
+  if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_error_update_ans' + tt).style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  }
              }
              
              
              
              }
+
 
 
 
@@ -611,6 +655,7 @@ $(this).remove();
 <script>
              function deletee(b) {
               var juan = b.id
+              var c = juan.substr(4)
 
               
 
@@ -627,6 +672,10 @@ $(this).remove();
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
+                     beforeSend: function () {
+                    $("#cog_co" + c).removeClass('fa-cog');
+                    $("#cog_co" + c).addClass('fa-circle-o-notch'); //Agregamos la clase loading al body
+                },
                  })
              })
 
@@ -634,9 +683,11 @@ $(this).remove();
               console.log(data)
               console.log(textStatus)
               console.log(jqXHR)
-     $("#rv").load(window.location + " #rv");
-     $("#rva").load(window.location + " #rva");
+              $("#mouse" + c).remove()
+     
+     
      $("#ven").load(window.location + " #ven");
+
      $(this).remove();
             
                  $myForm[0].reset(); 
@@ -688,7 +739,8 @@ $(this).remove();
               console.log(data)
               console.log(textStatus)
               console.log(jqXHR)
-     $("#rv").load(window.location + " #rv");
+              $("#rs" + c).remove()
+     
      $("#rs" + c).load(window.location + " #rs" + c);
      $("#j" + namen).load(window.location + " #j" + namen);
 
@@ -813,12 +865,15 @@ $(this).remove();
               var token = "{% csrf_token %}"
 
                  
-                 $myForm[0].reset();
+                 $myForm[0].reset(); 
+                 if($myForm.length > 1){
                  $myForm[1].reset(); 
-                 $myForm[1].style.display = 'none' 
+                 $myForm[1].style.display = 'initial'
+             }
+ 
        $("#j" + c).load(window.location + " #j" + c);
        $("#like_div" + c).load(window.location + " #like_div" + c);
-       $("#ccn" + c).append(' <div id="rs'+data.idp+'"><div class="mv-user-review-item" style="margin-bottom: -6px; width: 70%; position: relative; left: 40px;"><div class="user-infor" style="margin-bottom: -0px;"><img style="border-radius: 50%; width: 50px; height: 50px;" src="'+data.perfil+'" alt=""><div><h3 style="font-size: 16px; display:initial;">'+data.name+'</h3><i id="cog'+data.idp+'" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i><div class="btn-group"><div class="dropdown-menu"><a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample">Editar comentario<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a><form style="display: inline;" class="dele_ans'+data.idp+'" data-url="/delete_res/'+data.idp+'/" method="post">'+token+'<button onclick="deletee_res(this)" name="'+data.id+'"id="dele_ans'+data.idp+'" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form><!--a class="dropdown-item" href="#">Something else here</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a--></div></div><p class="time" style="margin-top: -0x;">'+data.fecha+'</p></div></div><p id="cm'+data.idp+'" style="margin-bottom: -15px;">'+data.content+'</p></div></div><div class="collapse container" id="col'+data.idp+'"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans'+data.idp+'" data-url="/responder_update/'+data.idp+'/">'+token+'<textarea id="textoans'+data.idp+'" onkeypress="return limita(400);" style=" height: 6em; width: 400px;" name="respuesta">'+data.content+'</textarea><br><input onclick="update_ans(this)" id="up_ans'+data.idp+'" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form></div></div></div>');
+       $("#ccn" + c).append(' <div id="rs'+data.idp+'"><div class="mv-user-review-item" style="margin-bottom: -6px; width: 70%; position: relative; left: 40px;"><div class="user-infor" style="margin-bottom: -0px;"><img style="border-radius: 50%; width: 50px; height: 50px;" src="'+data.perfil+'" alt=""><div><h3 style="font-size: 16px; display:initial;">'+data.name+'</h3><i id="cog'+data.idp+'" style="cursor: pointer; color: grey; position: relative; top: -4x;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i><div class="btn-group"><div class="dropdown-menu"><a class="dropdown-item" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample">Editar comentario<i style="position:relative; left: 8.5%; padding-left: 8px;" class="fa  fa-edit" aria-hidden="true"></i></a><form style="display: inline;" class="dele_ans'+data.idp+'" data-url="/delete_res/'+data.idp+'/" method="post">'+token+'<button onclick="deletee_res(this)" name="'+data.id+'"id="dele_ans'+data.idp+'" style="background: none; border: none;"><a class="dropdown-item">Eliminar respuesta<i style="padding-left: 8px;" class="fa fa-trash-o" aria-hidden="true"></i></a></button></form><!--a class="dropdown-item" href="#">Something else here</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#">Separated link</a--></div></div><p class="time" style="margin-top: -0x;">'+data.fecha+'</p></div></div><p id="cm'+data.idp+'" style="margin-bottom: -15px;">'+data.content+'</p></div></div><div class="collapse container" id="col'+data.idp+'"><div class="mt-3"><div class="md-form form-lg"><form method="post" class="updateup_ans'+data.idp+'" data-url="/responder_update/'+data.idp+'/">'+token+'<textarea id="textoans'+data.idp+'" onkeypress="return limita(400);" style=" height: 6em; width: 400px;" name="respuesta">'+data.content+'</textarea><br><input onclick="update_ans(this)" id="up_ans'+data.idp+'" style="border: none; cursor: pointer" type="submit" title="Editar" name="" class="redbtn" style="padding: 7px;" value="Editar"><a style=" padding: 7px;   " class="" href="#" data-toggle="collapse" data-target="#col'+data.idp+'" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-close"  aria-hidden="true"></i></a></form><div id="input_error_update_ans'+data.idp+'" style="margin-top: 0px;"></div></div></div></div>');
 
       
 
@@ -827,6 +882,15 @@ $(this).remove();
          }
 
              function handleFormError(jqXHR, textStatus, errorThrown){
+                if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_error' + juan).style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  } 
+$("#load" + c).addClass('fa-chevron-down');
+                    $("#load" + c).removeClass('fa-circle-o-notch');
                  
              }
              
@@ -861,6 +925,12 @@ $(this).remove();
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
+                     beforeSend: function () {
+                                                                
+        $("#like" + c).removeClass('fa-thumbs-up');
+       $("#like" + c).addClass('fa-circle-o-notch');
+                },
+                        
                     
 
 
@@ -904,6 +974,12 @@ function unlike(b) {
                      data: $formData,
                      success: handleFormSuccess,
                      error: handleFormError,
+                     beforeSend: function () {
+                                                                
+        $("#unlike" + c).removeClass('fa-thumbs-down');
+       $("#unlike" + c).addClass('fa-circle-o-notch');
+                },
+                     
                     
 
 
@@ -1693,14 +1769,14 @@ select::-ms-expand {
 
 	  <!-- Card group -->
 	  
-<div class="  row " id="row">
+<div class=" " id="row" style="">
 	<br>
-	<div class="container flex-wrap-movielist mv-grid-fw" style="margin-left: 17px;">
+	<div class="container flex-wrap-movielist mv-grid-fw" style="margin-left: 17px; width: 100%;">
 
   {% for cc in tem.capitulos.all|order_by:"num_episodio" %}
 
-<div class="movie-item-style-2 movie-item-style-1 col-lg-2 col-md-3 col-sm-4" style="margin-bottom: -13px;">
-	<a href="/{{cc.slug}}/{{tem.slug}}/"><img  src="{{cc.cover_capitulo.url}}" style="width: 230px; height: 120px;" alt=""></a>
+<div class="movie-item-style-2 movie-item-style-1 " style="margin-bottom: -8px;">
+	<a href="/{{cc.slug}}/{{tem.slug}}/"><img  src="{{cc.cover_capitulo.url}}" style="width: 400px !important; height: 120px;" alt=""></a>
 	
 	<div class="mv-item-infor">
 		<h6><a href="/{{cc.slug}}/{{tem.slug}}/">{{cc.num_episodio}}.     {{cc.nombre}}</a></h6>
@@ -1718,7 +1794,7 @@ select::-ms-expand {
           </div>
 
 	  <!-- Card group -->
-<div class="  row " id="row">
+<div class="   " id="row">
 	<br>
 	<div class="container flex-wrap-movielist mv-grid-fw" style="margin-left: 17px;">
 
@@ -1726,7 +1802,7 @@ select::-ms-expand {
   {% if tem.num_temporada == 1  and not request.user.on.all%}
 
 <div class="movie-item-style-2 movie-item-style-1" style="margin-bottom: -13px;">
-	<a href="/{{cc.slug}}/{{tem.slug}}/"><img  src="{{cc.cover_capitulo.url}}" style="width: 230px; height: 120px;" alt=""></a>
+	<a href="/{{cc.slug}}/{{tem.slug}}/"><img  src="{{cc.cover_capitulo.url}}" style="width: 400px !important; height: 120px;" alt=""></a>
 	
 	<div class="mv-item-infor">
 		<h6><a href="/{{cc.slug}}/{{tem.slug}}/">{{cc.num_episodio}}.     {{cc.nombre}}</a></h6>
@@ -1860,7 +1936,7 @@ for (i = 0; i < acc.length; i++) {
 						            		
 						            		<div class="sb-it">
 						            			<h6>Generos:</h6>
-						            			<p><a href="#">{{ series.genero }} </a> </p>
+						            			<p><a href="#">{{ series.genero }}, {{ series.genero2 }}, {{ series.genero3 }} </a> </p>
 						            		</div>
 						            		<div class="sb-it">
 						            			<h6>Fecha de extreno:</h6>
@@ -1872,7 +1948,7 @@ for (i = 0; i < acc.length; i++) {
 						            			<p class="tags">
 						            				
 
-						            				<span class="time"><span class="time"><a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag_principal }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tema }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag1 }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag2 }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag3 }}</a></span></span>
+						            				<span class="time"><span class="time"><a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag_principal }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tema }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag1 }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag2 }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag3 }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag4 }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag5 }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag6 }}</a>, <a href="#" style="background-color: #2874A6; color: white; padding-right:6px; padding-left: 5px;">{{ series.tag7 }}</a>, </span></span>
 													
 						            			</p>
 						            		</div>
@@ -1913,7 +1989,7 @@ for (i = 0; i < acc.length; i++) {
 												    <div class="mt-3">
 												    	<div class="md-form form-lg">
     													<!-- img width="30" height="30" src="{{ request.user.profile.perfil_img.url }}"-->
-    													<form class="coment" method='POST' data-url='/comentar_serie/{{ series.id }}/' enctype='multipart/form-data'>
+    													<form class="coment" method='POST' data-url='/comentar_serie/{{ series.id }}/' enctype='multipart/form-data' onsubmit="return validarSend()">
     														{% csrf_token %}
 
 														<input autocomplete="off" type="text" id="inputLGEx" class="form-control form-control-lg" name="content" style="width: 700px; color: #abb7c4;" size="25">
@@ -1921,12 +1997,51 @@ for (i = 0; i < acc.length; i++) {
                   <a data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"style="color: hsl(0, 0%, 53.3%); font-size: 16px; position: relative; left: 44.5%;">Cancelar</a>
               <button onclick="send(this)" class="btn btn-primary" type="submit" style="background-color: hsl(206.1, 79.3%, 52.7%); font-size: 16px; position: relative; left: 46%;">Comentar<i class="fa fa-paper-plane-o ml-2"></i></button>
 														</form>
+                                                        <div id="input_error" style="margin-top: -19px;"></div>
 </div>
-												        
+			<script type="text/javascript">
+    function validarSend() {
+    var input = document.getElementById("inputLGEx")
+    var input_error = document.getElementById('input_error')
+  // validate input
+  if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_error').style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  } else {
+    input.style.border = "1px solid green";
+    document.getElementById('input_error').style.color = "green";
+    input_error.textContent = "Validado con éxito";
+  }
+  }
+</script>									        
 												    </div>
 												</div>
 												<!-- / Collapsible element -->
 
+
+<script type="text/javascript">
+    function validarSend_ans(b) {
+       var str = b.id
+       var strr = str.substr(4)
+    var input = document.getElementById("xv" + strr)
+    var input_error = document.getElementById('input_errorv' + strr)
+  // validate input
+  if (input.value.length > 1500) {
+    input.style.border = "1px solid red";
+    document.getElementById('input_errorv' + strr).style.color = "red";
+    input_error.textContent = "No puede contener más de 1500 caracteres";
+    input.focus();
+    return false;
+  } else {
+    input.style.border = "1px solid green";
+    document.getElementById('input_errorv' + strr).style.color = "green";
+    input_error.textContent = "Validado con éxito";
+  }
+  }
+</script>
           <script type="text/javascript">
            function mouse(b) {
                    var juan = b.id
@@ -1964,7 +2079,7 @@ for (i = 0; i < acc.length; i++) {
 
 
 
-              <i style="cursor: pointer; color: grey; position: relative; left: 10px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i>
+              <i id="cog_co{{i.id}}" style="cursor: pointer; color: grey; position: relative; left: 10px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-cog dropdown-toggle px-3"></i>
               <!-- Split button -->
 
               {% else %}
@@ -2055,32 +2170,34 @@ for (i = 0; i < acc.length; i++) {
  {% if not request.user in i.vote.all %}
  <form style="display: inline;" method="post" class="like{{i.id}}" data-url="/like_serie/{{i.id}}/">{% csrf_token %}
  
-<button  class="buttonn" onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a style="color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
+<button  class="buttonn" onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a style="color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true" id="like{{i.id}}"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
 </form>
 {% else %}
 <form style="display: inline;" method="post" class="like{{i.id}}" data-url="/outlike_serie/{{i.id}}/">{% csrf_token %}
  
-<button class="buttonn"  onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
+<button class="buttonn"  onclick="like(this)" id="bl{{i.id}}" style="border: none; background: none;"> <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-up" aria-hidden="true" id="like{{i.id}}"></i> <span style="font-size: 14px;" id="count">{{i.vote.all|length}}</span> </a></button>
 </form>
 {% endif %}
 {% if not request.user in i.unvote.all %}
 <form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/dislike_serie/{{i.id}}/">{% csrf_token %}
- <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  > <span id="count">{{i.unvote.all|length}}</span> </i></a></button>
+ <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: grey; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  id="unlike{{i.id}}"> </i><span id="count">{{i.unvote.all|length}}</span> </a></button>
 </form>
 {% else %}
 <form style="display: inline;" method="post" class="unlike{{i.id}}" data-url="/outdislike_serie/{{i.id}}/">
- <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  > <span id="count">{{i.unvote.all|length}}</span> </i></a></button>
+ <button class="buttonn" onclick="unlike(this)" id="bul{{i.id}}" style="border: none; background: none;">  <a style="color: #e2e2e2; padding-left: 5px; padding-right: 5px; position: relative; top: 10px;" ><i class="fa fa-thumbs-down" aria-hidden="true"  id="unlike{{i.id}}"> </i><span id="count">{{i.unvote.all|length}}</span> </a></button>
 </form>
 {% endif %}
   <a   data-toggle="collapse" data-target="#collapseExample{{i.id}}z" aria-expanded="false
   " aria-controls="collapseExample{{i.id}}z" style="color: grey; font-family: sans-serif; padding-left: 5px; padding-right: 15px; position: relative; top: 10px;">Responder</a>
   <div  class="collapse container" id="collapseExample{{i.id}}z">
-  <form class="respv{{i.id}}" method="post" data-url="/responder_serie/{{i.slug}}/">
+  <form id="anss{{i.id}}" class="respv{{i.id}}" method="post" data-url="/responder_serie/{{i.slug}}/" onsubmit="return validarSend_ans(this)">
   {% csrf_token %}<div class="md-form">
    <img width="40"  height="40" style="border-radius: 50%; width: 50px; height: 50px;" src="{{request.user.profile.perfil_img.url}}">
-    <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4; " id="input-char-counter" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
+    <input id="xv{{i.id}}" autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4; " id="input-char-counter" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
 </div>
+<div id="input_errorv{{i.id}}" style="margin-top: -19px;"></div>
   </form>
+
 </div>
  </div>
 <div id="j{{i.id}}">
@@ -2211,6 +2328,7 @@ for (i = 0; i < acc.length; i++) {
 <i class="fa fa-close"  aria-hidden="true"></i>
 </a>
                  </form>
+                 <div id="input_error_update_ans{{cm.id}}" style="margin-top: 0px;"></div>
 </div>
                     
                 </div>
@@ -2258,6 +2376,7 @@ for (i = 0; i < acc.length; i++) {
 <i class="fa fa-close"  aria-hidden="true"></i>
 </a>
                  </form>
+                 <div id="input_error_updatep{{ i.slug }}" style="margin-top: 0px;"></div>
 </div>
                     
                 </div>

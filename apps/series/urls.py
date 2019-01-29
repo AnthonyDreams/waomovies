@@ -20,6 +20,9 @@ from apps.series.views import (
 	dislike,
 	reportar_cap,
 	cambiar_votaciono_serie,
+	series_soon,
+	search,
+	search_result_ajax,
 
 
 	)
@@ -28,6 +31,8 @@ URL_CHARS = "[a-zA-Z_/-'·çÇñÑàèìòùÀÈÌÒÙáéíóúÁÉÍÓÚäëï
 
 urlpatterns = [
     re_path(r'^series/(?P<slug>[\w-]+)/$', series_detail, name='series_detail'),
+    re_path(r'^series_soon/$', series_soon, name='series_soon'),
+
     re_path(r'votacion_serie/(?P<id>\d+)/$', votaciono, name='votaciono'),
     re_path(r'^añadirfavorito_series/(?P<id>\d+)/$', añadirfavorito, name='añadirfavorito'),
     re_path(r'^eliminar_añadirfavorito_series/(?P<id>\d+)/$', eliminar_añadirfavorito, name='eliminar_añadirfavorito'),
@@ -36,13 +41,18 @@ urlpatterns = [
     re_path(r'^temporada/(?P<slug>\w+)/$', temporada_detail, name='temporada_detail'),
     re_path(r'^(?P<capitulo>[\w-]+)/(?P<slug>[\w-]+)/$', capitulos_detail, name='capitulos_detail'),
     re_path(r'^to/(?P<capitulo>\w+)/(?P<temporada>\w+)/$', redirect, name='capitulos_detail'),
-    path(r'buscar_series/', search_series, name='search_series'),
+    path(r'buscar_series/', search, name='search_series'),
+    re_path(r'^series/search/(?:search-(?P<src>.+)/)?$', search_series, name='search_series'),
     path(r'filtrar_series/', filtrar, name='filtrar_series'),
     re_path(r'temporadaon/(?P<id>\d+)/post/$', ontemporada, name='ontemporada'),
-     re_path(r'^like_capi/(?P<id>\d+)/gustar/$', like),
-    url(r'^outlike_capi/(?P<id>\d+)/outgustar/$', unlike),
-     url(r'^dislike_capi/(?P<id>\d+)/disgustar/$', dislike),
+    path(r'search_ajax_serie/', search_result_ajax, name='search_ajax'),
+    url(r'^capitulo/like_capi/(?P<id>\d+)/gustar/$', like),
+    url(r'^capitulo/outlike_capi/(?P<id>\d+)/outgustar/$', unlike),
+     
+    url(r'^dislike_capi/(?P<id>\d+)/disgustar/$', dislike),
     url(r'^outdislike_capi/(?P<id>\d+)/outdisgustar/$', outdislike),
+    
+
     re_path(r'reportar_capitulo/(?P<id>\d+)/reportar/$', reportar_cap, name='reportar_cap'),
     re_path(r'cambiar_votaciono_serie/(?P<id>\d+)/as/$', cambiar_votaciono_serie, name='cambiar_votaciono_serie'),
 

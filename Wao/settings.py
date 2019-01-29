@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'apps.contacto',
     'apps.dashboard',
     'apps.news',
+    'timedeltatemplatefilter',
 ]
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
@@ -163,7 +164,7 @@ import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
-DEB = False
+DEB = True
 
 if DEB:
 	MEDIA_URL = '/media/'

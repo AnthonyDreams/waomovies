@@ -21,20 +21,21 @@ from apps.comentarios.models import *
 from django.db.models import Sum
 from .forms import *
 from urllib.parse import quote_plus
-from apps.usuarios.models import Usuario, Profile, UserPreference
+from apps.usuarios.models import Usuario, Profile, UserPreference, IPS, USER_IPS
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 import json
 from apps.series.models import Series, Hitcount_Series, Capitulos
 from django.core import serializers
 from rest_framework.views import APIView
-from .serializers import Comparitapi,Friends, peliserializer, COMENTARIOS,notizerializer,pelisnoveerializer,SEGUIRYVER,serieserializer
+from .serializers import Comparitapi,Friends, peliserializer, COMENTARIOS,notizerializer,pelisnoveerializer,SEGUIRYVER,serieserializer, GET_P
 from apps.vermas_tarde.models import Vermastarde
 from apps.notificaciones.models import Notificaciones, Evento, Compartir
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.conf import settings
 from apps.news.models import Hitcount_Articulos
+from ipware import get_client_ip
 class pelis(APIView):
 	serializer = peliserializer
 	def get(self, request, format=None):
@@ -141,6 +142,65 @@ class Notifi(APIView):
 		lista_noticount = Evento.objects.filter(noti_de_evento__in=noti, status="Unread").count()
 		response = self.serializer(lista_noti, many=True)
 		return HttpResponse(json.dumps(response.data))
+
+class IP_GET(APIView):
+	serializer = GET_P
+	def get(self, request, format=None):
+		ip, is_routable = get_client_ip(request)
+		if ip is None:
+	   		print("No se puede obtener la ip")
+		else:
+			print("Normal " + ip)
+			if is_routable:
+				print("Publica " + ip)
+			else:
+				print("Privada " + ip)
+		if request.user.is_authenticated:
+			ipp = IPS.objects.filter(Ip=ip)
+			if ipp:
+				for count in ipp:
+					count.hitcount += 1
+					count.save()
+				user_ip = USER_IPS.objects.filter(user=request.user.id)
+				total = 0
+				false = 0
+				for a in user_ip:
+					for ip in a.ips.all():	
+						total +=1			
+						if ipp == ip: 
+							pass
+						else:
+							false+=1
+					if false == total:
+						for p in ipp:
+							a.ips.add(p.id)
+
+			else:
+				save_ip = IPS(Ip=ip)
+				save_ip.save()
+				user = USER_IPS(user=request.user)
+				user.save()
+				ipp = IPS.objects.filter(Ip=ip)
+				user_ip = USER_IPS.objects.get(user=request.user.id)
+				for p in ipp:
+					user_ip.ips.add(p.id)
+
+		else:
+			ipp = IPS.objects.filter(Ip=ip)
+			if ipp:
+				pass
+			else:
+				save_ip = IPS(Ip=ip)
+				save_ip.save()
+
+
+
+		dataa = IPS.objects.filter(Ip=ip)
+		response = self.serializer(dataa, many=True)
+		return HttpResponse(json.dumps(response.data))
+
+
+		
 
 class Read(APIView):
 	serializer = notizerializer
@@ -348,7 +408,9 @@ def inicio(request):
 	series = Series.objects.all().order_by('-id')[:16]
 	movies = Peliculas.objects.all().order_by('-id')[:10]
 	trailers = Trailers.objects.all()[:10]
+	
 
+	# Order of precedence is (Public, Private, Loopback, None)
 
 	contexto = {
 	'peliculas':peliculas,
@@ -373,6 +435,7 @@ def inicio(request):
 	'documental':documental,
 	'fantasia':fantasia,
 	'onseries': settings.SERIES,
+	'inicio':True,
 
 	}
 	return render(request, 'index.html', contexto)

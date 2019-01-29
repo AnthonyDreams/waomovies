@@ -28,10 +28,71 @@ from django.conf import settings
 
 from datetime import datetime, date, time, timedelta
 
+def search_result_ajax(request):
+
+	if request.is_ajax():
+		if not settings.SERIES and request.user.is_admin:
+			src = request.GET.get('term', '')
+			puntuactions = '''!()[]{};:'"\,<>./?@#$%^&*'''
+			srch = src
+			slugsearch = ""
+			srchh = ""
+			juan = []
+			count = -1
+			index = ""
+			series_filt = True
+			if srch:
+				juan.append(srch)
+				for xy in srch:
+					if xy in puntuactions:
+						xy = ""
+					if xy == " ":
+						xy = "-"
+					slugsearch += xy
+				for values in srch:
+					if values == " ":
+						values = "_"
+					srchh += values
+
+
+			
+
+			if srch:
+				buscar =Busqueda_y_etiquetas_series.objects.filter(tag__icontains=srchh)
+				idbuscar = []
+				if buscar.count() > 0:
+					idbuscar.append(buscar[0].id)
+					if buscar.count() > 1:
+						for iss in buscar:
+							idbuscar.append(iss.id)
+
+
+				match = Series.objects.filter(Q(titulo__icontains=srch)|Q(titulo_original__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch))
+				matchc = Series.objects.filter(Q(titulo__icontains=srchh)|Q(titulo_original__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch)).count()
+
+			results = []
+			for datos in match:
+				results.append(datos.titulo)
+
+			data = json.dumps(results)
+			mimetype = 'application/json'
+			return HttpResponse(data, mimetype)
+		else:
+			results = ["Aún no están disponibles"]
+			
+
+			data = json.dumps(results)
+			mimetype = 'application/json'
+			return HttpResponse(data, mimetype)
+
 
 def series_detail(request, slug):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 
 	peliculasees = Vermastarde.objects.filter(usuario_id=request.user.id)
 	peliculase_seriesa = []
@@ -325,8 +386,12 @@ def series_detail(request, slug):
 
 
 def temporada_detail(request, slug):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	temporada = Temporada.objects.get(id=slug)
 	capitulo = Capitulos.objects.filter(temporadaa_id=slug)[0]
 	capitulos = Capitulos.objects.filter(temporadaa_id=slug)
@@ -350,8 +415,12 @@ def redirect(request, capitulo, temporada):
 
 
 def capitulos_detail(request, capitulo, slug):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 
 	user_report = Reporte.objects.filter(reportador_id=request.user.id)
 	report_user = []
@@ -360,11 +429,11 @@ def capitulos_detail(request, capitulo, slug):
 		report_user.append(report_users.comentario)
 		report_user_res.append(report_users.respuesta)
 	temporada = Temporada.objects.get(slug=slug)
-	capitulo = Capitulos.objects.get(slug=capitulo)
+	_capitulo = Capitulos.objects.get(slug=capitulo)
 	h = 0
 	if not request.is_ajax():
 		try:
-			h = Hitcount_Series.objects.get(capitulo_id=capitulo.id)
+			h = Hitcount_Series.objects.get(capitulo_id=_capitulo.id)
 			form = count_series(request.POST or None, request.FILES or None, instance=h)
 			if timezone.now() >= h.expired:
 				if form:
@@ -380,28 +449,28 @@ def capitulos_detail(request, capitulo, slug):
 					instance.hitcount_ever = h.hitcount_ever + 1
 					instance.save()
 		except ObjectDoesNotExist:
-			instances = get_object_or_404(Peliculas, id=id)
+			instances = get_object_or_404(Capitulos, id=_capitulo.id)
 			form = count_series(request.POST or None, request.FILES or None)
 			if form:
 				instance = form.save(commit=False)
-				instance.capitulo_id = id
+				instance.capitulo_id = _capitulo.id
 				instance.hitcount = 1
 				instance.hitcount_ever = 1
 				instance.expired = timezone.now() + timedelta(days=7)
 				instance.save()
 	else:
 		try:
-			h = Hitcount_Series.objects.get(capitulo_id=capitulo.id)
+			h = Hitcount_Series.objects.get(capitulo_id=_capitulo.id)
 		except ObjectDoesNotExist:
 			h = 0
-	siguiente = capitulo.num_episodio +1 
-	anterior = capitulo.num_episodio -1
-	get_siguiente=Capitulos.objects.filter(num_episodio=capitulo.num_episodio +1).filter(temporadaa_id=temporada.id)
-	get_anterior=Capitulos.objects.filter(num_episodio=capitulo.num_episodio - 1).filter(temporadaa_id=temporada.id)[:1]
+	siguiente = _capitulo.num_episodio +1 
+	anterior = _capitulo.num_episodio -1
+	get_siguiente=Capitulos.objects.filter(num_episodio=_capitulo.num_episodio +1).filter(temporadaa_id=temporada.id)
+	get_anterior=Capitulos.objects.filter(num_episodio=_capitulo.num_episodio - 1).filter(temporadaa_id=temporada.id)[:1]
 	
 	series_filt = True
-	comentarios_list = Post.objects.filter(capitulos_id=capitulo.id)
-	comentariosc = Post.objects.filter(capitulos_id=capitulo.id).count()
+	comentarios_list = Post.objects.filter(capitulos_id=_capitulo.id)
+	comentariosc = Post.objects.filter(capitulos_id=_capitulo.id).count()
 	if request.is_ajax():
 		paginator = Paginator(comentarios_list, 5 + comentariosc)
 	else: 
@@ -416,7 +485,7 @@ def capitulos_detail(request, capitulo, slug):
 		comentarios = paginator.page(paginator.num_pages)
 	contexto = {
 	'temporada':temporada,
-	'capitulo':capitulo,
+	'capitulo':_capitulo,
 	'series_filt':series_filt,
 	'comentariosc':comentariosc,
 	'comentarios':comentarios,
@@ -435,8 +504,12 @@ def capitulos_detail(request, capitulo, slug):
 
 
 def añadirfavorito(request, id):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	if not request.user.is_active:
 		raise Http404
 	instance = get_object_or_404(Series, id=id)
@@ -456,8 +529,12 @@ def añadirfavorito(request, id):
 		return JsonResponse(data)
 
 def eliminar_añadirfavorito(request, id):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	if not request.user.is_active:
 		raise Http404
 	instance = get_object_or_404(Series, id=id)
@@ -477,8 +554,12 @@ def eliminar_añadirfavorito(request, id):
 		return JsonResponse(data)
 
 def reportar(request, id):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	if not request.user.is_active:
 		raise Http404
 	instances = get_object_or_404(Series, id=id)
@@ -498,8 +579,12 @@ def reportar(request, id):
 
 # este es el formulario de votacion, simple
 def votaciono(request, id):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	if not request.user.is_active:
 		raise Http404
 		
@@ -517,8 +602,12 @@ def votaciono(request, id):
 				}
 			return JsonResponse(data)
 def cambiar_votaciono_serie(request, id):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	if not request.user.is_active:
 		raise Http404
 	instance = get_object_or_404(Votacion, id=id)
@@ -535,8 +624,12 @@ def cambiar_votaciono_serie(request, id):
 # este es el formulario de ver mas tarde, simple
 
 def series_list(request, filtro):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	if filtro == "orden_de_subida":
 		filtro = "_id"
 	seriesall = True
@@ -575,103 +668,182 @@ def series_list(request, filtro):
 	}
 	return render(request, 'moviegridfw.html', contexto)
 
-
-
-def search_series(request):
-	if not settings.SERIES:
-		raise Http404
+def search(request):
 	if request.method=='POST':
-		peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
-		peliculase = []
 
-		for i in peliculasee:
-			peliculase.append(i.series)
-
-		srch = request.POST['src']
-		slugsearch = ""
+		valor = request.POST['src']
+		puntuactions = '''!()[]{};:'"\,<>./?@#$%^&*'''
 		juan = []
-		count = -1
+		contar = -1
+		contar_valor2 = -1
 		index = ""
-		series_filt = True
-		if srch:
-			juan.append(srch)
 
-			for xy in srch:
-				if xy == " ":
-					xy = "-"
-				slugsearch += xy
+		valor2 = ""
+		if valor:
+			for b in valor:
+				contar = contar + 1
+				if b in puntuactions:
+		 			b = ""
+				if b == " " or b == "-" or b == "_":
+					try:
+						if valor[contar -1] == "-" or valor[contar + 1] =="-":
+							b = ""
+						elif valor[contar -1] == " " or valor[contar + 1] ==" ":
+							b = ""
+						else:
+			 				b="_"
+					except IndexError:
+						b=""
+					b="_"
+					
+				valor2 += b
 
-			for b in srch:
-				count += 1 
-				if b == " ":
-					b = "_"
-				index += b
+
+		if valor2:
+			for b in valor2:
+				contar_valor2 = contar_valor2 + 1
+				if b == "_":  
+					if valor2[contar_valor2 -1] == "_":
+						b = ""
+				index +=b
 
 		# -> NFC
 		
 
-		if srch:
-			match = Series.objects.filter(Q(titulo__icontains=srch)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch))
-			matchc = Series.objects.filter(Q(titulo__icontains=srch)|Q(tema__icontains=srch)|Q(tag1__icontains=index)|Q(tag2__icontains=index)|Q(tag3__icontains=index)|Q(slug__icontains=slugsearch)).count()
-			paginator = Paginator(match, 20)
-			page = request.GET.get('page')
-			try:
-				paginator = paginator.page(page)
-			except PageNotAnInteger:
-				paginator = paginator.page(1)
-			except EmptyPage:
-				paginator = paginator.page(paginator.num_pages)
+		if valor and not valor == "":
+			return HttpResponseRedirect('/series/search/search-' + index.lower())
+		if valor == "":
+			return HttpResponseRedirect('/series_list/_id/')
+
+
+	try:			
+		context = {'juan':valor, 'series_filt':series_filt, 'peliculase':peliculase, }
+	except UnboundLocalError:
+		return HttpResponseRedirect('/series_list/_id/')
+	return render(request, 'movielist.html', context)
+
+
+def search_series(request,src):
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+				return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")	
+	peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
+	peliculase = []
+
+	for i in peliculasee:
+		peliculase.append(i.series)
+
+	srch = src
+	slugsearch = ""
+	srchh = ""
+	juan = []
+	count = -1
+	index = ""
+	series_filt = True
+	if srch:
+		juan.append(srch)
+		for xy in srch:
+			if xy == "_":
+				xy = "-"
+			slugsearch += xy
+
+		for b in srch:
+			count += 1 
+			if b == "_":
+				b = "_"
+
+		for n in srch:
+			if n == "_":
+				n = " "
+			srchh += n
+
+	# -> NFC
+	
+
+	if srch:
+		buscar =Busqueda_y_etiquetas_series.objects.filter(tag__icontains=srch)
+		idbuscar = []
+		if buscar.count() > 0:
+			idbuscar.append(buscar[0].id)
+			if buscar.count() > 1:
+				for iss in buscar:
+					idbuscar.append(iss.id)
+
+
+
+		match = Series.objects.filter(Q(titulo__icontains=srchh)|Q(titulo_original__icontains=srchh)|Q(tema__icontains=srch)|Q(tag1__icontains=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch))
+		matchc = Series.objects.filter(Q(titulo__icontains=srchh)|Q(titulo_original__icontains=srchh)|Q(tema__icontains=srch)|Q(tag1__icontains=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch)).count()
+		paginator = Paginator(match, 30)
+		antes = ""
+		if matchc == 0:
+			
+			if request.user.is_authenticated:
+				guardar = Busqueda_y_etiquetas_series(tag=srch, user_who_search=request.user)
+				guardar.save()
+			else:
+				guardar = Busqueda_y_etiquetas_series(tag=srch)
+				guardar.save()
+			for i in match:
+				if i == " ":
+					break
+				else:
+					antes += i
+			match = Series.objects.filter(titulo__startswith=antes)
+
+		page = request.GET.get('page')
+		try:
+			paginator = paginator.page(page)
+		except PageNotAnInteger:
+			paginator = paginator.page(1)
+		except EmptyPage:
+			paginator = paginator.page(paginator.num_pages)
 
 
 
 
-			if paginator:
-				contexto = {
-				'peliculas':paginator,
-				'count':matchc,
-				'juan':srch,
-				'series_filt':series_filt,
-				'peliculase_serie': peliculase,
+		if paginator:
+			contexto = {
+			'peliculas':paginator,
+			'count':matchc,
+			'juan':srchh,
+			'series_filt':series_filt,
+			'peliculase':peliculase,
 
+			}
+			return render(request, 'movielist.html', contexto)
+		elif paginator == 0:
+			
+			for i in srchh:
+				srchh = correccion(i)
+				print(srchh)
 
-				}
-				return render(request, 'movielist.html', contexto)
-			elif paginator == 0:
-				
-				for i in srch:
-					srch = correccion(i)
-					print(srch)
-
-				match = Series.objects.filter(Q(titulo__icontains=i))
-				matchc = Series.objects.filter(Q(titulo__icontains=i)).count()
+			match = Series.objects.filter(Q(titulo__icontains=i))
 			
 		
-				contexto = {
-				'sr':match,
-				'count':matchc,
-				'juan':srch,
-				'series_filt':series_filt,
-			'peliculase_serie': peliculase,
+	
+			contexto = {
+			'sr':match,
+			'count':matchc,
+			'juan':srchh,
+			'series_filt':series_filt,
+			'peliculase':peliculase,
 
-				}
-				return render(request, 'movielist.html', contexto)
-			else: 
-				pass
-		else:
-			srch = "No has buscado nada"
-			return HttpResponseRedirect('/series_list/orden_de_subida/')
-	else:
-		srch = "No has buscado nada"
-		return HttpResponseRedirect('/series_list/orden_de_subida/')
+			}
+			return render(request, 'movielist.html', contexto)
 
-			
-	context = {'juan':srch, 'series_filt':series_filt, 'peliculase_serie': peliculase, }
+	context = {'juan':srchh, 'series_filt':series_filt, 'peliculase':peliculase, }
 	return render(request, 'movielist.html', context)
 
 
 def filtrar(request):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	if request.method=='POST':
 		peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
 		peliculase = []
@@ -744,8 +916,12 @@ def filtrar(request):
 
 
 def ontemporada(request, id):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	ser = Series.objects.get(id=id)
 	if request.method =='POST':
 		ona = request.POST['id']
@@ -770,8 +946,12 @@ def ontemporada(request, id):
 
 
 def like(request, id):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	if not request.user.is_active:
 		raise Http404
 	instances = get_object_or_404(Capitulos, id=id)
@@ -789,8 +969,12 @@ def like(request, id):
 			return JsonResponse(data)
 
 def unlike(request, id):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	if not request.user.is_active:
 		raise Http404
 	instances = get_object_or_404(Capitulos, id=id)
@@ -806,8 +990,12 @@ def unlike(request, id):
 			return JsonResponse(data)
 
 def dislike(request, id):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	if not request.user.is_active:
 		raise Http404
 	instances = get_object_or_404(Capitulos, id=id)
@@ -825,8 +1013,12 @@ def dislike(request, id):
 			return JsonResponse(data)
 
 def outdislike(request, id):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	if not request.user.is_active:
 		raise Http404
 	instance = get_object_or_404(Capitulos, id=id)
@@ -842,8 +1034,12 @@ def outdislike(request, id):
 			return JsonResponse(data)
 
 def reportar_cap(request, id):
-	if not settings.SERIES:
-		raise Http404
+	if request.user.is_authenticated:
+		if not settings.SERIES and not request.user.is_admin:
+			return HttpResponseRedirect("/series_soon/")
+	else:
+		return HttpResponseRedirect("/series_soon/")
+	
 	if not request.user.is_active:
 		raise Http404
 	instances = get_object_or_404(Capitulos, id=id)
@@ -858,3 +1054,18 @@ def reportar_cap(request, id):
 				'message': "Gracias por reportar"
 			}
 			return JsonResponse(data)
+
+
+
+def series_soon(request):
+	remaining = datetime.now() - datetime(2019,3,24,18,40,59)
+	if request.user.is_authenticated:
+		context = {
+		'remaining':remaining,
+		'admin':request.user.is_admin,
+		}
+	else:
+		context = {
+		'remaining':remaining,
+		}
+	return render(request, 'comingsoon.html', context)

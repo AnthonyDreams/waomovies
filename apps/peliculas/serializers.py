@@ -5,13 +5,19 @@ from apps.vermas_tarde.models import *
 from rest_framework import serializers
 from apps.series.models import Series
 from apps.notificaciones.models import Notificaciones, Evento, Compartir
-from apps.usuarios.models import Profile
+from apps.usuarios.models import Profile, IPS
 
 class peliserializer(ModelSerializer):
 
 	class Meta:
 		model = Peliculas
 		fields = ('titulo', 'director', 'fecha_de_lanzamiento', 'Cover', 'id', 'slug', 'puntuacion')
+
+class GET_P(ModelSerializer):
+
+	class Meta:
+		model = IPS
+		fields = ('Ip', 'hitcount',)
 
 class notizerializer(ModelSerializer):
 	unread = serializers.IntegerField()
