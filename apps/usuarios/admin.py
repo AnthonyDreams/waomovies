@@ -37,6 +37,6 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(Usuario, UserAdmin)
 admin.site.register(Profile)
-admin.site.register(Profile)
-admin.site.register(Profile)
+admin.site.register(IPS)
+admin.site.register(USER_IPS)
 
