@@ -650,6 +650,8 @@ def peliculasO(request, slug, *args, **kwargs):
 				'votacion2':votacion2,
 				'votacion2c':votacion2c,
 				'votacion':votacion,
+				'report_user':report_user,
+			'report_user_res':report_user_res,
 				
 			}
 
@@ -756,6 +758,8 @@ def peliculasO(request, slug, *args, **kwargs):
 				'votacion2':votacion2,
 				'votacion2c':votacion2c,
 				'votacion':votacion,
+				'report_user':report_user,
+			'report_user_res':report_user_res,
 				
 				
 			}
