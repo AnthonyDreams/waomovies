@@ -188,7 +188,9 @@ class IP_GET(APIView):
 		else:
 			ipp = IPS.objects.filter(Ip=ip)
 			if ipp:
-				pass
+				for count in ipp:
+					count.hitcount += 1
+					count.save()
 			else:
 				save_ip = IPS(Ip=ip)
 				save_ip.save()
