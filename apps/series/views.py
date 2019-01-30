@@ -1069,3 +1069,36 @@ def series_soon(request):
 		'remaining':remaining,
 		}
 	return render(request, 'comingsoon.html', context)
+
+
+def gettingembed(request, id):
+	get = Capitulos.objects.get(id=id)
+	if request.is_ajax():
+		server = request.POST.get('server')
+		if server == "rapidvideo":
+			embed = get.rapidvideo
+		elif server == "openload":
+			embed = get.openload
+		elif server == "vidoza":
+			embed = get.vidoza
+		elif server == "streamcloud":
+			embed = get.streamcloud
+		elif server == "streamago":
+			embed = get.streamago
+		elif server == "vidlox":
+			embed = get.vidlox
+		elif server == "servidor1":
+			embed = get.servidor1
+		elif server == "servidor2":
+			embed = get.servidor2
+		elif server == "servidor3":
+			embed = get.servidor3
+		elif server == "servidor4":
+			embed = get.servidor4
+		else:
+			embed = None
+		data= {
+		'embed': embed,
+		}
+
+		return JsonResponse(data)

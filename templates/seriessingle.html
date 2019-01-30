@@ -1200,12 +1200,12 @@ $(this).remove();
 		<div class="row ipad-width2">
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="movie-img sticky-sb">
-					<img src="{{ series.serie_cover.url }}" alt="">
-					<div class="movie-btn">	
-						<div class="btn-transform transform-vertical red">
-       <div><a data-toggle="modal" data-target="#modalyoutube" class="item item-1 redbtn">  Ver Trailer</a></div>
-       <div><a data-toggle="modal" data-target="#modalyoutube" class="item item-2 redbtn "><i class="fa fa-play point"></i></a></div>
-      </div>
+					<img src="{{ series.serie_cover.url }}" alt="" style="height: 440px; width: auto;">
+					<div id="moviebtna" class="movie-btn">	
+						<div class="btn-transform transform-vertical " style="margin-bottom: 7px !important;">
+                           <div><a data-toggle="modal" data-target="#modalyoutube" class="item item-1 redbtn" style="border-radius: 5px !important ; ">  Ver Trailer</a></div>
+                           <div><a data-toggle="modal" data-target="#modalyoutube" class="item item-2 redbtn " style="border-radius: 5px !important ; "><i class="fa fa-play point"></i></a></div>
+                          </div>
 
 <style type="text/css">
     
@@ -2193,7 +2193,7 @@ for (i = 0; i < acc.length; i++) {
   <form id="anss{{i.id}}" class="respv{{i.id}}" method="post" data-url="/responder_serie/{{i.slug}}/" onsubmit="return validarSend_ans(this)">
   {% csrf_token %}<div class="md-form">
    <img width="40"  height="40" style="border-radius: 50%; width: 50px; height: 50px;" src="{{request.user.profile.perfil_img.url}}">
-    <input id="xv{{i.id}}" autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4; " id="input-char-counter" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
+    <input id="xv{{i.id}}" autocomplete="off" style="display: inline; width: 70%; position:relative; color: #abb7c4; " id="input-char-counter" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
 </div>
 <div id="input_errorv{{i.id}}" style="margin-top: -19px;"></div>
   </form>
@@ -2222,7 +2222,7 @@ for (i = 0; i < acc.length; i++) {
   <div  class="collapse container" id="collapseExample{{i.id}}x">
    {% for cm in i.respuestas.all|order_by:"timestamp" %}
    <div {% if not request.user == cm.user %} onmouseover="mouse_res(this)" onmouseout="mouseout_res(this)" {% endif %} id="rs{{cm.id}}">
-    <div class="mv-user-review-item" style="margin-bottom: -6px; width: 70%; position: relative; left: 40px;">
+    <div class="mv-user-review-item" style="margin-bottom: -6px; width: 90%; position: relative; left: 40px;">
            <div class="user-infor" style="margin-bottom: -0px;">
             <img style="border-radius: 50%; width: 50px; height: 50px;" src="{{cm.who.profile.perfil_img.url}}" alt="">
             <div style="position: relative; right: 20px;">
@@ -2339,12 +2339,13 @@ for (i = 0; i < acc.length; i++) {
           <a   data-toggle="collapse" data-target="#collapseExample{{i.id}}zzx" aria-expanded="false
   " aria-controls="collapseExample{{i.id}}z" style="color: grey; font-family: sans-serif; padding-left: 5px; padding-right: 15px; position: relative; top: 10px;">Mencionar</a>
   <div  class="collapse container" id="collapseExample{{i.id}}zzx">
-  <form class="respv{{i.id}}" method="post" data-url="/responder/{{i.slug}}/">
+  <form id="anss{{i.id}}" class="respd{{i.id}}" method="post" data-url="/responder/{{i.slug}}/" onsubmit="return validarSend_ans(this)">
   {% csrf_token %}<div class="md-form">
    <img width="40"  height="40" style="border-radius: 50%; width: 50px; height: 50px;" src="{{request.user.profile.perfil_img.url}}">
-    <input autocomplete="off" style="display: inline; width: 40%; position:relative; color: #abb7c4;" id="input-char-counter" value="@{{cm.who.username}}" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="v{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
+    <input id="xd{{i.id}}" autocomplete="off" style="display: inline; width: 90%; position:relative; color: #abb7c4;" id="input-char-counter" value="@{{cm.who.username}}" placeholder="Añade una respuesta" type="text" length="400" class="form-control" name="respuesta" required><button style="display: inline; background: none; border: none" type="submit"  value="responder" name="" onclick="res(this)" id="d{{i.id}}"><i class="fa fa-send point" style="color: white; cursor: pointer;" ></i></button>
 </div>
   </form>
+  <div id="input_errord{{i.id}}" style="margin-top: -19px;"></div>
 </div>
           {% endif %}
           </div>

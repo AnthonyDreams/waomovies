@@ -23,6 +23,7 @@ from apps.series.views import (
 	series_soon,
 	search,
 	search_result_ajax,
+	gettingembed,
 
 
 	)
@@ -32,7 +33,7 @@ URL_CHARS = "[a-zA-Z_/-'·çÇñÑàèìòùÀÈÌÒÙáéíóúÁÉÍÓÚäëï
 urlpatterns = [
     re_path(r'^series/(?P<slug>[\w-]+)/$', series_detail, name='series_detail'),
     re_path(r'^series_soon/$', series_soon, name='series_soon'),
-
+    re_path(r'get_embed_serie/(?P<id>\d+)/$', gettingembed, name='gettingembed'),
     re_path(r'votacion_serie/(?P<id>\d+)/$', votaciono, name='votaciono'),
     re_path(r'^añadirfavorito_series/(?P<id>\d+)/$', añadirfavorito, name='añadirfavorito'),
     re_path(r'^eliminar_añadirfavorito_series/(?P<id>\d+)/$', eliminar_añadirfavorito, name='eliminar_añadirfavorito'),
