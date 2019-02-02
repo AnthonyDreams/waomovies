@@ -276,17 +276,28 @@ class añadiste(APIView):
 				added_tag3.append(use.tag3)
 				added_id.append(use.id)
 
-			lista2 = Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=added_id)[:25]
 			instancess = UserPreference.objects.filter(user=request.user)
+			lista2 = Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=added_id)[0:instancess[0].endindex]
 			if instancess:
 				instancess = UserPreference.objects.filter(user=request.user.id)[0]
-				if  timezone.now() >= instancess.expired :
+				if  timezone.now() >= instancess.expired:
+					instancess.endindex += 20
+					instancess.save() 
 					peliculass = instancess.week_recomendation.all()
 					idsd = []
 					for peli in peliculass:
 						idsd.append(peli.id)
+					try:
+						confirm =  Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=added_id)
+						if instancess.endindex > confirm.count():
+							instancess.endindex = 20
+							instancess.save()
+						mmm2 =Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=list(set(idsd+added_id)))[0:instancess.endindex]
+					except IndexError:
+						instancess.endindex = 20
+						instancess.save()
+						mmm2 =Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=list(set(idsd+added_id)))[0:instancess.endindex]
 
-					mmm2 =Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=list(set(idsd+added_id)))[:25]
 					fecha = timezone.now() + timedelta(days=7)
 					instancess.expired = fecha
 					instancess.week_recomendation.clear()
@@ -303,7 +314,7 @@ class añadiste(APIView):
 				if lista and not instancess:
 					asunto = UserPreference(user=request.user, expired = timezone.now() + timedelta(days=7))
 					asunto.save()
-					mmm2 = Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=added_id)[:25]
+					mmm2 = Peliculas.objects.filter(Q(tema__in=added_tema)|Q(tag1__in=added_tag1)|Q(tag2__in=added_tag2)|Q(tag3__in=added_tag3)).exclude(id__in=added_id)[0:instancess.endindex]
 					asunto.week_recomendation.add(*mmm2)
 				else:
 					peliculass = instancess.week_recomendation.all()

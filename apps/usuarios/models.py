@@ -163,6 +163,7 @@ class UserPreference(models.Model):
 	user = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name='preference')
 	week_recomendation = models.ManyToManyField(settings.MOVIES_DEL_WEB,blank=True, related_name='week_recomendation')
 	expired = models.DateTimeField(auto_now=False, auto_now_add=False, default=timezone.now)
+	endindex = models.IntegerField(default=20)
 
 
 @receiver(post_save, sender=Usuario)
