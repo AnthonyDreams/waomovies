@@ -7,8 +7,24 @@
 
 {% block scriptt %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bowser/1.9.4/bowser.min.js"></script>
+<input type="hidden" id="movie_cast" name="" value="{{peliculaa.id}}">
+<script type="text/javascript">
+  $(document).ready(function(){
+ var movieID = document.getElementById("movie_cast").value
+console.log(movieID)
+
+ 
+  $.getJSON('/cast/'+ movieID + "/")
+  .done(function(data) { 
+$.each(data, function(key, value){
+    $('#mv_cast').append('<div class="cast-it"><div class="cast-left"><img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2'+value.profile_path+'" alt="" width="40" height="40"><a href="#">'+value.name+'</a></div><p>... '+value.character+'.</p></div>');
 
 
+
+}); 
+  });
+  });
+</script>
 
 <script type="text/javascript">
 function compartirshare(b) {
@@ -1544,7 +1560,7 @@ $(this).remove();
             
            </div>
            <!-- movie cast -->
-           <div class="mvcast-item">
+           <div class="mvcast-item" id="mv_cast">
             {% for i in peliculaa.reparto.all %}  
             {% for a in i.actor.all %}
             <div class="cast-it">

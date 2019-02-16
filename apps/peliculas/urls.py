@@ -6,7 +6,7 @@ from apps.peliculas.views import (peliculas_list, peliculasO, Generos,
     answer_me, myview, peliculas_listodo,test,
     FavoritoFormView, EliminarFavoritoFormView, filtrar, cookies,
     GeneroF, GeneroF_eliminar,pelis_user_nove,añadiste,
-    seguirviendo,seguirviendo_series, IP_GET,actualizar_tops, search_result_ajax,cambiar_votaciono,Read,CompRead,gettingembed,testing, search_result, genero_list, Notifi, Friendsitos, CompAPI)
+    seguirviendo,set_themvd_id,seguirviendo_series, IP_GET,actualizar_tops, search_result_ajax,cambiar_votaciono,Read,CompRead,gettingembed,testing, search_result, genero_list, Notifi, Friendsitos, CompAPI)
 
 
 
@@ -54,6 +54,7 @@ urlpatterns = [
 
     path('compartir/', CompAPI.as_view(), name='compartir'),
     path('read/', Read.as_view(), name='read'),
+    re_path(r'^cast/(?P<id>\d+)/$', set_themvd_id, name='cast'),
     path('compread/', CompRead.as_view(), name='compread'),
 
 

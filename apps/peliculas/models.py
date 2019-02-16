@@ -78,7 +78,7 @@ class Peliculas(models.Model):
 	servidor4 = models.TextField(null=True, blank=True)
 
 	slug = models.SlugField(null=True, unique=True, max_length=200)
-
+	theid = models.IntegerField(null=True, unique=True, blank=True)
 	class Meta:
 		verbose_name_plural = "Películas"
 

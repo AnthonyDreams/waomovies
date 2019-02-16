@@ -36,6 +36,7 @@ from rest_framework.response import Response
 from django.conf import settings
 from apps.news.models import Hitcount_Articulos
 from ipware import get_client_ip
+import http.client
 class pelis(APIView):
 	serializer = peliserializer
 	def get(self, request, format=None):
@@ -1871,3 +1872,50 @@ def actualizar_tops(request):
 				h_articulos.save()
 			
 	return HttpResponseRedirect('/inicio/')
+
+
+
+
+
+def set_themvd_id(request, id):
+	pelicula = Peliculas.objects.get(id=id)
+	conn = http.client.HTTPSConnection("api.themoviedb.org")
+	payload = "{}"
+	if pelicula.theid:
+		movie = pelicula.theid
+		conn.request("GET", "/3/movie/" + str(movie) + "/credits?api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+		res = conn.getresponse()
+		data = res.read()
+		converted = json.loads(data.decode("utf-8"))
+		return HttpResponse(json.dumps(converted["cast"]))
+	else:
+		conn = http.client.HTTPSConnection("api.themoviedb.org")
+		payload = "{}"
+		namet = ""
+		for a in pelicula.titulo_orinal:
+			if a == " ":
+				a = "-"
+			namet += a
+		conn.request("GET", "/3/search/movie?include_adult=false&page=1&query=" + namet + "&language=en&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+		res = conn.getresponse()	
+		data = res.read()
+		converted = json.loads(data.decode("utf-8"))
+		if converted["total_results"] >= 1:
+			confirm = Peliculas.objects.get(titulo_orinal=converted["results"][0]["title"])
+			confirm.theid = converted["results"][0]["id"]
+			confirm.save()
+			peliculaa = Peliculas.objects.get(theid=confirm.theid)
+			conn.request("GET", "/3/movie/" + str(confirm.theid) + "/credits?api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+			res = conn.getresponse()
+			data = res.read()
+			converted = json.loads(data.decode("utf-8"))
+			return HttpResponse(json.dumps(converted["cast"]))
+
+
+		if converted["total_results"] == 0:
+			print("no results")
+
+			
+
+
+
