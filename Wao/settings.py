@@ -23,10 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #SECRET_KEY = os.environ.get('SECRET_KEY')
 SECRET_KEY = 'j$z5qv+cug3pd8p6#jnbj+mdn$0x#fonrlk#=&f*1f0_e)=&yt'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','wmoviestest.herokuapp.com', "0.0.0.0"]
-#ALLOWED_HOSTS = ['wmoviestest.herokuapp.com']
+#ALLOWED_HOSTS = ['127.0.0.1','wmoviestest.herokuapp.com', "0.0.0.0"]
+ALLOWED_HOSTS = ['wmoviestest.herokuapp.com']
 
 NOTICIAS = True
 SERIES = False
@@ -152,11 +152,11 @@ USE_TZ = True
 LOGIN_URL = '/'
 
 
-#EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
-EMAIL_PORT = 587
+EMAIL_PORT = 465
 EMAIL_HOST_USER = 'AKIAJQ2PKHUUYU4V373A'
 EMAIL_HOST_PASSWORD = "BPuF9+2ycJd9476LE1qVjQUin/83RKtPI/u2JXlyZLnD"
 #EMAIL_HOST_PASSWORD = 'A253035253035a'
