@@ -152,8 +152,8 @@ USE_TZ = True
 LOGIN_URL = '/'
 
 
-EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
 EMAIL_PORT = 587
