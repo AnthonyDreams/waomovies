@@ -135,7 +135,7 @@ class Profile(models.Model):
 
 			path_ = reverse('activate', kwargs={"code": self.activation_key})
 			subject = 'Activa tu cuenta Wao'
-			from_email = settings.EMAIL_HOST_USER
+			from_email = 'waosoporte@gmail.com'
 			message = f('Activa tu cuenta aquí: wmoviestest.herokuapp.com{path_}')
 			recipient_list = [self.user.email]
 			html_message = f('<p>Activa tu cuenta aquí: wmoviestest.herokuapp.com{path_}</p>')
