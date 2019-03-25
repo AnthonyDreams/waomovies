@@ -31,8 +31,8 @@ urlpatterns = [
     re_path(r'peliculas_por_genero/(?P<generos>\w+)/(?P<filtro>\w+)/$', genero_list, name='genero_list'),
     re_path(r'get_embed/(?P<id>\d+)/$', gettingembed, name='gettingembed'),
 
-    re_path(r'ver%todo/', peliculas_listodo, name='peliculas_listodo'),
-    re_path(r'vertodo/', peliculas_listodo, name='pelicul'),
+    #re_path(r'ver%todo/', peliculas_listodo, name='peliculas_listodo'),
+    re_path(r'vertodo/', peliculas_listodo, name='peliculas_listodo'),
 
 
     path(r'search/', search, name='search'),
