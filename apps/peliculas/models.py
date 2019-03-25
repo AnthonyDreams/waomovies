@@ -8,7 +8,7 @@ from django.db.models.signals import pre_save
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
-
+from ww import f
 from .utils import get_read_time
 from apps.series.models import Series
 
@@ -87,7 +87,7 @@ class Peliculas(models.Model):
 		return self.titulo
 
 	def get_absolute_url(self):
-		return reverse("peliculasO", kwargs={"slug": self.peliculas.slug})
+		return f('/{self.slug}/')
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
 

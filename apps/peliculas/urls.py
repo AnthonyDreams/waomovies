@@ -8,10 +8,15 @@ from apps.peliculas.views import (peliculas_list, peliculasO, Generos,
     GeneroF, GeneroF_eliminar,pelis_user_nove,añadiste,
     seguirviendo,set_themvd_id,seguirviendo_series, IP_GET,actualizar_tops, search_result_ajax,cambiar_votaciono,Read,CompRead,gettingembed,testing, search_result, genero_list, Notifi, Friendsitos, CompAPI)
 
-
+from .sitemaps import StaticViewSitemap, SnippetsSitemap
+from django.contrib.sitemaps.views import sitemap
+sitemaps = {
+    'static': StaticViewSitemap,
+    'snippet': SnippetsSitemap
+}
 
 urlpatterns = [
-
+    path('sitemap.xml', sitemap, {'sitemaps':sitemaps}),
     path('actualizar/', actualizar_tops, name='actualizar_tops'),
     path('inicio/', inicio, name='inicio'),
     path('test/', test, name='test'),
@@ -26,7 +31,7 @@ urlpatterns = [
     re_path(r'peliculas_por_genero/(?P<generos>\w+)/(?P<filtro>\w+)/$', genero_list, name='genero_list'),
     re_path(r'get_embed/(?P<id>\d+)/$', gettingembed, name='gettingembed'),
 
-    re_path(r'ver%todo/$', peliculas_listodo, name='peliculas_listodo'),
+    re_path(r'ver%todo/', peliculas_listodo, name='peliculas_listodo'),
 
     path(r'search/', search, name='search'),
     path(r'search_ajax/', search_result_ajax, name='search_ajax'),
