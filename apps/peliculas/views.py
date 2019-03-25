@@ -1887,7 +1887,7 @@ def set_themvd_id(request, id):
 		res = conn.getresponse()
 		data = res.read()
 		converted = json.loads(data.decode("utf-8"))
-		return HttpResponse(json.dumps(converted["cast"]))
+		return HttpResponse(json.dumps(converted["cast"][:8]))
 	else:
 		conn = http.client.HTTPSConnection("api.themoviedb.org")
 		payload = "{}"
@@ -1909,7 +1909,7 @@ def set_themvd_id(request, id):
 			res = conn.getresponse()
 			data = res.read()
 			converted = json.loads(data.decode("utf-8"))
-			return HttpResponse(json.dumps(converted["cast"]))
+			return HttpResponse(json.dumps(converted["cast"][:8]))
 
 
 		if converted["total_results"] == 0:
