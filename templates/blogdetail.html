@@ -9,7 +9,7 @@
 
 <head>
 	
-	<title>{% block title %} {{ blog.titulo }} {% endblock %}</title>
+	<title>{% block title %} {{ blogg.titulo }} {% endblock %}</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
@@ -499,8 +499,8 @@ function update_ans(b) {
 				<div class="hero-ct">
 					<h1> Blog</h1>
 					<ul class="breadcumb">
-						<li class="active"><a href="/blog/{{ blog.categoria }}/">{{ blog.categoria }}</a></li>
-						<li> <span class="fa fa-long-arrow-right"></span> {{ blog.titulo }}</li>
+						<li class="active"><a href="/blog/{{ blogg.categoria }}/">{{ blogg.categoria }}</a></li>
+						<li> <span class="fa fa-long-arrow-right"></span> {{ blogg.titulo }}</li>
 					</ul>
 				</div>
 			</div>
@@ -513,12 +513,12 @@ function update_ans(b) {
 		<div class="row">
 			<div class="col-md-9 col-sm-12 col-xs-12">
 				<div class="blog-detail-ct">
-					<h1>{{ blog.titulo }}</h1>
-					<span class="time">{{ blog.publish }}</span>
-					<img src="{{ blog.cover.url }}" alt="">
+					<h1>{{ blogg.titulo }}</h1>
+					<span class="time">{{ blogg.publish }}</span>
+					<img src="{{ blogg.cover.url }}" alt="">
 					<div id="contenter">
 						
-										{{blog.contenido|safe}}
+										{{blogg.contenido|safe}}
 					
 				</div>
 
@@ -560,7 +560,7 @@ function update_ans(b) {
                    
                 </ul>
                 </div>
-                <form class="formshare" method="post" data-url='/compartir/{{blog.id}}/{{blog.slug}}/'>
+                <form class="formshare" method="post" data-url='/compartir/{{blogg.id}}/{{blogg.slug}}/'>
         {% csrf_token %}
    <input type="hidden" name="users_to_share" value="" id="compartir">
    <input type="hidden" name="oculto" id="ocultado">
@@ -570,14 +570,14 @@ function update_ans(b) {
 {% endif %}
 
 <!--Facebook-->
-                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wmoviestest.herokuapp.com/blog/{{blog.categoria}}/{{blog.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook" style="color: white;"></i></a>
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wmoviestest.herokuapp.com/blog/{{blogg.categoria}}/{{blogg.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook" style="color: white;"></i></a>
                 <!--Twitter-->
-                <a target="_blank" href="https://twitter.com/home?status={{blog.titulo}}:  https://wmoviestest.herokuapp.com/blog/{{blog.categoria}}/{{blog.slug}}/" type="button" style="background-color: #00acee" class="btn-floating btn-tw"><i class="fa fa-twitter" style="color: white;"></i></a>
+                <a target="_blank" href="https://twitter.com/home?status={{blogg.titulo}}:  https://wmoviestest.herokuapp.com/blog/{{blogg.categoria}}/{{blogg.slug}}/" type="button" style="background-color: #00acee" class="btn-floating btn-tw"><i class="fa fa-twitter" style="color: white;"></i></a>
                 <!--Google +-->
-                <a target="_blank" href="https://plus.google.com/share?url=https://wmoviestest.herokuapp.com/blog/{{blog.categoria}}/{{blog.slug}}/" type="button" style="background-color: #d34836;" class="btn-floating btn-gplus"><i class="fa fa-google-plus" style="color: white;"></i></a>
+                <a target="_blank" href="https://plus.google.com/share?url=https://wmoviestest.herokuapp.com/blog/{{blogg.categoria}}/{{blogg.slug}}/" type="button" style="background-color: #d34836;" class="btn-floating btn-gplus"><i class="fa fa-google-plus" style="color: white;"></i></a>
 
                 <!--Pinterest-->
-                <a target="_blank" href="https://pinterest.com/pin/create/button/?url=https://wmoviestest.herokuapp.com/blog/{{blog.categoria}}/{{blog.slug}}/&media={{blog.cover.url}}&description={{blog.titulo}}" type="button"  style="background-color: #c8232c ;"class="btn-floating btn-pin"><i class="fa fa-pinterest" style="color: white;"></i></a>
+                <a target="_blank" href="https://pinterest.com/pin/create/button/?url=https://wmoviestest.herokuapp.com/blog/{{blogg.categoria}}/{{blogg.slug}}/&media={{blogg.cover.url}}&description={{blogg.titulo}}" type="button"  style="background-color: #c8232c ;"class="btn-floating btn-pin"><i class="fa fa-pinterest" style="color: white;"></i></a>
                 <!--Comments-->
                 <!--a type="button" class="btn-floating btn-comm"><i class="fa fa-comments"></i></a>
                 <Email>
@@ -594,7 +594,7 @@ function update_ans(b) {
 						</div>
 						<div class="right-it">
 							<h4>Tags</h4>
-							{% for tag in blog.tags.all %}
+							{% for tag in blogg.tags.all %}
 							<a href="#">{{tag}},</a>
 							
 							{% endfor %}
@@ -612,7 +612,7 @@ function update_ans(b) {
     <div id="votar_articulo">
     	
     {% if not userario%}
-</span><form class="my-ajax-form" role="form" method="post" data-url="/reating_articulos/{{blog.id}}/ar/" >
+</span><form class="my-ajax-form" role="form" method="post" data-url="/reating_articulos/{{blogg.id}}/ar/" >
     {% csrf_token %}
     
     
@@ -794,7 +794,7 @@ function update_ans(b) {
 						<h4>Comentar</h4>
               <div id="input_error" style="margin-top: -19px;"></div>
 
-						<form class="coment" method='POST' data-url='/comentar_articulo/{{ blog.id }}/' onsubmit="return validarSend()">
+						<form class="coment" method='POST' data-url='/comentar_articulo/{{ blogg.id }}/' onsubmit="return validarSend()">
 							{% csrf_token %}
 							<div class="row">
 								<div class="col-md-12">

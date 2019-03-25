@@ -110,11 +110,7 @@ def BlogDetail(request, categorie,slug):
 		userario = False
 
 
-	parrafo = blog_detail.contenido
-	content = parrafo.split("</p>")
-	parrafoo = []
-	for parrafos in content:
-		parrafoo.append(parrafos)
+	
 
 	
 
@@ -181,13 +177,11 @@ def BlogDetail(request, categorie,slug):
 			h = 0
 	
 	context = {
-	'blog':blog_detail,
+	'blogg':blog_detail,
 	'mas_vistas': mas_vistas,
 		'noticias_count':noticias_count,
 		'critica_count':critica_count,
 		'global_count':global_count,
-		'content':content,
-		'parrafo':parrafoo,
 		'userario':userario,
 		'comentarios':comentarios,
 		'blog':True,
