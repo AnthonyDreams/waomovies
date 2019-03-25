@@ -32,6 +32,8 @@ urlpatterns = [
     re_path(r'get_embed/(?P<id>\d+)/$', gettingembed, name='gettingembed'),
 
     re_path(r'ver%todo/', peliculas_listodo, name='peliculas_listodo'),
+    re_path(r'vertodo/', peliculas_listodo, name='pelicul'),
+
 
     path(r'search/', search, name='search'),
     path(r'search_ajax/', search_result_ajax, name='search_ajax'),
