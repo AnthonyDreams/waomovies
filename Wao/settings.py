@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #SECRET_KEY = os.environ.get('SECRET_KEY')
 SECRET_KEY = 'j$z5qv+cug3pd8p6#jnbj+mdn$0x#fonrlk#=&f*1f0_e)=&yt'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','wmoviestest.herokuapp.com', '.waomovies.com']
 #ALLOWED_HOSTS = ['wmoviestest.herokuapp.com', '.waomovies.com']
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'apps.dashboard',
     'apps.news',
     'timedeltatemplatefilter',
+    'debug_toolbar'
 ]
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
@@ -68,6 +69,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -178,7 +180,7 @@ DEB = False
 
 if DEB:
 	MEDIA_URL = '/media/'
-
+	STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 	MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 	# Static files (CSS, JavaScript, Images)
@@ -186,10 +188,7 @@ if DEB:
 
 	STATIC_URL = '/static/'
 	STATIC_DIRS = 'static'
-	STATICFILES_DIRS = [
-	    STATIC_DIRS,
 
-	]
 	STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 else:
@@ -253,3 +252,17 @@ if channell:
 		        },
 		    }
 		}
+
+
+
+
+INTERNAL_IPS = ("127.0.0.1",)
+
+
+def custom_show_toolbar(request):
+	if request.user.username.lower() in ["anthony2d", "waomovies"]:
+		return True 
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
+}

@@ -22,13 +22,14 @@ from django.contrib.auth.views import login, logout_then_login, password_reset_d
 from apps.usuarios.views import password_reset
 from django.conf.urls import handler404, handler500
 from apps.footer.views import mi_error_404 
- 
+import debug_toolbar
 handler404 = mi_error_404
 handler500 = mi_error_404
 
 
 
 urlpatterns = [
+    url(r"^__debug__", include(debug_toolbar.urls)),
     url(r'^', include('apps.peliculas.urls')),
     url(r'^', include('apps.notificaciones.urls')),
     url(r'^', include('apps.usuarios.urls')),
