@@ -66,9 +66,9 @@ ARTICLES_DE_WEB = 'news.Article'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    #'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -178,7 +178,7 @@ EMAIL_USE_TLS = True
 #db_from_env = dj_database_url.config(conn_max_age=600)
 #DATABASES['default'].update(db_from_env)
 
-DEB = False
+DEB = True
 
 if DEB:
 	MEDIA_URL = '/media/'
@@ -268,4 +268,8 @@ CACHES = {
 INTERNAL_IPS = ("127.0.0.1",)
 
 
-#CACHE_MIDDLEWARE_SECONDS=60*3
+
+
+
+
+CACHE_MIDDLEWARE_SECONDS=60
