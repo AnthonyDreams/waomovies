@@ -10,6 +10,7 @@ from apps.peliculas.views import (peliculas_list, peliculasO, Generos,
 
 from .sitemaps import StaticViewSitemap, SnippetsSitemap
 from django.contrib.sitemaps.views import sitemap
+
 sitemaps = {
     'static': StaticViewSitemap,
     'snippet': SnippetsSitemap
