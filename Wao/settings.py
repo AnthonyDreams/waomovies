@@ -178,7 +178,7 @@ import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
-DEB = True
+DEB = False
 
 if DEB:
 	MEDIA_URL = '/media/'
@@ -267,14 +267,5 @@ CACHES = {
 
 INTERNAL_IPS = ("127.0.0.1",)
 
-
-def custom_show_toolbar(request):
-	if request.user.username.lower() in ["anthony2d", "waomovies"]:
-		return True
-
-
-DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
-}
 
 #CACHE_MIDDLEWARE_SECONDS=60*3
