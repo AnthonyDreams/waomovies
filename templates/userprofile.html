@@ -160,7 +160,7 @@ upload.addEventListener("change", function(e) {
 				<div class="flex-wrap-movielist " >
 {% for o in peliculas %}
 						<div class="movie-item-style-2 movie-item-style-1 style-3">
-							<img src="{{o.Cover.url}}" alt="">
+							<img src="{{o.Coverimg}}" alt="">
 							{% include 'ajax.html' %}
 							<div class="mv-item-infor">
 								<h6><a href="/peliculas/{{o.id}}/">{{o.titulo}}</a></h6>
@@ -575,7 +575,7 @@ upload.addEventListener("change", function(e) {
 				<div class="flex-wrap-movielist">
 {% for o in peliculas %}
 						<div class="movie-item-style-2 movie-item-style-1 style-3">
-							<img style=" height: 240px;" src="{% if o.peliculas.Cover %}{{o.peliculas.Cover.url}}{% else %}{{ o.series.serie_cover.url }}{% endif %}" alt="">
+							<img style=" height: 240px;" src="{% if o.peliculas.Cover %}{{o.peliculas.Coverimg}}{% else %}{{ o.series.serie_cover.url }}{% endif %}" alt="">
 							{% if o.series.id %}
 							{% include 'ajaxserieuser.html' %}
 

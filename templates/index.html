@@ -37,7 +37,7 @@
 	    		<div class="movie-item">
 
 	    			<div class="mv-img">
-	    				<a href="{% url 'peliculasO' slug=pelicula.slug %}"><img class="imgtop" src="{{ pelicula.Cover.url }}" alt="" width="285" height="437"></a>
+	    				<a href="{% url 'peliculasO' slug=pelicula.slug %}"><img class="imgtop" src="{{ pelicula.Coverimg }}" alt="" width="285" height="437"></a>
 	    			</div>
 	    			<div class="title-in">
 	    				<div class="cate">
@@ -187,7 +187,7 @@ background: linear-gradient(to left, #0b8793, #360033); /* W3C, IE 10+/ Edge, Fi
 				            		<div id="zzzz{{pelicula.id}}" class="">
 				            			<div class="movie-item-style-2 movie-item-style-1" style="padding-bottom: 0px; margin-bottom: 0px;">
 					            			<div class="mv-img">
-					            				<img src="{{ pelicula.Cover.url }}" alt="" width="185" height="284">
+					            				<img src="{{ pelicula.Coverimg }}" alt="" width="185" height="284">
 					            			</div> 
 					            			<div class="hvr-inner" id="puto{{ pelicula.id }}">
 					            				
@@ -665,7 +665,7 @@ $('#tabcontentin').append('<div id="zzz'+value.id+'"  class="slide-it" style="wi
 				            		<div class="slide-it" style="width: 120px;">
 				            			<div class="movie-item" style="width: 150px;">
 					            			<div class="mv-img">
-					            				<img src="{{ kk.pelicula.Cover.url }}" alt="" width="185" height="284">
+					            				<img src="{{ kk.pelicula.Coverimg }}" alt="" width="185" height="284">
 					            			</div>
 					            			<div class="hvr-inner">
 					            				<a href="{% url 'peliculasO' slug=kk.pelicula.slug %}" style="color: white; width: 100%; top: 28% ; position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 50px; text-align: center; font-weight: bold;" class="fa fa-play point" aria-hidden="true"></i> </a>

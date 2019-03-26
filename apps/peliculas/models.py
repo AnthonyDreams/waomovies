@@ -11,12 +11,16 @@ from django.utils.text import slugify
 from ww import f
 from .utils import get_read_time
 from apps.series.models import Series
+from PIL import Image
+import requests
+from io import BytesIO
 
 
 
 class Peliculas(models.Model):
 	titulo = models.CharField(max_length=200)
-	Cover = models.ImageField(upload_to='static', height_field=None, width_field=None, max_length=100)
+	Cover = models.ImageField(upload_to='static', height_field=None, width_field=None)
+	CoverImg =models.ImageField(upload_to='', height_field=None, width_field=None, null=True, blank=True)
 	fecha_de_lanzamiento = models.DateField()
 	director = models.CharField(max_length=30)
 	reparto = models.ManyToManyField('Personajes', blank=True)
@@ -55,6 +59,7 @@ class Peliculas(models.Model):
 	puntuacion = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
 	links = models.TextField(blank=True, null=True)
 	portada = models.ImageField(upload_to='static', height_field=None, width_field=None, blank=True)
+	PortadaImg = models.ImageField(upload_to='', height_field=None, width_field=None, blank=True, null=True)
 	run_time = models.IntegerField(default=0, null=True)
 	titulo_orinal = models.CharField(max_length=150, null=True, blank=True)
 
@@ -88,6 +93,17 @@ class Peliculas(models.Model):
 
 	def get_absolute_url(self):
 		return f('/{self.slug}/')
+
+
+	@property
+	def Coverimg(self):
+		c = str(self.Cover)
+		response = requests.get("https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.CoverImg))
+		try:
+			img = Image.open(BytesIO(response.content))
+			return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.CoverImg)
+		except OSError:
+			return str(self.Cover.url)
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
 

@@ -25,3 +25,4 @@ django-ipware==2.1.0
 django-timedeltatemplatefilter==0.1.2
 django-smtp-ssl==1.0
 python-memcached==1.59
+requests==2.21.0

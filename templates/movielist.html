@@ -67,7 +67,7 @@
 									{% for o in peliculas %}
 
 				<div class="movie-item-style-2" id="imglist" style="border-bottom: solid 1px; padding-bottom: 8px;">
-					<img src="{{ o.Cover.url }}{{ o.serie_cover.url }}" alt="" class="">
+					<img src="{{ o.Coverimg }}{{ o.serie_cover.url }}" alt="" class="">
 						{% if  series_filt %}	{% include 'ajaxserielist.html' %}{% else %}{% include 'ajaxlist.html' %}{% endif %}
 
 						<style type="text/css">

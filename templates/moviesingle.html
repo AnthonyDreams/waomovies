@@ -1209,7 +1209,7 @@ $(this).remove();
   <div class="row ipad-width2">
    <div class="col-md-4 col-sm-12 col-xs-12">
     <div class="movie-img sticky-sb" >
-     <img src="{{ peliculaa.Cover.url }}" alt="" style="height: 440px; width: auto;">
+     <img src="{{ peliculaa.Coverimg }}" alt="" style="height: 440px; width: auto;">
      <div id="moviebtna" class="movie-btn" > 
       <div class="btn-transform transform-vertical " style="margin-bottom: 7px !important;">
        <div><a data-toggle="modal" data-target="#modalyoutube" class="item item-1 redbtn" style="border-radius: 5px !important ; ">  Ver Trailer</a></div>
@@ -1335,7 +1335,7 @@ $(this).remove();
                 <a target="_blank" href="https://plus.google.com/share?url=https://wmoviestest.herokuapp.com/peliculas/{{peliculaa.slug}}/" type="button" style="background-color: #d34836;" class="btn-floating btn-gplus"><i class="fa fa-google-plus"></i></a>
 
                 <!--Pinterest-->
-                <a target="_blank" href="https://pinterest.com/pin/create/button/?url=https://wmoviestest.herokuapp.com/peliculas/{{peliculaa.slug}}/&media={{peliculaa.Cover.url}}&description=Ver {{peliculaa.titulo}} completa HD en Waomovies" type="button"  style="background-color: #c8232c ;"class="btn-floating btn-pin"><i class="fa fa-pinterest"></i></a>
+                <a target="_blank" href="https://pinterest.com/pin/create/button/?url=https://wmoviestest.herokuapp.com/peliculas/{{peliculaa.slug}}/&media={{peliculaa.Coverimg}}&description=Ver {{peliculaa.titulo}} completa HD en Waomovies" type="button"  style="background-color: #c8232c ;"class="btn-floating btn-pin"><i class="fa fa-pinterest"></i></a>
     
                 <!--Comments-->
                 <!--a type="button" class="btn-floating btn-comm"><i class="fa fa-comments"></i></a>
@@ -3524,7 +3524,7 @@ document.getElementById('panelstreamcloud').style.display="none"
             {% if i != peliculaa %}
 
           <div class="movie-item-style-2">
-            <img style="height: 255px; width: auto;" src="{{ i.Cover.url }}" alt="">
+            <img style="height: 255px; width: auto;" src="{{ i.Coverimg }}" alt="">
 {% include 'ajaxlistre.html' %}
            <div class="mv-item-infor">
 
@@ -3547,7 +3547,7 @@ document.getElementById('panelstreamcloud').style.display="none"
             {% if i != peliculaa %}
 
           <div class="movie-item-style-2">
-            <img style="height: 255px; width: auto;" src="{{ i.Cover.url }}" alt="">
+            <img style="height: 255px; width: auto;" src="{{ i.Coverimg }}" alt="">
 {% include 'ajaxlistre.html' %}
            <div class="mv-item-infor">
 
@@ -3569,7 +3569,7 @@ document.getElementById('panelstreamcloud').style.display="none"
             {% if i != peliculaa %}
 
           <div class="movie-item-style-2">
-            <img style="height: 255px; width: auto;"  src="{{ i.Cover.url }}" alt="">
+            <img style="height: 255px; width: auto;"  src="{{ i.Coverimg }}" alt="">
 {% include 'ajaxlistre.html' %}
            <div class="mv-item-infor">
 
@@ -3591,7 +3591,7 @@ document.getElementById('panelstreamcloud').style.display="none"
             {% if i != peliculaa %}
 
           <div class="movie-item-style-2">
-            <img style="height: 255px; width: auto;" src="{{ i.Cover.url }}" alt="">
+            <img style="height: 255px; width: auto;" src="{{ i.Coverimg }}" alt="">
 {% include 'ajaxlistre.html' %}
            <div class="mv-item-infor">
 

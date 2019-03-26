@@ -657,7 +657,7 @@ background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, F
 	{% if not request.user.profile.fav_peliculas %}
 {% for peli in peliculas_fav%}
 <div id="{{peli.id}}" class=" as no-gutters" style=" margin-bottom:45px;padding:0px 19px; padding-left:  0px; padding-right: 0px; width: 160px; height: 200px; position: relative; float: left;">
-<img  class="{% if peli in request.user.favoritos.all %}border{% endif %}" src="{{ peli.Cover.url }}"  ><div id="sendingfav{{peli.id}}" style="display: none; ">
+<img  class="{% if peli in request.user.favoritos.all %}border{% endif %}" src="{{ peli.Coverimg }}"  ><div id="sendingfav{{peli.id}}" style="display: none; ">
            <img style=" z-index:999;position: relative; left: 35%; margin-top: -280px;" height="50" width="50"  src="{% static 'img/asa.gif' %}">
           </div> <div class="hvr-inner" id="hvr-inner{{peli.id}}">
           	{% if not peli in request.user.favoritos.all %}

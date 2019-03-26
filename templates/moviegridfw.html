@@ -59,7 +59,7 @@
 				<div class="flex-wrap-movielist mv-grid-fw">
 					{% for o in peliculas %}
 						<div class="movie-item-style-2 movie-item-style-1">
-							<img src="{{ o.Cover.url }}" alt="">
+							<img src="{{ o.Coverimg }}" alt="">
 							    			<div class="hvr-inner" id="puto{{ o.id }}">
 					            				
 					            				<a href="{% url 'peliculasO' slug=o.slug %}" style="color: white; width: 100%; top: 37% ; position: relative; background-color: transparent;" class="btn redbtn"><i style="font-size: 50px; text-align: center; font-weight: bold;" class="fa fa-play point" aria-hidden="true"></i> </a>
