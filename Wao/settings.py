@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #SECRET_KEY = os.environ.get('SECRET_KEY')
 SECRET_KEY = 'j$z5qv+cug3pd8p6#jnbj+mdn$0x#fonrlk#=&f*1f0_e)=&yt'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.waomovies.com']
 #ALLOWED_HOSTS = ['wmoviestest.herokuapp.com', '.waomovies.com']
@@ -66,7 +66,9 @@ ARTICLES_DE_WEB = 'news.Article'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    #'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -110,10 +112,10 @@ WSGI_APPLICATION = 'Wao.wsgi.application'
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'database',
-        'USER': 'postgres',
-        'PASSWORD': 'a253035253035',
-        'HOST': 'localhost',
+        'NAME': 'waomoviesdb',
+        'USER': 'theanthony2d',
+        'PASSWORD': 'A253035253035a',
+        'HOST': 'waomoviesdb.csenjz1oiib4.us-east-1.rds.amazonaws.com',
         'PORT': 5432,
 
     }
@@ -176,7 +178,7 @@ import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
-DEB = False
+DEB = True
 
 if DEB:
 	MEDIA_URL = '/media/'
@@ -256,16 +258,23 @@ if channell:
 
 
 
+CACHES = {
+	'default': {
+	'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+	'LOCATION': '127.0.0.1:11211'
+	}
+}
+
 INTERNAL_IPS = ("127.0.0.1",)
 
 
 def custom_show_toolbar(request):
-	if DEB:
-		if request.user.username.lower() in ["anthony2d", "waomovies"]:
-			return True
-	else:
-		return False 
+	if request.user.username.lower() in ["anthony2d", "waomovies"]:
+		return True
+
 
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
 }
+
+#CACHE_MIDDLEWARE_SECONDS=60*3
