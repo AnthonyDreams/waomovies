@@ -11,9 +11,6 @@ from django.utils.text import slugify
 from ww import f
 from .utils import get_read_time
 from apps.series.models import Series
-from PIL import Image
-import requests
-from io import BytesIO
 
 
 
@@ -97,13 +94,8 @@ class Peliculas(models.Model):
 
 	@property
 	def Coverimg(self):
-		c = str(self.Cover)
-		response = requests.get("https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.CoverImg))
-		try:
-			img = Image.open(BytesIO(response.content))
-			return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.CoverImg)
-		except OSError:
-			return str(self.Cover.url)
+		return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.CoverImg)
+
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
 
