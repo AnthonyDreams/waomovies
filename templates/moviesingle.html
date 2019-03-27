@@ -3,6 +3,7 @@
 {% load my_templatetag %}
 
  <title>{% block title %}{{peliculaa.titulo}}{% endblock %}</title>
+{% block meta %}<meta name="description" content="{{peliculaa.titulo}}, {{ peliculaa.sinopsis }}">{% endblock %}
 
 
 {% block scriptt %}
