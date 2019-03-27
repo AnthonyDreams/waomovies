@@ -1919,3 +1919,15 @@ def set_themvd_id(request, id):
 
 
 
+
+def analizis(request):
+	a = Peliculas.objects.all()
+	b = []
+	for i in a:
+		c = str(a.CoverImg)
+		response = requests.get("https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + c)
+	try:
+		img = Image.open(BytesIO(response.content))
+		return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.CoverImg)
+	except OSError:
+		return str(self.Cover.url)

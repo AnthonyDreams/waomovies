@@ -95,6 +95,9 @@ class Peliculas(models.Model):
 	@property
 	def Coverimg(self):
 		return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.CoverImg)
+	@property
+	def PortadaImg(self):
+		return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.PortadaImg)
 
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
