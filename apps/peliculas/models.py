@@ -96,7 +96,7 @@ class Peliculas(models.Model):
 	def Coverimg(self):
 		return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.CoverImg)
 	@property
-	def PortadaImg(self):
+	def Portadaimg(self):
 		return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.PortadaImg)
 
 
