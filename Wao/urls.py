@@ -23,9 +23,11 @@ from apps.usuarios.views import password_reset
 from django.conf.urls import handler404, handler500
 from apps.footer.views import mi_error_404 
 import debug_toolbar
+from django.http import HttpResponse
 handler404 = mi_error_404
 handler500 = mi_error_404
-
+from os import path as pathh
+a = open("templates/robots.txt", "r")
 
 
 urlpatterns = [
@@ -40,7 +42,7 @@ urlpatterns = [
     url(r'^', include('apps.dashboard.urls')),
     url(r'^', include('apps.news.urls')),
 
-
+    url(r'^robots.txt', lambda x: HttpResponse(a.readlines(), content_type="text/plain"), name="robots_file"),
     url(r'^reset/password_reset', password_reset, 
         {'template_name':'password_reset_form.html',
         'email_template_name': 'password_reset_email.html'}, 
