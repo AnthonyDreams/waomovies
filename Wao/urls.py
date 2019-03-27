@@ -27,7 +27,7 @@ from django.http import HttpResponse
 handler404 = mi_error_404
 handler500 = mi_error_404
 from os import path as pathh
-a = open("robots.txt", "r")
+a = open("Wao/robots.txt", "r")
 
 
 urlpatterns = [
