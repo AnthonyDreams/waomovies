@@ -158,19 +158,19 @@ LOGIN_URL = '/'
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
+#EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'AKIAJQ2PKHUUYU4V373A'
-EMAIL_HOST_PASSWORD = "BPuF9+2ycJd9476LE1qVjQUin/83RKtPI/u2JXlyZLnD"
+#EMAIL_HOST_USER = 'AKIAJQ2PKHUUYU4V373A'
+#EMAIL_HOST_PASSWORD = "BPuF9+2ycJd9476LE1qVjQUin/83RKtPI/u2JXlyZLnD"
 #EMAIL_HOST_PASSWORD = 'A253035253035a'
 EMAIL_USE_TLS = True
 
 
 #EMAIL_USE_TLS = True
-#EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
 #EMAIL_PORT = 587
-#EMAIL_HOST_USER = 'waosoporte@gmail.com'
-#EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = 'waosoporte@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 #import dj_database_url
 #db_from_env = dj_database_url.config(conn_max_age=600)
