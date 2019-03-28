@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #SECRET_KEY = os.environ.get('SECRET_KEY')
 SECRET_KEY = 'j$z5qv+cug3pd8p6#jnbj+mdn$0x#fonrlk#=&f*1f0_e)=&yt'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '.waomovies.com']
 #ALLOWED_HOSTS = ['wmoviestest.herokuapp.com', '.waomovies.com']
