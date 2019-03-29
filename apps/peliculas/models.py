@@ -94,13 +94,13 @@ class Peliculas(models.Model):
 
 	@property
 	def Coverimg(self):
-		if CoverImg:
+		if self.CoverImg:
 			return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.CoverImg)
 		else:
 			return self.Cover.url
 	@property
 	def Portadaimg(self):
-		if PortadaImg:
+		if self.PortadaImg:
 			return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.PortadaImg)
 		else:
 			return self.portada.url
