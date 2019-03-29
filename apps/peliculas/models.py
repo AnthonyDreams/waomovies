@@ -17,7 +17,7 @@ from apps.series.models import Series
 class Peliculas(models.Model):
 	titulo = models.CharField(max_length=200)
 	Cover = models.ImageField(upload_to='static', height_field=None, width_field=None)
-	CoverImg =models.ImageField(upload_to='', height_field=None, width_field=None, null=True, blank=True)
+	CoverImg =models.ImageField(upload_to='static/comprimidas', height_field=None, width_field=None, null=True, blank=True)
 	fecha_de_lanzamiento = models.DateField()
 	director = models.CharField(max_length=30)
 	reparto = models.ManyToManyField('Personajes', blank=True)
@@ -94,11 +94,16 @@ class Peliculas(models.Model):
 
 	@property
 	def Coverimg(self):
-		return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.CoverImg)
+		if Coverimg:
+			return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.CoverImg)
+		else:
+			return self.Cover.url
 	@property
 	def Portadaimg(self):
-		return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.PortadaImg)
-
+		if Portadaimg:
+			return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.PortadaImg)
+		else:
+			return self.portada.url
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
 
