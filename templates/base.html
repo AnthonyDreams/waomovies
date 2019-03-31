@@ -594,22 +594,38 @@ var resultac = document.getElementById('result').style.display= "none";
 <em>Perfil</em>
 </a>
 <div class="submenu">
-  <a class="submenu-item" href="/usuario/{{user.username}}/"> <i class="fa fa-angle-right"></i><em> Cuenta </em><i class="fa fa-circle"></i></a>
-<a class="submenu-item" href="/user_ver_favoritos/{{request.user.username}}/"> <i class="fa fa-angle-right"></i><em>Películas Favoritas </em><i class="fa fa-circle"></i></a>
-<a class="submenu-item" href="/user_ver_series_favoritos/{{request.user.username}}/"> <i class="fa fa-angle-right"></i><em>Series Favoritas </em><i class="fa fa-circle"></i></a>
-<a class="submenu-item" href="/ver_más_tarde/{{request.user.username}}/"> <i class="fa fa-angle-right"></i><em> Ver más tarde </em><i class="fa fa-circle"></i></a>
-<a class="submenu-item" href="/user_ver_amigos/{{request.user.username}}/"> <i class="fa fa-angle-right"></i><em> Amigos </em><i class="fa fa-circle"></i></a>
-<a class="submenu-item" href="/notificacionesfeed/{{ request.user.username }}/"> <i class="fa fa-angle-right"></i><em> Notificaciones </em><i class="fa fa-circle"></i></a>
-<a class="submenu-item" href="/actividadfeed/{{ request.user.username }}/"> <i class="fa fa-angle-right"></i><em> Actividad </em><i class="fa fa-circle"></i></a>
+  <a class="submenu-item" href="/usuario/{{user.username}}/"> <i class=""></i><em> Cuenta </em><i class=""></i></a>
+<a class="submenu-item" href="/user_ver_favoritos/{{request.user.username}}/"> <i class=""></i><em>Películas Favoritas </em><i class=""></i></a>
+<a class="submenu-item" href="/user_ver_series_favoritos/{{request.user.username}}/"> <i class=""></i><em>Series Favoritas </em><i class=""></i></a>
+<a class="submenu-item" href="/ver_más_tarde/{{request.user.username}}/"> <i class=""></i><em> Ver más tarde </em><i class=""></i></a>
+<a class="submenu-item" href="/user_ver_amigos/{{request.user.username}}/"> <i class=""></i><em> Amigos </em><i class=""></i></a>
+<a class="submenu-item" href="/notificacionesfeed/{{ request.user.username }}/"> <i class=""></i><em> Notificaciones </em><i class=""></i></a>
+<a class="submenu-item" href="/actividadfeed/{{ request.user.username }}/"> <i class=""></i><em> Actividad </em><i class=""></i></a>
 </div>
 </div>
 
 {% endif %}
 
 <div class="has-submenu">
-<a class="menu-item" href="/vertodo/">
+<a class="menu-item show-submenu" href="#">
 <em>Películas</em>
 </a>
+
+<div class="submenu">
+  <a class="submenu-item" href="/vertodo/"> <i class=""></i><em>Todas</em><i class=""></i></a>
+<a class="submenu-item" href="/peliculas_por_genero/ACC/"> <i class=""></i><em>Acción </em><i class=""></i></a>
+<a class="submenu-item" href="/peliculas_por_genero/SC/{{request.user.username}}/"> <i class=""></i><em>Ciencia Ficción </em><i class=""></i></a>
+<a class="submenu-item" href="/peliculas_por_genero/DRA/"> <i class=""></i><em>Drama </em><i class=""></i></a>
+<a class="submenu-item" href="/peliculas_por_genero/ROM/"> <i class=""></i><em>Romance </em><i class=""></i></a>
+<a class="submenu-item" href="/peliculas_por_genero/CRI/"> <i class=""></i><em>Crimen </em><i class=""></i></a>
+<a class="submenu-item" href="/peliculas_por_genero/TER/"> <i class=""></i><em> Terror </em><i class=""></i></a>
+<a class="submenu-item" href="/peliculas_por_genero/SUS/"> <i class=""></i><em> Suspenso </em><i class=""></i></a>
+<a class="submenu-item" href="/peliculas_por_genero/AVE/"> <i class=""></i><em> Aventura </em><i class=""></i></a>
+<a class="submenu-item" href="/peliculas_por_genero/ANI/"> <i class=""></i><em> Animación </em><i class=""></i></a>
+<a class="submenu-item" href="/peliculas_por_genero/COME/"> <i class=""></i><em> Comedia </em><i class=""></i></a>
+<a class="submenu-item" href="/peliculas_por_genero/FANT/"> <i class=""></i><em> Fantasía </em><i class=""></i></a>
+<a class="submenu-item" href="/peliculas_por_genero/TER/"> <i class=""></i><em> Documental </em><i class=""></i></a>
+</div>
 </div>
 
 <div class="has-submenu">
@@ -1261,14 +1277,17 @@ var load = false
 
 <script type="text/javascript">
   function miFuncionload() {
+    setTimeout(function(){
+
   var formuser = document.getElementsByClassName('login-wrapper')[0]
   var formuser2 = document.getElementsByClassName('login-wrapper')[1]
 
   formuser.style.display = "initial"
   formuser2.style.display = "initial"
 
-      
+      }, 2000);
     }
+
     window.onload=miFuncionload;
 </script>
 {% endif %}
