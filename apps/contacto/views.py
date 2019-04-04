@@ -12,7 +12,7 @@ def send_email(request):
             send_mail(
                 data['subject'],
                 data['content'],
-                'theanthony2d@gmail.com', #FROM
+                'waosoporte@gmail.com', #FROM
                 [data['email']],
                 fail_silently=False,
             )
