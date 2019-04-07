@@ -1057,7 +1057,7 @@ def search_result(request, src):
 		conn = http.client.HTTPSConnection("api.themoviedb.org")
 
 		payload = "{}"
-		conn.request("GET", "/3/search/movie?include_adult=false&page=1&query="+ srchh +"&language=en-US&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+		conn.request("GET", "/3/search/movie?include_adult=false&page=1&query="+ slugsearch +"&language=en-US&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
 
 		res = conn.getresponse()
 		data = res.read()
@@ -1071,7 +1071,7 @@ def search_result(request, src):
 
 		if int(json.dumps(converted["total_pages"])) > 1:
 			for i in range(2,int(json.dumps(converted["total_pages"]))+1):
-				conn.request("GET", "/3/search/movie?include_adult=false&page="+str(i)+"&query="+ srchh +"&language=en-US&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+				conn.request("GET", "/3/search/movie?include_adult=false&page="+str(i)+"&query="+ slugsearch +"&language=en-US&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
 				res = conn.getresponse()
 				data = res.read()
 				converted = json.loads(data.decode("utf-8"))
