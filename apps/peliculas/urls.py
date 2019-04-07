@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.urls import path, re_path
 from apps.peliculas.views import (peliculas_list, peliculasO, Generos, 
-	inicio, search, Orden, votaciono, reportar, VotacionFormView, list_moviejson, pelis,
+	inicio, search, Orden, votaciono,aa, reportar, VotacionFormView, list_moviejson, pelis,
      añadirfavorito, eliminar_añadirfavorito,
     answer_me, myview, peliculas_listodo,test,
     FavoritoFormView, EliminarFavoritoFormView, filtrar, cookies,
@@ -20,7 +20,9 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps':sitemaps}),
     path('actualizar/', actualizar_tops, name='actualizar_tops'),
     path('inicio/', inicio, name='inicio'),
-    path('test/', test, name='test'),
+    #path('aaaa/', aa, name='aa'),
+
+    #path('test/', test, name='test'),
     re_path(r'^generoz/(?P<genre>[\w-]+)/$', GeneroF, name='GeneroF'),
     re_path(r'^generoz_eliminar/(?P<genre>[\w-]+)/$', GeneroF_eliminar, name='GeneroF_eliminar'),
 

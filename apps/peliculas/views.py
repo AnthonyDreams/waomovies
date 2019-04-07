@@ -1054,9 +1054,36 @@ def search_result(request, src):
 					idbuscar.append(iss.id)
 
 
+		conn = http.client.HTTPSConnection("api.themoviedb.org")
 
-		match = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(titulo_orinal__icontains=srchh)|Q(tema__icontains=srch)|Q(tag_principal=srch)|Q(tag1__icontains=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch))
-		matchc = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(titulo_orinal__icontains=srchh)|Q(tema__icontains=srch)|Q(tag1__icontains=srch)|Q(tag_principal=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch)).count()
+		payload = "{}"
+		conn.request("GET", "/3/search/movie?include_adult=false&page=1&query="+ srchh +"&language=en-US&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+
+		res = conn.getresponse()
+		data = res.read()
+		titulos = []
+		titulos2 = []
+		converted = json.loads(data.decode("utf-8"))
+		for i in range(0,len(converted["results"])):
+			titulos.append(json.dumps(converted["results"][i]["original_title"]))
+
+
+
+		if int(json.dumps(converted["total_pages"])) > 1:
+			for i in range(2,int(json.dumps(converted["total_pages"]))+1):
+				conn.request("GET", "/3/search/movie?include_adult=false&page="+str(i)+"&query="+ srchh +"&language=en-US&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+				res = conn.getresponse()
+				data = res.read()
+				converted = json.loads(data.decode("utf-8"))
+				for i in range(0,len(converted["results"])):
+					titulos.append(json.dumps(converted["results"][i]["original_title"]))
+		
+
+		for i in titulos:
+			titulos2.append(i[i.find('"')+1:i.rfind('"')])
+
+		match = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(titulo_orinal__in=titulos)|Q(tema__icontains=srch)|Q(tag_principal=srch)|Q(tag1__icontains=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch))
+		matchc = Peliculas.objects.filter(Q(titulo__icontains=srchh)|Q(titulo_orinal__in=titulos)|Q(tema__icontains=srch)|Q(tag1__icontains=srch)|Q(tag_principal=srch)|Q(tag2__icontains=srch)|Q(tag3__icontains=srch)|Q(otras_etiquetas_y_busquedas__in=idbuscar)|Q(slug__icontains=slugsearch)).count()
 		paginator = Paginator(match, 30)
 		antes = ""
 		if matchc == 0:
@@ -1931,3 +1958,16 @@ def analizis(request):
 		return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.CoverImg)
 	except OSError:
 		return str(self.Cover.url)
+
+
+def aa(request):
+	a = Peliculas.objects.all()
+	b = ['https://www.rapidvideo.com/e/FTBXT0V3NG', 'https://www.rapidvideo.com/e/FXPVRZ4T0P', 'https://www.rapidvideo.com/e/FWS0FNKHRB', 'https://www.rapidvideo.com/e/FUT9JN1FG8', 'https://www.rapidvideo.com/e/FT3WW1VMB4', 'https://www.rapidvideo.com/e/FX4U9VMPA0', 'https://www.rapidvideo.com/embed/FXYM8U4AFY', 'https://www.rapidvideo.com/e/FXT6NHHYIW', 'https://www3616.playercdn.net/187/3/zQr5gsV6VCRTKcV_Zw5xIg/1544417125/180106/057FN6KURV5SPX7SDKPDI.mp4', 'https://www3574.playercdn.net/187/1/uaE-rM4ySRNHHaUW9RR5qA/1544404886/171230/961FMZJ5CDS2CPMUAIIEX.mp4', 'https://www.rapidvideo.com/embed/FQIFLXAUAE', 'https://divorce.playercdn.net/187/0/xH3Gvlj8bFe1Cd0_ZJL0KQ/1545129144/181029/414FWP755MEIFFXMLL2S6.mp4', 'https://www.rapidvideo.com/embed/FVVKP8LSBG', 'https://www.rapidvideo.com/embed/FO9G3O99IJ', 'https://www.rapidvideo.com/e/FXPVZ0VBO8', 'https://www.rapidvideo.com/embed/FSJ2DUXKDC', 'https://www.rapidvideo.com/e/FTZ0H5XT3T', 'https://www.rapidvideo.com/e/FX59ROUA75', 'https://www.rapidvideo.com/e/FX55XVTZG9', 'https://www.rapidvideo.com/e/FXT78WG1TF', 'https://www.rapidvideo.com/e/FVTNIXF91P', 'https://www.rapidvideo.com/e/FSTLI3F2V6', 'https://rapidvideo.com/e/FVCD6GCPTZ', 'https://www.rapidvideo.com/e/FW5634T1H9', 'https://rapidvideo.com/e/FWU86HUWVG', 'https://www.rapidvideo.com/embed/FNJFLAWYEX', 'https://www.rapidvideo.com/e/FRVYS69WZX', 'https://rapidvideo.com/e/FW6APOIG10', 'https://rapidvideo.com/e/FWVHWYWPA9', 'https://www.rapidvideo.com/e/FT56HHOXVF', 'https://www.rapidvideo.com/e/FT13MS8U92', 'https://www.rapidvideo.com/e/FUUZBQARDW', 'https://www.rapidvideo.com/e/FTC8LZJ2J6', 'https://www.rapidvideo.com/e/FTPUPQKF5T', 'https://www.rapidvideo.com/e/FXQCXZ2QYR', 'https://www.rapidvideo.com/e/FUGJPEJ2M5', 'https://rapidvideo.com/e/FVCDCHS34E', 'https://www3798.playercdn.net/187/0/U6p_rGTr90UWoUS9-YMuRA/1545124973/180126/708FNUGBCZQ470X4I3LFK.mp4', 'https://www.rapidvideo.com/embed/FXFF5AO6U6', 'https://www.rapidvideo.com/embed/FYP5PSQKBZ', 'https://www.rapidvideo.com/e/G0OQR50F0H', 'https://www.rapidvideo.com/embed/FYTTCKTSY6', 'https://www.rapidvideo.com/embed/FSI187V34O', 'https://server.pelisplus.to/enlace/FYCOA635YI/rapidvideo', 'https://www929.playercdn.net/187/2/MRhcQS-3bIaJWEIjNjup2g/1545371363/180115/257FNH7RDVRR93MZNGUTG.mp4', 'https://www.rapidvideo.com/embed/FQGKCNAFID', 'https://www.rapidvideo.com/embed/FUPOLM8DH9', '//www.youtube.com/embed/nOGsB9dORBg', 'https://protect.playercdn.net/187/7/jTg4Ez9Jw13sXgCzWPE3eg/1545363014/181113/951FX75RTCZZWVXP9KCUO.mp4', 'https://www.rapidvideo.com/embed/FUXSR8E8DV', 'https://www.rapidvideo.com/e/FXGNI5QO1H', 'https://www.rapidvideo.com/e/FWN1E8OI5S', 'https://www.rapidvideo.com/embed/FYMQOI061F', 'https://www3801.playercdn.net/187/0/wgSH8CK9vdiT9f4otHiXtg/1545130031/181017/502FWBFCTYMSJXKARR9EM.mp4', 'https://www.rapidvideo.com/embed/FQJC1A2E4O', 'https://www.rapidvideo.com/embed/FUPOJSHRKX', 'https://www.rapidvideo.com/e/FX5AUXGI2F', 'https://www.rapidvideo.com/embed/FRWMKNFKLE', 'https://www.rapidvideo.com/embed/FV1WF91HFC', 'https://www.rapidvideo.com/e/FT8S2GXB6L', 'https://www3492.playercdn.net/187/3/5zl5SApHWBH2646qOFvShQ/1545379379/180131/540FO01F6K397ZRE3QCO5.mp4', 'https://rapidvideo.com/e/FI78AO7502', 'https://www.rapidvideo.com/e/FX54XR0QT1', 'https://www.rapidvideo.com/embed/FY59ZWCXF0', 'https://www.rapidvideo.com/e/FUP6J8UJYG', 'https://www.rapidvideo.com/embed/FXNH8GUI5I', 'https://www3963.playercdn.net/187/0/FvMv8923s0zKTmJ6iUAifg/1545126018/180915/146FVA0P76LCBVQEBW2C4.mp4', 'https://www.rapidvideo.com/e/FTD9TCTLPK', 'https://www3790.playercdn.net/187/0/SBO7Gyu675HC5iMkF2VWNQ/1545125532/180901/550FUUAU65OPOEHQXTOOY.mp4', 'https://superior.playercdn.net/187/8/dSn2SbtDnmMGhGJPi-6ZZA/1545124283/181203/059FXT922HNC8NMF5TL2U.mp4', 'https://www.rapidvideo.com/embed/FXNCUZ23TF', 'https://www3795.playercdn.net/187/0/VlKrrFP9c4CD7-gEg92Hvw/1545123179/181107/808FX023DOB3ZV3QJAXC5.mp4', 'https://www.rapidvideo.com/embedFQJLTS8NWP', 'https://rapidvideo.com/e/FX3YZCKIYE', 'https://www.rapidvideo.com/embed/FM9BS7Y42T', 'https://www.rapidvideo.com/embed/FYMQOI04UJ', 'https://www.rapidvideo.com/e/FSTLICDHX3', 'https://www3603.playercdn.net/187/0/vXIdTOqj8UErGJPsI1beXQ/1545130420/181017/492FWBEY8XAPMUMRZGERG.mp4', 'https://www.rapidvideo.com/e/FVQ38BWCZ5', 'https://www.rapidvideo.com/e/FX4TI2HFYI', 'https://www.rapidvideo.com/embed/G0NXRE44TZ', 'https://www.rapidvideo.com/e/FU8FQFW3EK', 'https://www.rapidvideo.com/e/FTZ0HPZUMA', 'https://streamango.com/embed/qsbrkdddtqaqkkke', 'https://www.rapidvideo.com/e/FX53X40XEV', 'https://www.rapidvideo.com/embed/FYLLCKSDLL', 'https://rapidvideo.com/e/FYEFZW588S', 'https://www.rapidvideo.com/e/FX4WNQRNA6', 'https://www.rapidvideo.com/e/FTX6GOI1DC', 'https://www.rapidvideo.com/embed/FY4Q6TI0NC', 'https://effect.playercdn.net/186/7/DvkRgT5ORjyLnND46U_3hg/1545363300/181117/050FXAQRIZMHAIJLK0ULM.mp4', 'https://www.rapidvideo.com/e/FY1XFBS0TW', 'https://www.rapidvideo.com/e/FXW8GAIPHO', 'https://www.rapidvideo.com/embed/FSG9S4ZJ7Q', 'https://www.rapidvideo.com/e/FUP6J73FW0', 'https://www925.playercdn.net/187/1/F0eqia7AmHSxy0ZGHhAFnQ/1545122576/180611/mL3kF8GBtKZzLCC.mp4', 'https://www.rapidvideo.com/e/FUP6JBSQF9', 'https://rapidvideo.com/e/FWUTZZ85R6', 'https://www.rapidvideo.com/embed/FXNCM4WTOL', 'https://www.rapidvideo.com/embed/FXNCDJN3PN', 'https://www.rapidvideo.com/embed/FXNC7LCFFS', 'https://www.rapidvideo.com/embed/FVPI8CDAZ2', 'https://www.rapidvideo.com/embed/FMPJS9II95', 'https://www.rapidvideo.com/embed/FY4Q1A5UGR', 'https://www.rapidvideo.com/e/FU9RL2WWSE', 'https://www.rapidvideo.com/embed/FP61X2CPN7', 'https://rapidvideo.com/e/FVKJARJVQE', 'https://www.rapidvideo.com/e/FZKKSJAC9T', 'https://www.rapidvideo.com/e/FX5BI3NLLE', 'https://www.rapidvideo.com/embed/FRSKBVSECR', 'https://www.rapidvideo.com/embed/FRKQKNIW2U', 'https://www.rapidvideo.com/embed/R5FSBTFVF', 'https://www.rapidvideo.com/embed/FX973JVL7', 'https://www.rapidvideo.com/e/FX54XR0QT1', 'https://rapidvideo.com/e/FWF6FFC7BW', 'https://www.rapidvideo.com/e/FXXQS02BU7', 'https://rapidvideo.com/e/FXQVFGX63D', 'https://www.rapidvideo.com/embed/FJVJK5IXE2', 'https://www.rapidvideo.com/embed/FYO273WL01', 'https://www.rapidvideo.com/e/FTBXT0V3NG', 'https://rapidvideo.com/e/FX43XL0F49', 'https://www3757.playercdn.net/187/0/H_BcSw8tOMnNCZdGqGZuMw/1545364135/180130/813FNZ76KLXUJ3VP1I5CO.mp4', 'https://www.rapidvideo.com/e/FWRZB148NP', 'https://rapidvideo.com/e/FWGOMJYZTV', 'https://www.rapidvideo.com/e/FSQ1RX2V3M', 'https://rapidvideo.com/e/FXOTBM20Y8', 'https://rapidvideo.com/e/FX3JCYV5HK', 'https://rapidvideo.com/e/FSSXW63NY4', 'https://www.rapidvideo.com/embed/FSX4RA97RF', 'https://www.rapidvideo.com/e/FVHUNE8BEK', 'https://www.rapidvideo.com/e/FSTLFNXJXD', 'https://www.rapidvideo.com/e/FUT9JDJBRC', 'https://rapidvideo.com/e/FWU6VIFA9M', 'https://www.rapidvideo.com/e/FUWQPYWY5G', 'https://www.rapidvideo.com/e/FVTB2C0R3N', 'https://www.rapidvideo.com/embed/FSJ8K5QKVT', 'https://www.rapidvideo.com/e/FTPVEK8BD6', 'https://www.rapidvideo.com/e/FWV532V3RQ', 'https://www.rapidvideo.com/embed/FUXRURV2XD', 'https://www.rapidvideo.com/e/FVY4YGGBKA', 'https://www.rapidvideo.com/embed/FRZM99V3E6', 'https://www.rapidvideo.com/embed/FNLG1Q0EEY', 'https://www.rapidvideo.com/e/FUWVQMIF9H']
+	c = []
+
+	for i in a:
+		if i.links == "":
+			c.append(i.titulo)
+	print(c)
+	print(len(c))
+

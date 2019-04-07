@@ -1058,7 +1058,7 @@ def reportar_cap(request, id):
 
 
 def series_soon(request):
-	remaining = datetime.now() - datetime(2019,3,24,18,40,59)
+	remaining = datetime.now() - datetime(2019,4,22,18,40,59)
 	if request.user.is_authenticated:
 		context = {
 		'remaining':remaining,

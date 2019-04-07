@@ -211,3 +211,9 @@ class Busqueda_y_etiquetas(models.Model):
 	resuelto = models.BooleanField(default=False)
 	def __str__(self):
 		return str(self.tag)
+
+
+class solicitar(models.Model):
+	solicitado = models.CharField(max_length=150, unique=True)
+	solicitante = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True) 
+	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
