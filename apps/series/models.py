@@ -89,6 +89,7 @@ class Series(models.Model):
 	otras_etiquetas_y_busquedas = models.ManyToManyField('Busqueda_y_etiquetas_series', blank=True, related_name="otras_etiquetas_y_busquedas")
 	reportes = models.IntegerField(default=0)
 	favoritos = models.ManyToManyField(Usuario, blank=True, related_name="favoritos")
+	theid = models.IntegerField(null=True, unique=True, blank=True)
 
 
 	
