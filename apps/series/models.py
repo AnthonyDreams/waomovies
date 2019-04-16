@@ -9,6 +9,8 @@ from django.db.models.signals import pre_save
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
+import http.client
+import json
 
 
 # Create your models here.
@@ -75,7 +77,7 @@ class Series(models.Model):
 	portada = models.ImageField(upload_to='static', height_field=None, width_field=None, blank=True, null=True)
 	PortadaImg = models.ImageField(upload_to='', height_field=None, width_field=None, blank=True, null=True)
 	puntuacion = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
-	director = models.CharField(max_length=100, blank=True)
+	director = models.CharField(max_length=500, blank=True)
 	pais = models.CharField(max_length=40, null=True)
 	tema = models.CharField(max_length=20, blank=True)
 	palabra_clave = models.CharField(max_length=20, blank=True)
@@ -106,6 +108,39 @@ class Series(models.Model):
 		return self.titulo
 	def get_absolute_url(self):
 		return reverse("series_detail", kwargs={"slug": self.slug})
+	def crear_serie_theid(self):
+		conn = http.client.HTTPSConnection("api.themoviedb.org")
+		payload = "{}"
+
+		conn.request("GET", "/3/tv/"+self.theid+"?language=es&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+
+		res = conn.getresponse()
+		data = res.read()
+		creadores = ""
+		converted = json.loads(data.decode("utf-8"))
+		for i in range(0,len(converted["created_by"])):
+			if i != len(converted["created_by"]) - 1:
+				creadores += converted["created_by"][i]["name"] + " / "
+			else:
+				creadores += converted["created_by"][i]["name"]
+
+		fecha = converted["first_air_date"].split("-")
+		sinopsiss = converted["overview"]
+		original = converted["original_name"]
+		nombre = converted["name"]
+		votos = converted["vote_average"]
+		emicion = converted["in_production"]
+		fecha_de_lanzamientoo = datetime(int(fecha[0]),int(fecha[1]),int(fecha[2]))
+
+		self.fecha_de_lanzamiento = fecha_de_lanzamientoo
+		self.sinopsis = sinopsiss
+		self.titulo_original = original
+		self.titulo = nombre
+		self.puntuacion = votos
+		self.emicion = emision
+		self.director = creadores
+
+		crear_serie_theid()
 
 class Capitulos(models.Model):
 	nombre = models.CharField(max_length=100)
