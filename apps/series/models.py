@@ -11,6 +11,11 @@ from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 import http.client
 import json
+from googletrans import Translator
+from django.db.models.signals import post_save
+
+from django.dispatch import receiver
+
 
 
 # Create your models here.
@@ -28,8 +33,11 @@ class Temporada(models.Model):
 		return self.serie.titulo + " " + self.temporada_name
 
 class Series(models.Model):
-	titulo = models.CharField(max_length=100)
-	titulo_original = models.CharField(max_length=100, null=True)
+	theid = models.IntegerField(null=True, unique=True, blank=True)
+	serie_cover = models.ImageField(upload_to='static', height_field=None, width_field=None)
+	portada = models.ImageField(upload_to='static', height_field=None, width_field=None, blank=True, null=True)
+	pais = models.CharField(max_length=40, null=True)
+
 	ACCION = 'ACC'
 	DRAMA = 'DRA'
 	CIENCIA_FICCION = 'SC'
@@ -65,33 +73,32 @@ class Series(models.Model):
 	)
 	genero2 = models.CharField(max_length=20, choices=GENERO_CHOICES, blank=True, null=True)
 	genero3 = models.CharField(max_length=20, choices=GENERO_CHOICES, blank=True, null=True)
+	titulo = models.CharField(max_length=100, blank=True, null=True)
+	titulo_original = models.CharField(max_length=100, null=True,blank=True)
+	
 
 	reparto = models.ManyToManyField('peliculas.personajes', blank=True, related_name='reparto_serie')
-	sinopsis = models.TextField()
-	fecha_de_lanzamiento = models.DateField()
+	sinopsis = models.TextField(blank=True, null=True)
+	fecha_de_lanzamiento = models.DateField(blank=True, null=True)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 	trailer_link = models.TextField(null=True, blank=True)
-	serie_cover = models.ImageField(upload_to='static', height_field=None, width_field=None)
 	CoverImg =models.ImageField(upload_to='', height_field=None, width_field=None, blank=True, null=True)
 	tem = models.ManyToManyField('Temporada', blank=True)
-	portada = models.ImageField(upload_to='static', height_field=None, width_field=None, blank=True, null=True)
 	PortadaImg = models.ImageField(upload_to='', height_field=None, width_field=None, blank=True, null=True)
 	puntuacion = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
-	director = models.CharField(max_length=500, blank=True)
-	pais = models.CharField(max_length=40, null=True)
-	tema = models.CharField(max_length=20, blank=True)
-	palabra_clave = models.CharField(max_length=20, blank=True)
-	tag1 = models.CharField(max_length=20, blank=True, null=True)
-	tag2 = models.CharField(max_length=20, blank=True, null=True)
-	tag3 = models.CharField(max_length=20, blank=True, null=True)
-	tag4 = models.CharField(max_length=20, blank=True, null=True)
-	tag5 = models.CharField(max_length=20, blank=True, null=True)
-	tag6 = models.CharField(max_length=20, blank=True, null=True)
-	tag7 = models.CharField(max_length=20, blank=True, null=True)
+	director = models.CharField(max_length=500, blank=True, null=True)
+	tema = models.CharField(max_length=100, blank=True, null=True)
+	palabra_clave = models.CharField(max_length=100, blank=True, null=True)
+	tag1 = models.CharField(max_length=100, blank=True, null=True)
+	tag2 = models.CharField(max_length=100, blank=True, null=True)
+	tag3 = models.CharField(max_length=100, blank=True, null=True)
+	tag4 = models.CharField(max_length=100, blank=True, null=True)
+	tag5 = models.CharField(max_length=100, blank=True, null=True)
+	tag6 = models.CharField(max_length=100, blank=True, null=True)
+	tag7 = models.CharField(max_length=100, blank=True, null=True)
 	otras_etiquetas_y_busquedas = models.ManyToManyField('Busqueda_y_etiquetas_series', blank=True, related_name="otras_etiquetas_y_busquedas")
 	reportes = models.IntegerField(default=0)
 	favoritos = models.ManyToManyField(Usuario, blank=True, related_name="favoritos")
-	theid = models.IntegerField(null=True, unique=True, blank=True)
 
 
 	
@@ -105,42 +112,98 @@ class Series(models.Model):
 	slug = models.SlugField(max_length=200, blank=True, unique=True)
 
 	def __str__(self):
-		return self.titulo
+		if self.titulo:
+			return self.titulo
+		else:
+			return str(self.theid)
 	def get_absolute_url(self):
 		return reverse("series_detail", kwargs={"slug": self.slug})
+	@property	
 	def crear_serie_theid(self):
-		conn = http.client.HTTPSConnection("api.themoviedb.org")
-		payload = "{}"
+		if not self.director:
+			conn = http.client.HTTPSConnection("api.themoviedb.org")
+			payload = "{}"
 
-		conn.request("GET", "/3/tv/"+self.theid+"?language=es&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+			conn.request("GET", "/3/tv/"+str(self.theid)+"?language=es&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
 
-		res = conn.getresponse()
-		data = res.read()
-		creadores = ""
-		converted = json.loads(data.decode("utf-8"))
-		for i in range(0,len(converted["created_by"])):
-			if i != len(converted["created_by"]) - 1:
-				creadores += converted["created_by"][i]["name"] + " / "
-			else:
-				creadores += converted["created_by"][i]["name"]
+			res = conn.getresponse()
+			data = res.read()
+			creadores = ""
+			converted = json.loads(data.decode("utf-8"))
+			for i in range(0,len(converted["created_by"])):
+				if i != len(converted["created_by"]) - 1:
+					creadores += converted["created_by"][i]["name"] + " / "
+				else:
+					creadores += converted["created_by"][i]["name"]
 
-		fecha = converted["first_air_date"].split("-")
-		sinopsiss = converted["overview"]
-		original = converted["original_name"]
-		nombre = converted["name"]
-		votos = converted["vote_average"]
-		emicion = converted["in_production"]
-		fecha_de_lanzamientoo = datetime(int(fecha[0]),int(fecha[1]),int(fecha[2]))
+			fecha = converted["first_air_date"].split("-")
+			sinopsiss = converted["overview"]
+			original = converted["original_name"]
+			nombre = converted["name"]
+			votos = converted["vote_average"]
+			emicion = converted["in_production"]
+			fecha_de_lanzamientoo = datetime(int(fecha[0]),int(fecha[1]),int(fecha[2]))
 
-		self.fecha_de_lanzamiento = fecha_de_lanzamientoo
-		self.sinopsis = sinopsiss
-		self.titulo_original = original
-		self.titulo = nombre
-		self.puntuacion = votos
-		self.emicion = emision
-		self.director = creadores
+			self.fecha_de_lanzamiento = fecha_de_lanzamientoo
+			self.sinopsis = sinopsiss
+			self.titulo_original = original
+			self.titulo = nombre
+			self.puntuacion = votos
+			self.emision = emicion
+			self.director = creadores
+			self.slug = slugify(nombre)
+			conn.request("GET", "/3/tv/"+str(self.theid)+"/keywords?api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+			res = conn.getresponse()
+			data = res.read()
+			converted = json.loads(data.decode("utf-8"))
+			maximo = 6
+			key = []
+			for a in range(0, len(converted["results"])):
+				if a < 9:
+					key.append(converted["results"][a]["name"]);
+				else:
+					break;
 
-		crear_serie_theid()
+
+			gs = Translator()
+			count = 0
+			for i in key:
+				count +=1
+				keyp = gs.translate(i, dest="es").text
+				dos = ""
+				for i in keyp:
+					if i == " ":
+						i == "_"
+					dos += i
+					
+				if count == 1:
+					self.palabra_clave = dos
+				if count == 2:
+					self.tema =	dos
+				if count == 3:
+					self.tag1 =	dos
+				if count == 4:
+					self.tag2 =	dos
+				if count == 5:
+					self.tag3 =	dos
+				if count == 6:
+					self.tag4 =	dos
+				if count == 7:
+					self.tag5 =	dos
+				if count == 8:
+					self.tag6 =	dos
+				if count == 9:
+					self.tag7 =	dos
+			self.save()
+
+			return "Done"
+
+@receiver(post_save, sender=Series)
+def create_user_UserPreference(sender, instance, created, **kwargs):
+	if created:
+		
+		instance.crear_serie_theid
+
 
 class Capitulos(models.Model):
 	nombre = models.CharField(max_length=100)

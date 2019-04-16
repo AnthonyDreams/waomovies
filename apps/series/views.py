@@ -103,6 +103,7 @@ def series_detail(request, slug):
 	id = sacar_id.id
 	
 	series = Series.objects.get(id=id)
+	series.crear_serie_theid
 	temporada = Temporada.objects.filter(serie_id=id).order_by('num_temporada')
 
 	relacionar = Series.objects.all()[:10]

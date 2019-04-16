@@ -106,18 +106,31 @@ WSGI_APPLICATION = 'Wao.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+if DEBUG == True:
+	DATABASES = {
+	    'default': {
+	    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+	        'NAME': 'database',
+	        'USER': 'postgres',
+	        'PASSWORD': 'a253035253035',
+	        'HOST': 'localhost',
+	        'PORT': 5432,
 
-DATABASES = {
-    'default': {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'waomoviesdb',
-        'USER': 'theanthony2d',
-        'PASSWORD': 'A253035253035a',
-        'HOST': 'waomoviesdb.csenjz1oiib4.us-east-1.rds.amazonaws.com',
-        'PORT': 5432,
+	    }
+	}
+else:
+	DATABASES = {
+	    'default': {
+	    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+	        'NAME': 'waomoviesdb',
+	        'USER': 'theanthony2d',
+	        'PASSWORD': 'A253035253035a',
+	        'HOST': 'waomoviesdb.csenjz1oiib4.us-east-1.rds.amazonaws.com',
+	        'PORT': 5432,
 
-    }
-}
+	    }
+	}
+
 
 
 # Password validation
