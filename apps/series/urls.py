@@ -24,6 +24,7 @@ from apps.series.views import (
 	search,
 	search_result_ajax,
 	gettingembed,
+	añadircapitulos,
 
 
 	)
@@ -52,7 +53,7 @@ urlpatterns = [
      
     url(r'^dislike_capi/(?P<id>\d+)/disgustar/$', dislike),
     url(r'^outdislike_capi/(?P<id>\d+)/outdisgustar/$', outdislike),
-    
+    re_path(r'añadircapitulos/(?P<id>\d+)/asdas/$', añadircapitulos, name='añadircapitulos'),
 
     re_path(r'reportar_capitulo/(?P<id>\d+)/reportar/$', reportar_cap, name='reportar_cap'),
     re_path(r'cambiar_votaciono_serie/(?P<id>\d+)/as/$', cambiar_votaciono_serie, name='cambiar_votaciono_serie'),

@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #SECRET_KEY = os.environ.get('SECRET_KEY')
 SECRET_KEY = 'j$z5qv+cug3pd8p6#jnbj+mdn$0x#fonrlk#=&f*1f0_e)=&yt'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.waomovies.com']
 #ALLOWED_HOSTS = ['wmoviestest.herokuapp.com', '.waomovies.com']
@@ -35,25 +35,25 @@ SERIES = False
 
 INSTALLED_APPS = [
 	'rest_framework',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sitemaps',
-    'apps.peliculas',
-    'apps.series',
-    'apps.usuarios',
-    'apps.comentarios',
-    'apps.vermas_tarde',
-    'apps.notificaciones',
-    'apps.footer',
-    'multiselectfield',
-    'apps.contacto',
-    'apps.dashboard',
-    'apps.news',
-    'timedeltatemplatefilter',
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
+	'django.contrib.sitemaps',
+	'apps.peliculas',
+	'apps.series',
+	'apps.usuarios',
+	'apps.comentarios',
+	'apps.vermas_tarde',
+	'apps.notificaciones',
+	'apps.footer',
+	'multiselectfield',
+	'apps.contacto',
+	'apps.dashboard',
+	'apps.news',
+	'timedeltatemplatefilter',
   #  'debug_toolbar'
 ]
 
@@ -64,39 +64,39 @@ ARTICLES_DE_WEB = 'news.Article'
 
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django_currentuser.middleware.ThreadLocalUserMiddleware',
+	'django.middleware.security.SecurityMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	#'debug_toolbar.middleware.DebugToolbarMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'whitenoise.middleware.WhiteNoiseMiddleware',
+	'django_currentuser.middleware.ThreadLocalUserMiddleware',
 ]
 
 ROOT_URLCONF = 'Wao.urls'
 
 TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
+	{
+		'BACKEND': 'django.template.backends.django.DjangoTemplates',
+		'DIRS': [os.path.join(BASE_DIR, 'templates')],
+		'APP_DIRS': True,
+		'OPTIONS': {
+			'context_processors': [
+				'django.template.context_processors.debug',
+				'django.template.context_processors.request',
+				'django.contrib.auth.context_processors.auth',
+				'django.contrib.messages.context_processors.messages',
+			],
 
-            'libraries':{
-            	'my_templatetag': 'apps.peliculas.templatetags.tags',
+			'libraries':{
+				'my_templatetag': 'apps.peliculas.templatetags.tags',
 
-            }
-        },
-    },
+			}
+		},
+	},
 ]
 
 WSGI_APPLICATION = 'Wao.wsgi.application'
@@ -108,27 +108,27 @@ WSGI_APPLICATION = 'Wao.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 if DEBUG == True:
 	DATABASES = {
-	    'default': {
-	    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-	        'NAME': 'database',
-	        'USER': 'postgres',
-	        'PASSWORD': 'a253035253035',
-	        'HOST': 'localhost',
-	        'PORT': 5432,
+		'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': 'database',
+			'USER': 'postgres',
+			'PASSWORD': 'a253035253035',
+			'HOST': 'localhost',
+			'PORT': 5432,
 
-	    }
+		}
 	}
 else:
 	DATABASES = {
-	    'default': {
-	    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-	        'NAME': 'waomoviesdb',
-	        'USER': 'theanthony2d',
-	        'PASSWORD': 'A253035253035a',
-	        'HOST': 'waomoviesdb.csenjz1oiib4.us-east-1.rds.amazonaws.com',
-	        'PORT': 5432,
+		'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': 'waomoviesdb',
+			'USER': 'theanthony2d',
+			'PASSWORD': 'A253035253035a',
+			'HOST': 'waomoviesdb.csenjz1oiib4.us-east-1.rds.amazonaws.com',
+			'PORT': 5432,
 
-	    }
+		}
 	}
 
 
@@ -137,18 +137,18 @@ else:
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+	{
+		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+	},
+	{
+		'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+	},
+	{
+		'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+	},
+	{
+		'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+	},
 ]
 
 
@@ -215,7 +215,7 @@ else:
 	#AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 	STATIC_DIRS = 'static'
 	STATICFILES_DIRS = [
-	    STATIC_DIRS,
+		STATIC_DIRS,
 
 	]
 	AWS_ACCESS_KEY_ID = 'AKIAJ4IOBCQM32A5LVWQ'
@@ -223,8 +223,8 @@ else:
 	AWS_STORAGE_BUCKET_NAME = 'waomovies'
 	AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 	AWS_HEADERS = {
-    'Expires': 'Thu, 15 Apr 2010 20:00:00 GMT',
-    'Cache-Control': 'max-age=86400',
+	'Expires': 'Thu, 15 Apr 2010 20:00:00 GMT',
+	'Cache-Control': 'max-age=86400',
 }
 	AWS_LOCATION = 'static'
 	AWS_DEFAULT_ACL = "public-read"
@@ -249,21 +249,21 @@ channell = False
 if channell:
 	if DEB:
 		CHANNEL_LAYERS = {
-		    'default': {
-		        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-		        'CONFIG': {
-		            'hosts': [('localhost', 6379)],
-		        },
-		    }
+			'default': {
+				'BACKEND': 'channels_redis.core.RedisChannelLayer',
+				'CONFIG': {
+					'hosts': [('localhost', 6379)],
+				},
+			}
 		}
 	else:
 		CHANNEL_LAYERS = {
-		    'default': {
-		        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-		        'CONFIG': {
-		            'hosts': [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
-		        },
-		    }
+			'default': {
+				'BACKEND': 'channels_redis.core.RedisChannelLayer',
+				'CONFIG': {
+					'hosts': [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+				},
+			}
 		}
 
 

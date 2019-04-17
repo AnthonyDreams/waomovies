@@ -1776,9 +1776,9 @@ select::-ms-expand {
   {% for cc in tem.capitulos.all|order_by:"num_episodio" %}
 
 <div class="movie-item-style-2 movie-item-style-1 " style="margin-bottom: -8px;">
-	<a href="/{{cc.slug}}/{{tem.slug}}/"><img  src="{{cc.cover_capitulo.url}}" style="width: 400px !important; height: 120px;" alt=""></a>
+	<a href="/{{cc.slug}}/{{tem.slug}}/"><img  src="https://image.tmdb.org/t/p/w227_and_h127_bestv2/{{cc.cover_capitulo}}" style="width: 400px !important; height: 120px;" alt=""></a>
 	
-	<div class="mv-item-infor">
+	<div class="mv-item-infor" style="margin-bottom: 15px;">
 		<h6><a href="/{{cc.slug}}/{{tem.slug}}/">{{cc.num_episodio}}.     {{cc.nombre}}</a></h6>
 	</div>
 
@@ -1802,9 +1802,9 @@ select::-ms-expand {
   {% if tem.num_temporada == 1  and not request.user.on.all%}
 
 <div class="movie-item-style-2 movie-item-style-1" style="margin-bottom: -13px;">
-	<a href="/{{cc.slug}}/{{tem.slug}}/"><img  src="{{cc.cover_capitulo.url}}" style="width: 400px !important; height: 120px;" alt=""></a>
+	<a href="/{{cc.slug}}/{{tem.slug}}/"><img  src="https://image.tmdb.org/t/p/w227_and_h127_bestv2/{{cc.cover_capitulo}}" style="width: 400px !important; height: 120px;" alt=""></a>
 	
-	<div class="mv-item-infor">
+	<div class="mv-item-infor" style="margin-bottom: 15px;">
 		<h6><a href="/{{cc.slug}}/{{tem.slug}}/">{{cc.num_episodio}}.     {{cc.nombre}}</a></h6>
 	</div>
 

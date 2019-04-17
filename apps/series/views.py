@@ -22,6 +22,9 @@ from apps.peliculas.models import Cast, Personajes
 from apps.vermas_tarde.models import Vermastarde
 from django.core import serializers
 from django.conf import settings
+from django.utils.text import slugify
+import http.client
+import requests
 # Create your views here.
 
 
@@ -1103,3 +1106,49 @@ def gettingembed(request, id):
 		}
 
 		return JsonResponse(data)
+
+def añadircapitulos(request,id):
+	a = Series.objects.get(id=id)
+	conn = http.client.HTTPSConnection("api.themoviedb.org")
+	payload = "{}"
+
+	conn.request("GET", "/3/tv/"+str(a.theid)+"?language=es&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+
+	res = conn.getresponse()
+	data = res.read()
+	creadores = ""
+	converted = json.loads(data.decode("utf-8"))
+	episodios = converted["number_of_episodes"]
+	temporadas = converted["number_of_seasons"]
+	for i in range(1,temporadas+1):
+		conn.request("GET", "/3/tv/"+str(a.theid)+"/season/"+str(i)+"?language=es&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+
+		res = conn.getresponse()
+		data = res.read()
+		converted = json.loads(data.decode("utf-8"))
+		instance = Temporada.objects.create(serie=a,temporada_name=converted["name"], nombre_serie=a.titulo, num_temporada=i,slug=slugify('%s %s' % (a.titulo, i)))
+		instance.save()
+		a.tem.add(instance)
+		t = Temporada.objects.get(id=instance.id)
+		for i in range(0,len(converted["episodes"])):
+			titulo = converted["episodes"][i]["name"]
+			sinopsiss = converted["episodes"][i]["overview"]
+			fecha = converted["episodes"][i]["air_date"].split("-")
+			fecha_de_lanzamientoo = datetime(int(fecha[0]),int(fecha[1]),int(fecha[2]))
+			numero = converted["episodes"][i]["episode_number"]
+			slus = slugify('%s %s' % (titulo, numero))
+			if not datetime(int(fecha[0]),int(fecha[1]),int(fecha[2])) > datetime.today():
+				cover = converted["episodes"][i]["still_path"][1:]
+				instancec = Capitulos.objects.create(nombre=titulo,cover_capitulo=cover,sinopsis=sinopsiss, fecha_de_lanzamiento=fecha_de_lanzamientoo,num_episodio=numero,slug=slus, temporadaa=t)
+				instancec.save()
+				cap = Capitulos.objects.get(id=instancec.id)
+				t.capitulos.add(instancec)
+
+				url_imagen = "https://image.tmdb.org/t/p/w227_and_h127_bestv2/" + cover # El link de la imagen
+				nombre_local_imagen = cover # El nombre con el que queremos guardarla
+				imagen = requests.get(url_imagen).content
+				with open("C:/Users/Ant2D/Desktop/capitulos/" +nombre_local_imagen, 'wb') as handler:
+					handler.write(imagen)
+			else:
+				continue
+

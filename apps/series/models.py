@@ -207,10 +207,8 @@ def create_user_UserPreference(sender, instance, created, **kwargs):
 
 class Capitulos(models.Model):
 	nombre = models.CharField(max_length=100)
-	nombre_original = models.CharField(max_length=100, null=True)
 	cover_capitulo = models.ImageField(upload_to='static', height_field=None, width_field=None)
-	sinopsis = models.CharField(max_length=305)
-	director = models.CharField(max_length=100, blank=True, null=True)
+	sinopsis = models.CharField(max_length=800)
 	fecha_de_lanzamiento = models.DateField(null=True)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 	num_episodio = models.IntegerField(blank=True, null=True)
