@@ -1799,7 +1799,7 @@ select::-ms-expand {
 	<div class="container flex-wrap-movielist mv-grid-fw" style="margin-left: 17px;">
 
   {% for cc in tem.capitulos.all|order_by:"num_episodio" %}
-  {% if tem.num_temporada == 1  and not request.user.on.all%}
+  {% if tem.num_temporada == 1  and not tem in request.user.on.all%}
 
 <div class="movie-item-style-2 movie-item-style-1" style="margin-bottom: -13px;">
 	<a href="/{{cc.slug}}/{{tem.slug}}/"><img  src="https://image.tmdb.org/t/p/w227_and_h127_bestv2/{{cc.cover_capitulo}}" style="width: 400px !important; height: 120px;" alt=""></a>
