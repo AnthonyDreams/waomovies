@@ -1278,7 +1278,7 @@ $(this).remove();
             <!--Body-->
             
             <div  class="modal-body mb-0 text-center" style="max-height: 350px;">
-
+{% if request.user.is_authenticated and request.user.profile.AmiGos.count > 0 %}
              <div id="displayloaz" style="display: none; "><img style="position: relative; " height="50" width="50" src="{% static "img/fancybox_loading@2x.gif" %}"></div>  
 
              <div id="mensajeshare"></div> 
@@ -1300,6 +1300,7 @@ $(this).remove();
    <div class="md-form" style="width:80%; margin-left: 20px; height: 30px; float: left;"><input id="input-char-counter" type="text" maxlength="150" class="form-control" name="nota" ><label for="input-char-counter" style="font-size: 14px;">Dejar un mensaje</label></div> <button onclick="compartirshare(this)" id="formshare" type="submit" class="btn btn-primary" style="font-size:15px; margin-left:10px; margin-top: 35px; width: 30px; "><i class="fa fa-send"></i></button>
 </form>
 <br/>
+{% endif %}
 
  <!--Facebook-->
                 <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wmoviestest.herokuapp.com/series/{{series.slug}}/" type="button" class="btn-floating btn-fb" style="background-color: #3b5998"><i class="fa fa-facebook"></i></a>
