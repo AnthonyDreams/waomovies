@@ -199,7 +199,7 @@ class Series(models.Model):
 			return "Done"
 
 @receiver(post_save, sender=Series)
-def create_user_UserPreference(sender, instance, created, **kwargs):
+def create_serie(sender, instance, created, **kwargs):
 	if created:
 		
 		instance.crear_serie_theid
@@ -208,7 +208,7 @@ def create_user_UserPreference(sender, instance, created, **kwargs):
 class Capitulos(models.Model):
 	nombre = models.CharField(max_length=100)
 	cover_capitulo = models.ImageField(upload_to='static', height_field=None, width_field=None)
-	sinopsis = models.CharField(max_length=800)
+	sinopsis = models.CharField(max_length=2000)
 	fecha_de_lanzamiento = models.DateField(null=True)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 	num_episodio = models.IntegerField(blank=True, null=True)
@@ -245,7 +245,7 @@ class Capitulos(models.Model):
 		return reverse("capitulos_detail", kwargs={"slug": self.slug})
 
 	def __str__(self):
-		return self.nombre
+		return self.nombre + " - " + self.temporadaa
 
 
 class Votacion(models.Model):
