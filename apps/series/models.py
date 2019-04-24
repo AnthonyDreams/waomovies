@@ -29,6 +29,10 @@ class Temporada(models.Model):
 	num_temporada = models.IntegerField(blank=True, null=True)
 	slug = models.SlugField(null=True)
 	on = models.ManyToManyField(Usuario, related_name="on", blank=True)
+	@property
+	def foo(self):
+		return self.serie.titulo + " " + self.temporada_name
+	
 	def __str__(self):
 		return self.serie.titulo + " " + self.temporada_name
 
@@ -245,7 +249,7 @@ class Capitulos(models.Model):
 		return reverse("capitulos_detail", kwargs={"slug": self.slug})
 
 	def __str__(self):
-		return self.nombre + " - " + self.temporadaa
+		return self.nombre + " - " + self.temporadaa.foo
 
 
 class Votacion(models.Model):
