@@ -1280,10 +1280,11 @@ $(this).remove();
             <div  class="modal-body mb-0 text-center" style="max-height: 350px;">
 {% if request.user.is_authenticated and request.user.profile.AmiGos.count > 0 %}
              <div id="displayloaz" style="display: none; "><img style="position: relative; " height="50" width="50" src="{% static "img/fancybox_loading@2x.gif" %}"></div>  
+             {% endif %}
 
              <div id="mensajeshare"></div> 
 <div id="moda-bodycharge">
-
+{% if request.user.is_authenticated and request.user.profile.AmiGos.count > 0 %}
 <a onclick="select(this)" id="todos"><i class="fa fa-users" style="font-size: 30px; color: black;"></i> <span style="color: gray; font-weight: bold;">¡Click aquí para compartir con todos!</span></a>
 <br/>
 <br/>
