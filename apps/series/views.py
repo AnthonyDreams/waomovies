@@ -127,6 +127,13 @@ def series_detail(request, slug):
 	
 	relacionarportema = Series.objects.filter(Q(tema__iexact=series.tema)|Q(tag1__iexact=series.tag1)|Q(tag2__iexact=series.tag2)|Q(tag3__iexact=series.tag3)).order_by('-puntuacion')[:10]
 	relacionarportemac = Series.objects.filter(Q(tema__iexact=series.tema)).filter(Q(tema__iexact=series.tema)|Q(tag1__iexact=series.tag1)|Q(tag2__iexact=series.tag2)|Q(tag3__iexact=series.tag3)).order_by('-puntuacion')[:10].count()
+	showtem = False
+	temporadsa = []
+	for a in temporada:
+		c = a.on.filter(id=request.user.id)
+		if c:
+			showtem = True
+
 	if not request.is_ajax():
 		try:
 			h = Hitcount_Series.objects.get(serie_id=id)
@@ -232,6 +239,7 @@ def series_detail(request, slug):
 			'temporada':temporada,
 			'series_filt':series_filt,
 			'report_user':report_user,
+			'showtem':showtem,
 			'report_user_res':report_user_res,
 			'peliculase_seriesa':peliculase_seriesa,
 
@@ -335,6 +343,7 @@ def series_detail(request, slug):
 			'temporada':temporada,
 			'series_filt':series_filt,
 			'report_user':report_user,
+			'showtem':showtem,
 			'report_user_res':report_user_res,
 			'peliculase_seriesa':peliculase_seriesa,
 

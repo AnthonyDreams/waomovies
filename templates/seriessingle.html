@@ -1762,7 +1762,6 @@ select::-ms-expand {
        	 			<!--Accordion wrapper-->
        	 			<div id="rows" class="row">
 {% for tem in temporada %}
-
 {% if tem in request.user.on.all %}
 
        <div id="changingtem" style="display: none;">
@@ -1790,7 +1789,8 @@ select::-ms-expand {
                 	</div>
 <!-- Card group -->
 </div>
-{% else %}
+{% endif %}
+{% if not showtem %}
 <div id="changingtem" style="display: none;">
           	<img style="position: relative; left: 45%; top: 15px; padding-bottom: 7px;" height="50" width="50"  src="{% static 'img/throbber_12.gif' %}">
           </div>
@@ -1799,9 +1799,9 @@ select::-ms-expand {
 <div class="   " id="row">
 	<br>
 	<div class="container flex-wrap-movielist mv-grid-fw" style="margin-left: 17px;">
-
+{% if tem.num_temporada == 1 %}
   {% for cc in tem.capitulos.all|order_by:"num_episodio" %}
-  {% if tem.num_temporada == 1  and not tem in request.user.on.all%}
+  
 
 <div class="movie-item-style-2 movie-item-style-1" style="margin-bottom: -13px;">
 	<a href="/{{cc.slug}}/{{tem.slug}}/"><img  src="https://image.tmdb.org/t/p/w227_and_h127_bestv2/{{cc.cover_capitulo}}" style="width: 400px !important; height: 120px;" alt=""></a>
@@ -1812,13 +1812,15 @@ select::-ms-expand {
 
 	
 </div>	
+                    {% endfor %}
+
 {%endif%}
 
-                	{% endfor %}
                 	</div>
 <!-- Card group -->
+
 </div>
-{% endif %}
+                    {%endif%}
     
 
 {% endfor %}
