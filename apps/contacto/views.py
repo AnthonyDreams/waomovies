@@ -13,7 +13,7 @@ def send_email(request):
                 data['subject'],
                 data['content'],
                 'waosoporte@gmail.com', #FROM
-                [data['email']],
+                [data['email'], "waosoporte@gmail.com"],
                 fail_silently=False,
             )
             messages.success(request, 'Gracias por contactarnos, estaremos respondiendo lo más rápido posible.')
