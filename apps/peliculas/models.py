@@ -11,16 +11,18 @@ from django.utils.text import slugify
 from ww import f
 from .utils import get_read_time
 from apps.series.models import Series
+from googletrans import Translator
+from django.db.models.signals import post_save
+import http.client
+import json
+from django.dispatch import receiver
+
 
 
 
 class Peliculas(models.Model):
-	titulo = models.CharField(max_length=200)
+	theid = models.IntegerField(null=True, unique=True, blank=True)
 	Cover = models.ImageField(upload_to='static', height_field=None, width_field=None)
-	CoverImg =models.ImageField(upload_to='static/comprimidas', height_field=None, width_field=None, null=True, blank=True)
-	fecha_de_lanzamiento = models.DateField()
-	director = models.CharField(max_length=30)
-	reparto = models.ManyToManyField('Personajes', blank=True)
 	ACCION = 'ACC'
 	DRAMA = 'DRA'
 	CIENCIA_FICCION = 'SC'
@@ -51,13 +53,22 @@ class Peliculas(models.Model):
 	genero = models.CharField(max_length=20, choices=GENERO_CHOICES)
 	genero2 = models.CharField(max_length=20, choices=GENERO_CHOICES,blank=True, null=True)
 	genero3 = models.CharField(max_length=20, choices=GENERO_CHOICES,blank=True, null=True)
+	director = models.CharField(max_length=60)
 	pais = models.CharField(max_length=20)
-	sinopsis = models.TextField()
-	puntuacion = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
 	links = models.TextField(blank=True, null=True)
 	portada = models.ImageField(upload_to='static', height_field=None, width_field=None, blank=True)
+	
+	fecha_de_lanzamiento = models.DateField(blank=True, null=True)
+	reparto = models.ManyToManyField('Personajes', blank=True)
+	
+	
+	sinopsis = models.TextField(blank=True, null=True)
+	puntuacion = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+	CoverImg =models.ImageField(upload_to='static/comprimidas', height_field=None, width_field=None, null=True, blank=True)
+	
 	PortadaImg = models.ImageField(upload_to='', height_field=None, width_field=None, blank=True, null=True)
-	run_time = models.IntegerField(default=0, null=True)
+	run_time = models.IntegerField(default=0, blank=True, null=True)
+	titulo = models.CharField(max_length=200, blank=True, null=True)
 	titulo_orinal = models.CharField(max_length=150, null=True, blank=True)
 
 	tag_principal = models.CharField(max_length=40, blank=True)
@@ -79,14 +90,16 @@ class Peliculas(models.Model):
 	servidor3 = models.TextField(null=True, blank=True)
 	servidor4 = models.TextField(null=True, blank=True)
 
-	slug = models.SlugField(null=True, unique=True, max_length=200)
-	theid = models.IntegerField(null=True, unique=True, blank=True)
+	slug = models.SlugField(unique=True, max_length=200,blank=True, null=True)
 	class Meta:
 		verbose_name_plural = "Películas"
 
 
 	def __str__(self):
-		return self.titulo
+		if self.titulo:
+			return self.titulo
+		else:
+			return str(self.theid)
 
 	def get_absolute_url(self):
 		return f('/{self.slug}/')
@@ -104,6 +117,85 @@ class Peliculas(models.Model):
 			return "https://d3mp3oxoqwxddf.cloudfront.net/media/static/comprimidas/compress_" + str(self.PortadaImg)
 		else:
 			return self.portada.url
+	@property
+	def crear_pelicula_theid(self):
+		if not self.titulo:
+			conn = http.client.HTTPSConnection("api.themoviedb.org")
+			payload = "{}"
+
+			conn.request("GET", "/3/movie/"+str(self.theid)+"?language=es&api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+
+			res = conn.getresponse()
+			data = res.read()
+			creadores = ""
+			converted = json.loads(data.decode("utf-8"))
+
+			fecha = converted["release_date"].split("-")
+			sinopsiss = converted["overview"]
+			original = converted["original_title"]
+			nombre = converted["title"]
+			votos = converted["vote_average"]
+			run = converted["runtime"]
+			fecha_de_lanzamientoo = datetime(int(fecha[0]),int(fecha[1]),int(fecha[2]))
+
+			self.fecha_de_lanzamiento = fecha_de_lanzamientoo
+			self.sinopsis = sinopsiss
+			self.titulo_original = original
+			self.titulo = nombre
+			self.puntuacion = votos
+			self.run_time = run
+			self.slug = slugify(nombre)
+			conn.request("GET", "/3/movie/"+str(self.theid)+"/keywords?api_key=8bfa262e8f8c8848076b3494155c8c2a", payload)
+			res = conn.getresponse()
+			data = res.read()
+			converted = json.loads(data.decode("utf-8"))
+			maximo = 6
+			key = []
+			for a in range(0, len(converted["keywords"])):
+				if a < 9:
+					key.append(converted["keywords"][a]["name"]);
+				else:
+					break;
+
+
+			gs = Translator()
+			count = 0
+			for i in key:
+				count +=1
+				keyp = gs.translate(i, dest="es").text
+				dos = ""
+				for i in keyp:
+					if i == " ":
+						i == "_"
+					dos += i
+					
+				if count == 1:
+					self.palabra_clave = dos
+				if count == 2:
+					self.tema =	dos
+				if count == 3:
+					self.tag1 =	dos
+				if count == 4:
+					self.tag2 =	dos
+				if count == 5:
+					self.tag3 =	dos
+				if count == 6:
+					self.tag4 =	dos
+				if count == 7:
+					self.tag5 =	dos
+				if count == 8:
+					self.tag6 =	dos
+				if count == 9:
+					self.tag7 =	dos
+			self.save()
+
+			return "Done"
+
+@receiver(post_save, sender=Peliculas)
+def create_pelicula(sender, instance, created, **kwargs):
+	if created:
+		
+		instance.crear_pelicula_theid
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
 

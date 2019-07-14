@@ -25,7 +25,7 @@ class Temporada(models.Model):
 	serie = models.ForeignKey('Series', on_delete=models.CASCADE, null=True)
 	temporada_name = models.CharField(max_length=14)
 	capitulos = models.ManyToManyField('Capitulos', blank=True)
-	nombre_serie = models.CharField(max_length=20, blank=True)
+	nombre_serie = models.CharField(max_length=100, blank=True)
 	num_temporada = models.IntegerField(blank=True, null=True)
 	slug = models.SlugField(null=True)
 	on = models.ManyToManyField(Usuario, related_name="on", blank=True)

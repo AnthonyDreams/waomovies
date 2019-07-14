@@ -1145,7 +1145,11 @@ def añadircapitulos(request,id):
 			fecha = converted["episodes"][i]["air_date"].split("-")
 			fecha_de_lanzamientoo = datetime(int(fecha[0]),int(fecha[1]),int(fecha[2]))
 			numero = converted["episodes"][i]["episode_number"]
-			slus = slugify('%s %s' % (titulo, numero))
+			if titulo.lower() == "piloto":
+				slus = slugify('%s %s' % (titulo + " " +t.serie.titulo, numero))
+			else:
+				slus = slugify('%s %s' % (titulo, numero))
+
 			if not datetime(int(fecha[0]),int(fecha[1]),int(fecha[2])) > datetime.today():
 				cover = converted["episodes"][i]["still_path"][1:]
 				instancec = Capitulos.objects.create(nombre=titulo,cover_capitulo=cover,sinopsis=sinopsiss, fecha_de_lanzamiento=fecha_de_lanzamientoo,num_episodio=numero,slug=slus, temporadaa=t)

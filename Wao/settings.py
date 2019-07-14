@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #SECRET_KEY = os.environ.get('SECRET_KEY')
 SECRET_KEY = 'j$z5qv+cug3pd8p6#jnbj+mdn$0x#fonrlk#=&f*1f0_e)=&yt'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', '.waomovies.com']
 #ALLOWED_HOSTS = ['wmoviestest.herokuapp.com', '.waomovies.com']
 
@@ -105,7 +105,7 @@ WSGI_APPLICATION = 'Wao.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-if DEBUG == True:
+if DEBUG == False:
 	DATABASES = {
 		'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
