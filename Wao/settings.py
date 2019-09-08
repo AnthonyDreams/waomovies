@@ -52,7 +52,6 @@ INSTALLED_APPS = [
 	'apps.contacto',
 	'apps.dashboard',
 	'apps.news',
-	'timedeltatemplatefilter',
   #  'debug_toolbar'
 ]
 
