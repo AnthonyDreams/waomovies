@@ -104,7 +104,7 @@ WSGI_APPLICATION = 'Wao.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-if DEBUG == False:
+if DEBUG == True:
 	DATABASES = {
 		'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
