@@ -1010,7 +1010,6 @@ def search(request):
 
 def search_result(request, src):
 
-
 	peliculasee = Vermastarde.objects.filter(usuario_id=request.user.id)
 	peliculase = []
 
@@ -1029,6 +1028,17 @@ def search_result(request, src):
 		for xy in srch:
 			if xy == "_":
 				xy = "-"
+			if xy in ['á','é','í','ó','ú']:
+				if xy == 'á':
+					xy = 'a'
+				if xy == 'é':
+					xy = 'e'
+				if xy == 'í':
+					xy = 'i'
+				if xy == 'ó':
+					xy = 'o'
+				if xy == 'ú':
+					xy = 'u'	
 			slugsearch += xy
 
 		for b in srch:
@@ -1043,7 +1053,6 @@ def search_result(request, src):
 
 	# -> NFC
 	
-
 	if srch:
 		buscar =Busqueda_y_etiquetas.objects.filter(tag__icontains=srch)
 		idbuscar = []
@@ -1052,7 +1061,6 @@ def search_result(request, src):
 			if buscar.count() > 1:
 				for iss in buscar:
 					idbuscar.append(iss.id)
-
 
 		conn = http.client.HTTPSConnection("api.themoviedb.org")
 
